@@ -1,0 +1,23 @@
+{
+  "name": "knowyouroptions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandboxnu/knowyouroptions.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sandboxnu/knowyouroptions/issues"
+  },
+  "homepage": "https://github.com/sandboxnu/knowyouroptions#readme",
+  "devDependencies": {
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
+  }
+}
