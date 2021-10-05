@@ -20,13 +20,13 @@ class APIClient {
     method: Method,
     url: string,
     responseClass?: ClassType<ItemIfArray<T>>,
-    body?: any
+    body?: any,
   ): Promise<T>;
   private async req<T>(
     method: Method,
     url: string,
     responseClass?: ClassType<T>,
-    body?: any
+    body?: any,
   ): Promise<T> {
     const res = (
       await this.axios.request({
@@ -40,8 +40,8 @@ class APIClient {
   }
 
   helloWorld = {
-    get: async (): Promise<String> => {
-      return this.req('GET', '', String);
+    get: async (): Promise<string> => {
+      return this.req('GET', '');
     },
   };
 
