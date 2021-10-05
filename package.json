@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": ""
+    "start": "npm run start-backend & npm run start-frontend",
+    "install": "(cd ./frontend && npm install) & (cd ./backend && npm install)",
+    "start-db": "cd ./database && ./create-database.sh",
+    "start-frontend": "cd ./frontend && npm run dev",
+    "start-backend": "cd ./backend && npm run start:dev",
+    "clean-start": "npm run start-db && npm run start-frontend && npm run start-backend"
   },
   "repository": {
     "type": "git",
@@ -23,5 +28,8 @@
     "eslint": "^7.32.0",
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "pg": "^8.7.1"
   }
 }
