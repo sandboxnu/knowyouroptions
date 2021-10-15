@@ -51,7 +51,7 @@ const Sidebar = (): ReactElement => {
           style={{
             backgroundColor: 'white',
             marginTop: '0px',
-            marginLeft: '-10px',
+            height: '100vh',
           }}
         >
           <Button icon={<MenuOutlined />} onClick={() => setOpen(false)} />
