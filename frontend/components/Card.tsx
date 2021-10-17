@@ -10,10 +10,11 @@ const StyledCard = styled(AntdCard)`
   flex-direction: column;
   font-size: 0.8rem;
   padding: 1rem;
+  margin: 0.25rem;
 `;
 
 const Title = styled.h2`
-  margin: 0;
+  margin-top: 0.25rem;
 `;
 
 const Description = styled.p`
@@ -29,9 +30,11 @@ const RightArrow = styled(ArrowRightOutlined)`
 const Card = ({
   title,
   description,
+  link = '',
 }: {
   title: string;
   description: string;
+  link?: string;
 }): ReactElement => {
   return (
     <StyledCard
@@ -40,6 +43,13 @@ const Card = ({
         flexDirection: 'column',
         height: '100%',
       }}
+      onClick={
+        link !== ''
+          ? () => {
+              location.href = link;
+            }
+          : () => {}
+      }
     >
       <Title>{title}</Title>
       <Description>{description}</Description>
