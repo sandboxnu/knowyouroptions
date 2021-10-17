@@ -44,7 +44,7 @@ const Home = (): ReactElement => {
       <Card
         title="Quiz"
         description="Take a short questionnaire to find the methods that fit your needs."
-        //link = "quiz"
+        link="quiz"
       />
     </HomeContainer>
   );
