@@ -1,4 +1,4 @@
-import { Button, Menu } from 'antd';
+import { Button } from 'antd';
 import { ReactElement, useState } from 'react';
 import {
   MenuOutlined,
@@ -8,6 +8,7 @@ import {
   BarChartOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
+import slideStyle from './slide.module.scss';
 
 const MenuHeading = styled.h1`
   color: #800080;
@@ -37,6 +38,16 @@ const ColumnItem = styled.div`
   width: 50%;
 `;
 
+const Menu = styled.div`
+  width: 25vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  position: absolute;
+  z-index: 0;
+`;
+
 const Sidebar = (): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -46,15 +57,13 @@ const Sidebar = (): ReactElement => {
   return (
     <SidebarDiv>
       {open ? (
-        <Menu
-          mode="inline"
-          style={{
-            backgroundColor: 'white',
-            marginTop: '0px',
-            height: '100vh',
-          }}
-        >
-          <Button icon={<MenuOutlined />} onClick={() => setOpen(false)} />
+        <Menu className={slideStyle.slide}>
+          <Button
+            icon={<MenuOutlined />}
+            onClick={() => setOpen(false)}
+            style={{ width: '30px' }}
+            ghost
+          />
           <MenuSection>
             <div>
               <MenuHeading>

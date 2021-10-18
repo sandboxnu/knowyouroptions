@@ -1,0 +1,18 @@
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+.slide {
+  position: absolute;
+  left: -300px;
+  -webkit-animation: slide 0.5s forwards;
+  animation: slide 0.5s forwards;
+}
+
+@keyframes slide {
+  100% {
+    left: 0px;
+  }
+}
