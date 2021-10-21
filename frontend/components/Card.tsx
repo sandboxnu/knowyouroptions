@@ -2,6 +2,7 @@ import { Card as AntdCard } from 'antd';
 import { ReactElement, useState } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const StyledCard = styled(AntdCard)`
   background-color: white;
@@ -36,6 +37,7 @@ const Card = ({
   description: string;
   link?: string;
 }): ReactElement => {
+  const router = useRouter();
   return (
     <StyledCard
       bodyStyle={{
@@ -43,13 +45,7 @@ const Card = ({
         flexDirection: 'column',
         height: '100%',
       }}
-      onClick={
-        link !== ''
-          ? () => {
-              location.href = link;
-            }
-          : () => {}
-      }
+      onClick={() => router.push(link)}
     >
       <Title>{title}</Title>
       <Description>{description}</Description>
