@@ -1,6 +1,5 @@
 import { Card as AntdCard } from 'antd';
-import { ReactElement, useState } from 'react';
-import { ArrowRightOutlined } from '@ant-design/icons';
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import SvgRightArrow from '../public/right-arrow.svg';
