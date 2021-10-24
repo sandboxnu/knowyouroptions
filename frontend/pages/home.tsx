@@ -2,7 +2,6 @@ import { ReactElement } from 'react';
 import Card from '../components/Card';
 import styled from 'styled-components';
 import Image from 'next/image';
-import Head from 'next/head'
 import homepagePic from '../public/home-image.png';
 
 const HomeContainer = styled.div`
@@ -13,10 +12,14 @@ const HomeContainer = styled.div`
   padding: 2rem;
 `;
 
+const HomeTitle = styled.h1`
+  font-family: din-2014;
+`;
+
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding-top: 1rem;
   width: 100%;
 `;
@@ -28,13 +31,7 @@ const ImageContainer = styled(Row)`
 const Home = (): ReactElement => {
   return (
     <HomeContainer>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Oswald&display=optional"
-          rel="stylesheet"
-        />
-      </Head>
-      <h1>Home</h1>
+      <HomeTitle>Home</HomeTitle>
       <ImageContainer>
         <Image src={homepagePic} placeholder="blur" />
       </ImageContainer>
