@@ -2,6 +2,7 @@ import { ReactElement } from 'react';
 import Card from '../components/Card';
 import styled from 'styled-components';
 import Image from 'next/image';
+import Head from 'next/head'
 import homepagePic from '../public/home-image.png';
 
 const HomeContainer = styled.div`
@@ -27,6 +28,12 @@ const ImageContainer = styled(Row)`
 const Home = (): ReactElement => {
   return (
     <HomeContainer>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Oswald&display=optional"
+          rel="stylesheet"
+        />
+      </Head>
       <h1>Home</h1>
       <ImageContainer>
         <Image src={homepagePic} placeholder="blur" />

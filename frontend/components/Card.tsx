@@ -3,10 +3,12 @@ import { ReactElement, useState } from 'react';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
+import SvgRightArrow from '../public/right-arrow.svg';
 
 const StyledCard = styled(AntdCard)`
   background-color: white;
   border-radius: 0.5rem;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
@@ -16,14 +18,15 @@ const StyledCard = styled(AntdCard)`
 
 const Title = styled.h2`
   margin-top: 0.25rem;
+  margin-bottom: 0;
 `;
 
 const Description = styled.p`
-  margin: 0;
+  margin: 0.5rem 0;
   color: gray;
 `;
 
-const RightArrow = styled(ArrowRightOutlined)`
+const RightArrow = styled(SvgRightArrow)`
   align-self: end;
   margin-top: auto;
 `;
@@ -38,14 +41,18 @@ const Card = ({
   link?: string;
 }): ReactElement => {
   const router = useRouter();
+  const StyledCardProps = {
+    onClick: () => router.push(link),
+  }
   return (
     <StyledCard
-      bodyStyle={{
+      bodyStyle= {{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
       }}
-      onClick={() => router.push(link)}
+
+      {...StyledCardProps}
     >
       <Title>{title}</Title>
       <Description>{description}</Description>
