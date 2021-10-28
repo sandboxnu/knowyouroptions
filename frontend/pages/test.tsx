@@ -4,7 +4,7 @@ import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
 
 const Background = styled.div`
-  background-color: #ffe5b4;
+  background-color: #ef8b6f;
   width: 100vw;
   height: 100vh;
   position: relative;

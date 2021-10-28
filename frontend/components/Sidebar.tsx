@@ -16,6 +16,9 @@ const MenuHeading = styled.h1`
 
 const MenuElements = styled.div`
   margin-left: 10px;
+  :hover {
+    color: #800080;
+  }
 `;
 
 const SidebarDiv = styled.div`
@@ -36,6 +39,9 @@ const TwoColumns = styled.div`
 `;
 const ColumnItem = styled.div`
   width: 50%;
+  :hover {
+    color: #800080;
+  }
 `;
 
 const Menu = styled.div`
