@@ -2,7 +2,9 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 const HighlightedTab = styled.div`
-  border-bottom: 0.25rem #5f034c;
+  border: 0rem;
+  border-bottom: 0.2rem #5f034c;
+  border-style: solid;
   font-weight: bold;
   margin: 0 1rem;
   white-space: nowrap;
