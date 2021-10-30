@@ -5,7 +5,9 @@ import ContraceptiveTemplate from '../templates/contraceptives';
 import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
 import { MechanismProps } from '../templates/contraceptives/tabs/Mechanism';
 import { PracticalProps } from '../templates/contraceptives/tabs/PracticalQuestions';
-import { AdditionalProps } from '../templates/contraceptives/tabs/AdditionalInfo';
+import AdditionalInfo, {
+  AdditionalProps,
+} from '../templates/contraceptives/tabs/AdditionalInfo';
 
 const Implant = (): ReactElement => {
   const implantDesc =
@@ -59,8 +61,18 @@ const Implant = (): ReactElement => {
     highPrice: hiCost,
     costInfo: costInfo,
   };
+  const additionalInfo = [
+    [
+      'Needle phobia',
+      "Needles will be included in the inserting process. If you don't feel comfortable with that, please inform your doctor in advance.",
+    ],
+    [
+      'Is it compatible with your religious beliefs or cultural practices?',
+      'Some forms of birth control are considered a violation of certain religious rights or cultural traditions. Weigh the risks and benefits of a birth control method against your personal convictions.',
+    ],
+  ];
   const additionalProps: AdditionalProps = {
-    needles: true,
+    info: additionalInfo,
   };
   return (
     <ContraceptiveTemplate

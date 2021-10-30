@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const Cost = styled.p`
-  color: teal;
+  color: #1da3aa;
   font-size: 0.75rem;
   font-weight: bold;
   margin: 0rem;

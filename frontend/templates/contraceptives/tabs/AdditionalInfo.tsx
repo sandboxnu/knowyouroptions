@@ -32,29 +32,24 @@ const StyledP = styled.p`
 `;
 
 export declare interface AdditionalProps {
-  needles?: boolean;
-  beliefs?: string;
+  info: Array<Array<string>>;
 }
 
-const AdditionalInfo = ({
-  needles = false,
-  beliefs = 'Some forms of birth control are considered a violation of certain religious rights or cultural traditions. Weigh the risks and benefits of a birth control method against your personal convictions.',
-}: AdditionalProps) => {
+const AdditionalInfo = ({ info }: AdditionalProps) => {
   // Retrive info from database? idk
   return (
     <Container>
-      <StyledH2>Things to notice about this method:</StyledH2>
-      {needles && <StyledH3>Needle phobia</StyledH3>}
-      {needles && (
-        <StyledP>
-          Needles will be included in the inserting process. If you don't feel
-          comfortable with that, please inform your doctor in advance.
-        </StyledP>
-      )}
-      <StyledH3>
-        Is it compatible with your religious beliefs or cultural practices?
-      </StyledH3>
-      <StyledP>{beliefs}</StyledP>
+      <Section>
+        <StyledH2>Things to notice about this method:</StyledH2>
+        {info.map((section: Array<string>) => {
+          return (
+            <>
+              <StyledH3>{section[0]}</StyledH3>
+              <StyledP>{section[1]}</StyledP>
+            </>
+          );
+        })}
+      </Section>
     </Container>
   );
 };
