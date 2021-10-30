@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useMemo, useState } from 'react';
 import {
   MenuOutlined,
   UserOutlined,
@@ -56,17 +56,33 @@ const Menu = styled.div`
 
 const Sidebar = (): ReactElement => {
   const [open, setOpen] = useState<boolean>(false);
+  const [closing, setClosing] = useState<boolean>(false);
+
+  const animation = open
+    ? slideStyle.slide
+    : closing
+    ? slideStyle.close
+    : undefined;
+  console.log(animation);
+
+  const closeMenu = () => {
+    setOpen(false);
+    setClosing(true);
+    return setTimeout(() => {
+      setClosing(false);
+    }, 500);
+  };
 
   /**
    * TODO: Update icon to be icon from prototype - use custom icon
    */
   return (
     <SidebarDiv>
-      {open ? (
-        <Menu className={slideStyle.slide}>
+      {open || closing ? (
+        <Menu className={animation}>
           <Button
             icon={<MenuOutlined />}
-            onClick={() => setOpen(false)}
+            onClick={closeMenu}
             style={{ width: '30px' }}
             ghost
           />
