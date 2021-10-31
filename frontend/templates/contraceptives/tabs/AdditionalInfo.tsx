@@ -43,10 +43,10 @@ const AdditionalInfo = ({ info }: AdditionalProps) => {
         <StyledH2>Things to notice about this method:</StyledH2>
         {info.map((section: Array<string>) => {
           return (
-            <>
+            <div key={section[0]}>
               <StyledH3>{section[0]}</StyledH3>
               <StyledP>{section[1]}</StyledP>
-            </>
+            </div>
           );
         })}
       </Section>

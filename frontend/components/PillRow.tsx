@@ -11,14 +11,16 @@ const PillRow = ({
   className,
   pillTitles,
 }: {
-  className?: string,
-  pillTitles: string[],
-}): ReactElement  => {
+  className?: string;
+  pillTitles: string[];
+}): ReactElement => {
   return (
     <PillContainer className={className}>
-      {pillTitles.map((title: string): ReactElement =>
-        <Pill>{title}</Pill>)
-      }
+      {pillTitles.map(
+        (title: string): ReactElement => (
+          <Pill key={title}>{title}</Pill>
+        ),
+      )}
     </PillContainer>
   );
 };

@@ -68,7 +68,11 @@ const PracticalQuestions = ({
         <StyledP>{access[0]}</StyledP>
         <StyledUL>
           {access.map((description: string, index: number) => {
-            return index !== 0 && <StyledLI>{description}</StyledLI>;
+            return (
+              index !== 0 && (
+                <StyledLI key={description}>{description}</StyledLI>
+              )
+            );
           })}
         </StyledUL>
       </Section>
