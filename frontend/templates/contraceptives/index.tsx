@@ -1,25 +1,33 @@
 import React, { ReactElement } from 'react';
 import Overview, { OverviewProps } from './tabs/Overview'
+import Use, { UseProps } from './tabs/Use';
+import styled from 'styled-components';
+
+const TabContainer = styled.div`
+  margin: 1rem;
+`;
 
 export declare interface ContraceptivesProps {
   title: string,
   overviewProps: OverviewProps,
+  useProps: UseProps,
 };
 
 const Contraceptives = ({
   title,
   overviewProps,
+  useProps,
 }: ContraceptivesProps): ReactElement => {
   // states:
-  // @ts-ignore
   return (
     <>
-      <div>
+      <TabContainer>
         <h1>{title}</h1>
-      </div>
-      <div>
-        <Overview {...overviewProps} />
-      </div>
+      </TabContainer>
+      <TabContainer>
+        {/*<Overview {...overviewProps} />*/}
+        <Use {...useProps} />
+      </TabContainer>
     </>
   );
 };

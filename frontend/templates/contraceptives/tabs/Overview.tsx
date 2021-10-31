@@ -1,12 +1,14 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
+import PillRow from '../../../components/PillRow';
 
 // Styling
 const CategoryRow = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin: 1rem 0;
+  margin: 2rem 0;
   width: 100%;
 `;
 
@@ -22,6 +24,7 @@ const CategoryValue = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
+  white-space: nowrap;
 `;
 
 const Column = styled.div`
@@ -31,17 +34,6 @@ const Column = styled.div`
 
 const Description = styled.p`
   color: #7C7C7C;
-`;
-
-const Pill = styled.div`
-  color: #E98986;
-  border: 1px solid #E98986;
-  border-radius: .25rem;
-`;
-
-const PillRow = styled.div`
-  display: flex;
-  flex-direction: row;
 `;
 
 // Components
@@ -79,11 +71,7 @@ const Overview = ({
             <Category title={category} value={value}/>
         )}
       </CategoryRow>
-      <PillRow>
-        {pillTitles.map((title: string): ReactElement =>
-          <Pill>{title}</Pill>)
-        }
-      </PillRow>
+      <PillRow pillTitles={pillTitles} />
       <Description>
         {description}
       </Description>
