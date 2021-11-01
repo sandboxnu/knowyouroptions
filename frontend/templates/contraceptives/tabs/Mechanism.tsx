@@ -9,6 +9,13 @@ const Container = styled.div`
   padding: 0.5rem;
 `;
 
+const HighlightedSymptoms = styled.span`
+  background-color: transparent;
+  color: #1da3aa;
+  font-size: 0.7rem;
+  margin: 0rem;
+`;
+
 const Section = styled.div`
   align-self: flex;
   display: flex;
@@ -54,7 +61,7 @@ const Warning = styled.p`
 
 export declare interface MechanismProps {
   mechanism: string;
-  healthRisk: string;
+  healthRisk: Array<string>;
   whoCantUse: Array<string>;
   warning?: string;
 }
@@ -65,7 +72,7 @@ const Mechanism = ({
   whoCantUse,
   warning = '',
 }: MechanismProps): ReactElement => {
-  // Retrive info from database? idk
+  // TODO: add highlighting keywords for healthRisk
   return (
     <Container>
       <Section>
@@ -74,7 +81,15 @@ const Mechanism = ({
       </Section>
       <Section>
         <StyledH2>Health Risk</StyledH2>
-        <StyledP>{healthRisk}</StyledP>
+        <StyledP>
+          {healthRisk.map((phrase: string, index: number) => {
+            return index % 2 === 0 ? (
+              phrase
+            ) : (
+              <HighlightedSymptoms key={phrase}>{phrase}</HighlightedSymptoms>
+            );
+          })}
+        </StyledP>
       </Section>
       <Section>
         <StyledH2>Who can't use?</StyledH2>

@@ -6,9 +6,7 @@ import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
 import { UseProps } from '../templates/contraceptives/tabs/Use';
 import { MechanismProps } from '../templates/contraceptives/tabs/Mechanism';
 import { PracticalProps } from '../templates/contraceptives/tabs/PracticalQuestions';
-import AdditionalInfo, {
-  AdditionalProps,
-} from '../templates/contraceptives/tabs/AdditionalInfo';
+import { AdditionalProps } from '../templates/contraceptives/tabs/AdditionalInfo';
 
 const Implant = (): ReactElement => {
   const implantDesc =
@@ -28,9 +26,11 @@ const Implant = (): ReactElement => {
 
   // Use Props
   const careFreeFor = 3;
-  const howToUseDesc = "It is inserted by a doctor or nurse under the skin of your upper arm. Once it’s in, you can’t feel it unless you try to find it with your fingers.";
-  const howToUsePills = ["Use of hormones", "Scalpel included"];
-  const ifMissedRoutineDesc = "Talk with your doctor first and try to avoid having sex or use another contraceptive method until you confirm remedial actions with your doctor.";
+  const howToUseDesc =
+    'It is inserted by a doctor or nurse under the skin of your upper arm. Once it’s in, you can’t feel it unless you try to find it with your fingers.';
+  const howToUsePills = ['Use of hormones', 'Scalpel included'];
+  const ifMissedRoutineDesc =
+    'Talk with your doctor first and try to avoid having sex or use another contraceptive method until you confirm remedial actions with your doctor.';
   const lastsUpTo = 5;
 
   const useProps: UseProps = {
@@ -43,8 +43,15 @@ const Implant = (): ReactElement => {
 
   const mechanism =
     'The implant releases the hormone progestogen into your bloodstream, which prevents the release of an egg each month (ovulation) to prevent pregnancy.';
-  const healthRisk =
-    'Serious problems with Nexplanon are rare, but they include arm pain that lasts for longer than a few days, an infection in the arm that needs medicine, or a scar on your arm where the implant goes.';
+  const healthRisk = [
+    'Serious problems with Nexplanon are rare, but they include ',
+    'arm pain',
+    ' that lasts for longer than a few days, ',
+    'an infection',
+    ' in the arm that needs medicine, or ',
+    'a scar',
+    ' on your arm where the implant goes.',
+  ];
   const warning =
     '* Tell your doctor or nurse if you have any unexpected symptoms while using Nexplanon.';
   const cantUse = [

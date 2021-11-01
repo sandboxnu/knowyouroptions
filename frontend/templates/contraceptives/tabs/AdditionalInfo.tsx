@@ -36,7 +36,6 @@ export declare interface AdditionalProps {
 }
 
 const AdditionalInfo = ({ info }: AdditionalProps) => {
-  // Retrive info from database? idk
   return (
     <Container>
       <Section>

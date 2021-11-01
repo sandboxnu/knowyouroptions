@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Highlighter from 'react-highlight-words';
 
 const Container = styled.div`
   display: flex;
@@ -60,7 +61,6 @@ const PracticalQuestions = ({
   highPrice,
   costInfo,
 }: PracticalProps) => {
-  // Retrive info from database? idk
   return (
     <Container>
       <Section>
