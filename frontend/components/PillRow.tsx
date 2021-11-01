@@ -7,6 +7,12 @@ const PillContainer = styled.div`
   flex-direction: row;
 `;
 
+const PillContainerStyled = styled(PillContainer)`
+  &>div {
+    padding: .25rem;
+  }
+`;
+
 const PillRow = ({
   className,
   pillTitles,
@@ -14,12 +20,13 @@ const PillRow = ({
   className?: string,
   pillTitles: string[],
 }): ReactElement  => {
+  const Container = className === undefined? PillContainerStyled : PillContainer;
   return (
-    <PillContainer className={className}>
+    <Container className={className}>
       {pillTitles.map((title: string): ReactElement =>
         <Pill>{title}</Pill>)
       }
-    </PillContainer>
+    </Container>
   );
 };
 

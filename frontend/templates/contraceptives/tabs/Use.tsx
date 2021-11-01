@@ -44,12 +44,6 @@ const HowOftenTitle = styled.h3`
   margin-top: 2rem;
 `;
 
-const PillRowStyled = styled(PillRow)`
-  &>div {
-    padding: .25rem;
-  }
-`;
-
 // Components
 const Category = ({
   className,
@@ -99,7 +93,7 @@ const Use = ({
   return (
     <>
       <h3>How to use it?</h3>
-      <PillRowStyled pillTitles={howToUsePills} />
+      <PillRow pillTitles={howToUsePills} />
       <Description>{howToUseDesc}</Description>
       <HowOftenTitle>How often do I have to remember it?</HowOftenTitle>
       <CategoryRow>

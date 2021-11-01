@@ -1,7 +1,21 @@
 import { ReactElement } from 'react';
-import Image from 'next/image';
+
+import SvgAcne from '../public/acne.svg';
+import SvgBed from '../public/bed.svg';
+import SvgBreastFeeding from '../public/breastfeeding.svg';
+import SvgBreastTenderness from '../public/breast-tenderness.svg';
+import SvgCalendar from '../public/calendar.svg';
+import SvgDepressed from '../public/depressed.svg';
+import SvgDoctor from '../public/doctor.svg';
+import SvgHeadache from '../public/headache.svg';
 import SvgImplant from '../public/implant.svg';
+import SvgImplantRemoval from '../public/implant-removal.svg';
+import SvgPad from '../public/pad.svg';
+import SvgTime from '../public/time.svg';
+
 import ContraceptiveTemplate from '../templates/contraceptives';
+import { EffectProps } from '../templates/contraceptives/tabs/Effect';
+import { EfficacyProps } from '../templates/contraceptives/tabs/Efficacy';
 import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
 import { UseProps } from '../templates/contraceptives/tabs/Use';
 import { MechanismProps } from '../templates/contraceptives/tabs/Mechanism';
@@ -40,6 +54,50 @@ const Implant = (): ReactElement => {
     ifMissedRoutineDesc: ifMissedRoutineDesc,
     lastsUpTo: lastsUpTo,
   };
+
+  // Efficacy props
+  const backToFertilityDesc = 'Once the implant is removed your ability to get pregnant quickly returns.';
+  const howToStopDesc = 'The implant can be removed at any time by a trained doctor or nurse.';
+  const pregnancyPreventionRate = 99;
+  const stopInfos: [ReactElement, string][] = [
+    [<SvgDoctor/>, 'A trained doctor or nurse will make a tiny cut in your skin to gently pull the implant out.'],
+    [<SvgTime/>, 'The process only takes a few minutes to remove, and a local anaesthetic will be used.']
+  ];
+  const whenItStartsToWorkInfos = [
+    'If the implant is fitted during the first 5 days of your menstrual cycle, you’ll be immediately protected against becoming pregnant;',
+    'If it’s fitted on any other day of your menstrual cycle, you’ll need to use additional contraception (such as condoms) for the first week.'
+  ];
+
+  const efficacyProps: EfficacyProps = {
+    backToFertilityDesc: backToFertilityDesc,
+    howToStopDesc: howToStopDesc,
+    pregnancyPreventionRate: pregnancyPreventionRate,
+    stopInfos: stopInfos,
+    whenItStartsToWorkInfos: whenItStartsToWorkInfos,
+  }
+
+  // Effect props
+  const benefitsInfos: [ReactElement, string][] = [
+    [<SvgBed/>, 'It doesn’t interrupting sex.'],
+    [<SvgBreastFeeding/>, 'Safe with breastfeeding'],
+    [<SvgImplantRemoval/>, 'Your fertility will return to normal as soon as the implant is taken out.']
+  ];
+  const sideEffectsInfos: [ReactElement, string][] = [
+    [<SvgHeadache/>, 'Headache'],
+    [<SvgBreastTenderness/>, 'Breast tenderness'],
+    [<SvgAcne/>, 'Acne'],
+    [<SvgPad/>, 'Spotting\n' +
+    '(in the first 6–12 months)'],
+    [<SvgCalendar/>, 'Lighter to no period after a while'],
+    [<SvgDepressed/>, 'Mood swing /\n' +
+    'Depression']
+  ];
+
+  const effectProps: EffectProps = {
+    benefitsInfos: benefitsInfos,
+    sideEffectsInfos: sideEffectsInfos,
+  };
+
 
   const mechanism =
     'The implant releases the hormone progestogen into your bloodstream, which prevents the release of an egg each month (ovulation) to prevent pregnancy.';
@@ -93,6 +151,9 @@ const Implant = (): ReactElement => {
   };
   return (
     <ContraceptiveTemplate
+      SvgContraceptive={<SvgImplant />}
+      effectProps={effectProps}
+      efficacyProps={efficacyProps}
       title={'Implant'}
       overviewProps={overviewProps}
       useProps={useProps}

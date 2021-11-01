@@ -1,4 +1,6 @@
 import React, { ReactElement, useState } from 'react';
+import Efficacy, { EfficacyProps } from './tabs/Efficacy';
+import Effect, { EffectProps } from './tabs/Effect';
 import Overview, { OverviewProps } from './tabs/Overview';
 import Use, { UseProps } from './tabs/Use';
 import TabBar from '../TabBar';
@@ -13,11 +15,14 @@ const Container = styled.div`
 `;
 
 const Header = styled(Container)`
-  background-color: pink;
+  background-color: #FEBBA8;
 `;
 
 // components
 export declare interface ContraceptivesProps {
+  SvgContraceptive: ReactElement;
+  effectProps: EffectProps;
+  efficacyProps: EfficacyProps;
   title: string;
   overviewProps: OverviewProps;
   mechanismProps: MechanismProps;
@@ -27,7 +32,10 @@ export declare interface ContraceptivesProps {
 };
 
 const Contraceptives = ({
+  SvgContraceptive,
   title,
+  effectProps,
+  efficacyProps,
   overviewProps,
   useProps,
   mechanismProps,
@@ -46,17 +54,18 @@ const Contraceptives = ({
   ];
   const tabComponents = [
     <Overview {...overviewProps} />,
-    <Use {...useProps} />, // Use
-    <div></div>, // Efficacy
-    <div></div>, // Effect
+    <Use {...useProps} />,
+    <Efficacy {...efficacyProps} />,
+    <Effect {...effectProps} />,
     <Mechanism {...mechanismProps} />,
     <PracticalQuestions {...practicalProps} />,
     <AdditionalInfo {...additionalProps} />,
   ];
-  // states:
+
   return (
     <>
       <Header>
+        {tabIndex===0 && SvgContraceptive}
         <h1>{title}</h1>
       </Header>
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
