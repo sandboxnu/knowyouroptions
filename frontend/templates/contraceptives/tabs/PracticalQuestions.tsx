@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Highlighter from 'react-highlight-words';
 
 const Container = styled.div`
   display: flex;
