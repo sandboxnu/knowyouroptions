@@ -33,7 +33,7 @@ const Effect = ({
         {benefitsInfos.map((infos) => {
           const [icon, label] = infos;
           return (
-            <Row>
+            <Row key={label}>
               {icon}
               <p>{label}</p>
             </Row>
@@ -45,7 +45,7 @@ const Effect = ({
         {sideEffectsInfos.map((infos) => {
           const [icon, label] = infos;
           return (
-            <Column>
+            <Column key={label}>
               <p>{icon}</p>
               <p>{label}</p>
             </Column>

@@ -54,7 +54,7 @@ const Efficacy = ({
       <p>Less than {100 - pregnancyPreventionRate} in 100 women will get pregnant during the first year on this method.</p>
       <h3>When it starts to work?</h3>
       <ol type="A">
-        {whenItStartsToWorkInfos.map((desc) => <li>{desc}</li>)}
+        {whenItStartsToWorkInfos.map((desc) => <li key={desc}>{desc}</li>)}
       </ol>
 
       <h3>How can I stop it?</h3>
@@ -62,7 +62,7 @@ const Efficacy = ({
       <Row>
         {stopInfos.map(([icon, label]) => {
           return (
-            <StopIcons label={label} icon={icon} />
+            <StopIcons key={label} label={label} icon={icon} />
           );
         })}
       </Row>
