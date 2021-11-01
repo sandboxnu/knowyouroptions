@@ -7,21 +7,26 @@ const PillContainer = styled.div`
   flex-direction: row;
 `;
 
+const PillContainerStyled = styled(PillContainer)`
+  &>div {
+    padding: .25rem;
+  }
+`;
+
 const PillRow = ({
   className,
   pillTitles,
 }: {
-  className?: string;
-  pillTitles: string[];
-}): ReactElement => {
+  className?: string,
+  pillTitles: string[],
+}): ReactElement  => {
+  const Container = className === undefined? PillContainerStyled : PillContainer;
   return (
-    <PillContainer className={className}>
-      {pillTitles.map(
-        (title: string): ReactElement => (
-          <Pill key={title}>{title}</Pill>
-        ),
-      )}
-    </PillContainer>
+    <Container className={className}>
+      {pillTitles.map((title: string): ReactElement =>
+        <Pill key={title}>{title}</Pill>)
+      }
+    </Container>
   );
 };
 
