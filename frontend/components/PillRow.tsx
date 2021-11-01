@@ -24,7 +24,7 @@ const PillRow = ({
   return (
     <Container className={className}>
       {pillTitles.map((title: string): ReactElement =>
-        <Pill>{title}</Pill>)
+        <Pill key={title}>{title}</Pill>)
       }
     </Container>
   );

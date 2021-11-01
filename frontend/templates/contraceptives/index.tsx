@@ -8,14 +8,21 @@ import Mechanism, { MechanismProps } from './tabs/Mechanism';
 import PracticalQuestions, { PracticalProps } from './tabs/PracticalQuestions';
 import AdditionalInfo, { AdditionalProps } from './tabs/AdditionalInfo';
 import styled from 'styled-components';
+import DownOutlined from '@ant-design/icons/DownOutlined';
 
 // styled
 const Container = styled.div`
   padding: 1rem;
 `;
 
+const DownArrow = styled(DownOutlined)`
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+`;
+
 const Header = styled(Container)`
-  background-color: #FEBBA8;
+  background-color: #febba8;
 `;
 
 // components
@@ -27,9 +34,9 @@ export declare interface ContraceptivesProps {
   overviewProps: OverviewProps;
   mechanismProps: MechanismProps;
   practicalProps: PracticalProps;
-  useProps: UseProps,
+  useProps: UseProps;
   additionalProps: AdditionalProps;
-};
+}
 
 const Contraceptives = ({
   SvgContraceptive,
@@ -69,9 +76,10 @@ const Contraceptives = ({
         <h1>{title}</h1>
       </Header>
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
-      <Container>
-        {tabComponents[tabIndex]}
-      </Container>
+      <Container>{tabComponents[tabIndex]}</Container>
+      {tabIndex < tabs.length - 1 && (
+        <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
+      )}
     </>
   );
 };

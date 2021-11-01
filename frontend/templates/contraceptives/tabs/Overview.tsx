@@ -13,14 +13,14 @@ const CategoryRow = styled.div`
 `;
 
 const CategoryTitle = styled.h3`
-  color: #BEBEBE;
+  color: #bebebe;
   font-size: 1rem;
   font-weight: normal;
   margin: 0;
 `;
 
 const CategoryValue = styled.p`
-  color: #4B4B4B;
+  color: #4b4b4b;
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
@@ -33,48 +33,48 @@ const Column = styled.div`
 `;
 
 const Description = styled.p`
-  color: #7C7C7C;
+  color: #7c7c7c;
 `;
 
 // Components
 const Category = ({
   title,
-  value
+  value,
 }: {
-  title: string,
-  value: string
+  title: string;
+  value: string;
 }): ReactElement => {
   return (
     <Column>
       <CategoryValue>{value}</CategoryValue>
       <CategoryTitle>{title}</CategoryTitle>
     </Column>
-  )
-}
+  );
+};
 
 export declare interface OverviewProps {
-  description: string,
+  description: string;
   // info: string[]<[category: string, value: string]>
-  info: Array<string[]>,
-  pillTitles: string[]
-};
+  info: Array<string[]>;
+  pillTitles: string[];
+}
 
 const Overview = ({
   description,
   info,
-  pillTitles
+  pillTitles,
 }: OverviewProps): ReactElement => {
   return (
     <>
       <CategoryRow>
-        {info.map(([category, value]: string[]): ReactElement =>
-            <Category title={category} value={value}/>
+        {info.map(
+          ([category, value]: string[]): ReactElement => (
+            <Category key={category} title={category} value={value} />
+          ),
         )}
       </CategoryRow>
       <PillRow pillTitles={pillTitles} />
-      <Description>
-        {description}
-      </Description>
+      <Description>{description}</Description>
     </>
   );
 };

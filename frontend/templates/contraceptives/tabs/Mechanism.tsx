@@ -82,7 +82,11 @@ const Mechanism = ({
         <StyledP>{whoCantUse[0]}</StyledP>
         <StyledUL>
           {whoCantUse.map((description: string, index: number) => {
-            return index !== 0 && <StyledLI>{description}</StyledLI>;
+            return (
+              index !== 0 && (
+                <StyledLI key={description}>{description}</StyledLI>
+              )
+            );
           })}
         </StyledUL>
         {warning !== '' && <Warning>{warning}</Warning>}
