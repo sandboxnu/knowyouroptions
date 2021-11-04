@@ -68,11 +68,11 @@ const CategoryLeft = styled(Category)`
 `;
 
 export declare interface UseProps {
-  careFreeFor: number,
+  careFreeFor: [number, string],
   howToUseDesc: string,
   howToUsePills: string[],
   ifMissedRoutineDesc: string,
-  lastsUpTo: number,
+  lastsUpTo: [number, string],
 };
 
 const Use = ({
@@ -89,8 +89,8 @@ const Use = ({
       <Description>{howToUseDesc}</Description>
       <HowOftenTitle>How often do I have to remember it?</HowOftenTitle>
       <CategoryRow>
-        <CategoryLeft title={"Lasts up to"} unit={"years"} value={lastsUpTo} />
-        <Category title={"Care-free for"} unit={"years"} value={careFreeFor} />
+        <CategoryLeft title={"Lasts up to"} unit={lastsUpTo[1]} value={lastsUpTo[0]} />
+        <Category title={"Care-free for"} unit={careFreeFor[1]} value={careFreeFor[0]} />
       </CategoryRow>
       <h3>What if I missed once in the routine or made any mistake?</h3>
       <Description>{ifMissedRoutineDesc}</Description>

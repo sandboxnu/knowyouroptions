@@ -39,13 +39,13 @@ const Implant = (): ReactElement => {
   };
 
   // Use Props
-  const careFreeFor = 3;
+  const careFreeFor: [number, string] = [3, 'years'];
   const howToUseDesc =
     'It is inserted by a doctor or nurse under the skin of your upper arm. Once it’s in, you can’t feel it unless you try to find it with your fingers.';
   const howToUsePills = ['Use of hormones', 'Scalpel included'];
   const ifMissedRoutineDesc =
     'Talk with your doctor first and try to avoid having sex or use another contraceptive method until you confirm remedial actions with your doctor.';
-  const lastsUpTo = 5;
+  const lastsUpTo: [number, string] = [5, 'years'];
 
   const useProps: UseProps = {
     careFreeFor: careFreeFor,
