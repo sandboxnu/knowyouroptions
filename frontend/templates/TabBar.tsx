@@ -1,10 +1,12 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 
-const HighlightedTab = styled.div`
+const HighlightedTab = styled.h2`
   border: 0rem;
   border-bottom: 0.2rem #5f034c;
   border-style: solid;
+  cursor: pointer;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0 1rem;
   padding: 1rem 0;
@@ -21,7 +23,9 @@ const Row = styled.div`
   wrap: no-wrap;
 `;
 
-const Tab = styled.div`
+const Tab = styled.h2`
+  cursor: pointer;
+  font-size: 1rem;
   margin: 0 1rem;
   opacity: 0.2;
   padding: 1rem 0;

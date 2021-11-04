@@ -9,8 +9,17 @@ import PracticalQuestions, { PracticalProps } from './tabs/PracticalQuestions';
 import AdditionalInfo, { AdditionalProps } from './tabs/AdditionalInfo';
 import styled from 'styled-components';
 import DownOutlined from '@ant-design/icons/DownOutlined';
+import { Column, Row } from './tabs/StyledComponents';
+import SvgBookmark from '../../public/bookmark.svg';
 
 // styled
+const Bookmark = styled(SvgBookmark)`
+  fill: white;
+  position: relative;
+  stroke: black;
+  top: 2px;
+`;
+
 const Container = styled.div`
   padding: 1rem;
 `;
@@ -23,6 +32,43 @@ const DownArrow = styled(DownOutlined)`
 
 const Header = styled(Container)`
   background-color: #febba8;
+  display: flex;
+  flex-direction: row;
+`;
+
+const SvgCircle = styled.div`
+  background-color: white;
+  border-radius: 50%;
+  padding: 0.7rem 0.9rem 0.6rem 0.9rem;
+
+  :hover {
+    cursor: pointer;
+
+    ${Bookmark} {
+      fill: purple;
+    }
+  }
+`;
+
+const SvgColumn = styled(Column)`
+  margin-left: auto;
+
+  ${SvgCircle} {
+    margin-top: 0.5rem;
+  }
+`;
+
+const SvgRow = styled(Row)`
+  margin-left: auto;
+  margin-top: auto;
+
+  ${SvgCircle} {
+    margin-left: 0.5rem;
+  }
+`;
+
+const Title = styled.h1`
+  margin: 0;
 `;
 
 // components
@@ -68,18 +114,35 @@ const Contraceptives = ({
     <PracticalQuestions {...practicalProps} />,
     <AdditionalInfo {...additionalProps} />,
   ];
-
+  const BookmarkIcon = (
+    <SvgCircle>
+      <Bookmark />
+    </SvgCircle>
+  );
   return (
     <>
       <Header>
-        {tabIndex===0 && SvgContraceptive}
-        <h1>{title}</h1>
+        <div>
+          {tabIndex === 0 && SvgContraceptive}
+          <Title>{title}</Title>
+        </div>
+        {tabIndex === 0 ? (
+          <SvgColumn>
+            {BookmarkIcon}
+            {BookmarkIcon}
+          </SvgColumn>
+        ) : (
+          <SvgRow>
+            {BookmarkIcon}
+            {BookmarkIcon}
+          </SvgRow>
+        )}
       </Header>
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
       <Container>{tabComponents[tabIndex]}</Container>
-      {tabIndex < tabs.length - 1 && (
+      {/*tabIndex < tabs.length - 1 && (
         <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
-      )}
+      )*/}
     </>
   );
 };
