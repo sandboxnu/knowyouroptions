@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
+import {Column, Description} from './StyledComponents';
 
 // Styling
 const CategoryRow = styled.div`
@@ -29,15 +30,6 @@ const CategoryValueP = styled.p`
   font-size: 1.25rem;
   font-weight: bold;
   margin: 0;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Description = styled.p`
-  color: #7C7C7C;
 `;
 
 const HowOftenTitle = styled.h3`

@@ -1,17 +1,10 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
-import { Col } from 'antd';
+import { Column, Row } from './StyledComponents';
 
 // Styles
 
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+const RowWrapped = styled(Row)`
   flex-wrap: wrap;
 `;
 
@@ -41,7 +34,7 @@ const Effect = ({
         })}
       </Column>
       <h3>Side effects</h3>
-      <Row>
+      <RowWrapped>
         {sideEffectsInfos.map((infos) => {
           const [icon, label] = infos;
           return (
@@ -51,7 +44,7 @@ const Effect = ({
             </Column>
           );
         })}
-      </Row>
+      </RowWrapped>
     </>
   );
 };

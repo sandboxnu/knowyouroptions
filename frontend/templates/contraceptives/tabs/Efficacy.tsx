@@ -1,17 +1,5 @@
 import { ReactElement } from 'react';
-import styled from 'styled-components';
-
-// Style
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+import {Column, Row} from './StyledComponents';
 
 // Components
 
