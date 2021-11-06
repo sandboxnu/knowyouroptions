@@ -50,10 +50,12 @@ const SvgCircle = styled.div`
   }
 `;
 
+const SvgCircleSecond = styled(SvgCircle)``;
+
 const SvgColumn = styled(Column)`
   margin-left: auto;
 
-  ${SvgCircle} {
+  ${SvgCircleSecond} {
     margin-top: 0.5rem;
   }
 `;
@@ -62,7 +64,7 @@ const SvgRow = styled(Row)`
   margin-left: auto;
   margin-top: auto;
 
-  ${SvgCircle} {
+  ${SvgCircleSecond} {
     margin-left: 0.5rem;
   }
 `;
@@ -119,6 +121,11 @@ const Contraceptives = ({
       <Bookmark />
     </SvgCircle>
   );
+  const CompareMethodsIcon = (
+    <SvgCircleSecond>
+      <Bookmark />
+    </SvgCircleSecond>
+  );
   return (
     <>
       <Header>
@@ -129,12 +136,12 @@ const Contraceptives = ({
         {tabIndex === 0 ? (
           <SvgColumn>
             {BookmarkIcon}
-            {BookmarkIcon}
+            {CompareMethodsIcon}
           </SvgColumn>
         ) : (
           <SvgRow>
             {BookmarkIcon}
-            {BookmarkIcon}
+            {CompareMethodsIcon}
           </SvgRow>
         )}
       </Header>

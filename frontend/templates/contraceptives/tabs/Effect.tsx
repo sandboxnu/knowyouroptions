@@ -1,11 +1,36 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
-import { Column, Row } from './StyledComponents';
+import { Column, Description, Row } from './StyledComponents';
 
 // Styles
 
+const Container = styled(Column)`
+  align-items: center;
+  text-align: center;
+  width: 30%;
+`;
+
+const IconContainer = styled.div``;
+
+const Label = styled(Description)`
+  margin-left: 1rem;
+`;
+
 const RowWrapped = styled(Row)`
   flex-wrap: wrap;
+  justify-content: space-between;
+  row-gap: 1rem;
+`;
+
+const SideEffectsIconContainer = styled.div`
+  align-items: center;
+  display: flex;
+  height: 6vh;
+//  height: 5px;
+`;
+
+const SideEffectsLabel = styled(Description)`
+  margin: 0;
 `;
 
 // Components
@@ -27,8 +52,10 @@ const Effect = ({
           const [icon, label] = infos;
           return (
             <Row key={label}>
-              {icon}
-              <p>{label}</p>
+              <IconContainer>
+                {icon}
+              </IconContainer>
+              <Label>{label}</Label>
             </Row>
           );
         })}
@@ -38,10 +65,12 @@ const Effect = ({
         {sideEffectsInfos.map((infos) => {
           const [icon, label] = infos;
           return (
-            <Column key={label}>
-              <p>{icon}</p>
-              <p>{label}</p>
-            </Column>
+            <Container key={label}>
+              <SideEffectsIconContainer>
+                {icon}
+              </SideEffectsIconContainer>
+              <SideEffectsLabel>{label}</SideEffectsLabel>
+            </Container>
           );
         })}
       </RowWrapped>

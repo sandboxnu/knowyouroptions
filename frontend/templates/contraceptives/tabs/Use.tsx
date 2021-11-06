@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
-import {Column, Description} from './StyledComponents';
+import {CategoryValue, Column, Description} from './StyledComponents';
 
 // Styling
 const CategoryRow = styled.div`
@@ -16,19 +16,6 @@ const CategoryTitle = styled.h3`
   color: #BEBEBE;
   font-size: 1rem;
   font-weight: normal;
-  margin: 0;
-`;
-
-const CategoryValue = styled.span`
-  color: #1DA3AA;
-  font-size: 2rem;
-  font-weight: normal;
-  margin: 0 .25rem 0 0;
-`;
-
-const CategoryValueP = styled.p`
-  font-size: 1.25rem;
-  font-weight: bold;
   margin: 0;
 `;
 
@@ -51,12 +38,7 @@ const Category = ({
   return (
     <Column className={className}>
       <CategoryTitle>{title}</CategoryTitle>
-      <CategoryValueP>
-        <CategoryValue>
-          {value}
-        </CategoryValue>
-        {unit}
-      </CategoryValueP>
+      <CategoryValue unit={unit} value={value.toString()}/>
     </Column>
   );
 };

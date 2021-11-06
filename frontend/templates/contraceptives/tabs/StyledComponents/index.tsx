@@ -1,4 +1,39 @@
 import styled from 'styled-components';
+import { ReactElement } from 'react';
+
+const CategoryValueNumber = styled.span`
+  color: #1DA3AA;
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 0 .25rem 0 0;
+`;
+
+const CategoryValueP = styled.p`
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+`;
+
+const CategoryValue = ({
+  className,
+  unit,
+  value,
+}: {
+  className?: string,
+  unit: string,
+  value: string,
+}): ReactElement => {
+  return (
+    <>
+      <CategoryValueP className={className}>
+        <CategoryValueNumber>
+          {value}
+        </CategoryValueNumber>
+        {unit}
+      </CategoryValueP>
+    </>
+  );
+};
 
 const Column = styled.div`
   display: flex;
@@ -35,4 +70,13 @@ const Subtitle = styled.h3`
   margin-bottom: 0.5rem;
 `;
 
-export { Column, Description, DescriptionBold, List, ListItem, Row, Subtitle };
+export {
+  CategoryValue,
+  Column,
+  Description,
+  DescriptionBold,
+  List,
+  ListItem,
+  Row,
+  Subtitle
+};

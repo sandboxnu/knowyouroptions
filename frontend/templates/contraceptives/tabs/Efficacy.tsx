@@ -1,5 +1,16 @@
 import { ReactElement } from 'react';
-import {Column, Row} from './StyledComponents';
+import {CategoryValue, Column, Description, Row} from './StyledComponents';
+import styled from 'styled-components';
+
+// Styles
+
+const CategoryValueStyled = styled(CategoryValue)`
+  font-size: 1rem;
+`;
+
+const AlphaList = styled.ol`
+  color: #7c7c7c;
+`;
 
 // Components
 
@@ -14,7 +25,7 @@ const StopIcons = ({
     <>
       <Column>
         {icon}
-        <p>{label}</p>
+        <Description>{label}</Description>
       </Column>
     </>
   );
@@ -38,15 +49,15 @@ const Efficacy = ({
   return (
     <>
       <h3>How well does it prevent pregnancy?</h3>
-      <p><span>{pregnancyPreventionRate}%</span> effective</p>
-      <p>Less than {100 - pregnancyPreventionRate} in 100 women will get pregnant during the first year on this method.</p>
+      <CategoryValueStyled unit={'effective'} value={pregnancyPreventionRate + '%'}/>
+      <Description>Less than {100 - pregnancyPreventionRate} in 100 women will get pregnant during the first year on this method.</Description>
       <h3>When it starts to work?</h3>
-      <ol type="A">
+      <AlphaList type="A">
         {whenItStartsToWorkInfos.map((desc) => <li key={desc}>{desc}</li>)}
-      </ol>
+      </AlphaList>
 
       <h3>How can I stop it?</h3>
-      <p>{howToStopDesc}</p>
+      <Description>{howToStopDesc}</Description>
       <Row>
         {stopInfos.map(([icon, label]) => {
           return (
@@ -55,7 +66,7 @@ const Efficacy = ({
         })}
       </Row>
       <h3>Getting back to fertility</h3>
-      <p>{backToFertilityDesc}</p>
+      <Description>{backToFertilityDesc}</Description>
     </>
   );
 };
