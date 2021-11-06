@@ -6,7 +6,24 @@ const Column = styled.div`
 `;
 
 const Description = styled.p`
-  color: #7C7C7C;
+  color: #7c7c7c;
+`;
+
+const DescriptionBold = styled(Description)`
+  color: black;
+  font-weight: bold;
+`;
+
+const List = styled.ul`
+  padding-left: 1.25rem;
+
+  li::marker {
+    color: #1da3aa;
+  }
+`;
+
+const ListItem = styled.li`
+  color: #7c7c7c;
 `;
 
 const Row = styled.div`
@@ -14,8 +31,8 @@ const Row = styled.div`
   flex-direction: row;
 `;
 
-export {
-  Column,
-  Description,
-  Row
-};
+const Subtitle = styled.h3`
+  margin-bottom: 0.5rem;
+`;
+
+export { Column, Description, DescriptionBold, List, ListItem, Row, Subtitle };
