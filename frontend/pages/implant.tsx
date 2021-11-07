@@ -63,9 +63,17 @@ const Implant = (): ReactElement => {
     [<SvgDoctor/>, 'A trained doctor or nurse will make a tiny cut in your skin to gently pull the implant out.'],
     [<SvgTime/>, 'The process only takes a few minutes to remove, and a local anaesthetic will be used.']
   ];
-  const whenItStartsToWorkInfos = [
-    'If the implant is fitted during the first 5 days of your menstrual cycle, you’ll be immediately protected against becoming pregnant;',
-    'If it’s fitted on any other day of your menstrual cycle, you’ll need to use additional contraception (such as condoms) for the first week.'
+  const whenItStartsToWorkInfos: Array<string[]> = [
+    [
+      'If the implant is fitted during ',
+      'the first 5 days of your menstrual cycle',
+      ', you’ll be immediately protected against becoming pregnant;'
+    ],
+    [
+      'If it’s fitted on ',
+      'any other day of your menstrual cycle',
+      ', you’ll need to use additional contraception (such as condoms) for the first week.'
+    ]
   ];
 
   const efficacyProps: EfficacyProps = {

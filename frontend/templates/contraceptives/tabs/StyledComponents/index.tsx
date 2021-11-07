@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 const CategoryValueNumber = styled.span`
   color: #1DA3AA;
@@ -49,6 +49,31 @@ const DescriptionBold = styled(Description)`
   font-weight: bold;
 `;
 
+const Highlight = styled.span`
+  color: #1da3aa;
+  margin: 0rem;
+`;
+
+const HighlightDescription = ({
+  className,
+  description,
+}: {
+  className?: string,
+  description: string[],
+}) => {
+  return (
+    <>
+      {description.map((phrase: string, index: number) => {
+        return index % 2 === 0 ? (
+          phrase
+        ) : (
+          <Highlight className={className} key={phrase}>{phrase}</Highlight>
+        );
+      })}
+    </>
+  );
+};
+
 const List = styled.ul`
   padding-left: 1.25rem;
 
@@ -75,6 +100,8 @@ export {
   Column,
   Description,
   DescriptionBold,
+  Highlight,
+  HighlightDescription,
   List,
   ListItem,
   Row,

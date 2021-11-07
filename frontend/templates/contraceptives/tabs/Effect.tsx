@@ -10,8 +10,6 @@ const Container = styled(Column)`
   width: 30%;
 `;
 
-const IconContainer = styled.div``;
-
 const Label = styled(Description)`
   margin-left: 1rem;
 `;
@@ -52,9 +50,9 @@ const Effect = ({
           const [icon, label] = infos;
           return (
             <Row key={label}>
-              <IconContainer>
+              <div>
                 {icon}
-              </IconContainer>
+              </div>
               <Label>{label}</Label>
             </Row>
           );

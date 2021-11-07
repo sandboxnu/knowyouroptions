@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {
   Description,
   DescriptionBold,
+  HighlightDescription,
   List,
   ListItem,
   Subtitle,
@@ -40,13 +41,7 @@ const Mechanism = ({
       <Description>{mechanism}</Description>
       <Subtitle>Health Risk</Subtitle>
       <Description>
-        {healthRisk.map((phrase: string, index: number) => {
-          return index % 2 === 0 ? (
-            phrase
-          ) : (
-            <HighlightedSymptoms key={phrase}>{phrase}</HighlightedSymptoms>
-          );
-        })}
+        <HighlightDescription description={healthRisk}/>
       </Description>
       <Subtitle>Who can't use?</Subtitle>
       <DescriptionBold>Medical history / illness</DescriptionBold>

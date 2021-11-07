@@ -1,15 +1,26 @@
 import { ReactElement } from 'react';
-import {CategoryValue, Column, Description, Row} from './StyledComponents';
+import {
+  CategoryValue,
+  Column,
+  Description,
+  HighlightDescription,
+  Row
+} from './StyledComponents';
 import styled from 'styled-components';
 
 // Styles
+
+const AlphaList = styled.ol`
+  color: #7c7c7c;
+`;
 
 const CategoryValueStyled = styled(CategoryValue)`
   font-size: 1rem;
 `;
 
-const AlphaList = styled.ol`
-  color: #7c7c7c;
+const HighlightedDescription = styled(HighlightDescription)`
+  color: black;
+  font-weight: bold;
 `;
 
 // Components
@@ -36,7 +47,7 @@ export declare interface EfficacyProps {
   howToStopDesc: string,
   pregnancyPreventionRate: number,
   stopInfos: [ReactElement, string][],
-  whenItStartsToWorkInfos: Array<string>,
+  whenItStartsToWorkInfos: Array<string[]>,
 };
 
 const Efficacy = ({
@@ -53,7 +64,10 @@ const Efficacy = ({
       <Description>Less than {100 - pregnancyPreventionRate} in 100 women will get pregnant during the first year on this method.</Description>
       <h3>When it starts to work?</h3>
       <AlphaList type="A">
-        {whenItStartsToWorkInfos.map((desc) => <li key={desc}>{desc}</li>)}
+        {whenItStartsToWorkInfos.map((desc, index) =>
+          <li key={index}>
+            <HighlightedDescription description={desc} />
+          </li>)}
       </AlphaList>
 
       <h3>How can I stop it?</h3>
