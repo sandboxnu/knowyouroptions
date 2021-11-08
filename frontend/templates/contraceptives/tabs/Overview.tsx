@@ -52,7 +52,7 @@ const Category = ({
   );
 };
 
-export declare interface OverviewProps {
+export interface OverviewProps {
   description: string;
   // info: string[]<[category: string, value: string]>
   info: Array<string[]>;

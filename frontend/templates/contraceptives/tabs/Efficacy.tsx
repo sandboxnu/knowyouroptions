@@ -4,7 +4,7 @@ import {
   Column,
   Description,
   HighlightDescription,
-  Row
+  Row,
 } from './StyledComponents';
 import styled from 'styled-components';
 
@@ -25,13 +25,7 @@ const HighlightedDescription = styled(HighlightDescription)`
 
 // Components
 
-const StopIcons = ({
-  icon,
-  label,
-}: {
-  icon: ReactElement,
-  label: string,
-}) => {
+const StopIcons = ({ icon, label }: { icon: ReactElement; label: string }) => {
   return (
     <>
       <Column>
@@ -42,13 +36,13 @@ const StopIcons = ({
   );
 };
 
-export declare interface EfficacyProps {
-  backToFertilityDesc: string,
-  howToStopDesc: string,
-  pregnancyPreventionRate: number,
-  stopInfos: [ReactElement, string][],
-  whenItStartsToWorkInfos: Array<string[]>,
-};
+export interface EfficacyProps {
+  backToFertilityDesc: string;
+  howToStopDesc: string;
+  pregnancyPreventionRate: number;
+  stopInfos: [ReactElement, string][];
+  whenItStartsToWorkInfos: Array<string[]>;
+}
 
 const Efficacy = ({
   backToFertilityDesc,
@@ -60,23 +54,28 @@ const Efficacy = ({
   return (
     <>
       <h3>How well does it prevent pregnancy?</h3>
-      <CategoryValueStyled unit={'effective'} value={pregnancyPreventionRate + '%'}/>
-      <Description>Less than {100 - pregnancyPreventionRate} in 100 women will get pregnant during the first year on this method.</Description>
+      <CategoryValueStyled
+        unit={'effective'}
+        value={pregnancyPreventionRate + '%'}
+      />
+      <Description>
+        Less than {100 - pregnancyPreventionRate} in 100 women will get pregnant
+        during the first year on this method.
+      </Description>
       <h3>When it starts to work?</h3>
       <AlphaList type="A">
-        {whenItStartsToWorkInfos.map((desc, index) =>
+        {whenItStartsToWorkInfos.map((desc, index) => (
           <li key={index}>
             <HighlightedDescription description={desc} />
-          </li>)}
+          </li>
+        ))}
       </AlphaList>
 
       <h3>How can I stop it?</h3>
       <Description>{howToStopDesc}</Description>
       <Row>
         {stopInfos.map(([icon, label]) => {
-          return (
-            <StopIcons key={label} label={label} icon={icon} />
-          );
+          return <StopIcons key={label} label={label} icon={icon} />;
         })}
       </Row>
       <h3>Getting back to fertility</h3>

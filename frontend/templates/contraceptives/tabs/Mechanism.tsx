@@ -10,10 +10,6 @@ import {
 } from './StyledComponents';
 
 // Styling
-const HighlightedSymptoms = styled.span`
-  color: #1da3aa;
-  margin: 0rem;
-`;
 
 const Warning = styled(DescriptionBold)`
   font-style: italic;
@@ -41,7 +37,7 @@ const Mechanism = ({
       <Description>{mechanism}</Description>
       <Subtitle>Health Risk</Subtitle>
       <Description>
-        <HighlightDescription description={healthRisk}/>
+        <HighlightDescription description={healthRisk} />
       </Description>
       <Subtitle>Who can't use?</Subtitle>
       <DescriptionBold>Medical history / illness</DescriptionBold>

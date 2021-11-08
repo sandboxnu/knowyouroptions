@@ -6,7 +6,7 @@ const Section = styled.div`
   margin-bottom: 2rem;
 `;
 
-export declare interface AdditionalProps {
+export interface AdditionalProps {
   info: Array<Array<string>>;
 }
 

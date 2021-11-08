@@ -24,7 +24,7 @@ const SideEffectsIconContainer = styled.div`
   align-items: center;
   display: flex;
   height: 6vh;
-//  height: 5px;
+  //  height: 5px;
 `;
 
 const SideEffectsLabel = styled(Description)`
@@ -33,15 +33,12 @@ const SideEffectsLabel = styled(Description)`
 
 // Components
 
-export declare interface EffectProps {
-  benefitsInfos: [ReactElement, string][],
-  sideEffectsInfos: [ReactElement, string][],
-};
+export interface EffectProps {
+  benefitsInfos: [ReactElement, string][];
+  sideEffectsInfos: [ReactElement, string][];
+}
 
-const Effect = ({
-  benefitsInfos,
-  sideEffectsInfos,
- }: EffectProps) => {
+const Effect = ({ benefitsInfos, sideEffectsInfos }: EffectProps) => {
   return (
     <>
       <h3>Non-contraceptive benefits</h3>
@@ -50,9 +47,7 @@ const Effect = ({
           const [icon, label] = infos;
           return (
             <Row key={label}>
-              <div>
-                {icon}
-              </div>
+              <div>{icon}</div>
               <Label>{label}</Label>
             </Row>
           );
@@ -64,9 +59,7 @@ const Effect = ({
           const [icon, label] = infos;
           return (
             <Container key={label}>
-              <SideEffectsIconContainer>
-                {icon}
-              </SideEffectsIconContainer>
+              <SideEffectsIconContainer>{icon}</SideEffectsIconContainer>
               <SideEffectsLabel>{label}</SideEffectsLabel>
             </Container>
           );

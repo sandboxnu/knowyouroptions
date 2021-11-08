@@ -17,7 +17,7 @@ const CostDescription = styled(Description)`
   margin-top: 0rem;
 `;
 
-export declare interface PracticalProps {
+export interface PracticalProps {
   access: Array<string>;
   administration: string;
   lowPrice: number;

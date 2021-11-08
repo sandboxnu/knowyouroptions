@@ -8,8 +8,8 @@ const HighlightedTab = styled.h2`
   cursor: pointer;
   font-size: 1rem;
   font-weight: bold;
-  margin: 0 1rem;
-  padding: 1rem 0;
+  margin: 0 0.5rem;
+  padding: 1rem 0.5rem;
   white-space: nowrap;
 `;
 
