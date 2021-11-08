@@ -26,7 +26,7 @@ const Description = styled.p`
 `;
 
 const RightArrow = styled(SvgRightArrow)`
-  align-self: end;
+  align-self: flex-end;
   margin-top: auto;
 `;
 
@@ -42,15 +42,14 @@ const Card = ({
   const router = useRouter();
   const StyledCardProps = {
     onClick: () => router.push(link),
-  }
+  };
   return (
     <StyledCard
-      bodyStyle= {{
+      bodyStyle={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
       }}
-
       {...StyledCardProps}
     >
       <Title>{title}</Title>
