@@ -7,7 +7,4 @@ export class Tag {
 
   @Column()
   label: string;
-
-  @Column()
-  link: string;
 }
