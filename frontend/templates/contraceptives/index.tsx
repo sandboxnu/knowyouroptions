@@ -74,7 +74,7 @@ const Title = styled.h1`
 `;
 
 // components
-export declare interface ContraceptivesProps {
+export interface ContraceptivesProps {
   SvgContraceptive: ReactElement;
   effectProps: EffectProps;
   efficacyProps: EfficacyProps;
