@@ -3,7 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Test } from './entities/test.entity';
+import { Tag } from './entities/tags.entity';
+import { Benefit } from './entities/benefits.entity';
+import { SideEffect } from './entities/side-effects.entity';
+import { ThingToKnow } from './entities/things-to-know.entity';
+import { Contraceptive } from './entities/contraceptive.entity';
 
 @Module({
   imports: [
@@ -16,7 +20,7 @@ import { Test } from './entities/test.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DB_URL,
-      entities: [Test],
+      entities: [Tag, Benefit, SideEffect, ThingToKnow, Contraceptive],
       synchronize: true, // TODO: synchronize true should not be used in a production environment
     }),
   ],
