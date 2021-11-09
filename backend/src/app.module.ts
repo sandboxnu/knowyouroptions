@@ -11,7 +11,7 @@ import { Contraceptive } from './entities/contraceptive.entity';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { UserService } from './user/user.service';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { User } from './entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 

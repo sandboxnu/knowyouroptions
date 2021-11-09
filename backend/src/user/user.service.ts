@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { EmailIsTakenError } from 'src/error/email-taken-error';
 import { UserInfo } from 'src/types/user';
-import { Connection, Repository } from 'typeorm';
+import { Connection } from 'typeorm';
 
 @Injectable()
 export class UserService {
