@@ -8,6 +8,12 @@ import { Benefit } from './entities/benefits.entity';
 import { SideEffect } from './entities/side-effects.entity';
 import { ThingToKnow } from './entities/things-to-know.entity';
 import { Contraceptive } from './entities/contraceptive.entity';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { UserService } from './user/user.service';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { User } from './entities/user.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -20,11 +26,16 @@ import { Contraceptive } from './entities/contraceptive.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DB_URL,
-      entities: [Tag, Benefit, SideEffect, ThingToKnow, Contraceptive],
+      entities: [Tag, Benefit, SideEffect, ThingToKnow, Contraceptive, User],
       synchronize: true, // TODO: synchronize true should not be used in a production environment
     }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '24h' },
+    }),
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, AuthController],
+  providers: [AppService, AuthService, UserService],
 })
 export class AppModule {}

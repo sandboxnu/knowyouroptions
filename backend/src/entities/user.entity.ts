@@ -1,13 +1,16 @@
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
 
 @Entity()
-export class ThingToKnow extends BaseEntity {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  title: string;
+  email: string;
+
+  @Column() // TODO: This should be encrypted
+  password: string;
 
   @Column()
-  description: string;
+  name: string;
 }
