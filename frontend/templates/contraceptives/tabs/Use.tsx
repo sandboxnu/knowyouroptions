@@ -13,7 +13,7 @@ const CategoryRow = styled.div`
 `;
 
 const CategoryTitle = styled.h3`
-  color: #bebebe;
+  color: #808080;
   font-size: 1rem;
   font-weight: normal;
   margin: 0;

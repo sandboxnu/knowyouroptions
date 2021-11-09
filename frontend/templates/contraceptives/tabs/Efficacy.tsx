@@ -12,6 +12,7 @@ import styled from 'styled-components';
 
 const AlphaList = styled.ol`
   color: #7c7c7c;
+  padding-left: 1.25rem;
 `;
 
 const CategoryValueStyled = styled(CategoryValue)`
@@ -23,14 +24,30 @@ const HighlightedDescription = styled(HighlightDescription)`
   font-weight: bold;
 `;
 
+const IconContainer = styled(Row)`
+  column-gap: 1rem;
+`;
+
+const StopIconDescription = styled(Description)`
+  margin: .5rem 0 0 0;
+`;
+
+const StopIconWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  height: 5vh;
+`;
+
 // Components
 
 const StopIcons = ({ icon, label }: { icon: ReactElement; label: string }) => {
   return (
     <>
       <Column>
-        {icon}
-        <Description>{label}</Description>
+        <StopIconWrapper>
+          {icon}
+        </StopIconWrapper>
+        <StopIconDescription>{label}</StopIconDescription>
       </Column>
     </>
   );
@@ -64,20 +81,28 @@ const Efficacy = ({
       </Description>
       <h3>When it starts to work?</h3>
       <AlphaList type="A">
-        {whenItStartsToWorkInfos.map((desc, index) => (
-          <li key={index}>
-            <HighlightedDescription description={desc} />
-          </li>
-        ))}
+        {whenItStartsToWorkInfos.map((desc, index) => {
+          let StyledLi = styled.li``;
+          if (index === 0) {
+            StyledLi = styled.li`
+              margin-bottom: 1rem;
+            `;
+          }
+          return (
+            <StyledLi key={index}>
+              <HighlightedDescription description={desc} />
+            </StyledLi>
+          )
+        })}
       </AlphaList>
 
       <h3>How can I stop it?</h3>
       <Description>{howToStopDesc}</Description>
-      <Row>
+      <IconContainer>
         {stopInfos.map(([icon, label]) => {
           return <StopIcons key={label} label={label} icon={icon} />;
         })}
-      </Row>
+      </IconContainer>
       <h3>Getting back to fertility</h3>
       <Description>{backToFertilityDesc}</Description>
     </>

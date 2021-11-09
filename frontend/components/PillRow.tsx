@@ -9,7 +9,8 @@ const PillContainer = styled.div`
 
 const PillContainerStyled = styled(PillContainer)`
   &>div {
-    padding: .25rem;
+    font-weight: 500;
+    padding: .25rem .5rem;
   }
 `;
 

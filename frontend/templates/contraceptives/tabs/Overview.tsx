@@ -2,13 +2,15 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
 
+import {Column, Row} from './StyledComponents';
+
 // Styling
-const CategoryRow = styled.div`
-  display: flex;
-  flex-direction: row;
+const CategoryRow = styled(Row)`
+  column-gap: 2rem;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 2rem 0;
+  row-gap: 1rem;
   width: 100%;
 `;
 
@@ -22,14 +24,9 @@ const CategoryTitle = styled.h3`
 const CategoryValue = styled.p`
   color: #4b4b4b;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 500;
   margin: 0;
   white-space: nowrap;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const Description = styled.p`

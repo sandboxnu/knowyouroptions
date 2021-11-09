@@ -15,11 +15,13 @@ const HighlightedTab = styled.h2`
 
 const Row = styled.div`
   box-shadow: 0rem 0.75rem 1rem -0.5rem lightgrey;
+  column-gap: 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
   overflow-y: hidden;
+  margin: 0.5rem 1rem;
   wrap: no-wrap;
 `;
 

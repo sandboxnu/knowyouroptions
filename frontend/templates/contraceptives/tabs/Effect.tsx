@@ -4,6 +4,11 @@ import { Column, Description, Row } from './StyledComponents';
 
 // Styles
 
+const BenefitsIconWrapper = styled.div`
+  align-items: center;
+  display: flex;
+`;
+
 const Container = styled(Column)`
   align-items: center;
   text-align: center;
@@ -47,7 +52,7 @@ const Effect = ({ benefitsInfos, sideEffectsInfos }: EffectProps) => {
           const [icon, label] = infos;
           return (
             <Row key={label}>
-              <div>{icon}</div>
+              <BenefitsIconWrapper>{icon}</BenefitsIconWrapper>
               <Label>{label}</Label>
             </Row>
           );

@@ -3,9 +3,10 @@ import React, { ReactElement } from 'react';
 
 const CategoryValueNumber = styled.span`
   color: #1DA3AA;
-  font-size: 2rem;
-  font-weight: normal;
-  margin: 0 .25rem 0 0;
+  font-family: din-2014;
+  font-size: 2.5rem;
+  font-weight: 100;
+  margin: 0 .5rem 0 0;
 `;
 
 const CategoryValueP = styled.p`
