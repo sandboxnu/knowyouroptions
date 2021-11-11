@@ -39,13 +39,15 @@ const TabBar = ({
   tabs,
   tabIndex,
   setTabIndex,
+  className,
 }: {
   tabs: Array<string>;
   tabIndex: number;
   setTabIndex: Function;
+  className?: string;
 }): ReactElement => {
   return (
-    <Row>
+    <Row className={className}>
       {tabs.map((tab: string, index: number) => {
         const highlightedTab = <HighlightedTab key={tab}>{tab}</HighlightedTab>;
         const regularTab = (
