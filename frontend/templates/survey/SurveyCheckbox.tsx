@@ -21,6 +21,7 @@ const CheckboxStyled = styled.input`
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 1rem 0rem;
   row-gap: 1rem;
   & > div:hover {
     background-color: purple;

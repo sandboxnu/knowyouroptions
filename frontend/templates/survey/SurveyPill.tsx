@@ -6,7 +6,7 @@ import Survey from './index';
 const PillAnswers = styled(PillColumn)`
   row-gap: 1rem;
   & > div {
-    background-color: pink;
+    background-color: #ffebe7;
     border: 0;
     border-radius: 3rem;
     color: black;
@@ -18,6 +18,7 @@ const PillAnswers = styled(PillColumn)`
     background-color: purple;
     cursor: pointer;
   }
+  padding: 2rem 0rem;
 `;
 
 export interface SurveyPillProps {
