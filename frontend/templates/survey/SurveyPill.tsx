@@ -4,6 +4,7 @@ import PillColumn from '../../components/PillColumn';
 import Survey from './index';
 
 const PillAnswers = styled(PillColumn)`
+  padding: 4rem 1rem;
   row-gap: 1rem;
   & > div {
     background-color: pink;

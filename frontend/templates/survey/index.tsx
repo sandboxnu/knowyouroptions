@@ -6,10 +6,9 @@ const Container = styled.div`
   padding: 1rem;
 `;
 
-const Content = styled(Container)`
+const Content = styled.div`
   background-color: #febba8;
   height: 100%;
-  padding: 4rem 1rem;
 `;
 
 const Fraction = styled.p`
@@ -19,6 +18,10 @@ const Fraction = styled.p`
 
 const Header = styled(Container)`
   height: 40%;
+`;
+
+const HeaderSmall = styled(Container)`
+  height: 35%;
 `;
 
 const PageNumber = styled.span`
@@ -51,19 +54,23 @@ export interface SurveyProps {
   Options: ReactElement;
   pageNumber: number;
   question: string;
+  smallHeader?: boolean;
 }
 
 const Survey = ({
   Options,
   pageNumber,
   question,
+  smallHeader,
 }: SurveyProps): ReactElement => {
+  const HeaderElm = smallHeader? HeaderSmall : Header
+  const [curPage, setCurPage] = useState(0);
   return (
     <Wrapper>
-      <Header>
+      <HeaderElm>
         <PageNumberFraction number={pageNumber} />
         <Question> {question} </Question>
-      </Header>
+      </HeaderElm>
 
       <Content>{Options}</Content>
     </Wrapper>

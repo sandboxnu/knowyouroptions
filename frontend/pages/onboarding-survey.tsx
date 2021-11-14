@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
 import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
@@ -19,7 +19,61 @@ import SvgDiaphragm from '../public/diaphragm.svg';
 import SvgPill from '../public/pill.svg';
 import SvgCervicalCap from '../public/cervical-cap.svg';
 
-const OnboardingSurvey = ({}): ReactElement => {
+// PAGE 1
+const AgePregnantSurvey = ({}): ReactElement => {
+  const answers = [
+    'Under 12',
+    '13 - 15',
+    '16 - 18',
+    '19 - 22',
+    '23 - 30',
+    'Above 30',
+  ];
+  return (
+    <SurveyPill
+      answers={answers}
+      pageNumber={1}
+      question="What age do you consider appropriate for you to become pregnant?"
+    />
+  );
+};
+
+
+// PAGE 2
+const StageSexuallyActivePage = ({}): ReactElement => {
+  const answers = [
+    'Middle school',
+    'High school',
+    'Late teen',
+    'Early 20s',
+    'After marriage',
+    'Other...',
+  ];
+  return (
+    <SurveyPill
+      answers={answers}
+      pageNumber={2}
+      question="At what stage do you think you will be (or currently are) sexually active?"
+    />
+  );
+};
+
+
+// PAGE 3
+const TriedMethodsPage = ({}): ReactElement => {
+  const answers = ['Yes', 'No'];
+  return (
+    <SurveyPill
+      answers={answers}
+      pageNumber={3}
+      question="Have you tried any contraception/birth control methods?"
+    />
+  );
+};
+
+// PAGE 4
+
+const MethodsPage = ({}): ReactElement => {
   const methodInfos: [ReactElement, string][] = [
     [<SvgCopperIUD/>, 'Copper IUD'],
     [<SvgHormonalIUD/>, 'Hormonal IUD'],
@@ -43,23 +97,47 @@ const OnboardingSurvey = ({}): ReactElement => {
   );
 };
 
-// const OnboardingSurvey = ({}): ReactElement => {
-//   const dropdownInfos: [string, string[]][] = [
-//     ['State', ['CA', 'MA', 'NY', 'OK']],
-//   ];
-//   return (
-//     <SurveyDropdownInput
-//       dropdownInfos={dropdownInfos}
-//       inputQuestion="city/town"
-//       intro="I live in ..."
-//       pageNumber={6}
-//       question="What are you looking for in this app?"
-//     />
-//   );
-// };
+// PAGE 4.2
 
-/*
-const OnboardingSurvey = ({}): ReactElement => {
+
+// PAGE 5
+const SexualEducationPage = ({}): ReactElement => {
+  const answers = [
+    'Health education class at school',
+    'Parent / Family',
+    'Friends / Peers',
+    'Websites / Videos',
+    'Religious Institution',
+    'Others',
+  ];
+  return (
+    <SurveyCheckbox
+      answers={answers}
+      pageNumber={5}
+      question="Where do you receive sexual education about contraception, consent, and other related topics?"
+    />
+  );
+};
+
+// PAGE 6
+const LookingForPage = ({}): ReactElement => {
+  const answers = [
+    'General knowledge on contraceptive methods',
+    'Choosing a method that suits your value and lifestyle',
+    'Sharing your own experience with peers and community of girls',
+    'Looking for advice from peers and healthcare professionals',
+  ];
+  return (
+    <SurveyCheckbox
+      answers={answers}
+      pageNumber={6}
+      question="What are you looking for in this app?"
+    />
+  );
+};
+
+// PAGE 7.1
+const DemographicPage = ({}): ReactElement => {
   const dropdownInfos: [string, string[]][] = [
     [
       'Age',
@@ -86,29 +164,50 @@ const OnboardingSurvey = ({}): ReactElement => {
     <SurveyDropdown
       dropdownInfos={dropdownInfos}
       intro="I am ..."
-      pageNumber={6}
-      question="What are you looking for in this app?"
+      pageNumber={7}
+      question="Please tell us a bit more about yourself."
     />
   );
-};*/
+};
 
-/*
-const OnboardingSurvey = ({}): ReactElement => {
-  const answers = [
-    'middle school',
-    'high school',
-    'late teen',
-    'early 20s',
-    'after marriage',
-    'other...',
+
+// PAGE 7.2
+const PersonalInfoPage = ({}): ReactElement => {
+  const dropdownInfos: [string, string[]][] = [
+    ['State', ['CA', 'MA', 'NY', 'OK']],
   ];
   return (
-    <SurveyCheckbox
-      answers={answers}
-      pageNumber={6}
-      question="What are you looking for in this app?"
+    <SurveyDropdownInput
+      dropdownInfos={dropdownInfos}
+      inputQuestion="city/town"
+      intro="I live in ..."
+      pageNumber={7}
+      question="Please tell us a bit more about yourself."
     />
   );
-};*/
+};
+
+// DISPLAY
+
+const OnboardingSurvey = (): ReactElement => {
+  const [curPage, setCurPage] = useState(0);
+  const pages = [
+    AgePregnantSurvey,
+    StageSexuallyActivePage,
+    TriedMethodsPage,
+    MethodsPage,
+    SexualEducationPage,
+    LookingForPage,
+    DemographicPage,
+    PersonalInfoPage
+  ]
+
+  const Page = pages[curPage]
+  return (
+    <>
+      <Page setCurPage={setCurPage} />
+    </>
+  );
+};
 
 export default OnboardingSurvey;
