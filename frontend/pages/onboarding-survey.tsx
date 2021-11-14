@@ -5,21 +5,58 @@ import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyDropdown from '../templates/survey/SurveyDropdown';
 import SurveyDropdownInput from '../templates/survey/SurveyDropdownInput';
+import SurveyMethods from '../templates/survey/SurveyMethods';
+import SvgImplant from '../public/implant-small.svg';
+import SvgCopperIUD from '../public/copper-IUD.svg';
+import SvgHormonalIUD from '../public/hormonal-IUD.svg';
+import SvgSterilization from '../public/sterilization.svg';
+import SvgShot from '../public/shot.svg';
+import SvgRing from '../public/ring.svg';
+import SvgPatch from '../public/patch.svg';
+import SvgCondom from '../public/condom.svg';
+import SvgSpermicide from '../public/spermicide.svg';
+import SvgDiaphragm from '../public/diaphragm.svg';
+import SvgPill from '../public/pill.svg';
+import SvgCervicalCap from '../public/cervical-cap.svg';
 
 const OnboardingSurvey = ({}): ReactElement => {
-  const dropdownInfos: [string, string[]][] = [
-    ['State', ['CA', 'MA', 'NY', 'OK']],
+  const methodInfos: [ReactElement, string][] = [
+    [<SvgCopperIUD/>, 'Copper IUD'],
+    [<SvgHormonalIUD/>, 'Hormonal IUD'],
+    [<SvgSterilization/>, 'Sterilization'],
+    [<SvgImplant/>, 'Implant'],
+    [<SvgShot/>, 'Shot'],
+    [<SvgRing/>, 'Ring'],
+    [<SvgPatch/>, 'Patch'],
+    [<SvgCondom/>, 'Condoms'],
+    [<SvgSpermicide/>, 'Spermicide'],
+    [<SvgDiaphragm/>, 'Diaphragm'],
+    [<SvgPill/>, 'Pill'],
+    [<SvgCervicalCap/>, 'Cervical Cap'],
   ];
   return (
-    <SurveyDropdownInput
-      dropdownInfos={dropdownInfos}
-      inputQuestion="city/town"
-      intro="I live in ..."
-      pageNumber={6}
-      question="What are you looking for in this app?"
+    <SurveyMethods
+      methodInfos={methodInfos}
+      pageNumber={4}
+      question="I have used and been satisfied with the following method(s):"
     />
   );
 };
+
+// const OnboardingSurvey = ({}): ReactElement => {
+//   const dropdownInfos: [string, string[]][] = [
+//     ['State', ['CA', 'MA', 'NY', 'OK']],
+//   ];
+//   return (
+//     <SurveyDropdownInput
+//       dropdownInfos={dropdownInfos}
+//       inputQuestion="city/town"
+//       intro="I live in ..."
+//       pageNumber={6}
+//       question="What are you looking for in this app?"
+//     />
+//   );
+// };
 
 /*
 const OnboardingSurvey = ({}): ReactElement => {
