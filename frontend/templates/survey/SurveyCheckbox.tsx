@@ -31,10 +31,12 @@ const ColumnContainer = styled.div`
 const CheckboxColumn = ({
   checkboxTitles,
   className,
+  onClick,
   setCurPage,
 }: {
   checkboxTitles: string[];
   className?: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   setCurPage?: React.Dispatch<React.SetStateAction<string>>,
 }): ReactElement => {
   return (
@@ -53,12 +55,14 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
 
 const SurveyCheckbox = ({
   answers,
+  onClick,
   pageNumber,
   question,
 }: SurveyCheckboxProps): ReactElement => {

@@ -79,13 +79,13 @@ const OptionStyled = styled.option`
 `;
 
 const DropdownColumn = ({
+  classNames,
   intro,
   selectInfos,
-  classNames,
 }: {
+  classNames?: string;
   intro: string;
   selectInfos: [string, string[]][];
-  classNames?: string;
 }): ReactElement => {
   return (
     <>
@@ -141,6 +141,7 @@ export interface SurveyDropdownInputProps {
   dropdownInfos: [string, string[]][];
   inputQuestion: string;
   intro: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
@@ -149,6 +150,7 @@ const SurveyDropdownInput = ({
   dropdownInfos,
   inputQuestion,
   intro,
+  onClick,
   pageNumber,
   question,
 }: SurveyDropdownInputProps): ReactElement => {
