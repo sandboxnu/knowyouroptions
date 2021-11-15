@@ -20,6 +20,15 @@ const Eye = styled(SvgEye)`
 const FacebookIcon = styled(SvgFacebook)`
   cursor: pointer;
   margin-right: 2rem;
+
+  :hover {
+    g[fill='none'] {
+      stroke: #7e1a6a;
+    }
+    path {
+      fill: #7e1a6a;
+    }
+  }
 `;
 
 const ForgotPassword = styled.a`
@@ -38,6 +47,15 @@ const Form = styled.form`
 
 const GoogleIcon = styled(SvgGoogle)`
   cursor: pointer;
+
+  :hover {
+    g[fill='none'] {
+      stroke: #7e1a6a;
+    }
+    path {
+      fill: #7e1a6a;
+    }
+  }
 `;
 
 const Input = styled.input`
@@ -136,7 +154,7 @@ const SignInForm = (): ReactElement => {
           </Label>
         );
       })}
-      <ForgotPassword>FORGET PASSWORD?</ForgotPassword>
+      <ForgotPassword>FORGOT PASSWORD?</ForgotPassword>
       <Submit type="submit" value="Sign in" />
     </Form>
   );
@@ -178,7 +196,7 @@ const SignIn = (): ReactElement => {
           <OAuth>OR CONTINUE WITH</OAuth>
           <OAuthIconContainer>
             <FacebookIcon />
-            <SvgGoogle />
+            <GoogleIcon />
           </OAuthIconContainer>
         </>
       ) : (
