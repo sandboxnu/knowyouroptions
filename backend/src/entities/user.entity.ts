@@ -1,4 +1,6 @@
+import { EncryptionTransformerConfig } from 'src/auth/encryption.config';
 import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { EncryptionTransformer } from 'typeorm-encrypted';
 
 @Entity()
 export class User extends BaseEntity {
@@ -8,7 +10,11 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
-  @Column() // TODO: This should be encrypted
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    transformer: new EncryptionTransformer(EncryptionTransformerConfig),
+  })
   password: string;
 
   @Column()

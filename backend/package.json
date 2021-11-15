@@ -28,6 +28,7 @@
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^7.5.1",
     "@nestjs/typeorm": "^7.1.5",
+    "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
@@ -36,7 +37,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "typeorm": "^0.2.39"
+    "typeorm": "^0.2.39",
+    "typeorm-encrypted": "^0.6.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",
