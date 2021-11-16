@@ -23,11 +23,10 @@ export class AuthController {
   ) {}
 
   @Post('/sign-up')
-  async signUp(@Body() userInfo: UserInfo) {
+  async signUp(@Body() userInfo: UserInfo, @Res() res: Response) {
     const result = await this.authService.signUp(userInfo);
-    return {
-      redirect: `localhost:3001/login/entry?token=${result.accessToken}`,
-    };
+
+    this.enter(res, result.id);
   }
 
   // NOTE: Although the two routes below are on the backend,

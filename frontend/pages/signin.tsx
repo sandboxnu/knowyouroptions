@@ -5,6 +5,8 @@ import SvgEye from '../public/eye.svg';
 import SvgFacebook from '../public/facebook.svg';
 import SvgGoogle from '../public/google.svg';
 import { API } from '../api-client';
+import { redirect } from 'next/dist/server/api-utils';
+import { useRouter } from 'next/router';
 
 const Container = styled.div`
   display: flex;
@@ -180,6 +182,8 @@ const SignInForm = (): ReactElement => {
 
 const SignUpForm = (): ReactElement => {
   const [subtab, setSubtab] = useState(0);
+  const router = useRouter();
+
   const signup = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -194,14 +198,15 @@ const SignUpForm = (): ReactElement => {
     if (elements['CONFIRM PASSWORD'] !== elements.PASSWORD) {
       // TODO: handle error
     }
+    console.log(API.signUp);
 
-    const response = await API.signup.post({
+    const response = await API.signUp.post({
       email: elements['E-MAIL'].value,
       password: elements.PASSWORD.value,
       name: elements.NAME.value,
     });
 
-    console.log(response);
+    router.push('/');
   };
 
   return (

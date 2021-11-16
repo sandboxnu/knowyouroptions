@@ -40,7 +40,7 @@ class APIClient {
     return responseClass ? plainToClass(responseClass, res) : res;
   }
 
-  signup = {
+  signUp = {
     post: async (body: {
       email: string;
       password: string;
