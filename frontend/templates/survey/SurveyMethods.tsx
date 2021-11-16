@@ -15,7 +15,7 @@ const MethodCard = styled.div`
   font-size: .8rem;
   height: 12vh;
   justify-content: flex-end;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem .7rem;
   width: 30%;
 `;
 
@@ -52,6 +52,7 @@ const SurveyMethods = ({
   return (
     <>
       <Survey
+        onClick={onClick}
         Options={
           <MethodsContainer>
             {methodInfos.map((method) => {

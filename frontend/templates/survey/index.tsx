@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
+import SvgLeftArrow from '../../public/left-arrow.svg';
 
 // styled
 const Container = styled.div`
@@ -36,6 +37,8 @@ const Question = styled.h1`
 `;
 
 const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
   height: 100vh;
 `;
 
@@ -51,6 +54,7 @@ const PageNumberFraction = ({ number }: { number: number }): ReactElement => {
 };
 
 export interface SurveyProps {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
   question: string;
@@ -58,16 +62,17 @@ export interface SurveyProps {
 }
 
 const Survey = ({
+  onClick,
   Options,
   pageNumber,
   question,
   smallHeader,
 }: SurveyProps): ReactElement => {
   const HeaderElm = smallHeader? HeaderSmall : Header
-  const [curPage, setCurPage] = useState(0);
   return (
     <Wrapper>
       <HeaderElm>
+        <SvgLeftArrow onClick={onClick} />
         <PageNumberFraction number={pageNumber} />
         <Question> {question} </Question>
       </HeaderElm>

@@ -141,7 +141,7 @@ export interface SurveyDropdownInputProps {
   dropdownInfos: [string, string[]][];
   inputQuestion: string;
   intro: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
@@ -157,6 +157,7 @@ const SurveyDropdownInput = ({
   return (
     <>
       <Survey
+        onClick={onClick}
         Options={
           <DropdownColumnContainer>
             <DropdownColumn intro={intro} selectInfos={dropdownInfos} />

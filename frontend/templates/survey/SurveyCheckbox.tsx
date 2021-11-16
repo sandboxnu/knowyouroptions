@@ -55,7 +55,7 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
@@ -69,6 +69,7 @@ const SurveyCheckbox = ({
   return (
     <>
       <Survey
+        onClick={onClick}
         Options={
           <ColumnContainer>
             <CheckboxColumn checkboxTitles={answers} />

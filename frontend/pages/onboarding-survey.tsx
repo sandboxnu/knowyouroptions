@@ -80,23 +80,23 @@ const OnboardingSurvey = (): ReactElement => {
     );
   };
 
-  // PAGE 4
+  // PAGE 4.1
+  const methodInfos: [ReactElement, string][] = [
+    [<SvgCopperIUD/>, 'Copper IUD'],
+    [<SvgHormonalIUD/>, 'Hormonal IUD'],
+    [<SvgSterilization/>, 'Sterilization'],
+    [<SvgImplant/>, 'Implant'],
+    [<SvgShot/>, 'Shot'],
+    [<SvgRing/>, 'Ring'],
+    [<SvgPatch/>, 'Patch'],
+    [<SvgCondom/>, 'Condoms'],
+    [<SvgSpermicide/>, 'Spermicide'],
+    [<SvgDiaphragm/>, 'Diaphragm'],
+    [<SvgPill/>, 'Pill'],
+    [<SvgCervicalCap/>, 'Cervical Cap'],
+  ];
 
-  const MethodsPage = ({}): ReactElement => {
-    const methodInfos: [ReactElement, string][] = [
-      [<SvgCopperIUD/>, 'Copper IUD'],
-      [<SvgHormonalIUD/>, 'Hormonal IUD'],
-      [<SvgSterilization/>, 'Sterilization'],
-      [<SvgImplant/>, 'Implant'],
-      [<SvgShot/>, 'Shot'],
-      [<SvgRing/>, 'Ring'],
-      [<SvgPatch/>, 'Patch'],
-      [<SvgCondom/>, 'Condoms'],
-      [<SvgSpermicide/>, 'Spermicide'],
-      [<SvgDiaphragm/>, 'Diaphragm'],
-      [<SvgPill/>, 'Pill'],
-      [<SvgCervicalCap/>, 'Cervical Cap'],
-    ];
+  const MethodsUsedPage = ({}): ReactElement => {
     return (
       <SurveyMethods
         methodInfos={methodInfos}
@@ -108,7 +108,16 @@ const OnboardingSurvey = (): ReactElement => {
   };
 
   // PAGE 4.2
-
+  const MethodsMoreInfoPage = ({}): ReactElement => {
+    return (
+      <SurveyMethods
+        methodInfos={methodInfos}
+        onClick={onClick}
+        pageNumber={4}
+        question="I want more information about the following method(s):"
+      />
+    );
+  };
 
   // PAGE 5
   const SexualEducationPage = ({}): ReactElement => {
@@ -207,7 +216,8 @@ const OnboardingSurvey = (): ReactElement => {
     AgePregnantSurvey,
     StageSexuallyActivePage,
     TriedMethodsPage,
-    MethodsPage,
+    MethodsUsedPage,
+    MethodsMoreInfoPage,
     SexualEducationPage,
     LookingForPage,
     DemographicPage,

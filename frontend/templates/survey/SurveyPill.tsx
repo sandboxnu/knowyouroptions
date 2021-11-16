@@ -14,7 +14,7 @@ const PillAnswers = styled(PillContainer)`
   padding: 4rem 1rem;
   row-gap: 1rem;
   & > div {
-    background-color: pink;
+    background-color: #ffebe5;
     border: 0;
     border-radius: 3rem;
     color: black;
@@ -72,6 +72,7 @@ const SurveyPill = ({
   return (
     <>
       <Survey
+        onClick={onClick}
         Options={<PillColumn onClick={onClick} pillTitles={answers} />}
         pageNumber={pageNumber}
         question={question}
