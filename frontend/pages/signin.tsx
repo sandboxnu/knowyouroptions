@@ -11,6 +11,18 @@ const Container = styled.div`
   padding: 5rem 0.5rem;
 `;
 
+const Continue = styled.button`
+  background-color: #7e1a6a;
+  border-color: transparent;
+  border-radius: 0.25rem;
+  border-width: 0;
+  color: white;
+  cursor: pointer;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  width: 100%;
+`;
+
 const Eye = styled(SvgEye)`
   align-self: center;
   cursor: pointer;
@@ -91,6 +103,10 @@ const Label = styled.label`
   margin-bottom: 0.25rem;
 `;
 
+const NameLabel = styled(Label)`
+  margin-top: 2rem;
+`;
+
 const OAuth = styled.span`
   align-self: center;
   color: #aaaaaa;
@@ -128,6 +144,7 @@ const Submit = styled(Input)`
 
 function handleSubmit() {
   // TODO: handle the submit
+  console.log('Submitted');
 }
 
 const signInFields: Array<[string, boolean]> = [
@@ -141,14 +158,14 @@ const signUpFields: Array<[string, boolean]> = [
 
 const SignInForm = (): ReactElement => {
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form action="/welcome">
       {signInFields.map(([name, hidable]: [string, boolean]) => {
         const [hidden, setHidden] = useState(hidable);
         return (
           <Label key={name}>
             {name}
             <InputRow>
-              <Input type={hidden ? 'password' : 'text'} autoFocus={false} />
+              <Input type={hidden ? 'password' : 'text'} name={name} />
               {hidable && <Eye onClick={() => setHidden(!hidden)} />}
             </InputRow>
           </Label>
@@ -161,21 +178,34 @@ const SignInForm = (): ReactElement => {
 };
 
 const SignUpForm = (): ReactElement => {
+  const [subtab, setSubtab] = useState(0);
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form action="/welcome">
       {signUpFields.map(([name, hidable]: [string, boolean]) => {
         const [hidden, setHidden] = useState(hidable);
         return (
-          <Label key={name}>
+          <Label key={name} style={{ display: subtab !== 0 ? 'none' : 'flex' }}>
             {name}
             <InputRow>
-              <Input type={hidden ? 'password' : 'text'} autoFocus={false} />
+              <Input type={hidden ? 'password' : 'text'} name={name} />
               {hidable && <Eye onClick={() => setHidden(!hidden)} />}
             </InputRow>
           </Label>
         );
       })}
-      <Submit type="submit" value="Continue" />
+      <NameLabel key="Name" style={{ display: subtab === 0 ? 'none' : 'flex' }}>
+        WHAT WOULD YOU LIKE TO BE CALLED?
+        <InputRow>
+          <Input type="text" name="Name" />
+        </InputRow>
+      </NameLabel>
+      {subtab === 0 ? (
+        <Continue type="button" onClick={() => setSubtab(1)}>
+          Continue
+        </Continue>
+      ) : (
+        <Submit type="submit" value="Sign up" />
+      )}
     </Form>
   );
 };

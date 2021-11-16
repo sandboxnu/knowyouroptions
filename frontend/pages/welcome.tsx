@@ -65,7 +65,7 @@ const WelcomeDescription = styled(Description)`
   margin-top: 0rem;
 `;
 
-const Welcome = ({ name }: { name: string }): ReactElement => {
+const Welcome = ({ name }: { name?: string }): ReactElement => {
   const router = useRouter();
   return (
     <Container>
@@ -74,7 +74,7 @@ const Welcome = ({ name }: { name: string }): ReactElement => {
       </ImageContainer>
       <BottomContainer>
         <Hi>
-          Hi, <Name>Mary{name}</Name>
+          Hi, <Name>{name === '' ? 'No Name' : name}</Name>
         </Hi>
         <WelcomeDescription>
           Please tell us more about yourself so we can find the best
