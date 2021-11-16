@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 import TabBar from '../templates/TabBar';
 import SvgEye from '../public/eye.svg';
 import SvgFacebook from '../public/facebook.svg';
 import SvgGoogle from '../public/google.svg';
+import { API } from '../api-client';
 
 const Container = styled.div`
   display: flex;
@@ -179,8 +180,32 @@ const SignInForm = (): ReactElement => {
 
 const SignUpForm = (): ReactElement => {
   const [subtab, setSubtab] = useState(0);
+  const signup = async (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    console.log(form.elements);
+    const elements = form.elements as typeof form.elements & {
+      'E-MAIL': { value: string };
+      PASSWORD: { value: string };
+      'CONFIRM PASSWORD': { value: string };
+      NAME: { value: string };
+    };
+
+    if (elements['CONFIRM PASSWORD'] !== elements.PASSWORD) {
+      // TODO: handle error
+    }
+
+    const response = await API.signup.post({
+      email: elements['E-MAIL'].value,
+      password: elements.PASSWORD.value,
+      name: elements.NAME.value,
+    });
+
+    console.log(response);
+  };
+
   return (
-    <Form action="/welcome">
+    <Form onSubmit={signup}>
       {signUpFields.map(([name, hidable]: [string, boolean]) => {
         const [hidden, setHidden] = useState(hidable);
         return (
@@ -193,10 +218,10 @@ const SignUpForm = (): ReactElement => {
           </Label>
         );
       })}
-      <NameLabel key="Name" style={{ display: subtab === 0 ? 'none' : 'flex' }}>
+      <NameLabel key="NAME" style={{ display: subtab === 0 ? 'none' : 'flex' }}>
         WHAT WOULD YOU LIKE TO BE CALLED?
         <InputRow>
-          <Input type="text" name="Name" />
+          <Input type="text" name="NAME" />
         </InputRow>
       </NameLabel>
       {subtab === 0 ? (
