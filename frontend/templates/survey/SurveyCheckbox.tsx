@@ -32,9 +32,11 @@ const ColumnContainer = styled.div`
 const CheckboxColumn = ({
   checkboxTitles,
   className,
+  setCurPage,
 }: {
   checkboxTitles: string[];
   className?: string;
+  setCurPage?: React.Dispatch<React.SetStateAction<string>>;
 }): ReactElement => {
   return (
     <>

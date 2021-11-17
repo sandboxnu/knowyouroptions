@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45.152" height="45.207" viewBox="0 0 45.152 45.207">
+  <g id="icon-07" transform="translate(-4.557 -1.443)">
+    <path id="Path_834" data-name="Path 834" d="M9.54,45.93c-.45.45-1.76-.15-2.94-1.32s-1.77-2.5-1.32-3L21.17,25.77,25.44,30,9.54,45.93" fill="#fff" stroke="#40403f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <ellipse id="Ellipse_294" data-name="Ellipse 294" cx="0.93" cy="3.02" rx="0.93" ry="3.02" transform="translate(20.511 26.425) rotate(-45)" fill="#fff" stroke="#40403f" stroke-miterlimit="10" stroke-width="1"/>
+    <path id="Path_835" data-name="Path 835" d="M44.79,2.15c.44-.45,1.76.15,2.94,1.32S49.5,6,49.05,6.42L33.16,22.31l-4.27-4.26,15.9-15.9" fill="#fff" stroke="#40403f" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    <ellipse id="Ellipse_295" data-name="Ellipse 295" cx="0.93" cy="3.02" rx="0.93" ry="3.02" transform="translate(28.231 18.707) rotate(-45)" fill="#fff" stroke="#40403f" stroke-miterlimit="10" stroke-width="1"/>
+    <line id="Line_201" data-name="Line 201" x2="1.06" y2="1.06" transform="translate(15.52 12.08)" fill="none" stroke="#40403f" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.75"/>
+    <line id="Line_202" data-name="Line 202" x2="18.55" y2="18.55" transform="translate(18.53 15.1)" fill="none" stroke="#40403f" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.75" stroke-dasharray="2.76 2.76"/>
+    <line id="Line_203" data-name="Line 203" x2="1.06" y2="1.06" transform="translate(38.06 34.62)" fill="none" stroke="#40403f" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.75"/>
+  </g>
+</svg>

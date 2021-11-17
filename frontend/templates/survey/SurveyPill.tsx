@@ -18,7 +18,7 @@ const PillAnswers = styled(PillColumn)`
     background-color: purple;
     cursor: pointer;
   }
-  padding: 2rem 0rem;
+  padding: 2rem 1rem;
 `;
 
 export interface SurveyPillProps {

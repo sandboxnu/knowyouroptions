@@ -1,14 +1,26 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 
 import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyDropdown from '../templates/survey/SurveyDropdown';
 import SurveyDropdownInput from '../templates/survey/SurveyDropdownInput';
+import SurveyMethods from '../templates/survey/SurveyMethods';
+import SvgImplant from '../public/implant-small.svg';
+import SvgCopperIUD from '../public/copper-IUD.svg';
+import SvgHormonalIUD from '../public/hormonal-IUD.svg';
+import SvgSterilization from '../public/sterilization.svg';
+import SvgShot from '../public/shot.svg';
+import SvgRing from '../public/ring.svg';
+import SvgPatch from '../public/patch.svg';
+import SvgCondom from '../public/condom.svg';
+import SvgSpermicide from '../public/spermicide.svg';
+import SvgDiaphragm from '../public/diaphragm.svg';
+import SvgPill from '../public/pill.svg';
+import SvgCervicalCap from '../public/cervical-cap.svg';
 
-/*
 // PAGE 1
-const OnboardingSurvey = ({}): ReactElement => {
+const AgePregnantSurvey = ({}): ReactElement => {
   const answers = [
     'Under 12',
     '13 - 15',
@@ -24,11 +36,11 @@ const OnboardingSurvey = ({}): ReactElement => {
       question="What age do you consider appropriate for you to become pregnant?"
     />
   );
-};*/
+};
 
-/*
+
 // PAGE 2
-const OnboardingSurvey = ({}): ReactElement => {
+const StageSexuallyActivePage = ({}): ReactElement => {
   const answers = [
     'Middle school',
     'High school',
@@ -44,11 +56,11 @@ const OnboardingSurvey = ({}): ReactElement => {
       question="At what stage do you think you will be (or currently are) sexually active?"
     />
   );
-};*/
+};
 
-/*
+
 // PAGE 3
-const OnboardingSurvey = ({}): ReactElement => {
+const TriedMethodsPage = ({}): ReactElement => {
   const answers = ['Yes', 'No'];
   return (
     <SurveyPill
@@ -57,15 +69,39 @@ const OnboardingSurvey = ({}): ReactElement => {
       question="Have you tried any contraception/birth control methods?"
     />
   );
-};*/
+};
 
 // PAGE 4
 
+const MethodsPage = ({}): ReactElement => {
+  const methodInfos: [ReactElement, string][] = [
+    [<SvgCopperIUD/>, 'Copper IUD'],
+    [<SvgHormonalIUD/>, 'Hormonal IUD'],
+    [<SvgSterilization/>, 'Sterilization'],
+    [<SvgImplant/>, 'Implant'],
+    [<SvgShot/>, 'Shot'],
+    [<SvgRing/>, 'Ring'],
+    [<SvgPatch/>, 'Patch'],
+    [<SvgCondom/>, 'Condoms'],
+    [<SvgSpermicide/>, 'Spermicide'],
+    [<SvgDiaphragm/>, 'Diaphragm'],
+    [<SvgPill/>, 'Pill'],
+    [<SvgCervicalCap/>, 'Cervical Cap'],
+  ];
+  return (
+    <SurveyMethods
+      methodInfos={methodInfos}
+      pageNumber={4}
+      question="I have used and been satisfied with the following method(s):"
+    />
+  );
+};
+
 // PAGE 4.2
 
-/*
+
 // PAGE 5
-const OnboardingSurvey = ({}): ReactElement => {
+const SexualEducationPage = ({}): ReactElement => {
   const answers = [
     'Health education class at school',
     'Parent / Family',
@@ -81,10 +117,10 @@ const OnboardingSurvey = ({}): ReactElement => {
       question="Where do you receive sexual education about contraception, consent, and other related topics?"
     />
   );
-};*/
+};
 
 // PAGE 6
-const OnboardingSurvey = ({}): ReactElement => {
+const LookingForPage = ({}): ReactElement => {
   const answers = [
     'General knowledge on contraceptive methods',
     'Choosing a method that suits your value and lifestyle',
@@ -100,9 +136,8 @@ const OnboardingSurvey = ({}): ReactElement => {
   );
 };
 
-/*
 // PAGE 7.1
-const OnboardingSurvey = ({}): ReactElement => {
+const DemographicPage = ({}): ReactElement => {
   const dropdownInfos: [string, string[]][] = [
     [
       'Age',
@@ -133,11 +168,11 @@ const OnboardingSurvey = ({}): ReactElement => {
       question="Please tell us a bit more about yourself."
     />
   );
-};*/
+};
 
-/*
+
 // PAGE 7.2
-const OnboardingSurvey = ({}): ReactElement => {
+const PersonalInfoPage = ({}): ReactElement => {
   const dropdownInfos: [string, string[]][] = [
     ['State', ['CA', 'MA', 'NY', 'OK']],
   ];
@@ -150,6 +185,29 @@ const OnboardingSurvey = ({}): ReactElement => {
       question="Please tell us a bit more about yourself."
     />
   );
-};*/
+};
+
+// DISPLAY
+
+const OnboardingSurvey = (): ReactElement => {
+  const [curPage, setCurPage] = useState(0);
+  const pages = [
+    AgePregnantSurvey,
+    StageSexuallyActivePage,
+    TriedMethodsPage,
+    MethodsPage,
+    SexualEducationPage,
+    LookingForPage,
+    DemographicPage,
+    PersonalInfoPage
+  ]
+
+  const Page = pages[curPage]
+  return (
+    <>
+      <Page setCurPage={setCurPage} />
+    </>
+  );
+};
 
 export default OnboardingSurvey;
