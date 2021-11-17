@@ -1,12 +1,20 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import PillColumn from '../../components/PillColumn';
 import Survey from './index';
+import Pill from '../../components/Pill';
 
-const PillAnswers = styled(PillColumn)`
+// Styling
+
+const PillContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const PillAnswers = styled(PillContainer)`
+  padding: 4rem 1rem;
   row-gap: 1rem;
   & > div {
-    background-color: #ffebe7;
+    background-color: #ffebe5;
     border: 0;
     border-radius: 3rem;
     color: black;
@@ -21,21 +29,52 @@ const PillAnswers = styled(PillColumn)`
   padding: 2rem 1rem;
 `;
 
+// Components
+
+const PillColumn = ({
+  className,
+  onClick,
+  pillTitles,
+}: // setValues
+{
+  className?: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  pillTitles: string[];
+}): ReactElement => {
+  return (
+    <PillAnswers className={className}>
+      {pillTitles.map((title: string): ReactElement => {
+        const newOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
+          onClick(event);
+        };
+        return (
+          <Pill key={title} onClick={newOnClick}>
+            {title}
+          </Pill>
+        );
+      })}
+    </PillAnswers>
+  );
+};
+
 export interface SurveyPillProps {
   answers: string[];
+  onClick: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
 
 const SurveyPill = ({
   answers,
+  onClick,
   pageNumber,
   question,
 }: SurveyPillProps): ReactElement => {
   return (
     <>
       <Survey
-        Options={<PillAnswers pillTitles={answers} />}
+        onClick={onClick}
+        Options={<PillColumn onClick={onClick} pillTitles={answers} />}
         pageNumber={pageNumber}
         question={question}
       />

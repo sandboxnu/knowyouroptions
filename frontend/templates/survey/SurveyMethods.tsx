@@ -1,6 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import Survey from './index';
+import SvgRightArrowWhite from '../../public/right-arrow-white.svg';
+import { MoveForwardButton } from './StyledComponents';
 
 // styling
 
@@ -13,7 +15,7 @@ const MethodCard = styled.div`
   font-size: 0.8rem;
   height: 12vh;
   justify-content: flex-end;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.7rem;
   width: 30%;
 `;
 
@@ -36,18 +38,23 @@ const MethodsName = styled.span`
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
   methodInfos: [ReactElement, string][];
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
 
 const SurveyMethods = ({
   methodInfos,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
 }: SurveyMethodsProps): ReactElement => {
   return (
     <>
       <Survey
+        onClick={onClickBackwards}
         Options={
           <MethodsContainer>
             {methodInfos.map((method) => {
@@ -59,6 +66,7 @@ const SurveyMethods = ({
                 </MethodCard>
               );
             })}
+            <MoveForwardButton onClick={onClickForwards} />
           </MethodsContainer>
         }
         pageNumber={pageNumber}
