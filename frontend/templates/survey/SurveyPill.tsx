@@ -59,22 +59,24 @@ const PillColumn = ({
 
 export interface SurveyPillProps {
   answers: string[];
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
 
 const SurveyPill = ({
   answers,
-  onClick,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
 }: SurveyPillProps): ReactElement => {
   return (
     <>
       <Survey
-        onClick={onClick}
-        Options={<PillColumn onClick={onClick} pillTitles={answers} />}
+        onClick={onClickBackwards}
+        Options={<PillColumn onClick={onClickForwards} pillTitles={answers} />}
         pageNumber={pageNumber}
         question={question}
       />

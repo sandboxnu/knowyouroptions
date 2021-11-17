@@ -32,20 +32,40 @@ const ColumnContainer = styled.div`
 const CheckboxColumn = ({
   checkboxTitles,
   className,
+  key,
   onClick,
   setCurPage,
+  response,
+  setResponse,
 }: {
   checkboxTitles: string[];
   className?: string;
+  key: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   setCurPage?: React.Dispatch<React.SetStateAction<string>>;
+  response: Record<string, string[]>;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
     <>
       {checkboxTitles.map((checkboxTitle) => {
         return (
           <CheckboxContainer>
-            <CheckboxStyled type="checkbox" />
+            <CheckboxStyled
+              type="checkbox"
+              onChange={(event) => {
+                let answers = response[key] === undefined ? [] : response[key];
+                if (event.target.checked) {
+                  answers.push(checkboxTitle);
+                } else {
+                  const index = answers.indexOf(checkboxTitle);
+                  answers.splice(index, 1);
+                }
+                console.log('kevin and ally are amazing :)');
+                console.log(answers);
+                setResponse(answers);
+              }}
+            />
             <label>{checkboxTitle}</label>
           </CheckboxContainer>
         );
@@ -56,24 +76,33 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  response: {};
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const SurveyCheckbox = ({
   answers,
-  onClick,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
+  response,
+  setResponse,
 }: SurveyCheckboxProps): ReactElement => {
   return (
     <>
       <Survey
-        onClick={onClick}
+        onClick={onClickBackwards}
         Options={
           <ColumnContainer>
-            <CheckboxColumn checkboxTitles={answers} />
+            <CheckboxColumn
+              checkboxTitles={answers}
+              setResponse={setResponse}
+            />
           </ColumnContainer>
         }
         pageNumber={pageNumber}

@@ -28,6 +28,8 @@ const OnboardingSurvey = (): ReactElement => {
     setCurPage(curPage - 1);
   };
 
+  const [response, setResponse] = useState({});
+
   // PAGE 1
   const AgePregnantSurvey = ({}): ReactElement => {
     const answers = [
@@ -41,9 +43,11 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
-        onClick={onClickForwards}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={1}
         question="What age do you consider appropriate for you to become pregnant?"
+        setResponse={setResponse}
       />
     );
   };
@@ -65,6 +69,7 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={2}
         question="At what stage do you think you will be (or currently are) sexually active?"
+        setResponse={setResponse}
       />
     );
   };
@@ -79,6 +84,7 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={3}
         question="Have you tried any contraception/birth control methods?"
+        setResponse={setResponse}
       />
     );
   };
@@ -107,6 +113,7 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={4}
         question="I have used and been satisfied with the following method(s):"
+        setResponse={setResponse}
       />
     );
   };
@@ -120,6 +127,7 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={4}
         question="I want more information about the following method(s):"
+        setResponse={setResponse}
       />
     );
   };
@@ -141,6 +149,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={5}
         question="Where do you receive sexual education about contraception, consent, and other related topics?"
+        response={response}
+        setResponse={setResponse}
       />
     );
   };
@@ -160,6 +170,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={6}
         question="What are you looking for in this app?"
+        response={response}
+        setResponse={setResponse}
       />
     );
   };
@@ -196,6 +208,7 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Please tell us a bit more about yourself."
+        setResponse={setResponse}
       />
     );
   };
@@ -214,6 +227,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Please tell us a bit more about yourself."
+        response={response}
+        setResponse={setResponse}
       />
     );
   };
