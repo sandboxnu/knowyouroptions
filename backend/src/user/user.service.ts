@@ -15,21 +15,16 @@ export class UserService {
       email: userInfo.email,
     });
 
-    if (existingUser) {
-      throw new EmailIsTakenError();
-    } else {
-      const user = User.create();
-      user.email = userInfo.email;
-      user.name = userInfo.name;
-      /**
-       * hope to use typeorm encryption but
-       * https://github.com/Platekun/NestAuthExample/blob/fdf4401dba1d89b90b66f696ddf37dc1e30fa672/src/users/errors/email-is-taken.error.ts#L3
-       * just in case
-       */
-      user.password = userInfo.password;
+    // if (existingUser) {
+    //   //throw new EmailIsTakenError();
+    // } else {
+    const user = User.create();
+    user.email = userInfo.email;
+    user.name = userInfo.name;
+    user.password = userInfo.password;
 
-      await User.save(user);
-      return user;
-    }
+    await User.save(user);
+    return user;
+    //}
   }
 }

@@ -23,10 +23,14 @@ export class AuthController {
   ) {}
 
   @Post('/sign-up')
-  async signUp(@Body() userInfo: UserInfo, @Res() res: Response) {
+  async signUp(@Body() userInfo: UserInfo) {
     const result = await this.authService.signUp(userInfo);
 
-    this.enter(res, result.id);
+    console.log(result);
+
+    return {
+      redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
+    };
   }
 
   // NOTE: Although the two routes below are on the backend,
@@ -57,7 +61,7 @@ export class AuthController {
     // Expires in 30 days
     const authToken = await this.jwtService.signAsync({
       userId,
-      expiresIn: 60 * 60 * 24 * 30,
+      expiresIn: 2629800000,
     });
 
     if (authToken === null || authToken === undefined) {
@@ -65,7 +69,11 @@ export class AuthController {
     }
 
     res
-      .cookie('auth_token', authToken, { httpOnly: true, secure: false }) // todo figure out is securew
+      .cookie('auth_token', authToken, {
+        httpOnly: true,
+        maxAge: 2629800000,
+        secure: false,
+      }) // todo figure out is securew
       .redirect(302, '/');
   }
 }

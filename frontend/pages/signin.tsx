@@ -7,6 +7,7 @@ import SvgGoogle from '../public/google.svg';
 import { API } from '../api-client';
 import { redirect } from 'next/dist/server/api-utils';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -187,7 +188,6 @@ const SignUpForm = (): ReactElement => {
   const signup = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    console.log(form.elements);
     const elements = form.elements as typeof form.elements & {
       'E-MAIL': { value: string };
       PASSWORD: { value: string };
@@ -198,15 +198,23 @@ const SignUpForm = (): ReactElement => {
     if (elements['CONFIRM PASSWORD'] !== elements.PASSWORD) {
       // TODO: handle error
     }
-    console.log(API.signUp);
 
-    const response = await API.signUp.post({
+    const response: { redirect: string } = (await API.signUp.post({
       email: elements['E-MAIL'].value,
       password: elements.PASSWORD.value,
       name: elements.NAME.value,
-    });
+    })) as { redirect: string };
 
-    router.push('/');
+    console.log(response);
+    const login = axios
+      .get(response.redirect, { withCredentials: true })
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(login);
+
+    //router.push('/');
   };
 
   return (

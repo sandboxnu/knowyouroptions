@@ -34,7 +34,6 @@ class APIClient {
         method,
         url,
         data: body,
-        headers: { 'Access-Control-Allow-Origin': '*' },
       })
     ).data;
     return responseClass ? plainToClass(responseClass, res) : res;
