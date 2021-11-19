@@ -39,6 +39,15 @@ class APIClient {
     return responseClass ? plainToClass(responseClass, res) : res;
   }
 
+  signIn = {
+    post: async (body: {
+      email: string;
+      password: string;
+    }): Promise<unknown> => {
+      return this.req('POST', `${API_URL}/sign-in`, undefined, body);
+    },
+  };
+
   signUp = {
     post: async (body: {
       email: string;

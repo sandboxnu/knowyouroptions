@@ -5,7 +5,6 @@ import SvgEye from '../public/eye.svg';
 import SvgFacebook from '../public/facebook.svg';
 import SvgGoogle from '../public/google.svg';
 import { API } from '../api-client';
-import { redirect } from 'next/dist/server/api-utils';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
@@ -146,11 +145,6 @@ const Submit = styled(Input)`
   cursor: pointer;
 `;
 
-function handleSubmit() {
-  // TODO: handle the submit
-  console.log('Submitted');
-}
-
 const signInFields: Array<[string, boolean]> = [
   ['E-MAIL', false],
   ['PASSWORD', true],
@@ -161,8 +155,35 @@ const signUpFields: Array<[string, boolean]> = [
 ];
 
 const SignInForm = (): ReactElement => {
+  const router = useRouter();
+
+  const signin = async (event: React.SyntheticEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const elements = form.elements as typeof form.elements & {
+      'E-MAIL': { value: string };
+      PASSWORD: { value: string };
+    };
+
+    const response: { redirect: string } = (await API.signIn.post({
+      email: elements['E-MAIL'].value,
+      password: elements.PASSWORD.value,
+    })) as { redirect: string };
+
+    console.log(response);
+    const login = axios
+      .get(response.redirect, { withCredentials: true })
+      .then()
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(login);
+
+    //router.push('/');
+  };
+
   return (
-    <Form action="/welcome">
+    <Form onSubmit={signin}>
       {signInFields.map(([name, hidable]: [string, boolean]) => {
         const [hidden, setHidden] = useState(hidable);
         return (

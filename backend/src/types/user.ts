@@ -1,7 +1,10 @@
-export type UserInfo = {
+export type UserInfo = SignInInfo & {
+  readonly name: string;
+};
+
+export type SignInInfo = {
   readonly email: string;
   readonly password: string;
-  readonly name: string;
 };
 
 export type AuthenticatedUser = {

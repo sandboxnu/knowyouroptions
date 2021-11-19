@@ -9,7 +9,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { UserInfo } from '../types/user';
+import { SignInInfo, UserInfo } from '../types/user';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { Connection } from 'typeorm';
@@ -21,6 +21,17 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly jwtService: JwtService,
   ) {}
+
+  @Post('/sign-in')
+  async signIn(@Body() info: SignInInfo) {
+    const result = await this.authService.signIn(info);
+
+    console.log(result);
+
+    return {
+      redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
+    };
+  }
 
   @Post('/sign-up')
   async signUp(@Body() userInfo: UserInfo) {
