@@ -15,16 +15,16 @@ export class UserService {
       email: userInfo.email,
     });
 
-    // if (existingUser) {
-    //   //throw new EmailIsTakenError();
-    // } else {
-    const user = User.create();
-    user.email = userInfo.email;
-    user.name = userInfo.name;
-    user.password = userInfo.password;
+    if (existingUser) {
+      throw new EmailIsTakenError();
+    } else {
+      const user = User.create();
+      user.email = userInfo.email;
+      user.name = userInfo.name;
+      user.password = userInfo.password;
 
-    await User.save(user);
-    return user;
-    //}
+      await User.save(user);
+      return user;
+    }
   }
 }
