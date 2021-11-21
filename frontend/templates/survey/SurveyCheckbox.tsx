@@ -1,13 +1,15 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from './index';
+import { MoveForwardButton } from './StyledComponents';
 
 const CheckboxContainer = styled.div`
   // TODO: change color (click action) when clicking on the entire container, not just checkbox
   align-items: center;
   background-color: #ffebe7;
   display: flex;
-  padding: 1rem 1rem;
+  font-size: 0.85rem;
+  padding: 0.75rem 1rem;
 `;
 
 const CheckboxStyled = styled.input`
@@ -21,7 +23,7 @@ const CheckboxStyled = styled.input`
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 0rem;
+  padding: 1rem 1rem;
   row-gap: 1rem;
   & > div:hover {
     background-color: purple;
@@ -103,6 +105,7 @@ const SurveyCheckbox = ({
               checkboxTitles={answers}
               setResponse={setResponse}
             />
+            <MoveForwardButton onClick={onClickForwards} />
           </ColumnContainer>
         }
         pageNumber={pageNumber}
