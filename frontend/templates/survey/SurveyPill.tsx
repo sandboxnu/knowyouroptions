@@ -11,7 +11,9 @@ const PillContainer = styled.div`
 `;
 
 const PillAnswers = styled(PillContainer)`
-  padding: 4rem 1rem;
+  height: 100%;
+  padding: 0 1rem;
+  padding-top: 3rem;
   row-gap: 1rem;
   & > div {
     background-color: #ffebe5;
