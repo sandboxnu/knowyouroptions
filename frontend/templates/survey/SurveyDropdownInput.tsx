@@ -89,24 +89,52 @@ const SubmitButtonStyled = styled.div`
 const DropdownColumn = ({
   classNames,
   intro,
+  response,
+  responseKey,
   selectInfos,
+  setResponse,
 }: {
   classNames?: string;
   intro: string;
+  response: Record<string, string[]>;
+  responseKey: string;
   selectInfos: [string, string[]][];
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
+  const createOnChange = (index: number) => {
+    // index is the position of the answer
+    const onChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+      let answers = response[responseKey];
+      if (answers === undefined || answers.length === 0) {
+        answers = [];
+        for (let i = 0; i < selectInfos.length; i++) {
+          answers.push('');
+        }
+      }
+      answers[index] = event.currentTarget.value;
+      response[responseKey] = answers;
+      setResponse(response);
+    };
+    return onChange;
+  };
+
   return (
     <>
       <IntroStyled> {intro} </IntroStyled>
 
-      {selectInfos.map((selectInfo) => {
+      {selectInfos.map((selectInfo, index) => {
         const [labelName, options] = selectInfo;
+        const onChange = createOnChange(index);
 
         return (
           <>
             <ContentContainer>
               <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-              <DropdownStyled name={labelName} id={labelName}>
+              <DropdownStyled
+                name={labelName}
+                id={labelName}
+                onChange={onChange}
+              >
                 {options.map((option) => {
                   return (
                     <>
@@ -166,6 +194,9 @@ export interface SurveyDropdownInputProps {
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const SurveyDropdownInput = ({
@@ -176,15 +207,45 @@ const SurveyDropdownInput = ({
   onClickBackwards,
   pageNumber,
   question,
+  response,
+  responseKey,
+  setResponse,
 }: SurveyDropdownInputProps): ReactElement => {
+  const submitOnClick = (event) => {
+    onClickForwards(event);
+
+    // add value of text input to response
+    // ASSUME: select values have been added to response
+    const textInput = document.getElementById(inputQuestion);
+    if (textInput === null) {
+      console.log('element with id: ' + inputQuestion + ' does not exist');
+    } else {
+      let answers = response[responseKey];
+      answers.push(textInput.value);
+      response[responseKey] = answers;
+      setResponse(response);
+    }
+  };
+
   return (
     <>
       <Survey
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
-            <DropdownColumn intro={intro} selectInfos={dropdownInfos} />
-            <InputBox inputQuestion={inputQuestion} />
+            <DropdownColumn
+              intro={intro}
+              selectInfos={dropdownInfos}
+              response={response}
+              responseKey={responseKey}
+              setResponse={setResponse}
+            />
+            <InputBox
+              inputQuestion={inputQuestion}
+              response={response}
+              responseKey={responseKey}
+              setResponse={setResponse}
+            />
             <SubmitButton onClick={onClickForwards} />
           </DropdownColumnContainer>
         }

@@ -86,3 +86,17 @@ const Survey = ({
 };
 
 export default Survey;
+
+const SurveyKeys = [
+  'PregnancyAge',
+  'SexuallyActiveStage',
+  'TriedMethods',
+  'UsedMethods',
+  'MoreInformationMethods',
+  'WhereEducation',
+  'LookingFor',
+  'Demographics',
+  'Location',
+];
+
+export { SurveyKeys };

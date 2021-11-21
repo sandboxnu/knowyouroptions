@@ -37,17 +37,25 @@ const PillColumn = ({
   className,
   onClick,
   pillTitles,
-}: // setValues
-{
+  response,
+  responseKey,
+  setResponse,
+}: {
   className?: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   pillTitles: string[];
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
     <PillAnswers className={className}>
       {pillTitles.map((title: string): ReactElement => {
         const newOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
           onClick(event);
+
+          response[responseKey] = [title];
+          setResponse(response);
         };
         return (
           <Pill key={title} onClick={newOnClick}>
@@ -65,6 +73,9 @@ export interface SurveyPillProps {
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const SurveyPill = ({
@@ -73,12 +84,23 @@ const SurveyPill = ({
   onClickBackwards,
   pageNumber,
   question,
+  response,
+  responseKey,
+  setResponse,
 }: SurveyPillProps): ReactElement => {
   return (
     <>
       <Survey
         onClick={onClickBackwards}
-        Options={<PillColumn onClick={onClickForwards} pillTitles={answers} />}
+        Options={
+          <PillColumn
+            onClick={onClickForwards}
+            pillTitles={answers}
+            response={response}
+            responseKey={responseKey}
+            setResponse={setResponse}
+          />
+        }
         pageNumber={pageNumber}
         question={question}
       />

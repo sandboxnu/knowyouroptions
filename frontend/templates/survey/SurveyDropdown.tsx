@@ -62,14 +62,37 @@ const OptionStyled = styled.option`
 const DropdownColumn = ({
   classNames,
   intro,
+  response,
+  responseKey,
   selectInfos,
+  setResponse,
 }: {
   classNames?: string;
   intro: string;
+  response: Record<string, string[]>;
+  responseKey: string;
   selectInfos: [string, string[]][];
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   const [firstLabel, firstOptions] = selectInfos[0];
   const restInfos = selectInfos.slice(1);
+
+  const createOnChange = (index: number) => {
+    // index is the position of the answer
+    const onChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+      let answers = response[responseKey];
+      if (answers === undefined || answers.length === 0) {
+        answers = [];
+        for (let i = 0; i < selectInfos.length; i++) {
+          answers.push('');
+        }
+      }
+      answers[index] = event.currentTarget.value;
+      response[responseKey] = answers;
+      setResponse(response);
+    };
+    return onChange;
+  };
 
   return (
     <>
@@ -77,7 +100,11 @@ const DropdownColumn = ({
 
       <DropdownContainer>
         <LabelStyled htmlFor={firstLabel}> {firstLabel} </LabelStyled>
-        <DropdownSmall name={firstLabel} id={firstLabel}>
+        <DropdownSmall
+          name={firstLabel}
+          id={firstLabel}
+          onChange={createOnChange(0)}
+        >
           <option value={firstLabel} selected disabled hidden>
             {' '}
             {firstLabel}{' '}
@@ -91,11 +118,19 @@ const DropdownColumn = ({
           })}
         </DropdownSmall>
       </DropdownContainer>
-      {restInfos.map((selectInfo) => {
+      {restInfos.map((selectInfo, index) => {
         const [labelName, options] = selectInfo;
+        const onChange = createOnChange(index + 1);
         return (
           <>
-            <DropdownColumnBody labelName={labelName} options={options} />
+            <DropdownColumnBody
+              labelName={labelName}
+              onChange={onChange}
+              options={options}
+              response={response}
+              responseKey={responseKey}
+              setResponse={setResponse}
+            />
           </>
         );
       })}
@@ -105,16 +140,24 @@ const DropdownColumn = ({
 
 const DropdownColumnBody = ({
   labelName,
+  onChange,
   options,
+  response,
+  responseKey,
+  setResponse,
 }: {
   labelName: string;
+  onChange: React.ChangeEventHandler<HTMLSelectElement>;
   options: string[];
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
     <>
       <DropdownContainer>
         <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-        <DropdownStyled name={labelName} id={labelName}>
+        <DropdownStyled name={labelName} id={labelName} onChange={onChange}>
           <option value={labelName} selected disabled hidden>
             {' '}
             {labelName}{' '}
@@ -139,6 +182,9 @@ export interface SurveyDropdownProps {
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const SurveyDropdown = ({
@@ -148,6 +194,9 @@ const SurveyDropdown = ({
   onClickBackwards,
   pageNumber,
   question,
+  response,
+  responseKey,
+  setResponse,
 }: SurveyDropdownProps): ReactElement => {
   return (
     <>
@@ -155,7 +204,13 @@ const SurveyDropdown = ({
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
-            <DropdownColumn intro={intro} selectInfos={dropdownInfos} />
+            <DropdownColumn
+              intro={intro}
+              selectInfos={dropdownInfos}
+              response={response}
+              responseKey={responseKey}
+              setResponse={setResponse}
+            />
             <MoveForwardButton onClick={onClickForwards} />
           </DropdownColumnContainer>
         }

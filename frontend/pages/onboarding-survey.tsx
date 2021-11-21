@@ -2,6 +2,7 @@ import { ReactElement, useState } from 'react';
 
 import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
+import { SurveyKeys } from '../templates/survey';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyDropdown from '../templates/survey/SurveyDropdown';
 import SurveyDropdownInput from '../templates/survey/SurveyDropdownInput';
@@ -28,7 +29,12 @@ const OnboardingSurvey = (): ReactElement => {
     setCurPage(curPage - 1);
   };
 
-  const [response, setResponse] = useState({});
+  // create an initial response to have keys
+  const initialResponse: Record<string, string[]> = {};
+  for (const index in SurveyKeys) {
+    initialResponse[SurveyKeys[index]] = [];
+  }
+  const [response, setResponse] = useState(initialResponse);
 
   // PAGE 1
   const AgePregnantSurvey = ({}): ReactElement => {
@@ -47,6 +53,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={1}
         question="What age do you consider appropriate for you to become pregnant?"
+        response={response}
+        responseKey={SurveyKeys[0]}
         setResponse={setResponse}
       />
     );
@@ -69,6 +77,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={2}
         question="At what stage do you think you will be (or currently are) sexually active?"
+        response={response}
+        responseKey={SurveyKeys[1]}
         setResponse={setResponse}
       />
     );
@@ -84,6 +94,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={3}
         question="Have you tried any contraception/birth control methods?"
+        response={response}
+        responseKey={SurveyKeys[2]}
         setResponse={setResponse}
       />
     );
@@ -150,6 +162,7 @@ const OnboardingSurvey = (): ReactElement => {
         pageNumber={5}
         question="Where do you receive sexual education about contraception, consent, and other related topics?"
         response={response}
+        responseKey={SurveyKeys[5]}
         setResponse={setResponse}
       />
     );
@@ -171,6 +184,7 @@ const OnboardingSurvey = (): ReactElement => {
         pageNumber={6}
         question="What are you looking for in this app?"
         response={response}
+        responseKey={SurveyKeys[6]}
         setResponse={setResponse}
       />
     );
@@ -208,6 +222,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Please tell us a bit more about yourself."
+        response={response}
+        responseKey={SurveyKeys[7]}
         setResponse={setResponse}
       />
     );
@@ -228,6 +244,7 @@ const OnboardingSurvey = (): ReactElement => {
         pageNumber={7}
         question="Please tell us a bit more about yourself."
         response={response}
+        responseKey={SurveyKeys[8]}
         setResponse={setResponse}
       />
     );

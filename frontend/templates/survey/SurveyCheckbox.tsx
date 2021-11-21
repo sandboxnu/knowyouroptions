@@ -34,7 +34,7 @@ const ColumnContainer = styled.div`
 const CheckboxColumn = ({
   checkboxTitles,
   className,
-  key,
+  responseKey,
   onClick,
   setCurPage,
   response,
@@ -42,10 +42,10 @@ const CheckboxColumn = ({
 }: {
   checkboxTitles: string[];
   className?: string;
-  key: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
   setCurPage?: React.Dispatch<React.SetStateAction<string>>;
   response: Record<string, string[]>;
+  responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
@@ -56,16 +56,18 @@ const CheckboxColumn = ({
             <CheckboxStyled
               type="checkbox"
               onChange={(event) => {
-                let answers = response[key] === undefined ? [] : response[key];
+                let answers =
+                  response[responseKey] === undefined
+                    ? []
+                    : response[responseKey];
                 if (event.target.checked) {
                   answers.push(checkboxTitle);
                 } else {
                   const index = answers.indexOf(checkboxTitle);
                   answers.splice(index, 1);
                 }
-                console.log('kevin and ally are amazing :)');
-                console.log(answers);
-                setResponse(answers);
+                response[responseKey] = answers;
+                setResponse(response);
               }}
             />
             <label>{checkboxTitle}</label>
@@ -78,6 +80,7 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
+  responseKey: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
@@ -88,6 +91,7 @@ export interface SurveyCheckboxProps {
 
 const SurveyCheckbox = ({
   answers,
+  responseKey,
   onClickForwards,
   onClickBackwards,
   pageNumber,
@@ -102,7 +106,9 @@ const SurveyCheckbox = ({
         Options={
           <ColumnContainer>
             <CheckboxColumn
+              responseKey={responseKey}
               checkboxTitles={answers}
+              response={response}
               setResponse={setResponse}
             />
             <MoveForwardButton onClick={onClickForwards} />
