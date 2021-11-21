@@ -1,14 +1,19 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
-
-// divs and padding are weird
+import { MoveForwardButton } from './StyledComponents';
 
 const DropdownColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0.5rem;
-  row-gap: 0rem;
+  padding: 1rem 1.5rem;
+  row-gap: 1.5rem;
+`;
+
+const DropdownContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
 `;
 
 // how to style the down-pointing arrow???
@@ -70,10 +75,8 @@ const DropdownColumn = ({
     <>
       <IntroStyled> {intro} </IntroStyled>
 
-      <div>
+      <DropdownContainer>
         <LabelStyled htmlFor={firstLabel}> {firstLabel} </LabelStyled>
-        <br></br>
-        {/*instead of br tag use display:flex in a div container (line 81)*/}
         <DropdownSmall name={firstLabel} id={firstLabel}>
           <option value={firstLabel} selected disabled hidden>
             {' '}
@@ -87,38 +90,12 @@ const DropdownColumn = ({
             );
           })}
         </DropdownSmall>
-        <br></br>
-        <br></br>
-      </div>
-
+      </DropdownContainer>
       {restInfos.map((selectInfo) => {
         const [labelName, options] = selectInfo;
-
-        {
-          /*make this another component*/
-        }
         return (
           <>
-            <div>
-              <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-              <br></br>
-              {/*instead of br tag use display:flex in a div container (line 81)*/}
-              <DropdownStyled name={labelName} id={labelName}>
-                <option value={labelName} selected disabled hidden>
-                  {' '}
-                  {labelName}{' '}
-                </option>
-                {options.map((option) => {
-                  return (
-                    <>
-                      <OptionStyled value={option}> {option} </OptionStyled>
-                    </>
-                  );
-                })}
-              </DropdownStyled>
-              <br></br>
-              <br></br>
-            </div>
+            <DropdownColumnBody labelName={labelName} options={options} />
           </>
         );
       })}
@@ -126,10 +103,40 @@ const DropdownColumn = ({
   );
 };
 
+const DropdownColumnBody = ({
+  labelName,
+  options,
+}: {
+  labelName: string;
+  options: string[];
+}): ReactElement => {
+  return (
+    <>
+      <DropdownContainer>
+        <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
+        <DropdownStyled name={labelName} id={labelName}>
+          <option value={labelName} selected disabled hidden>
+            {' '}
+            {labelName}{' '}
+          </option>
+          {options.map((option) => {
+            return (
+              <>
+                <OptionStyled value={option}> {option} </OptionStyled>
+              </>
+            );
+          })}
+        </DropdownStyled>
+      </DropdownContainer>
+    </>
+  );
+};
+
 export interface SurveyDropdownProps {
   dropdownInfos: [string, string[]][];
   intro: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
@@ -137,17 +144,19 @@ export interface SurveyDropdownProps {
 const SurveyDropdown = ({
   dropdownInfos,
   intro,
-  onClick,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
 }: SurveyDropdownProps): ReactElement => {
   return (
     <>
       <Survey
-        onClick={onClick}
+        onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
             <DropdownColumn intro={intro} selectInfos={dropdownInfos} />
+            <MoveForwardButton onClick={onClickForwards} />
           </DropdownColumnContainer>
         }
         pageNumber={pageNumber}

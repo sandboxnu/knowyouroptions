@@ -28,54 +28,57 @@ const PillAnswers = styled(PillContainer)`
     background-color: purple;
     cursor: pointer;
   }
+  padding: 2rem 1rem;
 `;
 
 // Components
 
 const PillColumn = ({
-    className,
-    onClick,
-    pillTitles,
-  // setValues
-  }: {
+  className,
+  onClick,
+  pillTitles,
+}: // setValues
+{
   className?: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   pillTitles: string[];
 }): ReactElement => {
   return (
     <PillAnswers className={className}>
-      {pillTitles.map(
-        (title: string): ReactElement => {
-          const newOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
-            onClick(event);
-          }
-          return (
-            <Pill key={title} onClick={newOnClick}>{title}</Pill>
-          );
-        }
-      )}
+      {pillTitles.map((title: string): ReactElement => {
+        const newOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
+          onClick(event);
+        };
+        return (
+          <Pill key={title} onClick={newOnClick}>
+            {title}
+          </Pill>
+        );
+      })}
     </PillAnswers>
   );
 };
 
 export interface SurveyPillProps {
   answers: string[];
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
 
 const SurveyPill = ({
   answers,
-  onClick,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
 }: SurveyPillProps): ReactElement => {
   return (
     <>
       <Survey
-        onClick={onClick}
-        Options={<PillColumn onClick={onClick} pillTitles={answers} />}
+        onClick={onClickBackwards}
+        Options={<PillColumn onClick={onClickForwards} pillTitles={answers} />}
         pageNumber={pageNumber}
         question={question}
       />

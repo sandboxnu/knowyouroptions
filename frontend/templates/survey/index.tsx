@@ -19,6 +19,7 @@ const Fraction = styled.p`
 
 const Header = styled(Container)`
   height: 40%;
+  padding: 1rem 1.5rem;
 `;
 
 const HeaderSmall = styled(Container)`
@@ -32,8 +33,10 @@ const PageNumber = styled.span`
 `;
 
 const Question = styled.h1`
+  color: gray;
+  font-family: 'Roboto';
   font-size: 2rem;
-  font-weight: normal;
+  font-weight: 300;
 `;
 
 const Wrapper = styled.div`
@@ -68,7 +71,7 @@ const Survey = ({
   question,
   smallHeader,
 }: SurveyProps): ReactElement => {
-  const HeaderElm = smallHeader? HeaderSmall : Header
+  const HeaderElm = smallHeader ? HeaderSmall : Header;
   return (
     <Wrapper>
       <HeaderElm>

@@ -12,25 +12,25 @@ const MethodCard = styled.div`
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
-  font-size: .8rem;
+  font-size: 0.8rem;
   height: 12vh;
   justify-content: flex-end;
-  padding: 0.5rem .7rem;
+  padding: 0.5rem 0.7rem;
   width: 30%;
 `;
 
 const MethodsContainer = styled.div`
-  column-gap: .5rem;
+  column-gap: 0.5rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   padding: 1.5rem 1rem;
-  row-gap: .5rem;
+  row-gap: 0.5rem;
 `;
 
 const MethodsName = styled.span`
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 `;
 
 // components
@@ -38,21 +38,23 @@ const MethodsName = styled.span`
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
   methodInfos: [ReactElement, string][];
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
 
 const SurveyMethods = ({
   methodInfos,
-  onClick,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
 }: SurveyMethodsProps): ReactElement => {
   return (
     <>
       <Survey
-        onClick={onClick}
+        onClick={onClickBackwards}
         Options={
           <MethodsContainer>
             {methodInfos.map((method) => {
@@ -60,13 +62,11 @@ const SurveyMethods = ({
               return (
                 <MethodCard>
                   {methodIcon}
-                  <MethodsName>
-                    {MethodName}
-                  </MethodsName>
+                  <MethodsName>{MethodName}</MethodsName>
                 </MethodCard>
               );
             })}
-            <MoveForwardButton onClick={(event) => {onClick(event)}} />
+            <MoveForwardButton onClick={onClickForwards} />
           </MethodsContainer>
         }
         pageNumber={pageNumber}

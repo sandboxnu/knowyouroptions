@@ -2,20 +2,19 @@ import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
 
-// ABSTRACT ALL OF THIS
-
-// divs and padding are weird
+const ContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+`;
 
 const DropdownColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.5rem 0.5rem;
-  row-gap: 0rem;
+  padding: 1rem 1.5rem;
+  row-gap: 1rem;
 `;
 
-// how to style the down-pointing arrow???
-// how to make displayed text the labelName rather than the default first option
-// dropdown on this page is weird: arrow transitions to facing up, prototype doesn't display options
 const DropdownStyled = styled.select`
   align-items: center;
   background-color: #ffebe7;
@@ -26,17 +25,15 @@ const DropdownStyled = styled.select`
   :hover {
     cursor: pointer;
   }
+  & option:hover {
+    box-shadow: red;
+    cursor: pointer;
+    font-color: red;
+  }
   padding: 0.75rem 0.75rem;
   width: 100%;
 `;
 
-// age needs to be half width
-const DropdownSmall = styled(DropdownStyled)`
-  width: 50%;
-`;
-
-// fix the inputQuestion placeholder
-// create gray line underneath***
 const InputStyled = styled.input`
   align-items: center;
   background-color: #ffebe7;
@@ -66,7 +63,6 @@ const LabelStyled = styled.label`
   text-transform: uppercase;
 `;
 
-// how to style an option?????
 const OptionStyled = styled.option`
   background-color: white;
   border: 0;
@@ -76,6 +72,18 @@ const OptionStyled = styled.option`
     cursor: pointer;
     font-color: white;
   }
+`;
+
+const SubmitButtonStyled = styled.div`
+  background-color: #911d7a;
+  border-radius: 0.25rem;
+  color: white;
+  height: 7vh;
+  justify-content: center;
+  margin-left: auto;
+  padding: 1rem 4rem;
+  vertical-align: middle;
+  width: 50vw;
 `;
 
 const DropdownColumn = ({
@@ -96,10 +104,8 @@ const DropdownColumn = ({
 
         return (
           <>
-            <div>
-              {/* weird error when trying to do for attribute, so changed to htmlFor*/}
+            <ContentContainer>
               <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-              <br></br>
               <DropdownStyled name={labelName} id={labelName}>
                 {options.map((option) => {
                   return (
@@ -109,9 +115,7 @@ const DropdownColumn = ({
                   );
                 })}
               </DropdownStyled>
-              <br></br>
-              <br></br>
-            </div>
+            </ContentContainer>
           </>
         );
       })}
@@ -126,14 +130,31 @@ const InputBox = ({
 }): ReactElement => {
   return (
     <>
-      <LabelStyled htmlFor={inputQuestion}> {inputQuestion} </LabelStyled>
-      <br></br>
-      <InputStyled
-        type="text"
-        id={inputQuestion}
-        placeholder={'Input your ' + inputQuestion}
-      />
+      <ContentContainer>
+        <LabelStyled htmlFor={inputQuestion}> {inputQuestion} </LabelStyled>
+        <InputStyled
+          type="text"
+          id={inputQuestion}
+          placeholder={'Input your ' + inputQuestion}
+        />
+      </ContentContainer>
     </>
+  );
+};
+
+const SubmitButton = ({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}): ReactElement => {
+  return (
+    <SubmitButtonStyled
+      onClick={(event) => {
+        onClick(event);
+      }}
+    >
+      Submit
+    </SubmitButtonStyled>
   );
 };
 
@@ -141,7 +162,8 @@ export interface SurveyDropdownInputProps {
   dropdownInfos: [string, string[]][];
   inputQuestion: string;
   intro: string;
-  onClick: React.MouseEventHandler<HTMLDivElement>;
+  onClickForwards: React.MouseEventHandler<HTMLDivElement>;
+  onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
 }
@@ -150,18 +172,20 @@ const SurveyDropdownInput = ({
   dropdownInfos,
   inputQuestion,
   intro,
-  onClick,
+  onClickForwards,
+  onClickBackwards,
   pageNumber,
   question,
 }: SurveyDropdownInputProps): ReactElement => {
   return (
     <>
       <Survey
-        onClick={onClick}
+        onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
             <DropdownColumn intro={intro} selectInfos={dropdownInfos} />
             <InputBox inputQuestion={inputQuestion} />
+            <SubmitButton onClick={onClickForwards} />
           </DropdownColumnContainer>
         }
         pageNumber={pageNumber}

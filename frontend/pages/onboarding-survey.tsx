@@ -21,9 +21,14 @@ import SvgCervicalCap from '../public/cervical-cap.svg';
 
 const OnboardingSurvey = (): ReactElement => {
   const [curPage, setCurPage] = useState(0);
-  const onClick = () => {
+  const onClickForwards = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurPage(curPage + 1);
-  }
+  };
+  const onClickBackwards = (event: React.MouseEvent<HTMLDivElement>) => {
+    setCurPage(curPage - 1);
+  };
+
+  const [response, setResponse] = useState({});
 
   // PAGE 1
   const AgePregnantSurvey = ({}): ReactElement => {
@@ -38,13 +43,14 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={1}
         question="What age do you consider appropriate for you to become pregnant?"
+        setResponse={setResponse}
       />
     );
   };
-
 
   // PAGE 2
   const StageSexuallyActivePage = ({}): ReactElement => {
@@ -59,13 +65,14 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={2}
         question="At what stage do you think you will be (or currently are) sexually active?"
+        setResponse={setResponse}
       />
     );
   };
-
 
   // PAGE 3
   const TriedMethodsPage = ({}): ReactElement => {
@@ -73,36 +80,40 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={3}
         question="Have you tried any contraception/birth control methods?"
+        setResponse={setResponse}
       />
     );
   };
 
   // PAGE 4.1
   const methodInfos: [ReactElement, string][] = [
-    [<SvgCopperIUD/>, 'Copper IUD'],
-    [<SvgHormonalIUD/>, 'Hormonal IUD'],
-    [<SvgSterilization/>, 'Sterilization'],
-    [<SvgImplant/>, 'Implant'],
-    [<SvgShot/>, 'Shot'],
-    [<SvgRing/>, 'Ring'],
-    [<SvgPatch/>, 'Patch'],
-    [<SvgCondom/>, 'Condoms'],
-    [<SvgSpermicide/>, 'Spermicide'],
-    [<SvgDiaphragm/>, 'Diaphragm'],
-    [<SvgPill/>, 'Pill'],
-    [<SvgCervicalCap/>, 'Cervical Cap'],
+    [<SvgCopperIUD />, 'Copper IUD'],
+    [<SvgHormonalIUD />, 'Hormonal IUD'],
+    [<SvgSterilization />, 'Sterilization'],
+    [<SvgImplant />, 'Implant'],
+    [<SvgShot />, 'Shot'],
+    [<SvgRing />, 'Ring'],
+    [<SvgPatch />, 'Patch'],
+    [<SvgCondom />, 'Condoms'],
+    [<SvgSpermicide />, 'Spermicide'],
+    [<SvgDiaphragm />, 'Diaphragm'],
+    [<SvgPill />, 'Pill'],
+    [<SvgCervicalCap />, 'Cervical Cap'],
   ];
 
   const MethodsUsedPage = ({}): ReactElement => {
     return (
       <SurveyMethods
         methodInfos={methodInfos}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={4}
         question="I have used and been satisfied with the following method(s):"
+        setResponse={setResponse}
       />
     );
   };
@@ -112,9 +123,11 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyMethods
         methodInfos={methodInfos}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={4}
         question="I want more information about the following method(s):"
+        setResponse={setResponse}
       />
     );
   };
@@ -132,9 +145,12 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={5}
         question="Where do you receive sexual education about contraception, consent, and other related topics?"
+        response={response}
+        setResponse={setResponse}
       />
     );
   };
@@ -150,9 +166,12 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={6}
         question="What are you looking for in this app?"
+        response={response}
+        setResponse={setResponse}
       />
     );
   };
@@ -185,13 +204,14 @@ const OnboardingSurvey = (): ReactElement => {
       <SurveyDropdown
         dropdownInfos={dropdownInfos}
         intro="I am ..."
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Please tell us a bit more about yourself."
+        setResponse={setResponse}
       />
     );
   };
-
 
   // PAGE 7.2
   const PersonalInfoPage = ({}): ReactElement => {
@@ -203,9 +223,12 @@ const OnboardingSurvey = (): ReactElement => {
         dropdownInfos={dropdownInfos}
         inputQuestion="city/town"
         intro="I live in ..."
-        onClick={onClick}
+        onClickForwards={onClickForwards}
+        onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Please tell us a bit more about yourself."
+        response={response}
+        setResponse={setResponse}
       />
     );
   };
@@ -221,10 +244,10 @@ const OnboardingSurvey = (): ReactElement => {
     SexualEducationPage,
     LookingForPage,
     DemographicPage,
-    PersonalInfoPage
-  ]
+    PersonalInfoPage,
+  ];
 
-  const Page = pages[curPage]
+  const Page = pages[curPage];
   return (
     <>
       <Page />
