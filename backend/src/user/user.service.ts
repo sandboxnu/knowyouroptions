@@ -37,13 +37,11 @@ export class UserService {
 
     if (existingUser) {
       if (info.password !== existingUser.password) {
-        console.log('incorrect password');
         throw new IncorrectPasswordError();
       } else {
         return existingUser;
       }
     } else {
-      console.log('unknown email');
       throw new UnknownEmailError();
     }
   }

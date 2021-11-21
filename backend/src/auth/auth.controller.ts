@@ -26,8 +26,6 @@ export class AuthController {
   async signIn(@Body() info: SignInInfo) {
     const result = await this.authService.signIn(info);
 
-    console.log(result);
-
     return {
       redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
     };
@@ -36,9 +34,6 @@ export class AuthController {
   @Post('/sign-up')
   async signUp(@Body() userInfo: UserInfo) {
     const result = await this.authService.signUp(userInfo);
-
-    console.log(result);
-
     return {
       redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
     };

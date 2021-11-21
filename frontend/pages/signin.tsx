@@ -170,14 +170,7 @@ const SignInForm = (): ReactElement => {
       password: elements.PASSWORD.value,
     })) as { redirect: string };
 
-    console.log(response);
-    const login = axios
-      .get(response.redirect, { withCredentials: true })
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(login);
+    await axios.get(response.redirect, { withCredentials: true });
 
     //router.push('/');
   };
@@ -225,17 +218,9 @@ const SignUpForm = (): ReactElement => {
       password: elements.PASSWORD.value,
       name: elements.NAME.value,
     })) as { redirect: string };
+    await axios.get(response.redirect, { withCredentials: true });
 
-    console.log(response);
-    const login = axios
-      .get(response.redirect, { withCredentials: true })
-      .then()
-      .catch((error) => {
-        console.log(error);
-      });
-    console.log(login);
-
-    //router.push('/');
+    router.push('/');
   };
 
   return (
