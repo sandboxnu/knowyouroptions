@@ -5,6 +5,7 @@ import React, { ReactElement } from 'react';
 const MoveForwardButtonStyled = styled.div`
   background-color: #911d7a;
   border-radius: 1.5rem;
+  cursor: pointer;
   margin-left: auto;
   padding: 0.75rem 1.5rem;
 `;
