@@ -102,33 +102,19 @@ const OnboardingSurvey = (): ReactElement => {
   };
 
   // PAGE 4.1
-  // const methodInfos: [ReactElement, string][] = [
-  //   [<SvgCopperIUD />, 'Copper IUD'],
-  //   [<SvgHormonalIUD />, 'Hormonal IUD'],
-  //   [<SvgSterilization />, 'Sterilization'],
-  //   [<SvgImplant />, 'Implant'],
-  //   [<SvgShot />, 'Shot'],
-  //   [<SvgRing />, 'Ring'],
-  //   [<SvgPatch />, 'Patch'],
-  //   [<SvgCondom />, 'Condoms'],
-  //   [<SvgSpermicide />, 'Spermicide'],
-  //   [<SvgDiaphragm />, 'Diaphragm'],
-  //   [<SvgPill />, 'Pill'],
-  //   [<SvgCervicalCap />, 'Cervical Cap'],
-  // ];
   const methodInfos: [ReactElement, string][] = [
-    [SvgCopperIUD, 'Copper IUD'],
-    [SvgHormonalIUD, 'Hormonal IUD'],
-    [SvgSterilization, 'Sterilization'],
-    [SvgImplant, 'Implant'],
-    [SvgShot, 'Shot'],
-    [SvgRing, 'Ring'],
-    [SvgPatch, 'Patch'],
-    [SvgCondom, 'Condoms'],
-    [SvgSpermicide, 'Spermicide'],
-    [SvgDiaphragm, 'Diaphragm'],
-    [SvgPill, 'Pill'],
-    [SvgCervicalCap, 'Cervical Cap'],
+    [<SvgCopperIUD />, 'Copper IUD'],
+    [<SvgHormonalIUD />, 'Hormonal IUD'],
+    [<SvgSterilization />, 'Sterilization'],
+    [<SvgImplant />, 'Implant'],
+    [<SvgShot />, 'Shot'],
+    [<SvgRing />, 'Ring'],
+    [<SvgPatch />, 'Patch'],
+    [<SvgCondom />, 'Condoms'],
+    [<SvgSpermicide />, 'Spermicide'],
+    [<SvgDiaphragm />, 'Diaphragm'],
+    [<SvgPill />, 'Pill'],
+    [<SvgCervicalCap />, 'Cervical Cap'],
   ];
 
   const MethodsUsedPage = ({}): ReactElement => {

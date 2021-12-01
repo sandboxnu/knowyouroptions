@@ -63,7 +63,7 @@ const MethodCard = styled.a`
   }
 `;
 
-const MethodCardClicked = styled(MethodCard)`
+const MethodCardSelected = styled(MethodCard)`
   background-color: ${secondaryColor};
   color: white;
 
@@ -115,19 +115,18 @@ const SurveyMethods = ({
               {methodInfos.map((method) => {
                 const [MethodIcon, methodName] = method;
 
-                const ClickedIcon = styled(MethodIcon)`
-                  ${SVGStyled}
-                `;
-
+                // if this card is selected t
                 const Card = methodsClicked.has(methodName)?
-                  MethodCardClicked
+                  MethodCardSelected
                   : MethodCard;
 
                 const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
                   const newMethodsClicked = methodsClicked;
                   if (methodsClicked.has(methodName)) {
+                    // user wants to unselect this selected method
                     newMethodsClicked.delete(methodName)
                   } else {
+                    // user wants to select this unselected method
                     newMethodsClicked.add(methodName);
                   }
 
@@ -135,7 +134,7 @@ const SurveyMethods = ({
                 }
                 return (
                   <Card onClick={onClick} key={methodName}>
-                    {<MethodIcon />}
+                    {MethodIcon}
                     <MethodsName>{methodName}</MethodsName>
                   </Card>
                 );
