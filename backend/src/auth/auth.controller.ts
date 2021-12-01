@@ -82,7 +82,7 @@ export class AuthController {
         httpOnly: true,
         maxAge: 2629800000,
         secure: false,
-      }) // todo figure out is securew
+      })
       .redirect(302, '/');
   }
 }
