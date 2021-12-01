@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance, Method } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
-import { SignupResponse } from '../classes/response-classes';
+import { Redirect } from '../classes/response-classes';
 
 // Return type of array item, if T is an array
 type ItemIfArray<T> = T extends (infer I)[] ? I : T;
@@ -40,11 +40,15 @@ class APIClient {
   }
 
   signIn = {
-    post: async (body: {
+    get: async (body: {
       email: string;
       password: string;
-    }): Promise<unknown> => {
-      return this.req('POST', `${API_URL}/sign-in`, undefined, body);
+    }): Promise<Redirect> => {
+      return this.req(
+        'GET',
+        `${API_URL}/sign-in?email=${body.email}&password=${body.password}`,
+        Redirect,
+      );
     },
   };
 
@@ -53,8 +57,8 @@ class APIClient {
       email: string;
       password: string;
       name: string;
-    }): Promise<unknown> => {
-      return this.req('POST', `${API_URL}/sign-up`, SignupResponse, body);
+    }): Promise<Redirect> => {
+      return this.req('POST', `${API_URL}/sign-up`, Redirect, body);
     },
   };
 

@@ -22,9 +22,12 @@ export class AuthController {
     private readonly jwtService: JwtService,
   ) {}
 
-  @Post('/sign-in')
-  async signIn(@Body() info: SignInInfo) {
-    const result = await this.authService.signIn(info);
+  @Get('/sign-in')
+  async signIn(
+    @Query('email') email: string,
+    @Query('password') password: string,
+  ) {
+    const result = await this.authService.signIn({ email, password });
 
     return {
       redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
