@@ -6,7 +6,10 @@ import SvgFacebook from '../public/facebook.svg';
 import SvgGoogle from '../public/google.svg';
 import { API } from '../api-client';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import Toast from '../components/Toast';
+import { HttpException } from '@nestjs/common';
+import { Redirect } from '../classes/response-classes';
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +18,7 @@ const Container = styled.div`
 `;
 
 const Continue = styled.button`
-  background-color: #7e1a6a;
+  background-color: #911d7a;
   border-color: transparent;
   border-radius: 0.25rem;
   border-width: 0;
@@ -65,10 +68,10 @@ const GoogleIcon = styled(SvgGoogle)`
 
   :hover {
     g[fill='none'] {
-      stroke: #7e1a6a;
+      stroke: #911d7a;
     }
     path {
-      fill: #7e1a6a;
+      fill: #911d7a;
     }
   }
 `;
@@ -83,7 +86,7 @@ const Input = styled.input`
   width: 100%;
 
   :focus-visible {
-    outline: #7e1a6a auto 1px;
+    outline: #911d7a auto 1px;
   }
 `;
 
@@ -95,7 +98,7 @@ const InputRow = styled.div`
   margin: 0rem;
 
   :focus-visible {
-    outline: #7e1a6a auto 1px;
+    outline: #911d7a auto 1px;
   }
 `;
 
@@ -156,6 +159,7 @@ const signUpFields: Array<[string, boolean]> = [
 
 const SignInForm = (): ReactElement => {
   const router = useRouter();
+  const [error, setError] = useState('');
 
   const signin = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -165,14 +169,20 @@ const SignInForm = (): ReactElement => {
       PASSWORD: { value: string };
     };
 
-    const response: { redirect: string } = (await API.signIn.post({
-      email: elements['E-MAIL'].value,
-      password: elements.PASSWORD.value,
-    })) as { redirect: string };
-
-    await axios.get(response.redirect, { withCredentials: true });
-
-    //router.push('/');
+    try {
+      const response: Redirect = await API.signIn.get({
+        email: elements['E-MAIL'].value,
+        password: elements.PASSWORD.value,
+      });
+      setError('');
+      await axios.get(response.redirect, { withCredentials: true });
+      router.push('/');
+    } catch (e) {
+      const err = e as AxiosError<HttpException>;
+      if (err.response) {
+        setError(err.response.data.message);
+      }
+    }
   };
 
   return (
@@ -191,6 +201,7 @@ const SignInForm = (): ReactElement => {
       })}
       <ForgotPassword>FORGOT PASSWORD?</ForgotPassword>
       <Submit type="submit" value="Sign in" />
+      {error && <Toast text={error} onClose={() => setError('')} />}
     </Form>
   );
 };
@@ -198,6 +209,7 @@ const SignInForm = (): ReactElement => {
 const SignUpForm = (): ReactElement => {
   const [subtab, setSubtab] = useState(0);
   const router = useRouter();
+  const [error, setError] = useState('');
 
   const signup = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -209,18 +221,26 @@ const SignUpForm = (): ReactElement => {
       NAME: { value: string };
     };
 
-    if (elements['CONFIRM PASSWORD'] !== elements.PASSWORD) {
-      // TODO: handle error
+    if (elements['CONFIRM PASSWORD'].value !== elements.PASSWORD.value) {
+      setError('Password and confirm password do not match.');
+      return;
     }
 
-    const response: { redirect: string } = (await API.signUp.post({
-      email: elements['E-MAIL'].value,
-      password: elements.PASSWORD.value,
-      name: elements.NAME.value,
-    })) as { redirect: string };
-    await axios.get(response.redirect, { withCredentials: true });
-
-    router.push('/');
+    try {
+      const response: Redirect = await API.signUp.post({
+        email: elements['E-MAIL'].value,
+        password: elements.PASSWORD.value,
+        name: elements.NAME.value,
+      });
+      setError('');
+      await axios.get(response.redirect, { withCredentials: true });
+      router.push('/welcome');
+    } catch (e) {
+      const err = e as AxiosError<HttpException>;
+      if (err.response) {
+        setError(err.response.data.message);
+      }
+    }
   };
 
   return (
@@ -249,6 +269,15 @@ const SignUpForm = (): ReactElement => {
         </Continue>
       ) : (
         <Submit type="submit" value="Sign up" />
+      )}
+      {error && (
+        <Toast
+          text={error}
+          onClose={() => {
+            setError('');
+            setSubtab(0);
+          }}
+        />
       )}
     </Form>
   );
