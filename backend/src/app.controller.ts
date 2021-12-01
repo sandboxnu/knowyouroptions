@@ -1,4 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Req } from '@nestjs/common';
+import { Request } from 'express';
 import { AppService } from './app.service';
 
 @Controller()
@@ -8,5 +9,15 @@ export class AppController {
   @Get()
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  /**
+   * This is a proof of concept for cookies and basically just returns the cookie
+   * @param request
+   * @returns
+   */
+  @Get('cookieTest')
+  cookieTest(@Req() request: Request): string {
+    return request.cookies;
   }
 }

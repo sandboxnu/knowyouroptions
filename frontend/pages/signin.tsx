@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { ReactElement, useCallback, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import TabBar from '../templates/TabBar';
 import SvgEye from '../public/eye.svg';
 import SvgFacebook from '../public/facebook.svg';
@@ -234,6 +234,7 @@ const SignUpForm = (): ReactElement => {
       });
       setError('');
       await axios.get(response.redirect, { withCredentials: true });
+
       router.push('/welcome');
     } catch (e) {
       const err = e as AxiosError<HttpException>;
