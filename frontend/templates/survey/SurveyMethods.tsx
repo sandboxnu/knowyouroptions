@@ -1,15 +1,50 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from './index';
 import SvgRightArrowWhite from '../../public/right-arrow-white.svg';
 import { MoveForwardButton } from './StyledComponents';
 
+// constants
+const secondaryColor = '#911d7a';
+const fillColor = secondaryColor;
+const strokeColor = 'white';
+
+const SVGStyled = `
+  circle {
+      fill: ${fillColor};
+      stroke: ${strokeColor};
+    }
+    
+    ellipse {
+      fill: ${fillColor};
+      stroke: ${strokeColor};
+    }
+    
+    rect {
+      fill: ${fillColor};
+      stroke: ${strokeColor};
+    }
+
+    path {
+      fill: ${fillColor};
+      stroke: ${strokeColor};
+    }
+`;
+
 // styling
 
-const MethodCard = styled.div`
+const Container = styled.div`
+  row-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+`;
+
+const MethodCard = styled.a`
   align-items: center;
   background-color: #ffebe5;
   border-radius: 0.2rem;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
@@ -17,6 +52,24 @@ const MethodCard = styled.div`
   justify-content: flex-end;
   padding: 0.5rem 0.7rem;
   width: 30%;
+  
+  &:hover, &:active {
+    background-color: ${secondaryColor};
+    color: white;
+  }
+  
+  &:hover > svg {
+    ${SVGStyled}
+  }
+`;
+
+const MethodCardClicked = styled(MethodCard)`
+  background-color: ${secondaryColor};
+  color: white;
+
+  > svg {
+    ${SVGStyled}
+  }
 `;
 
 const MethodsContainer = styled.div`
@@ -25,7 +78,6 @@ const MethodsContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 1.5rem 1rem;
   row-gap: 0.5rem;
 `;
 
@@ -51,23 +103,46 @@ const SurveyMethods = ({
   pageNumber,
   question,
 }: SurveyMethodsProps): ReactElement => {
+  const [methodsClicked, setMethodsClicked] = useState(new Set());
+
   return (
     <>
       <Survey
         onClick={onClickBackwards}
         Options={
-          <MethodsContainer>
-            {methodInfos.map((method) => {
-              const [methodIcon, MethodName] = method;
-              return (
-                <MethodCard>
-                  {methodIcon}
-                  <MethodsName>{MethodName}</MethodsName>
-                </MethodCard>
-              );
-            })}
+          <Container>
+            <MethodsContainer>
+              {methodInfos.map((method) => {
+                const [MethodIcon, methodName] = method;
+
+                const ClickedIcon = styled(MethodIcon)`
+                  ${SVGStyled}
+                `;
+
+                const Card = methodsClicked.has(methodName)?
+                  MethodCardClicked
+                  : MethodCard;
+
+                const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+                  const newMethodsClicked = methodsClicked;
+                  if (methodsClicked.has(methodName)) {
+                    newMethodsClicked.delete(methodName)
+                  } else {
+                    newMethodsClicked.add(methodName);
+                  }
+
+                  setMethodsClicked(new Set(newMethodsClicked));
+                }
+                return (
+                  <Card onClick={onClick} key={methodName}>
+                    {<MethodIcon />}
+                    <MethodsName>{methodName}</MethodsName>
+                  </Card>
+                );
+              })}
+            </MethodsContainer>
             <MoveForwardButton onClick={onClickForwards} />
-          </MethodsContainer>
+          </Container>
         }
         pageNumber={pageNumber}
         question={question}
