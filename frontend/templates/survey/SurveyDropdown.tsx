@@ -2,6 +2,15 @@ import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
 import { MoveForwardButton } from './StyledComponents';
+// import { Select } from 'antd';
+// const { Option } = Select;
+// import "antd/dist/antd.css";
+import NativeSelect from '@mui/material/NativeSelect';
+import MenuItem from '@mui/material/MenuItem';
+import SVGDownArrow from '../../public/down-arrow.svg';
+// import styles from './SurveyDropdown.less';
+
+// Styles
 
 const DropdownColumnContainer = styled.div`
   display: flex;
@@ -18,6 +27,53 @@ const DropdownContainer = styled.div`
 
 // how to style the down-pointing arrow???
 // make a gap between the dropdown box and the options
+const SelectStyled = styled(NativeSelect)`
+  align-items: center;
+  background-color: #ffebe7;
+  border: 0;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  height: 3rem;
+  &::before {
+    border-bottom: 0px !important;
+  }
+  &::after {
+    border-bottom: 0px !important;
+  }
+  padding: 0.75rem 0.75rem;
+  width: 100%;
+  
+`;
+
+const SelectStyles = {
+  'align-items': 'center',
+  'background-color': '#ffebe7',
+  'border': 0,
+  'border-radius': '0.5rem',
+  'font-size': '0.9rem',
+  'height': '3rem',
+  ':hover': {
+    'cursor': 'pointer',
+  },
+  '& option:hover': {
+    'box-shadow': 'red',
+    'cursor': 'pointer',
+    'font-color': 'red',
+  },
+  'padding': '0.75rem 0.75rem',
+  'width':' 100%',
+  '> div': {
+    'background-color': 'red'
+  },
+
+}
+
+const DropdownContainerStyled = styled.div`
+  background-color: red;
+  margin-top: 10rem;
+  z-index: 1000000;
+`;
+
 const DropdownStyled = styled.select`
   align-items: center;
   background-color: #ffebe7;
@@ -97,7 +153,6 @@ const DropdownColumn = ({
   return (
     <>
       <IntroStyled> {intro} </IntroStyled>
-
       <DropdownContainer>
         <LabelStyled htmlFor={firstLabel}> {firstLabel} </LabelStyled>
         <DropdownSmall
@@ -156,20 +211,35 @@ const DropdownColumnBody = ({
   return (
     <>
       <DropdownContainer>
-        <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-        <DropdownStyled name={labelName} id={labelName} onChange={onChange}>
-          <option value={labelName} selected disabled hidden>
+        {/*<LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>*/}
+        <SelectStyled
+          IconComponent={SVGDownArrow}
+        >
+          <option value={labelName} disabled hidden>
             {' '}
             {labelName}{' '}
           </option>
           {options.map((option) => {
             return (
               <>
-                <OptionStyled value={option}> {option} </OptionStyled>
+                <option value={option} onClick={() => {console.log('hi')}}> {option} </option>
               </>
             );
           })}
-        </DropdownStyled>
+        </SelectStyled>
+        {/*<DropdownStyled name={labelName} id={labelName} onChange={onChange}>*/}
+        {/*  <option value={labelName} selected disabled hidden>*/}
+        {/*    {' '}*/}
+        {/*    {labelName}{' '}*/}
+        {/*  </option>*/}
+        {/*  {options.map((option) => {*/}
+        {/*    return (*/}
+        {/*      <>*/}
+        {/*        <OptionStyled value={option}> {option} </OptionStyled>*/}
+        {/*      </>*/}
+        {/*    );*/}
+        {/*  })}*/}
+        {/*</DropdownStyled>*/}
       </DropdownContainer>
     </>
   );
