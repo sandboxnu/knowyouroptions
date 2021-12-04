@@ -40,38 +40,18 @@ const SelectStyled = styled(NativeSelect)`
   &::after {
     border-bottom: 0px !important;
   }
-  padding: 0.75rem 0.75rem;
+  
+  & > select {
+    padding: 0.75rem 0.75rem;
+  }
+  
+  & > select:focus {
+    background-color: inherit;
+    border-radius: inherit;
+  }
+  //padding: 0.75rem 0.75rem;
   width: 100%;
   
-`;
-
-const SelectStyles = {
-  'align-items': 'center',
-  'background-color': '#ffebe7',
-  'border': 0,
-  'border-radius': '0.5rem',
-  'font-size': '0.9rem',
-  'height': '3rem',
-  ':hover': {
-    'cursor': 'pointer',
-  },
-  '& option:hover': {
-    'box-shadow': 'red',
-    'cursor': 'pointer',
-    'font-color': 'red',
-  },
-  'padding': '0.75rem 0.75rem',
-  'width':' 100%',
-  '> div': {
-    'background-color': 'red'
-  },
-
-}
-
-const DropdownContainerStyled = styled.div`
-  background-color: red;
-  margin-top: 10rem;
-  z-index: 1000000;
 `;
 
 const DropdownStyled = styled.select`
@@ -211,13 +191,12 @@ const DropdownColumnBody = ({
   return (
     <>
       <DropdownContainer>
-        {/*<LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>*/}
-        <SelectStyled
+        <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
+        <SelectStyled name={labelName} id={labelName} onChange={onChange}
           IconComponent={SVGDownArrow}
         >
-          <option value={labelName} disabled hidden>
-            {' '}
-            {labelName}{' '}
+          <option value={labelName} hidden>
+            {labelName}
           </option>
           {options.map((option) => {
             return (
