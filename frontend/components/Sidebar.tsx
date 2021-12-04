@@ -3,21 +3,32 @@ import { ReactElement, useMemo, useState } from 'react';
 import {
   MenuOutlined,
   UserOutlined,
-  BookOutlined,
   QuestionCircleOutlined,
   BarChartOutlined,
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import slideStyle from './slide.module.scss';
+import SvgBookmarkIcon from '../public/bookmark.svg';
+import SvgMenuIcon from '../public/menu.svg';
+import SvgQuickAccessButton from '../public/quick-access.svg';
 
 const MenuHeading = styled.h1`
-  color: #800080;
+  color: #911d7a;
+  font-family: 'DIN 2014';
+  font-size: 1rem;
 `;
 
 const MenuElements = styled.div`
   margin-left: 10px;
   :hover {
-    color: #800080;
+    color: #911d7a;
+  }
+  & > div {
+    & > a {
+      color: #404040;
+      font-family: 'roboto';
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -25,12 +36,18 @@ const SidebarDiv = styled.div`
   position: absolute;
   x: 0;
   y: 0;
-  width: 30vw;
+  width: 70vw;
   height: 100vh;
 `;
 
 const MenuSection = styled.div`
-  border-bottom: 2px solid;
+  border-bottom: 1.5px solid #d6d6d6;
+  padding: 1rem 0rem;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+  }
 `;
 
 const TwoColumns = styled.div`
@@ -42,10 +59,17 @@ const ColumnItem = styled.div`
   :hover {
     color: #800080;
   }
+  & > a {
+    font-family: 'roboto';
+    font-size: 0.8rem;
+  }
 `;
 
 const Menu = styled.div`
-  width: 25vw;
+  border: 2px solid #d6d6d6;
+  border-left: none;
+  padding: 3rem 1rem;
+  width: 75vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -88,44 +112,51 @@ const Sidebar = (): ReactElement => {
           />
           <MenuSection>
             <div>
-              <MenuHeading>
-                <UserOutlined />
-                Profile
-              </MenuHeading>
-              <MenuElements>
-                <a href={'https://google.com'}>Survey Report</a>
-              </MenuElements>
-            </div>
-            <div>
-              <MenuHeading>
-                <BookOutlined />
-                Bookmarks
-              </MenuHeading>
-              <MenuElements>
-                <div>
-                  <a href={'https://google.com'}>My method list</a>
-                </div>
-                <div>
-                  <a href={'https://google.com'}>Saved Posts</a>
-                </div>
-                <div>
-                  <a href={'https://google.com'}>Saved Topics</a>
-                </div>
-              </MenuElements>
-            </div>
-            <div>
-              <MenuHeading>Take Questionnaire</MenuHeading>
-            </div>
-            <div>
-              <MenuHeading>
-                <QuestionCircleOutlined /> Q&A
-              </MenuHeading>
+              <div>
+                <MenuHeading>
+                  <UserOutlined />
+                  Profile
+                </MenuHeading>
+                <MenuElements>
+                  <div>
+                    <a href={'https://google.com'}>Survey Report</a>
+                  </div>
+                </MenuElements>
+              </div>
+              <div>
+                <MenuHeading>
+                  <UserOutlined />
+                  Bookmarks
+                </MenuHeading>
+                <MenuElements>
+                  <div>
+                    <a href={'https://google.com'}>My method list</a>
+                  </div>
+                  <div>
+                    <a href={'https://google.com'}>Saved Posts</a>
+                  </div>
+                  <div>
+                    <a href={'https://google.com'}>Saved Topics</a>
+                  </div>
+                </MenuElements>
+              </div>
+              <div>
+                <MenuHeading>
+                  <UserOutlined />
+                  Take Questionnaire
+                </MenuHeading>
+              </div>
+              <div>
+                <MenuHeading>
+                  <QuestionCircleOutlined /> Q&A
+                </MenuHeading>
+              </div>
             </div>
           </MenuSection>
           <MenuSection>
             <div>
               <MenuHeading>
-                <BarChartOutlined />
+                <UserOutlined />
                 Quick Access
               </MenuHeading>
               <TwoColumns>
@@ -179,13 +210,21 @@ const Sidebar = (): ReactElement => {
             </div>
           </MenuSection>
           <div>
-            <MenuHeading>Settings and Privacy</MenuHeading>
+            <MenuHeading>Settings and privacy</MenuHeading>
           </div>
         </Menu>
       ) : (
         <Button icon={<MenuOutlined />} onClick={() => setOpen(true)} />
       )}
     </SidebarDiv>
+  );
+};
+
+const Bookmark = (): ReactElement => {
+  return (
+    <>
+      <SvgBookmarkIcon />
+    </>
   );
 };
 
