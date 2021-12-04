@@ -42,7 +42,7 @@ const SelectStyled = styled(NativeSelect)`
   }
   
   & > select {
-    padding: 0.75rem 0.75rem;
+    padding: 0.75rem 0 0.75rem 0.75rem;
   }
   
   & > select:focus {
@@ -52,6 +52,10 @@ const SelectStyled = styled(NativeSelect)`
   //padding: 0.75rem 0.75rem;
   width: 100%;
   
+  & .MuiNativeSelect-icon {
+    margin-right: 0.75rem;
+    top: auto;
+  }
 `;
 
 const DropdownStyled = styled.select`
