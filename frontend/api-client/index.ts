@@ -34,6 +34,7 @@ class APIClient {
         method,
         url,
         data: body,
+        withCredentials: true,
       })
     ).data;
     return responseClass ? plainToClass(responseClass, res) : res;
@@ -59,6 +60,12 @@ class APIClient {
       name: string;
     }): Promise<Redirect> => {
       return this.req('POST', `${API_URL}/sign-up`, Redirect, body);
+    },
+  };
+
+  user = {
+    getName: async (): Promise<string> => {
+      return this.req('GET', `${API_URL}/name`);
     },
   };
 

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from 'src/entities/user.entity';
 import { EmailIsTakenError } from 'src/error/email-taken-error';
 import { IncorrectPasswordError } from 'src/error/incorrect-password-error';
+import { NotLoggedInError } from 'src/error/not-logged-in-error';
 import { UnknownEmailError } from 'src/error/unknown-email-error';
 import { SignInInfo, UserInfo } from 'src/types/user';
 import { Connection } from 'typeorm';
@@ -43,6 +44,18 @@ export class UserService {
       }
     } else {
       throw new UnknownEmailError();
+    }
+  }
+
+  public async getById(id: number): Promise<User> {
+    const existingUser = await User.findOne({
+      id: id,
+    });
+
+    if (existingUser) {
+      return existingUser;
+    } else {
+      throw new NotLoggedInError();
     }
   }
 }

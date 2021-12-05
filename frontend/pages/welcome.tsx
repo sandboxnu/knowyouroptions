@@ -2,9 +2,10 @@ import {
   Description,
   DescriptionBold,
 } from '../templates/contraceptives/tabs/StyledComponents';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SvgWelcomeImage from '../public/welcome.svg';
+import { API } from '../api-client';
 import { useRouter } from 'next/router';
 
 const BottomContainer = styled.div`
@@ -65,8 +66,23 @@ const WelcomeDescription = styled(Description)`
   margin-top: 0rem;
 `;
 
-const Welcome = ({ name }: { name?: string }): ReactElement => {
+const Welcome = (): ReactElement => {
   const router = useRouter();
+  const [name, setName] = useState('');
+  useEffect(() => {
+    if (!name) {
+      getName();
+    }
+  });
+  const getName = async () => {
+    try {
+      const user = await API.user.getName();
+      setName(user);
+    } catch (e) {
+      // If user is not signed in (expects not-logged-in error)
+      router.push('/signin');
+    }
+  };
   return (
     <Container>
       <ImageContainer>
@@ -74,7 +90,7 @@ const Welcome = ({ name }: { name?: string }): ReactElement => {
       </ImageContainer>
       <BottomContainer>
         <Hi>
-          Hi, <Name>{name === '' ? 'No Name' : name}</Name>
+          Hi, <Name>{name}</Name>
         </Hi>
         <WelcomeDescription>
           Please tell us more about yourself so we can find the best
