@@ -1,6 +1,8 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
+import { DropdownStyled } from './StyledComponents';
+import SVGDownArrow from '../../public/down-arrow.svg';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -13,25 +15,6 @@ const DropdownColumnContainer = styled.div`
   flex-direction: column;
   padding: 1rem 1.5rem;
   row-gap: 1rem;
-`;
-
-const DropdownStyled = styled.select`
-  align-items: center;
-  background-color: #ffebe7;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  height: 3rem;
-  :hover {
-    cursor: pointer;
-  }
-  & option:hover {
-    box-shadow: red;
-    cursor: pointer;
-    font-color: red;
-  }
-  padding: 0.75rem 0.75rem;
-  width: 100%;
 `;
 
 const InputStyled = styled.input`
@@ -134,7 +117,11 @@ const DropdownColumn = ({
                 name={labelName}
                 id={labelName}
                 onChange={onChange}
+                IconComponent={SVGDownArrow}
               >
+                <option value={labelName} hidden>
+                  {labelName}
+                </option>
                 {options.map((option) => {
                   return (
                     <>

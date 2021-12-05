@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
-import { MoveForwardButton } from './StyledComponents';
+import { DropdownStyled, MoveForwardButton } from './StyledComponents';
 // import { Select } from 'antd';
 // const { Option } = Select;
 // import "antd/dist/antd.css";
@@ -27,55 +27,6 @@ const DropdownContainer = styled.div`
 
 // how to style the down-pointing arrow???
 // make a gap between the dropdown box and the options
-const SelectStyled = styled(NativeSelect)`
-  align-items: center;
-  background-color: #ffebe7;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  height: 3rem;
-  &::before {
-    border-bottom: 0px !important;
-  }
-  &::after {
-    border-bottom: 0px !important;
-  }
-  
-  & > select {
-    padding: 0.75rem 0 0.75rem 0.75rem;
-  }
-  
-  & > select:focus {
-    background-color: inherit;
-    border-radius: inherit;
-  }
-  //padding: 0.75rem 0.75rem;
-  width: 100%;
-  
-  & .MuiNativeSelect-icon {
-    margin-right: 0.75rem;
-    top: auto;
-  }
-`;
-
-const DropdownStyled = styled.select`
-  align-items: center;
-  background-color: #ffebe7;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  height: 3rem;
-  :hover {
-    cursor: pointer;
-  }
-  & option:hover {
-    box-shadow: red;
-    cursor: pointer;
-    font-color: red;
-  }
-  padding: 0.75rem 0.75rem;
-  width: 100%;
-`;
 
 const DropdownSmall = styled(DropdownStyled)`
   width: 50%;
@@ -130,10 +81,21 @@ const DropdownColumn = ({
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
+      console.log(response);
     };
     return onChange;
   };
 
+  const createValue = (index: number, defaultValue: string): string => {
+    const answers = response[responseKey];
+    if (answers === undefined || answers.length === 0) {
+      return defaultValue;
+    } else {
+      return answers[index];
+    }
+  }
+
+  const firstValue = createValue(0, firstLabel);
   return (
     <>
       <IntroStyled> {intro} </IntroStyled>
@@ -143,15 +105,16 @@ const DropdownColumn = ({
           name={firstLabel}
           id={firstLabel}
           onChange={createOnChange(0)}
+          IconComponent={SVGDownArrow}
         >
-          <option value={firstLabel} selected disabled hidden>
+          <option value={firstLabel} selected={firstValue == firstLabel} disabled hidden>
             {' '}
             {firstLabel}{' '}
           </option>
           {firstOptions.map((option) => {
             return (
               <>
-                <OptionStyled value={option}> {option} </OptionStyled>
+                <OptionStyled value={option} selected={firstValue == firstLabel}> {option} </OptionStyled>
               </>
             );
           })}
@@ -168,6 +131,7 @@ const DropdownColumn = ({
               options={options}
               response={response}
               responseKey={responseKey}
+              selectValue={createValue(index + 1, labelName)}
               setResponse={setResponse}
             />
           </>
@@ -183,6 +147,7 @@ const DropdownColumnBody = ({
   options,
   response,
   responseKey,
+  selectValue = labelName,
   setResponse,
 }: {
   labelName: string;
@@ -190,39 +155,36 @@ const DropdownColumnBody = ({
   options: string[];
   response: Record<string, string[]>;
   responseKey: string;
+  selectValue?: string,
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
     <>
       <DropdownContainer>
         <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-        <SelectStyled name={labelName} id={labelName} onChange={onChange}
+        <DropdownStyled
+          name={labelName}
+          id={labelName}
+          onChange={onChange}
           IconComponent={SVGDownArrow}
         >
-          <option value={labelName} hidden>
+          <option value={labelName} selected={labelName == selectValue} hidden>
             {labelName}
           </option>
           {options.map((option) => {
             return (
               <>
-                <option value={option} onClick={() => {console.log('hi')}}> {option} </option>
+                <option
+                  value={option}
+                  onClick={() => {console.log('hi')}}
+                  selected={option == selectValue}
+                >
+                  {option}
+                </option>
               </>
             );
           })}
-        </SelectStyled>
-        {/*<DropdownStyled name={labelName} id={labelName} onChange={onChange}>*/}
-        {/*  <option value={labelName} selected disabled hidden>*/}
-        {/*    {' '}*/}
-        {/*    {labelName}{' '}*/}
-        {/*  </option>*/}
-        {/*  {options.map((option) => {*/}
-        {/*    return (*/}
-        {/*      <>*/}
-        {/*        <OptionStyled value={option}> {option} </OptionStyled>*/}
-        {/*      </>*/}
-        {/*    );*/}
-        {/*  })}*/}
-        {/*</DropdownStyled>*/}
+        </DropdownStyled>
       </DropdownContainer>
     </>
   );
