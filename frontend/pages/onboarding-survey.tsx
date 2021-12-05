@@ -125,6 +125,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={4}
         question="I have used and been satisfied with the following method(s):"
+        response={response}
+        responseKey={SurveyKeys[3]}
         setResponse={setResponse}
       />
     );
@@ -139,6 +141,8 @@ const OnboardingSurvey = (): ReactElement => {
         onClickBackwards={onClickBackwards}
         pageNumber={4}
         question="I want more information about the following method(s):"
+        response={response}
+        responseKey={SurveyKeys[4]}
         setResponse={setResponse}
       />
     );

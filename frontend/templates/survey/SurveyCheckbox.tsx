@@ -56,7 +56,7 @@ const CheckboxColumn = ({
             <CheckboxStyled
               type="checkbox"
               onChange={(event) => {
-                let answers =
+                const answers =
                   response[responseKey] === undefined
                     ? []
                     : response[responseKey];

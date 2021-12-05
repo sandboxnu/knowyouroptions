@@ -94,6 +94,9 @@ export interface SurveyMethodsProps {
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 const SurveyMethods = ({
@@ -102,8 +105,15 @@ const SurveyMethods = ({
   onClickBackwards,
   pageNumber,
   question,
+  response,
+  responseKey,
+  setResponse,
 }: SurveyMethodsProps): ReactElement => {
-  const [methodsClicked, setMethodsClicked] = useState(new Set());
+  const methodsClickedInit =
+    response[responseKey] === undefined
+      ? []
+      : response[responseKey];
+  const [methodsClicked, setMethodsClicked] = useState(new Set(methodsClickedInit));
 
   return (
     <>
@@ -115,8 +125,8 @@ const SurveyMethods = ({
               {methodInfos.map((method) => {
                 const [MethodIcon, methodName] = method;
 
-                // if this card is selected t
-                const Card = methodsClicked.has(methodName)?
+                const isThisMethodHighlighted = methodsClicked.has(methodName);
+                const Card = isThisMethodHighlighted?
                   MethodCardSelected
                   : MethodCard;
 
@@ -131,6 +141,10 @@ const SurveyMethods = ({
                   }
 
                   setMethodsClicked(new Set(newMethodsClicked));
+
+                  // Update the state that was passed in as a prop
+                  response[responseKey] = Array.from(methodsClicked);
+                  setResponse(response);
                 }
                 return (
                   <Card onClick={onClick} key={methodName}>
