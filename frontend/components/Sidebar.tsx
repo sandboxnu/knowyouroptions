@@ -8,9 +8,10 @@ import {
 } from '@ant-design/icons';
 import styled from 'styled-components';
 import slideStyle from './slide.module.scss';
-import SvgBookmarkIcon from '../public/bookmark.svg';
+import SvgBookmarkIcon from '../public/bookmark-nav-bar.svg';
 import SvgMenuIcon from '../public/menu.svg';
 import SvgQuickAccessButton from '../public/quick-access.svg';
+import SvgTakeQuestionnaire from '../public/take-questionnaire.svg';
 
 const MenuHeading = styled.h1`
   color: #911d7a;
@@ -97,15 +98,12 @@ const Sidebar = (): ReactElement => {
     }, 500);
   };
 
-  /**
-   * TODO: Update icon to be icon from prototype - use custom icon
-   */
   return (
     <SidebarDiv>
       {open || closing ? (
         <Menu className={animation}>
-          <Button
-            icon={<MenuOutlined />}
+          <SvgMenuIcon
+            cursor="pointer"
             onClick={closeMenu}
             style={{ width: '30px' }}
             ghost
@@ -125,7 +123,7 @@ const Sidebar = (): ReactElement => {
               </div>
               <div>
                 <MenuHeading>
-                  <UserOutlined />
+                  <SvgBookmarkIcon color="purple" />
                   Bookmarks
                 </MenuHeading>
                 <MenuElements>
@@ -142,7 +140,7 @@ const Sidebar = (): ReactElement => {
               </div>
               <div>
                 <MenuHeading>
-                  <UserOutlined />
+                  <SvgTakeQuestionnaire />
                   Take Questionnaire
                 </MenuHeading>
               </div>
@@ -156,7 +154,7 @@ const Sidebar = (): ReactElement => {
           <MenuSection>
             <div>
               <MenuHeading>
-                <UserOutlined />
+                <SvgQuickAccessButton />
                 Quick Access
               </MenuHeading>
               <TwoColumns>
@@ -214,7 +212,12 @@ const Sidebar = (): ReactElement => {
           </div>
         </Menu>
       ) : (
-        <Button icon={<MenuOutlined />} onClick={() => setOpen(true)} />
+        <SvgMenuIcon
+          cursor="pointer"
+          onClick={() => setOpen(true)}
+          style={{ width: '30px' }}
+          ghost
+        />
       )}
     </SidebarDiv>
   );
