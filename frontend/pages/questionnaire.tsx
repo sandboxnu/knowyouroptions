@@ -1,6 +1,7 @@
 import { ReactElement, useState } from 'react';
 
-import QuestionnaireStartPage from '../templates/questionnaire/StartPage';
+import QuestionnaireDiagram from '../templates/questionnaire/QuestionnaireDiagram';
+import QuestionnaireStartPage from '../templates/questionnaire/QuestionnaireStartPage';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyMethods from '../templates/survey/SurveyMethods';
@@ -18,7 +19,7 @@ import SvgBreastTenderness from '../public/breast-tenderness.svg';
 import SvgMood from '../public/mood-depression.svg';
 
 const Questionnaire = (): ReactElement => {
-  const SurveyKeys = [
+  const QuestionnaireKeys = [
     'Intro',
     'WhenPlanPregnant',
     'TopPriority',
@@ -42,8 +43,8 @@ const Questionnaire = (): ReactElement => {
 
   // create an initial response to have keys
   const initialResponse: Record<string, string[]> = {};
-  for (const index in SurveyKeys) {
-    initialResponse[SurveyKeys[index]] = [];
+  for (const index in QuestionnaireKeys) {
+    initialResponse[QuestionnaireKeys[index]] = [];
   }
   const [response, setResponse] = useState(initialResponse);
 
@@ -74,7 +75,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={1}
         question="When do you plan on getting pregnant?"
         response={response}
-        responseKey={SurveyKeys[1]}
+        responseKey={QuestionnaireKeys[1]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -96,7 +97,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={2}
         question="What is your top priority in using contraceptive methods?"
         response={response}
-        responseKey={SurveyKeys[2]}
+        responseKey={QuestionnaireKeys[2]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -122,7 +123,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={3}
         question="What additional benefit do you hope to get from contraception?"
         response={response}
-        responseKey={SurveyKeys[3]}
+        responseKey={QuestionnaireKeys[3]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -130,7 +131,7 @@ const Questionnaire = (): ReactElement => {
   };
 
   // PAGE 4.1
-  // TODO: sideEffectInfos
+  // TODO: make font size adjustable
   const sideEffectInfos: [ReactElement, string][] = [
     [<SvgCramps />, 'Cramps'],
     [<SvgAches />, 'Muscle soreness / Back ache'],
@@ -154,7 +155,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={4}
         question="What side effects can't you tolerate?"
         response={response}
-        responseKey={SurveyKeys[4]}
+        responseKey={QuestionnaireKeys[4]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -180,7 +181,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={5}
         question="How frequently do you care to use contraceptive methods?"
         response={response}
-        responseKey={SurveyKeys[5]}
+        responseKey={QuestionnaireKeys[5]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -190,22 +191,28 @@ const Questionnaire = (): ReactElement => {
   // PAGE 6
   // TODO: body
   const PreferredMethodsPage = ({}): ReactElement => {
-    const answers = [
-      'General knowledge on contraceptive methods',
-      'Choosing a method that suits your value and lifestyle',
-      'Sharing your own experience with peers and community of girls',
-      'Looking for advice from peers and healthcare professionals',
+    const methods = [
+      'Pill',
+      'Shot',
+      'Implant',
+      'Patch',
+      'Sterilization',
+      'IUD',
+      'Diaphragm',
+      'Ring',
+      'Condom',
+      'Spermicide',
+      'Other',
     ];
     return (
-      <SurveyCheckbox
-        answers={answers}
-        headerSize="small"
+      <QuestionnaireDiagram
+        methodInfos={methods}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={6}
         question="What methods of use do you prefer?"
         response={response}
-        responseKey={SurveyKeys[6]}
+        responseKey={QuestionnaireKeys[6]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -224,7 +231,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={7}
         question="Would you like to take the contraceptive method yourself or have a healthcare professional to administer for you?"
         response={response}
-        responseKey={SurveyKeys[7]}
+        responseKey={QuestionnaireKeys[7]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -247,7 +254,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={8}
         question="How do you prefer to access the contraception methods?"
         response={response}
-        responseKey={SurveyKeys[8]}
+        responseKey={QuestionnaireKeys[8]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -265,7 +272,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={9}
         question="Do you have health insurance?"
         response={response}
-        responseKey={SurveyKeys[9]}
+        responseKey={QuestionnaireKeys[9]}
         setResponse={setResponse}
         totalPages={10}
       />
@@ -290,7 +297,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={10}
         question="How much are you willing to pay yourself for contraception?"
         response={response}
-        responseKey={SurveyKeys[10]}
+        responseKey={QuestionnaireKeys[10]}
         setResponse={setResponse}
         totalPages={10}
       />
