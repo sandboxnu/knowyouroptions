@@ -177,6 +177,7 @@ const DropdownColumnBody = ({
 
 export interface SurveyDropdownProps {
   dropdownInfos: [string, string[]][];
+  headerSize?: string;
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -185,10 +186,12 @@ export interface SurveyDropdownProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  totalPages: number;
 }
 
 const SurveyDropdown = ({
   dropdownInfos,
+  headerSize,
   intro,
   onClickForwards,
   onClickBackwards,
@@ -197,10 +200,12 @@ const SurveyDropdown = ({
   response,
   responseKey,
   setResponse,
+  totalPages,
 }: SurveyDropdownProps): ReactElement => {
   return (
     <>
       <Survey
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
@@ -216,6 +221,7 @@ const SurveyDropdown = ({
         }
         pageNumber={pageNumber}
         question={question}
+        totalPages={totalPages}
       />
     </>
   );

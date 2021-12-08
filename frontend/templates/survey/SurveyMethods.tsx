@@ -52,12 +52,13 @@ const MethodCard = styled.a`
   justify-content: flex-end;
   padding: 0.5rem 0.7rem;
   width: 30%;
-  
-  &:hover, &:active {
+
+  &:hover,
+  &:active {
     background-color: ${secondaryColor};
     color: white;
   }
-  
+
   &:hover > svg {
     ${SVGStyled}
   }
@@ -73,16 +74,19 @@ const MethodCardSelected = styled(MethodCard)`
 `;
 
 const MethodsContainer = styled.div`
-  column-gap: 0.5rem;
+  column-gap: 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  row-gap: 0.5rem;
+  justify-content: left;
+  padding-right: 0;
+  row-gap: 1rem;
 `;
 
-const MethodsName = styled.span`
+const MethodsName = styled.div`
+  font-size: 80%;
   margin-top: 0.5rem;
+  text-align: center;
 `;
 
 // components
@@ -94,6 +98,7 @@ export interface SurveyMethodsProps {
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  totalPages: number;
 }
 
 const SurveyMethods = ({
@@ -102,12 +107,14 @@ const SurveyMethods = ({
   onClickBackwards,
   pageNumber,
   question,
+  totalPages,
 }: SurveyMethodsProps): ReactElement => {
   const [methodsClicked, setMethodsClicked] = useState(new Set());
 
   return (
     <>
       <Survey
+        headerSize={'small'}
         onClick={onClickBackwards}
         Options={
           <Container>
@@ -116,22 +123,24 @@ const SurveyMethods = ({
                 const [MethodIcon, methodName] = method;
 
                 // if this card is selected t
-                const Card = methodsClicked.has(methodName)?
-                  MethodCardSelected
+                const Card = methodsClicked.has(methodName)
+                  ? MethodCardSelected
                   : MethodCard;
 
-                const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+                const onClick = (
+                  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+                ) => {
                   const newMethodsClicked = methodsClicked;
                   if (methodsClicked.has(methodName)) {
                     // user wants to unselect this selected method
-                    newMethodsClicked.delete(methodName)
+                    newMethodsClicked.delete(methodName);
                   } else {
                     // user wants to select this unselected method
                     newMethodsClicked.add(methodName);
                   }
 
                   setMethodsClicked(new Set(newMethodsClicked));
-                }
+                };
                 return (
                   <Card onClick={onClick} key={methodName}>
                     {MethodIcon}
@@ -145,7 +154,7 @@ const SurveyMethods = ({
         }
         pageNumber={pageNumber}
         question={question}
-        smallHeader={true}
+        totalPages={totalPages}
       />
     </>
   );

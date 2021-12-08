@@ -1,27 +1,37 @@
 import { ReactElement, useState } from 'react';
 
-import QuestionnaireStartPage from '../templates/questionnaire/start-page';
-import Survey from '../templates/survey';
+import QuestionnaireStartPage from '../templates/questionnaire/StartPage';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
-import { SurveyKeys } from '../templates/survey';
 import SurveyPill from '../templates/survey/SurveyPill';
-import SurveyDropdown from '../templates/survey/SurveyDropdown';
-import SurveyDropdownInput from '../templates/survey/SurveyDropdownInput';
 import SurveyMethods from '../templates/survey/SurveyMethods';
-import SvgImplant from '../public/implant-small.svg';
-import SvgCopperIUD from '../public/copper-IUD.svg';
-import SvgHormonalIUD from '../public/hormonal-IUD.svg';
-import SvgSterilization from '../public/sterilization.svg';
-import SvgShot from '../public/shot.svg';
-import SvgRing from '../public/ring.svg';
-import SvgPatch from '../public/patch.svg';
-import SvgCondom from '../public/condom.svg';
-import SvgSpermicide from '../public/spermicide.svg';
-import SvgDiaphragm from '../public/diaphragm.svg';
-import SvgPill from '../public/pill.svg';
-import SvgCervicalCap from '../public/cervical-cap.svg';
+
+import SvgCramps from '../public/cramps.svg';
+import SvgAches from '../public/aches.svg';
+import SvgSpotting from '../public/spotting.svg';
+import SvgMenstrualDisorder from '../public/menstrual-disorder.svg';
+import SvgHeavyPeriod from '../public/heavy-period.svg';
+import SvgLessNoPeriod from '../public/less-no-period.svg';
+import SvgHeadache from '../public/headache.svg';
+import SvgNausea from '../public/nausea.svg';
+import SvgAcne from '../public/acne.svg';
+import SvgBreastTenderness from '../public/breast-tenderness.svg';
+import SvgMood from '../public/mood-depression.svg';
 
 const Questionnaire = (): ReactElement => {
+  const SurveyKeys = [
+    'Intro',
+    'WhenPlanPregnant',
+    'TopPriority',
+    'AdditionalBenefit',
+    'SideEffects',
+    'UsageFrequency',
+    'PreferredMethods',
+    'WhoAdministers',
+    'PreferredAccess',
+    'HealthInsurance',
+    'Payment',
+  ];
+
   const [curPage, setCurPage] = useState(0);
   const onClickForwards = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurPage(curPage + 1);
@@ -66,6 +76,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[1]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -87,6 +98,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[2]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -104,6 +116,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        headerSize="medium"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={3}
@@ -111,6 +124,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[3]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -118,17 +132,17 @@ const Questionnaire = (): ReactElement => {
   // PAGE 4.1
   // TODO: sideEffectInfos
   const sideEffectInfos: [ReactElement, string][] = [
-    [<SvgCopperIUD />, 'Cramps'],
-    [<SvgHormonalIUD />, 'Muscle soreness / Back ache'],
-    [<SvgSterilization />, 'Spotting'],
-    [<SvgImplant />, 'Menstrual disorder'],
-    [<SvgShot />, 'Heavy period'],
-    [<SvgRing />, 'Less / No period'],
-    [<SvgPatch />, 'Headache'],
-    [<SvgCondom />, 'Nausea'],
-    [<SvgSpermicide />, 'Acne'],
-    [<SvgDiaphragm />, 'Breast Tenderness'],
-    [<SvgPill />, 'Mood Depression'],
+    [<SvgCramps />, 'Cramps'],
+    [<SvgAches />, 'Muscle soreness / Back ache'],
+    [<SvgSpotting />, 'Spotting'],
+    [<SvgMenstrualDisorder />, 'Menstrual disorder'],
+    [<SvgHeavyPeriod />, 'Heavy period'],
+    [<SvgLessNoPeriod />, 'Less / No period'],
+    [<SvgHeadache />, 'Headache'],
+    [<SvgNausea />, 'Nausea'],
+    [<SvgAcne />, 'Acne'],
+    [<SvgBreastTenderness />, 'Breast Tenderness'],
+    [<SvgMood />, 'Mood Depression'],
   ];
 
   const SideEffectsPage = ({}): ReactElement => {
@@ -142,6 +156,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[4]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -167,12 +182,13 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[5]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
 
   // PAGE 6
-  // TODO
+  // TODO: body
   const PreferredMethodsPage = ({}): ReactElement => {
     const answers = [
       'General knowledge on contraceptive methods',
@@ -183,6 +199,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        headerSize="small"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={6}
@@ -190,6 +207,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[6]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -200,6 +218,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        headerSize="medium"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={7}
@@ -207,6 +226,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[7]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -221,6 +241,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        headerSize="medium"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={8}
@@ -228,6 +249,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[8]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -245,6 +267,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[9]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -253,7 +276,7 @@ const Questionnaire = (): ReactElement => {
   // TODO: add submit button
   const PaymentPage = ({}): ReactElement => {
     const answers = [
-      '$ 0 - 50 montly',
+      '$ 0 - 50 monthly',
       '$ 50 - 100 several times a year',
       '$ 100 - 500 at one time, every 1 - 3 years',
       '$ 500 - 1000 at one time, every 2 - 5 years',
@@ -265,10 +288,11 @@ const Questionnaire = (): ReactElement => {
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={10}
-        question="Do you have health insurance?"
+        question="How much are you willing to pay yourself for contraception?"
         response={response}
         responseKey={SurveyKeys[10]}
         setResponse={setResponse}
+        totalPages={10}
       />
     );
   };
@@ -286,6 +310,7 @@ const Questionnaire = (): ReactElement => {
     WhoAdministersPage,
     PreferredAccessPage,
     HealthInsurancePage,
+    PaymentPage,
   ];
 
   const Page = pages[curPage];

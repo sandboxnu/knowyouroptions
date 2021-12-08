@@ -2,7 +2,6 @@ import { ReactElement, useState } from 'react';
 
 import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
-import { SurveyKeys } from '../templates/survey';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyDropdown from '../templates/survey/SurveyDropdown';
 import SurveyDropdownInput from '../templates/survey/SurveyDropdownInput';
@@ -19,6 +18,18 @@ import SvgSpermicide from '../public/spermicide.svg';
 import SvgDiaphragm from '../public/diaphragm.svg';
 import SvgPill from '../public/pill.svg';
 import SvgCervicalCap from '../public/cervical-cap.svg';
+
+const SurveyKeys = [
+  'PregnancyAge',
+  'SexuallyActiveStage',
+  'TriedMethods',
+  'UsedMethods',
+  'MoreInformationMethods',
+  'WhereEducation',
+  'LookingFor',
+  'Demographics',
+  'Location',
+];
 
 const OnboardingSurvey = (): ReactElement => {
   const [curPage, setCurPage] = useState(0);

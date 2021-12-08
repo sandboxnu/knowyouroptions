@@ -18,16 +18,12 @@ const Fraction = styled.p`
 `;
 
 const Header = styled(Container)`
-  height: 80%;
+  height: 40%;
   padding: 1rem 1.5rem;
 `;
 
-const HeaderMed = styled(Container)`
-  height: 68%;
-`;
-
 const HeaderSmall = styled(Container)`
-  height: 55%;
+  height: 35%;
 `;
 
 const PageNumber = styled.span`
@@ -50,52 +46,37 @@ const Wrapper = styled.div`
 `;
 
 // components
-const PageNumberFraction = ({
-  curPage,
-  totalPages,
-}: {
-  curPage: number;
-  totalPages: number;
-}): ReactElement => {
+const PageNumberFraction = ({ number }: { number: number }): ReactElement => {
   return (
     <>
       <Fraction>
-        <PageNumber>{curPage}</PageNumber> / {totalPages}
+        <PageNumber>{number}</PageNumber> / 10
       </Fraction>
     </>
   );
 };
 
 export interface SurveyProps {
-  headerSize?: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
   question: string;
-  totalPages: number;
+  smallHeader?: boolean;
 }
 
 const Survey = ({
-  headerSize,
   onClick,
   Options,
   pageNumber,
   question,
-  totalPages,
+  smallHeader,
 }: SurveyProps): ReactElement => {
-  let HeaderElm = Header;
-  if (headerSize === 'small') {
-    HeaderElm = HeaderSmall;
-  } else if (headerSize === 'medium') {
-    HeaderElm = HeaderMed;
-  } else {
-    HeaderElm = Header;
-  }
+  const HeaderElm = smallHeader ? HeaderSmall : Header;
   return (
     <Wrapper>
       <HeaderElm>
         <SvgLeftArrow onClick={onClick} />
-        <PageNumberFraction curPage={pageNumber} totalPages={totalPages} />
+        <PageNumberFraction number={pageNumber} />
         <Question> {question} </Question>
       </HeaderElm>
 
@@ -105,3 +86,17 @@ const Survey = ({
 };
 
 export default Survey;
+
+const SurveyKeys = [
+  'PregnancyAge',
+  'SexuallyActiveStage',
+  'TriedMethods',
+  'UsedMethods',
+  'MoreInformationMethods',
+  'WhereEducation',
+  'LookingFor',
+  'Demographics',
+  'Location',
+];
+
+export { SurveyKeys };

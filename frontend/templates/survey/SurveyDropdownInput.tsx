@@ -188,6 +188,7 @@ const SubmitButton = ({
 
 export interface SurveyDropdownInputProps {
   dropdownInfos: [string, string[]][];
+  headerSize?: string;
   inputQuestion: string;
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
@@ -201,6 +202,7 @@ export interface SurveyDropdownInputProps {
 
 const SurveyDropdownInput = ({
   dropdownInfos,
+  headerSize,
   inputQuestion,
   intro,
   onClickForwards,
@@ -230,6 +232,7 @@ const SurveyDropdownInput = ({
   return (
     <>
       <Survey
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
