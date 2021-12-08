@@ -15,8 +15,13 @@ import SvgTakeQuestionnaire from '../public/take-questionnaire.svg';
 
 const MenuHeading = styled.h1`
   color: #911d7a;
-  font-family: 'DIN 2014';
+  font-family: 'din-2014';
   font-size: 1rem;
+  font-weight: bold;
+
+  > * {
+    margin-right: 10px;
+  }
 `;
 
 const MenuElements = styled.div`
@@ -31,6 +36,10 @@ const MenuElements = styled.div`
       font-size: 0.8rem;
     }
   }
+
+  > * {
+    margin-left: 15px;
+  }
 `;
 
 const SidebarDiv = styled.div`
@@ -39,6 +48,7 @@ const SidebarDiv = styled.div`
   y: 0;
   width: 70vw;
   height: 100vh;
+  z-index: 10;
 `;
 
 const MenuSection = styled.div`
@@ -54,11 +64,16 @@ const MenuSection = styled.div`
 const TwoColumns = styled.div`
   display: flex;
   margin-left: 10px;
+
+  > * {
+    margin-left: 20px;
+  }
 `;
 const ColumnItem = styled.div`
   width: 50%;
   :hover {
     color: #800080;
+    font-weight: bold;
   }
   & > a {
     font-family: 'roboto';
@@ -215,7 +230,7 @@ const Sidebar = (): ReactElement => {
         <SvgMenuIcon
           cursor="pointer"
           onClick={() => setOpen(true)}
-          style={{ width: '30px' }}
+          style={{ width: '30px', marginLeft: '30px', marginTop: '30px' }}
           ghost
         />
       )}
