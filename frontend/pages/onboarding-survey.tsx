@@ -67,6 +67,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[0]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -91,6 +92,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[1]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -108,6 +110,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[2]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -137,6 +140,7 @@ const OnboardingSurvey = (): ReactElement => {
         pageNumber={4}
         question="I have used and been satisfied with the following method(s):"
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -151,6 +155,7 @@ const OnboardingSurvey = (): ReactElement => {
         pageNumber={4}
         question="I want more information about the following method(s):"
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -175,6 +180,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[5]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -197,6 +203,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[6]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -236,6 +243,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[7]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
@@ -257,6 +265,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[8]}
         setResponse={setResponse}
+        totalPages={7}
       />
     );
   };
