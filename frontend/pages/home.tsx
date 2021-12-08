@@ -3,6 +3,7 @@ import Card from '../components/Card';
 import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
+import Layout from '../components/Layout';
 
 const HomeContainer = styled.div`
   background-color: #ef8b6f;
@@ -30,29 +31,31 @@ const ImageContainer = styled(Row)`
 
 const Home = (): ReactElement => {
   return (
-    <HomeContainer>
-      <HomeTitle>Home</HomeTitle>
-      <ImageContainer>
-        <Image src={homepagePic} placeholder="blur" />
-      </ImageContainer>
-      <Row>
+    <Layout>
+      <HomeContainer>
+        <HomeTitle>Home</HomeTitle>
+        <ImageContainer>
+          <Image src={homepagePic} placeholder="blur" />
+        </ImageContainer>
+        <Row>
+          <Card
+            title="Methods"
+            description="Explore the available contraceptive methods"
+            link="/methods"
+          />
+          <Card
+            title="Stories"
+            description="Share your stories and experience with peers"
+            link="/stories"
+          />
+        </Row>
         <Card
-          title="Methods"
-          description="Explore the available contraceptive methods"
-          link="/methods"
+          title="Quiz"
+          description="Take a short questionnaire to find the methods that fit your needs."
+          link="/quiz"
         />
-        <Card
-          title="Stories"
-          description="Share your stories and experience with peers"
-          link="/stories"
-        />
-      </Row>
-      <Card
-        title="Quiz"
-        description="Take a short questionnaire to find the methods that fit your needs."
-        link="/quiz"
-      />
-    </HomeContainer>
+      </HomeContainer>
+    </Layout>
   );
 };
 
