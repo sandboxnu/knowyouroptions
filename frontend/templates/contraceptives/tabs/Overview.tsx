@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
 
-import {Column, Row} from './StyledComponents';
+import { Column, Row } from './StyledComponents';
 
 // Styling
 const CategoryRow = styled(Row)`
