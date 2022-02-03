@@ -20,7 +20,8 @@ const HomeTitle = styled.h1`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   padding-top: 1rem;
   width: 100%;
 `;
@@ -48,12 +49,12 @@ const Home = (): ReactElement => {
             description="Share your stories and experience with peers"
             link="/stories"
           />
+          <Card
+            title="Quiz"
+            description="Take a short questionnaire to find the methods that fit your needs."
+            link="/quiz"
+          />
         </Row>
-        <Card
-          title="Quiz"
-          description="Take a short questionnaire to find the methods that fit your needs."
-          link="/quiz"
-        />
       </HomeContainer>
     </Layout>
   );

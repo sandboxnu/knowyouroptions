@@ -12,7 +12,25 @@ const StyledCard = styled(AntdCard)`
   flex-direction: column;
   font-size: 0.8rem;
   padding: 1rem;
-  margin: 0.25rem;
+  width: 30%;
+  max-width: 281px;
+  margin-right: min(3%, 39px);
+
+  @media (max-width: 600px) {
+    flex-grow: 1;
+    width: 45%;
+    max-width: 100%;
+    margin: 0.25rem;
+    height: 138px;
+  }
+
+  @media (min-width: 600px) {
+    &:nth-child(3) {
+      max-width: 381px;
+      width: 30%;
+    }
+    padding: 2rem;
+  }
 `;
 
 const Title = styled.h2`
