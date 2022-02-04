@@ -11,6 +11,15 @@ const HomeContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   padding: 2rem;
+
+  .title-above {
+    @media (min-width: 600px) {
+      display: none;
+    }
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
 `;
 
 const HomeTitle = styled.h1`
@@ -34,10 +43,12 @@ const Home = (): ReactElement => {
   return (
     <Layout>
       <HomeContainer>
-        <HomeTitle>Home</HomeTitle>
+        <HomeTitle className="title-above">Home</HomeTitle>
         <ImageContainer>
-          <Image src={homepagePic} placeholder="blur" />
+          {' '}
+          <Image src={homepagePic} placeholder="blur" />{' '}
         </ImageContainer>
+        <HomeTitle className="title-below">Home</HomeTitle>
         <Row>
           <Card
             title="Methods"
