@@ -16,6 +16,8 @@ const HomeContainer = styled.div`
     @media (min-width: 600px) {
       display: none;
     }
+  }
+  .title-below {
     @media (max-width: 600px) {
       display: none;
     }
