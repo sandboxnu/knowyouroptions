@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import Efficacy, { EfficacyProps } from './tabs/Efficacy';
 import Effect, { EffectProps } from './tabs/Effect';
 import Overview, { OverviewProps } from './tabs/Overview';
@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import DownOutlined from '@ant-design/icons/DownOutlined';
 import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
+import {useWindowDimensions} from './useWindowDimensions'
 
 // styled
 const Bookmark = styled(SvgBookmark)`
@@ -98,6 +99,26 @@ const Contraceptives = ({
   additionalProps,
 }: ContraceptivesProps): ReactElement => {
   const [tabIndex, setTabIndex] = useState(0);
+  const [isMobile, changeIsMobile] = useState(false);
+  let width = 0;
+  
+  //const {width, height} = useWindowDimensions();
+
+  useEffect( ()=> {
+    
+  })
+
+  useEffect(() => {
+    width = window?.innerWidth
+    if(width > 600){
+      changeIsMobile(false)
+    } else {
+      changeIsMobile(true)
+    }
+  }
+  , [])
+
+
   const tabs = [
     'Overview',
     'Use',
@@ -145,8 +166,9 @@ const Contraceptives = ({
           </SvgRow>
         )}
       </Header>
-      <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
+      {isMobile ? (<TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />) : ('') }
       <Container>{tabComponents[tabIndex]}</Container>
+
       {/*tabIndex < tabs.length - 1 && (
         <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
       )*/}
