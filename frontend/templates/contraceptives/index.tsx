@@ -41,6 +41,10 @@ const Header = styled(Container)`
   background-color: #febba8;
   display: flex;
   flex-direction: row;
+
+  @media (min-width: 600px) {
+    height: 57vh;
+  }
 `;
 
 const SvgCircle = styled.div`
