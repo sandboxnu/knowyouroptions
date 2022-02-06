@@ -14,6 +14,17 @@ import SvgBookmark from '../../public/bookmark.svg';
 import { device } from '../../pages/mediaSizes';
 
 // styled
+const Container = styled.div`
+  padding: 1rem;
+`;
+
+const Body = styled(Container)`
+  @media (min-width: 600px) {
+    padding: 1rem 3rem;
+    width: 65vw;
+  }
+`;
+
 const Bookmark = styled(SvgBookmark)`
   fill: white;
   position: relative;
@@ -22,10 +33,6 @@ const Bookmark = styled(SvgBookmark)`
   @media ${device.laptop} {
     display: none;
   }
-`;
-
-const Container = styled.div`
-  padding: 1rem;
 `;
 
 const DownArrow = styled(DownOutlined)`
@@ -38,6 +45,10 @@ const Header = styled(Container)`
   background-color: #febba8;
   display: flex;
   flex-direction: row;
+
+  @media (min-width: 600px) {
+    height: 57vh;
+  }
 `;
 
 const SvgCircle = styled.div`

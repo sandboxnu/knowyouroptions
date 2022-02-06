@@ -27,10 +27,19 @@ const CategoryValue = styled.p`
   font-weight: 500;
   margin: 0;
   white-space: nowrap;
+
+  @media (min-width: 600px) {
+    margin: 0.5rem 0;
+  }
 `;
 
 const Description = styled.p`
   color: #7c7c7c;
+
+  @media (min-width: 600px) {
+    margin: 2rem 0rem;
+    width: 33vw;
+  }
 `;
 
 // Components
