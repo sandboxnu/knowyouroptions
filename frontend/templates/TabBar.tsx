@@ -24,6 +24,10 @@ const Row = styled.div`
   padding: 0 1rem;
   margin: 0.5rem 0;
   wrap: no-wrap;
+
+  @media (min-width: 600px) {
+    padding: 0 4rem;
+  }
 `;
 
 const Tab = styled.h2`

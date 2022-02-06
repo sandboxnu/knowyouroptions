@@ -11,18 +11,24 @@ import styled from 'styled-components';
 import DownOutlined from '@ant-design/icons/DownOutlined';
 import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
-import {useWindowDimensions} from './useWindowDimensions'
 
 // styled
+const Container = styled.div`
+  padding: 1rem;
+`;
+
+const Body = styled(Container)`
+  @media (min-width: 600px) {
+    padding: 1rem 3rem;
+    width: 65vw;
+  }
+`;
+
 const Bookmark = styled(SvgBookmark)`
   fill: white;
   position: relative;
   stroke: black;
   top: 2px;
-`;
-
-const Container = styled.div`
-  padding: 1rem;
 `;
 
 const DownArrow = styled(DownOutlined)`
@@ -101,23 +107,19 @@ const Contraceptives = ({
   const [tabIndex, setTabIndex] = useState(0);
   const [isMobile, changeIsMobile] = useState(false);
   let width = 0;
-  
+
   //const {width, height} = useWindowDimensions();
 
-  useEffect( ()=> {
-    
-  })
+  useEffect(() => {});
 
   useEffect(() => {
-    width = window?.innerWidth
-    if(width > 600){
-      changeIsMobile(false)
+    width = window?.innerWidth;
+    if (width > 600) {
+      changeIsMobile(false);
     } else {
-      changeIsMobile(true)
+      changeIsMobile(true);
     }
-  }
-  , [])
-
+  }, []);
 
   const tabs = [
     'Overview',
@@ -166,8 +168,11 @@ const Contraceptives = ({
           </SvgRow>
         )}
       </Header>
-      {isMobile ? (<TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />) : ('') }
-      <Container>{tabComponents[tabIndex]}</Container>
+      {
+        isMobile ? '' : '' // add dynamic title/buttons
+      }
+      <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
+      <Body>{tabComponents[tabIndex]}</Body>
 
       {/*tabIndex < tabs.length - 1 && (
         <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
