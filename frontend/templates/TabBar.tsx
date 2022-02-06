@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
+import { device } from '../pages/mediaSizes';
 
 const HighlightedTab = styled.h2`
   border: 0rem;
@@ -25,7 +26,7 @@ const Row = styled.div`
   margin: 0.5rem 0;
   wrap: no-wrap;
 
-  @media (min-width: 600px) {
+  @media ${device.laptop} {
     padding: 0 4rem;
   }
 `;

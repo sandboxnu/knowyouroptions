@@ -19,7 +19,7 @@ const Container = styled.div`
 `;
 
 const Body = styled(Container)`
-  @media (min-width: 600px) {
+  @media ${device.laptop} {
     padding: 1rem 3rem;
     width: 65vw;
   }
@@ -46,7 +46,7 @@ const Header = styled(Container)`
   display: flex;
   flex-direction: row;
 
-  @media (min-width: 600px) {
+  @media ${device.laptop} {
     height: 57vh;
   }
 `;
