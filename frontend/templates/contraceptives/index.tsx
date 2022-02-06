@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import DownOutlined from '@ant-design/icons/DownOutlined';
 import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
-import {useWindowDimensions} from './useWindowDimensions'
+import { device } from '../../pages/mediaSizes';
 
 // styled
 const Bookmark = styled(SvgBookmark)`
@@ -19,6 +19,9 @@ const Bookmark = styled(SvgBookmark)`
   position: relative;
   stroke: black;
   top: 2px;
+  @media ${device.laptop} {
+    display: none;
+  }
 `;
 
 const Container = styled.div`
@@ -48,6 +51,9 @@ const SvgCircle = styled.div`
     ${Bookmark} {
       fill: purple;
     }
+  }
+  @media ${device.laptop} {
+    display: none;
   }
 `;
 
@@ -101,23 +107,19 @@ const Contraceptives = ({
   const [tabIndex, setTabIndex] = useState(0);
   const [isMobile, changeIsMobile] = useState(false);
   let width = 0;
-  
+
   //const {width, height} = useWindowDimensions();
 
-  useEffect( ()=> {
-    
-  })
+  useEffect(() => {});
 
   useEffect(() => {
-    width = window?.innerWidth
-    if(width > 600){
-      changeIsMobile(false)
+    width = window?.innerWidth;
+    if (width > 600) {
+      changeIsMobile(false);
     } else {
-      changeIsMobile(true)
+      changeIsMobile(true);
     }
-  }
-  , [])
-
+  }, []);
 
   const tabs = [
     'Overview',
@@ -166,7 +168,12 @@ const Contraceptives = ({
           </SvgRow>
         )}
       </Header>
-      {isMobile ? (<TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />) : ('') }
+
+      {
+        isMobile ? '' : ''
+        //reserved for displaying things based off view (js way)
+      }
+      <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
       <Container>{tabComponents[tabIndex]}</Container>
 
       {/*tabIndex < tabs.length - 1 && (
