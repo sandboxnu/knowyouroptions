@@ -17,14 +17,17 @@ const MenuHeading = styled.h1`
   color: black;
   font-family: 'din-2014';
   font-size: 1rem;
+  padding-left: 15%;
 
+  display: inline-block;
    {
     margin-right: 10px;
   }
 `;
 
 const MenuElements = styled.div`
-  margin-left: 10px;
+  margin-left: 10%;
+  width: 75%;
   :hover {
     color: #911d7a;
   }
@@ -39,15 +42,6 @@ const MenuElements = styled.div`
   > * {
     margin-left: 15px;
   }
-`;
-
-const SidebarDiv = styled.div`
-  position: absolute;
-  x: 0;
-  y: 0;
-  width: 70vw;
-  height: 100vh;
-  z-index: 10;
 `;
 
 const MenuSection = styled.div`
@@ -91,16 +85,19 @@ const Menu = styled.div`
   position: absolute;
   z-index: 0;
 `;
-const Icon = styled.div`
-  margin-left: 5%;
-  float: right;
-  display: inline;
-`;
-const MenuIcons = styled.div`
-  margin: auto;
 
+const MenuIcons = styled.div`
+  position: absolute;
+  right: 1%;
+  top: 0;
   width: 25%;
+`;
+const Icon = styled.div`
+  padding-top: 10px;
+  padding-right: 10%;
+  display: inline-block;
   float: right;
+  margin: auto;
 `;
 const Sidebar = (): ReactElement => {
   const [open, setOpen] = useState<boolean>(true);
@@ -115,104 +112,33 @@ const Sidebar = (): ReactElement => {
   };
 
   return (
-    <SidebarDiv>
-      <Menu>
-        <div>
-          <MenuElements></MenuElements>
-        </div>
-        <div>
-          {/* <MenuElements>
-                  <div>
-                    <a href={'https://google.com'}>My method list</a>
-                  </div>
-                  <div>
-                    <a href={'https://google.com'}>Saved Posts</a>
-                  </div>
-                  <div>
-                    <a href={'https://google.com'}>Saved Topics</a>
-                  </div>
-                </MenuElements> */}
-        </div>
-        <div>
-          <MenuHeading>Take Questionnaire</MenuHeading>
-        </div>
-        <div>
-          <MenuHeading>Q&A</MenuHeading>
-        </div>
+    <Menu>
+      <MenuElements>
+        <MenuHeading>Take Questionnaire</MenuHeading>
 
-        <div>
-          <MenuHeading>Quick Access</MenuHeading>
-          {/* 
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Sterilization</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Implant</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Copper IUD</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Hormonal IUD</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Shot</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Ring</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Patch</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Condom</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Spermicide</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Diaphram</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Pill</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Cervical Cap</a>
-                </ColumnItem>
-              </TwoColumns> */}
-        </div>
+        <MenuHeading>Q&A</MenuHeading>
 
-        <MenuIcons>
-          <Icon>
-            {' '}
-            <SvgBookmarkIcon></SvgBookmarkIcon>{' '}
-          </Icon>
-          <Icon>
-            {' '}
-            <SvgBookmarkIcon></SvgBookmarkIcon>{' '}
-          </Icon>
-          <Icon>
-            {' '}
-            <UserOutlined />{' '}
-          </Icon>
-          <Icon>
-            {' '}
-            <UserOutlined />{' '}
-          </Icon>
-        </MenuIcons>
-      </Menu>
-    </SidebarDiv>
+        <MenuHeading>Quick Access</MenuHeading>
+      </MenuElements>
+
+      <MenuIcons>
+        <Icon>
+          {' '}
+          <UserOutlined />
+        </Icon>
+
+        <Icon>
+          <UserOutlined />
+        </Icon>
+        <Icon>
+          <SvgBookmarkIcon></SvgBookmarkIcon>
+        </Icon>
+
+        <Icon>
+          <SvgBookmarkIcon></SvgBookmarkIcon>
+        </Icon>
+      </MenuIcons>
+    </Menu>
   );
 };
 
