@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import DownOutlined from '@ant-design/icons/DownOutlined';
 import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
-import { size, device } from '../../pages/mediaSizes';
+import { size, device, maxDevice } from '../../pages/mediaSizes';
 import Pill from '../../components/Pill';
 
 // styled
@@ -112,6 +112,9 @@ const SvgRow = styled(Row)`
 
 const SvgDesktopRow = styled(Row)`
   display: inline;
+  @media ${maxDevice.laptop} {
+    display: none;
+  }
 `;
 
 const Title = styled.h1`
@@ -122,13 +125,7 @@ const SubTitle = styled.h2`
   margin: 0;
   display: inline;
   padding: 1rem;
-`;
-
-const Button = styled.button`
-  background: #fffefe;
-  border: 2px solid #6abdc1;
-  box-sizing: border-box;
-  border-radius: 5px;
+  }
 `;
 
 const PillDesktop = styled(Pill)`
