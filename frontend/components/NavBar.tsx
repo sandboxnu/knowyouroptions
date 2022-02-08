@@ -14,10 +14,9 @@ import SvgQuickAccessButton from '../public/quick-access.svg';
 import SvgTakeQuestionnaire from '../public/take-questionnaire.svg';
 
 const MenuHeading = styled.h1`
-  color: #911d7a;
+  color: black;
   font-family: 'din-2014';
   font-size: 1rem;
-  font-weight: bold;
 
    {
     margin-right: 10px;
@@ -82,31 +81,33 @@ const ColumnItem = styled.div`
 `;
 
 const Menu = styled.div`
-  border: 2px solid #d6d6d6;
   border-left: none;
-  padding: 3rem 1rem;
-  width: 75vw;
-  height: 100vh;
+  padding: 0rem 1rem;
+  height: 5v;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   background: white;
   position: absolute;
   z-index: 0;
 `;
+const Icon = styled.div`
+  margin-left: 5%;
+  float: right;
+  display: inline;
+`;
+const MenuIcons = styled.div`
+  margin: auto;
 
+  width: 25%;
+  float: right;
+`;
 const Sidebar = (): ReactElement => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
   const [closing, setClosing] = useState<boolean>(false);
 
-  const animation = open
-    ? slideStyle.slide
-    : closing
-    ? slideStyle.close
-    : undefined;
-  console.log(animation);
-
   const closeMenu = () => {
-    setOpen(false);
+    setOpen(true);
     setClosing(true);
     return setTimeout(() => {
       setClosing(false);
@@ -115,33 +116,12 @@ const Sidebar = (): ReactElement => {
 
   return (
     <SidebarDiv>
-      {open || closing ? (
-        <Menu className={animation}>
-          <SvgMenuIcon
-            cursor="pointer"
-            onClick={closeMenu}
-            style={{ width: '30px' }}
-            ghost
-          />
-          <MenuSection>
-            <div>
-              <div>
-                <MenuHeading>
-                  <UserOutlined />
-                  Profile
-                </MenuHeading>
-                <MenuElements>
-                  <div>
-                    <a href={'https://google.com'}>Survey Report</a>
-                  </div>
-                </MenuElements>
-              </div>
-              <div>
-                <MenuHeading>
-                  <SvgBookmarkIcon color="purple" />
-                  Bookmarks
-                </MenuHeading>
-                <MenuElements>
+      <Menu>
+        <div>
+          <MenuElements></MenuElements>
+        </div>
+        <div>
+          {/* <MenuElements>
                   <div>
                     <a href={'https://google.com'}>My method list</a>
                   </div>
@@ -151,27 +131,18 @@ const Sidebar = (): ReactElement => {
                   <div>
                     <a href={'https://google.com'}>Saved Topics</a>
                   </div>
-                </MenuElements>
-              </div>
-              <div>
-                <MenuHeading>
-                  <SvgTakeQuestionnaire />
-                  Take Questionnaire
-                </MenuHeading>
-              </div>
-              <div>
-                <MenuHeading>
-                  <QuestionCircleOutlined /> Q&A
-                </MenuHeading>
-              </div>
-            </div>
-          </MenuSection>
-          <MenuSection>
-            <div>
-              <MenuHeading>
-                <SvgQuickAccessButton />
-                Quick Access
-              </MenuHeading>
+                </MenuElements> */}
+        </div>
+        <div>
+          <MenuHeading>Take Questionnaire</MenuHeading>
+        </div>
+        <div>
+          <MenuHeading>Q&A</MenuHeading>
+        </div>
+
+        <div>
+          <MenuHeading>Quick Access</MenuHeading>
+          {/* 
               <TwoColumns>
                 <ColumnItem>
                   <a href={'https://google.com'}>Sterilization</a>
@@ -219,21 +190,28 @@ const Sidebar = (): ReactElement => {
                 <ColumnItem>
                   <a href={'https://google.com'}>Cervical Cap</a>
                 </ColumnItem>
-              </TwoColumns>
-            </div>
-          </MenuSection>
-          <div>
-            <MenuHeading>Settings and privacy</MenuHeading>
-          </div>
-        </Menu>
-      ) : (
-        <SvgMenuIcon
-          cursor="pointer"
-          onClick={() => setOpen(true)}
-          style={{ width: '30px', marginLeft: '30px', marginTop: '30px' }}
-          ghost
-        />
-      )}
+              </TwoColumns> */}
+        </div>
+
+        <MenuIcons>
+          <Icon>
+            {' '}
+            <SvgBookmarkIcon></SvgBookmarkIcon>{' '}
+          </Icon>
+          <Icon>
+            {' '}
+            <SvgBookmarkIcon></SvgBookmarkIcon>{' '}
+          </Icon>
+          <Icon>
+            {' '}
+            <UserOutlined />{' '}
+          </Icon>
+          <Icon>
+            {' '}
+            <UserOutlined />{' '}
+          </Icon>
+        </MenuIcons>
+      </Menu>
     </SidebarDiv>
   );
 };

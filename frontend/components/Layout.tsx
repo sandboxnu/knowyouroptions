@@ -1,4 +1,5 @@
 import Sidebar from './Sidebar';
+import MenuBar from './NavBar';
 import styled from 'styled-components';
 import { ReactElement } from 'react';
 
@@ -15,7 +16,7 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps): ReactElement => {
   return (
     <PageContainer>
-      <Sidebar />
+      <MenuBar />
       {children}
     </PageContainer>
   );

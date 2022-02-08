@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-
+//import TabBar from '../templates/TabBar';
+//import TabBar from '../templates/TabBar';
 const HomeContainer = styled.div`
   background-color: #ef8b6f;
   display: flex;
