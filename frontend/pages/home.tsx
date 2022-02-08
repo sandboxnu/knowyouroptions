@@ -9,7 +9,7 @@ const HomeContainer = styled.div`
   background-color: #ef8b6f;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - 15vh);
   padding: 2rem;
 `;
 

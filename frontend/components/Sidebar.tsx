@@ -46,7 +46,7 @@ const SidebarDiv = styled.div`
   position: absolute;
   x: 0;
   y: 0;
-  width: 70vw;
+  width: 100vw;
   height: 100vh;
   z-index: 10;
 `;
