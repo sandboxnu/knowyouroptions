@@ -11,6 +11,8 @@ import styled from 'styled-components';
 import DownOutlined from '@ant-design/icons/DownOutlined';
 import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
+import SvgDesktopBookmark from '../../public/desktop-icons/desktop-bookmark.svg';
+import SvgDesktopDropdown from '../../public/desktop-icons/desktop-dropdown.svg';
 import { size, device, maxDevice } from '../../pages/mediaSizes';
 import Pill from '../../components/Pill';
 
@@ -62,6 +64,7 @@ const Header = styled(Container)`
 
   @media ${device.laptop} {
     height: 57vh;
+    position: relative;
   }
 `;
 
@@ -99,6 +102,12 @@ const SvgDesktopColumn = styled(Column)`
   ${SvgCircleSecond} {
     margin-top: 0.5rem;
   }
+
+  @media ${device.laptop} {
+    bottom: 0;
+    justify: left;
+    position: absolute;
+  }
 `;
 
 const SvgRow = styled(Row)`
@@ -119,12 +128,20 @@ const SvgDesktopRow = styled(Row)`
 
 const Title = styled.h1`
   margin: 0;
+
+  @media ${device.laptop} {
+    display: none;
+  }
 `;
 
-const SubTitle = styled.h2`
-  margin: 0;
+const TitleDesktop = styled.h1`
   display: inline;
-  padding: 1rem;
+  font-size: 40px;
+  margin: 0;
+  padding: 0.5rem;
+
+  @media ${maxDevice.laptop} {
+    display: none;
   }
 `;
 
@@ -133,6 +150,18 @@ const PillDesktop = styled(Pill)`
   display: inline;
   margin: 1rem;
   padding: 0.2rem 0.3rem;
+`;
+
+const QuickAccess = styled.div`
+  @media ${device.laptop} {
+    display: flex;
+    flex-direction: row;
+    padding: 1.5rem 1.5rem;
+  }
+`;
+
+const SvgBookmarkDesktopStyled = styled(SvgDesktopBookmark)`
+  margin: 0.7rem 0rem;
 `;
 
 // components
@@ -196,7 +225,7 @@ const Contraceptives = ({
   ];
   const BookmarkIcon = (
     <SvgCircle>
-      <Bookmark />
+      <SvgBookmark />
     </SvgCircle>
   );
   const CompareMethodsIcon = (
@@ -213,14 +242,14 @@ const Contraceptives = ({
             <Title>{title}</Title>
           </div>
           <SvgDesktopRow>
-            <div>
-              <BookmarkDesktop />
-              <SubTitle>{'Contraceptive'}</SubTitle>
-              <BookmarkDesktop />
+            <QuickAccess>
+              <SvgBookmarkDesktopStyled />
+              <TitleDesktop>{title}</TitleDesktop>
+              <SvgDesktopDropdown />
               <PillDesktop key={'Compare Methods'}>
                 {'Compare Methods'}
               </PillDesktop>
-            </div>
+            </QuickAccess>
           </SvgDesktopRow>
         </SvgDesktopColumn>
 
@@ -243,7 +272,7 @@ const Contraceptives = ({
       }
 
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
-      <Container>{tabComponents[tabIndex]}</Container>
+      <Body>{tabComponents[tabIndex]}</Body>
 
       {/*tabIndex < tabs.length - 1 && (
         <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
