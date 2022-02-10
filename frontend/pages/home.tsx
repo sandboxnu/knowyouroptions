@@ -4,22 +4,23 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
+import { SIZES } from '../Constants';
 //import TabBar from '../templates/TabBar';
 //import TabBar from '../templates/TabBar';
 const HomeContainer = styled.div`
   background-color: #ef8b6f;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: calc(100vh - ${SIZES.navbarHeight}px);
   padding: 2rem;
 
   .title-above {
-    @media (min-width: 600px) {
+    @media (min-width: ${SIZES.mobileWidth}px) {
       display: none;
     }
   }
   .title-below {
-    @media (max-width: 600px) {
+    @media (max-width: ${SIZES.mobileWidth}px) {
       display: none;
     }
   }
@@ -40,6 +41,7 @@ const Row = styled.div`
 
 const ImageContainer = styled(Row)`
   margin: 1rem 0rem 1rem 0rem;
+  height: 100%;
 `;
 
 const Home = (): ReactElement => {

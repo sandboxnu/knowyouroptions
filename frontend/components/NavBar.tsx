@@ -36,10 +36,14 @@ const Icon = styled.div`
   padding: 1.5rem;
 `;
 
-// TODO: Switch between this sidebar and the one in Sidebar.tsx at a certain screen size.
+// TODO: Update logo icon.
 const Sidebar = (): ReactElement => {
   return (
     <Menu>
+      <Icon>
+        <SvgProfileIcon />
+      </Icon>
+
       <MenuElements>
         <MenuHeading>Take Questionnaire</MenuHeading>
 

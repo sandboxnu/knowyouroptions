@@ -1,5 +1,4 @@
-import Sidebar from './Sidebar';
-import MenuBar from './NavBar';
+import MenuBar from './Menubar';
 import styled from 'styled-components';
 import { ReactElement } from 'react';
 
