@@ -3,10 +3,10 @@ import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import HomePage from './home';
-import Implant from './implant'
+import OnboardingSurvey from './onboarding-survey';
 
 const Home: NextPage = () => {
-  return <Implant />;
+  return <OnboardingSurvey />;
 };
 
 export default Home;
