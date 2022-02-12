@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
-import { device } from '../pages/mediaSizes';
+import { device } from './mediaSizes';
 
 const HighlightedTab = styled.h2`
   border: 0rem;
