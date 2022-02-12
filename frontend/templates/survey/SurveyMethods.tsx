@@ -52,12 +52,13 @@ const MethodCard = styled.a`
   justify-content: flex-end;
   padding: 0.5rem 0.7rem;
   width: 30%;
-  
-  &:hover, &:active {
+
+  &:hover,
+  &:active {
     background-color: ${secondaryColor};
     color: white;
   }
-  
+
   &:hover > svg {
     ${SVGStyled}
   }
@@ -110,10 +111,10 @@ const SurveyMethods = ({
   setResponse,
 }: SurveyMethodsProps): ReactElement => {
   const methodsClickedInit =
-    response[responseKey] === undefined
-      ? []
-      : response[responseKey];
-  const [methodsClicked, setMethodsClicked] = useState(new Set(methodsClickedInit));
+    response[responseKey] === undefined ? [] : response[responseKey];
+  const [methodsClicked, setMethodsClicked] = useState(
+    new Set(methodsClickedInit),
+  );
 
   return (
     <>
@@ -126,15 +127,17 @@ const SurveyMethods = ({
                 const [MethodIcon, methodName] = method;
 
                 const isThisMethodHighlighted = methodsClicked.has(methodName);
-                const Card = isThisMethodHighlighted?
-                  MethodCardSelected
+                const Card = isThisMethodHighlighted
+                  ? MethodCardSelected
                   : MethodCard;
 
-                const onClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+                const onClick = (
+                  event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+                ) => {
                   const newMethodsClicked = methodsClicked;
                   if (methodsClicked.has(methodName)) {
                     // user wants to unselect this selected method
-                    newMethodsClicked.delete(methodName)
+                    newMethodsClicked.delete(methodName);
                   } else {
                     // user wants to select this unselected method
                     newMethodsClicked.add(methodName);
@@ -145,7 +148,7 @@ const SurveyMethods = ({
                   // Update the state that was passed in as a prop
                   response[responseKey] = Array.from(methodsClicked);
                   setResponse(response);
-                }
+                };
                 return (
                   <Card onClick={onClick} key={methodName}>
                     {MethodIcon}

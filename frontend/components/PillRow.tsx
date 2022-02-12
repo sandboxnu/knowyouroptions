@@ -8,9 +8,9 @@ const PillContainer = styled.div`
 `;
 
 const PillContainerStyled = styled(PillContainer)`
-  &>div {
+  & > div {
     font-weight: 500;
-    padding: .25rem .5rem;
+    padding: 0.25rem 0.5rem;
   }
 `;
 
@@ -18,15 +18,18 @@ const PillRow = ({
   className,
   pillTitles,
 }: {
-  className?: string,
-  pillTitles: string[],
-}): ReactElement  => {
-  const Container = className === undefined? PillContainerStyled : PillContainer;
+  className?: string;
+  pillTitles: string[];
+}): ReactElement => {
+  const Container =
+    className === undefined ? PillContainerStyled : PillContainer;
   return (
     <Container className={className}>
-      {pillTitles.map((title: string): ReactElement =>
-        <Pill key={title}>{title}</Pill>)
-      }
+      {pillTitles.map(
+        (title: string): ReactElement => (
+          <Pill key={title}>{title}</Pill>
+        ),
+      )}
     </Container>
   );
 };

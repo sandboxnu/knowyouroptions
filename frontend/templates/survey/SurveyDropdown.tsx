@@ -93,7 +93,7 @@ const DropdownColumn = ({
     } else {
       return answers[index];
     }
-  }
+  };
 
   const firstValue = createValue(0, firstLabel);
   return (
@@ -107,14 +107,25 @@ const DropdownColumn = ({
           onChange={createOnChange(0)}
           IconComponent={SVGDownArrow}
         >
-          <option value={firstLabel} selected={firstValue == firstLabel} disabled hidden>
+          <option
+            value={firstLabel}
+            selected={firstValue == firstLabel}
+            disabled
+            hidden
+          >
             {' '}
             {firstLabel}{' '}
           </option>
           {firstOptions.map((option) => {
             return (
               <>
-                <OptionStyled value={option} selected={firstValue == firstLabel}> {option} </OptionStyled>
+                <OptionStyled
+                  value={option}
+                  selected={firstValue == firstLabel}
+                >
+                  {' '}
+                  {option}{' '}
+                </OptionStyled>
               </>
             );
           })}
@@ -155,7 +166,7 @@ const DropdownColumnBody = ({
   options: string[];
   response: Record<string, string[]>;
   responseKey: string;
-  selectValue?: string,
+  selectValue?: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
@@ -176,7 +187,9 @@ const DropdownColumnBody = ({
               <>
                 <option
                   value={option}
-                  onClick={() => {console.log('hi')}}
+                  onClick={() => {
+                    console.log('hi');
+                  }}
                   selected={option == selectValue}
                 >
                   {option}

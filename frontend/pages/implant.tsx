@@ -56,24 +56,32 @@ const Implant = (): ReactElement => {
   };
 
   // Efficacy props
-  const backToFertilityDesc = 'Once the implant is removed your ability to get pregnant quickly returns.';
-  const howToStopDesc = 'The implant can be removed at any time by a trained doctor or nurse.';
+  const backToFertilityDesc =
+    'Once the implant is removed your ability to get pregnant quickly returns.';
+  const howToStopDesc =
+    'The implant can be removed at any time by a trained doctor or nurse.';
   const pregnancyPreventionRate = 99;
   const stopInfos: [ReactElement, string][] = [
-    [<SvgDoctor/>, 'A trained doctor or nurse will make a tiny cut in your skin to gently pull the implant out.'],
-    [<SvgTime/>, 'The process only takes a few minutes to remove, and a local anaesthetic will be used.']
+    [
+      <SvgDoctor />,
+      'A trained doctor or nurse will make a tiny cut in your skin to gently pull the implant out.',
+    ],
+    [
+      <SvgTime />,
+      'The process only takes a few minutes to remove, and a local anaesthetic will be used.',
+    ],
   ];
   const whenItStartsToWorkInfos: Array<string[]> = [
     [
       'If the implant is fitted during ',
       'the first 5 days of your menstrual cycle',
-      ', you’ll be immediately protected against becoming pregnant;'
+      ', you’ll be immediately protected against becoming pregnant;',
     ],
     [
       'If it’s fitted on ',
       'any other day of your menstrual cycle',
-      ', you’ll need to use additional contraception (such as condoms) for the first week.'
-    ]
+      ', you’ll need to use additional contraception (such as condoms) for the first week.',
+    ],
   ];
 
   const efficacyProps: EfficacyProps = {
@@ -82,30 +90,30 @@ const Implant = (): ReactElement => {
     pregnancyPreventionRate: pregnancyPreventionRate,
     stopInfos: stopInfos,
     whenItStartsToWorkInfos: whenItStartsToWorkInfos,
-  }
+  };
 
   // Effect props
   const benefitsInfos: [ReactElement, string][] = [
-    [<SvgBed/>, 'It doesn’t interrupting sex.'],
-    [<SvgBreastFeeding/>, 'Safe with breastfeeding'],
-    [<SvgImplantRemoval/>, 'Your fertility will return to normal as soon as the implant is taken out.']
+    [<SvgBed />, 'It doesn’t interrupting sex.'],
+    [<SvgBreastFeeding />, 'Safe with breastfeeding'],
+    [
+      <SvgImplantRemoval />,
+      'Your fertility will return to normal as soon as the implant is taken out.',
+    ],
   ];
   const sideEffectsInfos: [ReactElement, string][] = [
-    [<SvgHeadache/>, 'Headache'],
-    [<SvgBreastTenderness/>, 'Breast tenderness'],
-    [<SvgAcne/>, 'Acne'],
-    [<SvgPad/>, 'Spotting\n' +
-    '(in the first 6–12 months)'],
-    [<SvgCalendar/>, 'Lighter to no period after a while'],
-    [<SvgDepressed/>, 'Mood swing /\n' +
-    'Depression']
+    [<SvgHeadache />, 'Headache'],
+    [<SvgBreastTenderness />, 'Breast tenderness'],
+    [<SvgAcne />, 'Acne'],
+    [<SvgPad />, 'Spotting\n' + '(in the first 6–12 months)'],
+    [<SvgCalendar />, 'Lighter to no period after a while'],
+    [<SvgDepressed />, 'Mood swing /\n' + 'Depression'],
   ];
 
   const effectProps: EffectProps = {
     benefitsInfos: benefitsInfos,
     sideEffectsInfos: sideEffectsInfos,
   };
-
 
   const mechanism =
     'The implant releases the hormone progestogen into your bloodstream, which prevents the release of an egg each month (ovulation) to prevent pregnancy.';

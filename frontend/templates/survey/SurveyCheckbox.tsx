@@ -48,12 +48,9 @@ const CheckboxColumn = ({
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
-
   const storeCheckedResponse = (isChecked: boolean, title: string) => {
     const answers =
-      response[responseKey] === undefined
-        ? []
-        : response[responseKey];
+      response[responseKey] === undefined ? [] : response[responseKey];
     if (isChecked) {
       answers.push(title);
     } else {
@@ -62,7 +59,7 @@ const CheckboxColumn = ({
     }
     response[responseKey] = answers;
     setResponse(response);
-  }
+  };
   return (
     <>
       {checkboxTitles.map((checkboxTitle) => {

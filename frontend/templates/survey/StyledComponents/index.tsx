@@ -16,18 +16,18 @@ const DropdownStyled = styled(NativeSelect)`
   &::after {
     border-bottom: 0px !important;
   }
-  
+
   & > select {
     padding: 0.75rem 0 0.75rem 0.75rem;
   }
-  
+
   & > select:focus {
     background-color: inherit;
     border-radius: inherit;
   }
   //padding: 0.75rem 0.75rem;
   width: 100%;
-  
+
   & .MuiNativeSelect-icon {
     margin-right: 0.75rem;
     top: auto;
@@ -58,7 +58,4 @@ const MoveForwardButton = ({
   );
 };
 
-export {
-  DropdownStyled,
-  MoveForwardButton
-};
+export { DropdownStyled, MoveForwardButton };

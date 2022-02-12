@@ -1,0 +1,37 @@
+@-webkit-keyframes slide {
+  100% {
+    left: 0;
+  }
+}
+
+.slide {
+  position: absolute;
+  left: -300px;
+  -webkit-animation: slide 0.5s forwards;
+  animation: slide 0.5s forwards;
+}
+
+@keyframes slide {
+  100% {
+    left: 0px;
+  }
+}
+
+.close {
+  position: absolute;
+  left: 0px;
+  -webkit-animation: close 0.5s forwards;
+  animation: close 0.5s forwards;
+}
+
+@-webkit-keyframes close {
+  100% {
+    left: -350px;
+  }
+}
+
+@keyframes close {
+  100% {
+    left: -350px;
+  }
+}

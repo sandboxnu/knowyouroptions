@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import React, { ReactElement } from 'react';
 
 const CategoryValueNumber = styled.span`
-  color: #1DA3AA;
+  color: #1da3aa;
   font-family: din-2014;
   font-size: 2.5rem;
   font-weight: 100;
-  margin: 0 .5rem 0 0;
+  margin: 0 0.5rem 0 0;
 `;
 
 const CategoryValueP = styled.p`
@@ -20,16 +20,14 @@ const CategoryValue = ({
   unit,
   value,
 }: {
-  className?: string,
-  unit: string,
-  value: string,
+  className?: string;
+  unit: string;
+  value: string;
 }): ReactElement => {
   return (
     <>
       <CategoryValueP className={className}>
-        <CategoryValueNumber>
-          {value}
-        </CategoryValueNumber>
+        <CategoryValueNumber>{value}</CategoryValueNumber>
         {unit}
       </CategoryValueP>
     </>
@@ -59,8 +57,8 @@ const HighlightDescription = ({
   className,
   description,
 }: {
-  className?: string,
-  description: string[],
+  className?: string;
+  description: string[];
 }) => {
   return (
     <>
@@ -68,7 +66,9 @@ const HighlightDescription = ({
         return index % 2 === 0 ? (
           phrase
         ) : (
-          <Highlight className={className} key={phrase}>{phrase}</Highlight>
+          <Highlight className={className} key={phrase}>
+            {phrase}
+          </Highlight>
         );
       })}
     </>
@@ -106,5 +106,5 @@ export {
   List,
   ListItem,
   Row,
-  Subtitle
+  Subtitle,
 };
