@@ -13,7 +13,7 @@ import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
 import SvgDesktopBookmark from '../../public/desktop-icons/desktop-bookmark.svg';
 import SvgDesktopDropdown from '../../public/desktop-icons/desktop-dropdown.svg';
-import { size, device, maxDevice } from '../../pages/mediaSizes';
+import { size, device, maxDevice } from '../mediaSizes';
 import Pill from '../../components/Pill';
 
 // styled
