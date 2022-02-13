@@ -189,21 +189,6 @@ const Contraceptives = ({
   additionalProps,
 }: ContraceptivesProps): ReactElement => {
   const [tabIndex, setTabIndex] = useState(0);
-  const [isMobile, changeIsMobile] = useState(false);
-  let width = 0;
-
-  //const {width, height} = useWindowDimensions();
-
-  useEffect(() => {});
-
-  useEffect(() => {
-    width = window?.innerWidth;
-    if (width > 600) {
-      changeIsMobile(false);
-    } else {
-      changeIsMobile(true);
-    }
-  }, []);
 
   const tabs = [
     'Overview',
@@ -266,17 +251,8 @@ const Contraceptives = ({
         )}
       </Header>
 
-      {
-        isMobile ? '' : ''
-        //reserved for displaying things based off view (js way)
-      }
-
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
       <Body>{tabComponents[tabIndex]}</Body>
-
-      {/*tabIndex < tabs.length - 1 && (
-        <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
-      )*/}
     </>
   );
 };
