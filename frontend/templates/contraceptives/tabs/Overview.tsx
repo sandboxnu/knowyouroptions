@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { Column, Row } from './StyledComponents';
+import { device } from '../../mediaSizes';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
-import { device } from '../../mediaSizes';
 
 // Styling
 const CategoryRow = styled(Row)`
