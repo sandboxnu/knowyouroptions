@@ -1,6 +1,5 @@
 // from https://jsramblings.com/how-to-use-media-queries-with-styled-components/
 // thx Stefan <3 very cool
-import React, { ReactElement, useEffect, useState } from 'react';
 
 export const size = {
   mobileS: '320px',
