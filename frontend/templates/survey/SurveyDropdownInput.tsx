@@ -64,6 +64,7 @@ const SubmitButtonStyled = styled.div`
   height: 7vh;
   justify-content: center;
   margin-left: auto;
+  margin-top: 3rem;
   padding: 1rem 4rem;
   vertical-align: middle;
   width: 50vw;
@@ -184,6 +185,7 @@ export interface SurveyDropdownInputProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyDropdownInput = ({
@@ -197,6 +199,7 @@ const SurveyDropdownInput = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
 }: SurveyDropdownInputProps): ReactElement => {
   const submitOnClick = (event) => {
     onClickForwards(event);
@@ -238,6 +241,7 @@ const SurveyDropdownInput = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );

@@ -76,6 +76,7 @@ export interface SurveyPillProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyPill = ({
@@ -87,6 +88,7 @@ const SurveyPill = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
 }: SurveyPillProps): ReactElement => {
   return (
     <>
@@ -103,6 +105,7 @@ const SurveyPill = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );

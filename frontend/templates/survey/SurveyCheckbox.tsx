@@ -88,6 +88,7 @@ export interface SurveyCheckboxProps {
   question: string;
   response: {};
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyCheckbox = ({
@@ -99,6 +100,7 @@ const SurveyCheckbox = ({
   question,
   response,
   setResponse,
+  subHeader,
 }: SurveyCheckboxProps): ReactElement => {
   return (
     <>
@@ -117,6 +119,7 @@ const SurveyCheckbox = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );

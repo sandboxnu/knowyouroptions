@@ -213,6 +213,7 @@ export interface SurveyDropdownProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyDropdown = ({
@@ -225,6 +226,7 @@ const SurveyDropdown = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
 }: SurveyDropdownProps): ReactElement => {
   return (
     <>
@@ -244,6 +246,7 @@ const SurveyDropdown = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );
