@@ -1,4 +1,5 @@
 import { ReactElement, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
@@ -22,11 +23,20 @@ import SvgCervicalCap from '../public/cervical-cap.svg';
 
 const OnboardingSurvey = (): ReactElement => {
   const [curPage, setCurPage] = useState(0);
+  const router = useRouter();
+
   const onClickForwards = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurPage(curPage + 1);
   };
   const onClickBackwards = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurPage(curPage - 1);
+  };
+  const redirectToHome = (event: React.MouseEvent<HTMLDivElement>) => {
+    router.push({
+      pathname: '/home',
+      query: { popup: true },
+    });
+    //console.log('ive been hit D:');
   };
 
   // create an initial response to have keys
@@ -243,7 +253,7 @@ const OnboardingSurvey = (): ReactElement => {
         dropdownInfos={dropdownInfos}
         inputQuestion="city/town"
         intro="I live in ..."
-        onClickForwards={onClickForwards}
+        onClickForwards={redirectToHome}
         onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Please tell us a bit more about yourself."

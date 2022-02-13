@@ -17,7 +17,7 @@ const PopupStyled = styled.div`
     margin: 4rem 3rem;
   }
 `;
-/*
+
 const SurveyPopup = ({}): ReactElement => {
   return (
     <>
@@ -25,12 +25,11 @@ const SurveyPopup = ({}): ReactElement => {
         <PopupStyled className="modal-content">
           <span className="close">&times;</span>
           <p>Thank you for submitting the onboarding survey.</p>
+          <button>Explore APP</button>
         </PopupStyled>
-        <Button>Explore APP</Button>
       </div>
     </>
   );
 };
 
 export default SurveyPopup;
-*/
