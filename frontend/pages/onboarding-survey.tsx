@@ -49,6 +49,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="age"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={1}
@@ -74,6 +75,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="stage"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={2}
@@ -92,6 +94,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={3}
@@ -123,6 +126,7 @@ const OnboardingSurvey = (): ReactElement => {
   const MethodsUsedPage = ({}): ReactElement => {
     return (
       <SurveyMethods
+        boldedWord="method(s)"
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -140,6 +144,7 @@ const OnboardingSurvey = (): ReactElement => {
   const MethodsMoreInfoPage = ({}): ReactElement => {
     return (
       <SurveyMethods
+        boldedWord="method(s)"
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -166,6 +171,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={5}
@@ -189,6 +195,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={6}
@@ -227,6 +234,7 @@ const OnboardingSurvey = (): ReactElement => {
     ];
     return (
       <SurveyDropdown
+        boldedWord=""
         dropdownInfos={dropdownInfos}
         intro="I am ..."
         onClickForwards={onClickForwards}
@@ -248,6 +256,7 @@ const OnboardingSurvey = (): ReactElement => {
     ];
     return (
       <SurveyDropdownInput
+        boldedWord=""
         dropdownInfos={dropdownInfos}
         inputQuestion="city/town"
         intro="I live in ..."

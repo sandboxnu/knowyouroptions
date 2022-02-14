@@ -204,6 +204,7 @@ const DropdownColumnBody = ({
 };
 
 export interface SurveyDropdownProps {
+  boldedWord: string;
   dropdownInfos: [string, string[]][];
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
@@ -217,6 +218,7 @@ export interface SurveyDropdownProps {
 }
 
 const SurveyDropdown = ({
+  boldedWord,
   dropdownInfos,
   intro,
   onClickForwards,
@@ -231,6 +233,7 @@ const SurveyDropdown = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>

@@ -81,6 +81,7 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
+  boldedWord: string;
   responseKey: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -93,6 +94,7 @@ export interface SurveyCheckboxProps {
 
 const SurveyCheckbox = ({
   answers,
+  boldedWord,
   responseKey,
   onClickForwards,
   onClickBackwards,
@@ -105,6 +107,7 @@ const SurveyCheckbox = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <ColumnContainer>

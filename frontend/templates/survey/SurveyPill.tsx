@@ -69,6 +69,7 @@ const PillColumn = ({
 
 export interface SurveyPillProps {
   answers: string[];
+  boldedWord: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
@@ -81,6 +82,7 @@ export interface SurveyPillProps {
 
 const SurveyPill = ({
   answers,
+  boldedWord,
   onClickForwards,
   onClickBackwards,
   pageNumber,
@@ -93,6 +95,7 @@ const SurveyPill = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <PillColumn

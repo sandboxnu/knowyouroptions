@@ -175,6 +175,7 @@ const SubmitButton = ({
 };
 
 export interface SurveyDropdownInputProps {
+  boldedWord: string;
   dropdownInfos: [string, string[]][];
   inputQuestion: string;
   intro: string;
@@ -189,6 +190,7 @@ export interface SurveyDropdownInputProps {
 }
 
 const SurveyDropdownInput = ({
+  boldedWord,
   dropdownInfos,
   inputQuestion,
   intro,
@@ -220,6 +222,7 @@ const SurveyDropdownInput = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
