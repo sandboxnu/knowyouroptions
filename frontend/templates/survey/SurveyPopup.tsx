@@ -1,12 +1,23 @@
 import React, { ReactElement, useState } from 'react';
-import Home from '../../pages';
+import { Modal, Button } from 'antd';
 import styled from 'styled-components';
+
+const PopupContainer = styled.div`
+  height: 50%;
+  border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
 
 const PopupStyled = styled.div`
   background-color: pink;
-  margin: 2%;
   padding: 1rem 1rem;
-  width: 96%;
+
   & > span {
     font-size: 1.5rem;
     color: gray;
@@ -16,18 +27,34 @@ const PopupStyled = styled.div`
   & > p {
     margin: 4rem 3rem;
   }
+  z-index: 100;
+  outline: none;
+  padding: 3.2rem;
+  text-align: center;
+  border-radius: 0.5rem;
+  position: fixed;
+  margin-top: 20%;
 `;
 
-const SurveyPopup = ({}): ReactElement => {
+/**
+ * make the div conditional once the popup dissapears so users can click on other page elements
+ */
+
+export interface SurveyPopupInputProps {
+  onClickHandler: React.MouseEventHandler<HTMLButtonElement>;
+}
+const SurveyPopup = ({
+  onClickHandler,
+}: SurveyPopupInputProps): ReactElement => {
   return (
     <>
-      <div id="surveySubmitted" className="modal">
+      <PopupContainer>
         <PopupStyled className="modal-content">
           <span className="close">&times;</span>
           <p>Thank you for submitting the onboarding survey.</p>
-          <button>Explore APP</button>
+          <button onClick={onClickHandler}>Explore App</button>
         </PopupStyled>
-      </div>
+      </PopupContainer>
     </>
   );
 };

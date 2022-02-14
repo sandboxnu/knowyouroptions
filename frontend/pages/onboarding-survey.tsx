@@ -32,10 +32,13 @@ const OnboardingSurvey = (): ReactElement => {
     setCurPage(curPage - 1);
   };
   const redirectToHome = (event: React.MouseEvent<HTMLDivElement>) => {
-    router.push({
-      pathname: '/home',
-      query: { popup: true },
-    });
+    router.push(
+      {
+        pathname: '/home',
+        query: { popup: true },
+      },
+      '/home',
+    );
     //console.log('ive been hit D:');
   };
 

@@ -33,19 +33,29 @@ const ImageContainer = styled(Row)`
 
 const Home = (): ReactElement => {
   const [showPopup, togglePopup] = useState(false);
+
   const router = useRouter();
+
+  const buttonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('hi');
+    togglePopup(false);
+  };
 
   useEffect(() => {
     console.log(router.query.popup);
-    router.query.popup ? togglePopup(!showPopup) : togglePopup(false);
-  }, []);
+    router.query.popup ? togglePopup(true) : togglePopup(false);
+  }, [showPopup]);
 
   return (
     <Layout>
       <HomeContainer>
+        {showPopup ? (
+          <SurveyPopup onClickHandler={buttonClickHandler} />
+        ) : (
+          console.log('nope')
+        )}
         <HomeTitle>Home</HomeTitle>
         <ImageContainer>
-          {showPopup ? <SurveyPopup /> : ''}
           <Image src={homepagePic} placeholder="blur" />
         </ImageContainer>
 
