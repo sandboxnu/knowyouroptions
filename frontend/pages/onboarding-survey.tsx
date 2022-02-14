@@ -62,6 +62,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="age"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={1}
@@ -69,6 +70,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[0]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -86,6 +88,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="stage"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={2}
@@ -93,6 +96,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[1]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -103,6 +107,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={3}
@@ -110,6 +115,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[2]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -133,6 +139,7 @@ const OnboardingSurvey = (): ReactElement => {
   const MethodsUsedPage = ({}): ReactElement => {
     return (
       <SurveyMethods
+        boldedWord="method(s)"
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -141,6 +148,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[3]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -149,6 +157,7 @@ const OnboardingSurvey = (): ReactElement => {
   const MethodsMoreInfoPage = ({}): ReactElement => {
     return (
       <SurveyMethods
+        boldedWord="method(s)"
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -157,6 +166,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[4]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -174,6 +184,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={5}
@@ -181,6 +192,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[5]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -196,6 +208,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={6}
@@ -203,6 +216,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[6]}
         setResponse={setResponse}
+        subHeader=""
       />
     );
   };
@@ -233,6 +247,7 @@ const OnboardingSurvey = (): ReactElement => {
     ];
     return (
       <SurveyDropdown
+        boldedWord=""
         dropdownInfos={dropdownInfos}
         intro="I am ..."
         onClickForwards={onClickForwards}
@@ -242,6 +257,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[7]}
         setResponse={setResponse}
+        subHeader="*The data will not be shared with any other group. It will only be used to help improve the application."
       />
     );
   };
@@ -253,6 +269,7 @@ const OnboardingSurvey = (): ReactElement => {
     ];
     return (
       <SurveyDropdownInput
+        boldedWord=""
         dropdownInfos={dropdownInfos}
         inputQuestion="city/town"
         intro="I live in ..."
@@ -263,6 +280,7 @@ const OnboardingSurvey = (): ReactElement => {
         response={response}
         responseKey={SurveyKeys[8]}
         setResponse={setResponse}
+        subHeader="*The data will not be shared with any other group. It will only be used to help improve the application."
       />
     );
   };

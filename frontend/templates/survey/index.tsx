@@ -18,25 +18,36 @@ const Fraction = styled.p`
 `;
 
 const Header = styled(Container)`
-  height: 40%;
-  padding: 1rem 1.5rem;
+  min-height: 40%;
+  padding: 1.5rem;
 `;
 
 const HeaderSmall = styled(Container)`
-  height: 35%;
+  min-height: 35%;
+  padding: 1.5rem;
 `;
 
 const PageNumber = styled.span`
   color: black;
+  font-family: 'Din 2014';
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 900;
 `;
 
 const Question = styled.h1`
-  color: gray;
+  color: #5d5d5d;
   font-family: 'Roboto';
-  font-size: 2rem;
-  font-weight: 300;
+  font-size: 28px;
+  font-weight: lighter;
+  margin-bottom: 0.5rem;
+`;
+
+const Subheader = styled.h6`
+  color: #707070;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 100;
+  margin: 0;
 `;
 
 const Wrapper = styled.div`
@@ -57,27 +68,49 @@ const PageNumberFraction = ({ number }: { number: number }): ReactElement => {
 };
 
 export interface SurveyProps {
+  boldedWord: string; // the bolded word in the question
   onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
   question: string;
   smallHeader?: boolean;
+  subHeader: string;
 }
 
 const Survey = ({
+  boldedWord,
   onClick,
   Options,
   pageNumber,
   question,
   smallHeader,
+  subHeader,
 }: SurveyProps): ReactElement => {
   const HeaderElm = smallHeader ? HeaderSmall : Header;
+
+  // escape special characters to use with RegExp
+  function escapeRegExp(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // bold the keyword in the question
+  const makeBold = (question: string, toBold: string) => {
+    const boldedQuestion = question.replace(
+      new RegExp(escapeRegExp(toBold), 'g'),
+      '<b>' + toBold + '</b>',
+    );
+    return boldedQuestion;
+  };
+
   return (
     <Wrapper>
       <HeaderElm>
         <SvgLeftArrow onClick={onClick} />
         <PageNumberFraction number={pageNumber} />
-        <Question> {question} </Question>
+        <Question
+          dangerouslySetInnerHTML={{ __html: makeBold(question, boldedWord) }}
+        ></Question>
+        <Subheader>{subHeader}</Subheader>
       </HeaderElm>
 
       <Content>{Options}</Content>

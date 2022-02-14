@@ -204,6 +204,7 @@ const DropdownColumnBody = ({
 };
 
 export interface SurveyDropdownProps {
+  boldedWord: string;
   dropdownInfos: [string, string[]][];
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
@@ -213,9 +214,11 @@ export interface SurveyDropdownProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyDropdown = ({
+  boldedWord,
   dropdownInfos,
   intro,
   onClickForwards,
@@ -225,10 +228,12 @@ const SurveyDropdown = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
 }: SurveyDropdownProps): ReactElement => {
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
@@ -244,6 +249,7 @@ const SurveyDropdown = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );

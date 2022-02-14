@@ -90,6 +90,7 @@ const MethodsName = styled.span`
 
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
+  boldedWord: string;
   methodInfos: [ReactElement, string][];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -98,9 +99,11 @@ export interface SurveyMethodsProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyMethods = ({
+  boldedWord,
   methodInfos,
   onClickForwards,
   onClickBackwards,
@@ -109,6 +112,7 @@ const SurveyMethods = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
 }: SurveyMethodsProps): ReactElement => {
   const methodsClickedInit =
     response[responseKey] === undefined ? [] : response[responseKey];
@@ -119,6 +123,7 @@ const SurveyMethods = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <Container>
@@ -163,6 +168,7 @@ const SurveyMethods = ({
         pageNumber={pageNumber}
         question={question}
         smallHeader={true}
+        subHeader={subHeader}
       />
     </>
   );

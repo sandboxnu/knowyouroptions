@@ -81,6 +81,7 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
+  boldedWord: string;
   responseKey: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -88,10 +89,12 @@ export interface SurveyCheckboxProps {
   question: string;
   response: {};
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyCheckbox = ({
   answers,
+  boldedWord,
   responseKey,
   onClickForwards,
   onClickBackwards,
@@ -99,10 +102,12 @@ const SurveyCheckbox = ({
   question,
   response,
   setResponse,
+  subHeader,
 }: SurveyCheckboxProps): ReactElement => {
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <ColumnContainer>
@@ -117,6 +122,7 @@ const SurveyCheckbox = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );
