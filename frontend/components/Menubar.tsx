@@ -8,7 +8,7 @@ const Menubar = (): ReactElement => {
 
   if (!size.width) return <Sidebar />;
 
-  return size.width <= SIZES.mobileWidth ? <Sidebar /> : <NavBar />;
+  return size.width <= 992 ? <Sidebar /> : <NavBar />;
 };
 
 // Hook - https://usehooks.com/useWindowSize/

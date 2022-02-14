@@ -8,19 +8,16 @@ import { SIZES } from '../Constants';
 //import TabBar from '../templates/TabBar';
 //import TabBar from '../templates/TabBar';
 const HomeContainer = styled.div`
-  background-color: #ef8b6f;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - ${SIZES.navbarHeight}px);
   padding: 2rem;
-
   .title-above {
-    @media (min-width: ${SIZES.mobileWidth}px) {
+    @media (min-width: 990px) {
       display: none;
     }
   }
   .title-below {
-    @media (max-width: ${SIZES.mobileWidth}px) {
+    @media (max-width: 990px) {
       display: none;
     }
   }
@@ -28,6 +25,7 @@ const HomeContainer = styled.div`
 
 const HomeTitle = styled.h1`
   font-family: din-2014;
+  z-index: 0;
 `;
 
 const Row = styled.div`

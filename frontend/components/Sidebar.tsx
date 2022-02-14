@@ -48,7 +48,7 @@ const SidebarDiv = styled.div`
   y: 0;
   width: 70vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 1;
 `;
 
 const MenuSection = styled.div`
@@ -91,7 +91,6 @@ const Menu = styled.div`
   flex-direction: column;
   background: white;
   position: absolute;
-  z-index: 0;
 `;
 
 const Sidebar = (): ReactElement => {

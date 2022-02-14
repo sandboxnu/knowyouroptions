@@ -24,7 +24,7 @@ const StyledCard = styled(AntdCard)`
     height: 138px;
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 993px) {
     &:nth-child(3) {
       max-width: 381px;
       width: 30%;

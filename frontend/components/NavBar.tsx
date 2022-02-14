@@ -5,7 +5,7 @@ import SvgBookmarkIcon from '../public/BookmarkOutline.svg';
 import SvgProfileIcon from '../public/ProfileOutline.svg';
 import SvgSearchOutline from '../public/SearchOutline.svg';
 import SvgSettingsOutline from '../public/SettingsOutline.svg';
-import { Menu, Dropdown } from 'antd';
+import { Menu } from 'antd';
 
 class Link {
   title: string;
@@ -27,7 +27,9 @@ function MenuHeading(props) {
   const dropdownStyle = {
     position: 'absolute',
     backgroundColor: 'white',
-    padding: '20px',
+    paddingTop: 57,
+    marginLeft: -21,
+    //padding: '20px',
   };
 
   const [dropdown, setDropdown] = useState(false);
@@ -48,7 +50,7 @@ function MenuHeading(props) {
       onMouseEnter={() => setDropdown(true)}
       onMouseLeave={() => setDropdown(false)}
     >
-      Test
+      {props.title}
       {dropdown ? (
         <div style={dropdownStyle}>
           {props.links?.map((link: Link) => linkToItem(link))}
@@ -72,6 +74,7 @@ const NavMenu = styled.div`
   align-items: center;
   background: white;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  z-index: 3;
 `;
 
 const MenuIcons = styled.div`
@@ -119,7 +122,7 @@ const Sidebar = (): ReactElement => {
         </Icon>
 
         <Icon>
-          <SvgBookmarkIcon />
+          <SvgBookmarkIcon></SvgBookmarkIcon>
         </Icon>
         <Icon>
           <SvgSettingsOutline />
