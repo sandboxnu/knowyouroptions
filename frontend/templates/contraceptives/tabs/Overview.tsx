@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
+import { Column, Row } from './StyledComponents';
+import { device } from '../../mediaSizes';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
-
-import { Column, Row } from './StyledComponents';
 
 // Styling
 const CategoryRow = styled(Row)`
@@ -27,10 +27,19 @@ const CategoryValue = styled.p`
   font-weight: 500;
   margin: 0;
   white-space: nowrap;
+
+  @media ${device.laptop} {
+    margin: 0.5rem 0;
+  }
 `;
 
 const Description = styled.p`
   color: #7c7c7c;
+
+  @media ${device.laptop} {
+    margin: 2rem 0rem;
+    width: 33vw;
+  }
 `;
 
 // Components
