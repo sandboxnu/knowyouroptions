@@ -27,8 +27,12 @@ function MenuHeading(props) {
   const dropdownStyle = {
     position: 'absolute',
     backgroundColor: 'white',
-    paddingTop: 57,
-    marginLeft: -21,
+    marginLeft: -50,
+    padding: 20,
+    paddingTop: 50,
+    paddingBottom: 30,
+    columns: 2,
+
     //padding: '20px',
   };
 
@@ -36,7 +40,7 @@ function MenuHeading(props) {
 
   const linkToItem = (link: Link) => {
     return (
-      <Menu.Item style={{ margin: 20, listStyle: 'none' }}>
+      <Menu.Item style={{ listStyle: 'none', marginLeft: 0, paddingLeft: 0 }}>
         <a target="_blank" rel="noopener noreferrer" href={link.url}>
           {link.title}
         </a>
@@ -52,9 +56,9 @@ function MenuHeading(props) {
     >
       {props.title}
       {dropdown ? (
-        <div style={dropdownStyle}>
+        <ul style={dropdownStyle}>
           {props.links?.map((link: Link) => linkToItem(link))}
-        </div>
+        </ul>
       ) : null}
     </Menu>
   );
@@ -67,7 +71,7 @@ const MenuElements = styled.div`
 `;
 
 const NavMenu = styled.div`
-  height: 135px;
+  height: 120px;
   display: flex;
   flex-wrap: no-wrap;
   justify-content: space-between;
@@ -106,6 +110,7 @@ const Sidebar = (): ReactElement => {
             new Link('Patch', 'google.com'),
             new Link('Spermicide', 'google.com'),
             new Link('Pill', 'google.com'),
+
             new Link('Implant', 'google.com'),
             new Link('Hormonal IUD', 'google.com'),
             new Link('Ring', 'google.com'),
