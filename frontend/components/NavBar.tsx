@@ -1,5 +1,5 @@
 import { ReactElement, useState } from 'react';
-import { UserOutlined } from '@ant-design/icons';
+import { SolutionOutlined, UserOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import SvgBookmarkIcon from '../public/BookmarkOutline.svg';
 import SvgProfileIcon from '../public/ProfileOutline.svg';
@@ -21,21 +21,29 @@ function MenuHeading(props) {
     color: 'black',
     fontFamily: 'roboto',
     fontSize: 16,
-    padding: 40,
+    padding: 50,
   };
 
   const dropdownStyle = {
     position: 'absolute',
     backgroundColor: 'white',
     marginLeft: -75,
-
     padding: 20,
-    paddingTop: 70,
+    marginTop: 49,
+    paddingTop: 21,
     paddingLeft: 25,
     paddingBottom: 30,
     columns: 2,
-
+    borderTopStyle: 'solid',
+    borderTopWidth: 1,
+    borderTopColor: '#6abdc1',
     //padding: '20px',
+  };
+  const ArrowStyle = {
+    position: 'absolute',
+    marginTop: 45,
+    marginLeft: 40,
+    zIndex: 4,
   };
   const MenuItem = styled(Menu.Item)`
     a:hover {
@@ -43,6 +51,7 @@ function MenuHeading(props) {
       text-decoration: underline;
     }
   `;
+
   const [dropdown, setDropdown] = useState(false);
 
   const linkToItem = (link: Link) => {
@@ -71,14 +80,24 @@ function MenuHeading(props) {
     >
       {props.title}
       {dropdown && props.title == 'Quick Access' ? (
-        <ul style={dropdownStyle}>
-          {props.links?.map((link: Link) => linkToItem(link))}
-        </ul>
+        <div>
+          <ArrowDropdown style={ArrowStyle}></ArrowDropdown>
+          <ul style={dropdownStyle}>
+            {props.links?.map((link: Link) => linkToItem(link))}
+          </ul>
+        </div>
       ) : null}
     </Menu>
   );
 }
-
+const ArrowDropdown = styled.div`
+width: 0; 
+height: 0; 
+border-left: 5px solid transparent;
+border-right: 5px solid transparent;
+border-bottom: 5px solid #6abdc1;
+}
+`;
 const MenuElements = styled.div`
   display: flex;
   width: 80%;

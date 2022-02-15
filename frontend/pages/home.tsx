@@ -12,12 +12,12 @@ const HomeContainer = styled.div`
   flex-direction: column;
   padding: 2rem;
   .title-above {
-    @media (min-width: 993px) {
+    @media (min-width: 1009px) {
       display: none;
     }
   }
   .title-below {
-    @media (max-width: 992px) {
+    @media (max-width: 1008px) {
       display: none;
     }
   }
