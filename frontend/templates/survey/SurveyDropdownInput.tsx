@@ -32,6 +32,10 @@ const InputStyled = styled.input`
   padding: 0.75rem 0.75rem;
   ::placeholder {
   }
+  text-decoration: underline;
+  text-decoration-color: gray;
+  text-decoration-thickness: 15px;
+  text-underline-offset: 0.2rem;
   width: 100%;
 `;
 
@@ -89,15 +93,21 @@ const DropdownColumn = ({
     // index is the position of the answer
     const onChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
       let answers = response[responseKey];
+
+      // if answers has not been set, initialize it
+      // to an array that is the size of the number of dropdowns
       if (answers === undefined || answers.length === 0) {
         answers = [];
         for (let i = 0; i < selectInfos.length; i++) {
           answers.push('');
         }
       }
+      // else, array has already been initialized inside the InputBox
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
+      console.log('dropdown');
+      console.log(response);
     };
     return onChange;
   };
@@ -141,9 +151,37 @@ const DropdownColumn = ({
 
 const InputBox = ({
   inputQuestion,
+  response,
+  responseKey,
+  selectInfosSize,
+  setResponse,
 }: {
   inputQuestion: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  selectInfosSize: number;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
+  // pass in user answers to the response
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    let answers = response[responseKey];
+
+    // if response value at responseKey has not been set, initialize it
+    // with an array that is the size of the number of dropdowns
+    if (answers === undefined || answers.length === 0) {
+      answers = [];
+      for (let i = 0; i < selectInfosSize; i++) {
+        answers.push('');
+      }
+    }
+    // push the input box value into the array
+    answers[selectInfosSize] = event.currentTarget.value;
+    response[responseKey] = answers;
+    setResponse(response);
+    console.log('input');
+    console.log(response);
+  };
+
   return (
     <>
       <ContentContainer>
@@ -151,6 +189,7 @@ const InputBox = ({
         <InputStyled
           type="text"
           id={inputQuestion}
+          onChange={(e) => onChange(e)}
           placeholder={'Input your ' + inputQuestion}
         />
       </ContentContainer>
@@ -237,6 +276,7 @@ const SurveyDropdownInput = ({
               inputQuestion={inputQuestion}
               response={response}
               responseKey={responseKey}
+              selectInfosSize={dropdownInfos.length}
               setResponse={setResponse}
             />
             <SubmitButton onClick={onClickForwards} />

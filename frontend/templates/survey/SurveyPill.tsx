@@ -20,7 +20,6 @@ const PillAnswers = styled(PillContainer)`
     border: 0;
     border-radius: 3rem;
     color: black;
-    font-weight: 500;
     padding: 1rem 3rem;
     width: 100%;
   }
