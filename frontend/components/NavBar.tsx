@@ -132,27 +132,21 @@ const NavBar = (): ReactElement => {
       <Icon>
         <SvgBookmarkIcon />
       </Icon>
-
       <MenuElements>
         <MenuHeading title={'Take Questionnaire'} />
-
         <MenuHeading title={'Q&A'} />
-
         <MenuHeading title={'Quick Access'} links={quickLinks} />
       </MenuElements>
-
       <MenuIcons>
         <Icon>
           <SvgBookmarkIcon />
         </Icon>
-
         <Icon>
           <SvgBookmarkIcon />
         </Icon>
         <Icon>
           <SvgBookmarkIcon />
         </Icon>
-
         <Icon>
           <SvgBookmarkIcon />
         </Icon>
