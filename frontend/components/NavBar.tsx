@@ -31,60 +31,54 @@ const quickLinks = [
   new Link('Sterilization', "https://www.google.com'"),
 ];
 
-interface MenuHeadingProps {
+const DropdownColumns = styled.ul`
+  position: absolute;
+  background-color: white;
+  margin-left: -75px;
+  padding: 25px;
+  margin-top: 49px;
+  columns: 2;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #6abdc1;
+`;
+
+const StyledMenu = styled(Menu)`
+  padding: 50px;
+`;
+
+const MenuItem = styled(Menu.Item)`
+  list-style: none;
+
+  a:hover {
+    color: #6abdc1;
+    text-decoration: underline;
+  }
+`;
+
+const ArrowDropdown = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #6abdc1;
+  position: absolute;
+  margin-top: 45px;
+  margin-left: 40px;
+`;
+
+const MenuHeading = ({
+  title,
+  links = [],
+}: {
   title: string;
-  links: Link[];
-}
-
-const MenuHeading = ({ title, links }: MenuHeadingProps): ReactElement => {
-  const headingStyle = {
-    color: 'black',
-    fontFamily: 'roboto',
-    fontSize: 16,
-    padding: 50,
-  };
-
-  const dropdownStyle = {
-    position: 'absolute',
-    backgroundColor: 'white',
-    marginLeft: -75,
-    padding: 20,
-    marginTop: 49,
-    paddingTop: 21,
-    paddingLeft: 25,
-    paddingBottom: 30,
-    columns: 2,
-    borderTopStyle: 'solid',
-    borderTopWidth: 1,
-    borderTopColor: '#6abdc1',
-  };
-
-  const ArrowStyle = {
-    position: 'absolute',
-    marginTop: 45,
-    marginLeft: 40,
-    zIndex: 4,
-  };
-  const MenuItem = styled(Menu.Item)`
-    a:hover {
-      color: #6abdc1;
-      text-decoration: underline;
-    }
-  `;
-
+  links?: Link[];
+}): ReactElement => {
   const [dropdown, setDropdown] = useState(false);
 
   const linkToItem = (link: Link) => {
     return (
-      <MenuItem
-        style={{
-          listStyle: 'none',
-          margin: 0,
-          marginLeft: 0,
-          padding: 1,
-          textAlign: 'left',
-        }}
-      >
+      <MenuItem>
         <a target="_blank" rel="noopener noreferrer" href={link.url}>
           {link.title}
         </a>
@@ -93,32 +87,23 @@ const MenuHeading = ({ title, links }: MenuHeadingProps): ReactElement => {
   };
 
   return (
-    <Menu
-      style={headingStyle}
+    <StyledMenu
       onMouseEnter={() => setDropdown(true)}
       onMouseLeave={() => setDropdown(false)}
     >
       {title}
       {dropdown && title == 'Quick Access' ? (
         <div>
-          <ArrowDropdown style={ArrowStyle} />
-          <ul style={dropdownStyle}>
+          <ArrowDropdown />
+          <DropdownColumns>
             {links?.map((link: Link) => linkToItem(link))}
-          </ul>
+          </DropdownColumns>
         </div>
       ) : null}
-    </Menu>
+    </StyledMenu>
   );
 };
 
-const ArrowDropdown = styled.div`
-width: 0; 
-height: 0; 
-border-left: 5px solid transparent;
-border-right: 5px solid transparent;
-border-bottom: 5px solid #6abdc1;
-}
-`;
 const MenuElements = styled.div`
   display: flex;
   width: 80%;
@@ -143,8 +128,8 @@ const Icon = styled.div`
   padding: 1.5rem;
 `;
 
-// TODO: Update logo icon.
-const Sidebar = (): ReactElement => {
+// TODO: Update icons.
+const NavBar = (): ReactElement => {
   return (
     <NavMenu>
       <Icon>
@@ -179,4 +164,4 @@ const Sidebar = (): ReactElement => {
   );
 };
 
-export default Sidebar;
+export default NavBar;
