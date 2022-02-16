@@ -29,13 +29,11 @@ const InputStyled = styled.input`
     border-style: solid;
     border-color: purple;
   }
-  padding: 0.75rem 0.75rem;
+  padding: 0rem 1rem;
   ::placeholder {
   }
   text-decoration: underline;
   text-decoration-color: gray;
-  text-decoration-thickness: 15px;
-  text-underline-offset: 0.2rem;
   width: 100%;
 `;
 
