@@ -1,14 +1,14 @@
 import { ReactElement, useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import NavBar from './NavBar';
-import { SIZES } from '../Constants';
+import { size as DEVICE_SIZE } from '../templates/mediaSizes';
 
 const Menubar = (): ReactElement => {
   const size = useWindowSize();
 
   if (!size.width) return <Sidebar />;
 
-  return size.width <= 1008 ? <Sidebar /> : <NavBar />;
+  return size.width <= parseInt(DEVICE_SIZE.laptop) ? <Sidebar /> : <NavBar />;
 };
 
 // Hook - https://usehooks.com/useWindowSize/

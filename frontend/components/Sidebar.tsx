@@ -19,7 +19,7 @@ const MenuHeading = styled.h1`
   font-size: 1rem;
   font-weight: bold;
 
-   {
+  > * {
     margin-right: 10px;
   }
 `;
@@ -48,7 +48,6 @@ const SidebarDiv = styled.div`
   y: 0;
   width: 70vw;
   height: 100vh;
-  z-index: 1;
 `;
 
 const MenuSection = styled.div`
@@ -91,6 +90,7 @@ const Menu = styled.div`
   flex-direction: column;
   background: white;
   position: absolute;
+  z-index: 0;
 `;
 
 const Sidebar = (): ReactElement => {

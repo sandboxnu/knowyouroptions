@@ -4,20 +4,19 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { SIZES } from '../Constants';
-//import TabBar from '../templates/TabBar';
-//import TabBar from '../templates/TabBar';
+import { device, maxDevice } from '../templates/mediaSizes';
+
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
   .title-above {
-    @media (min-width: 1009px) {
+    @media ${device.laptop} {
       display: none;
     }
   }
   .title-below {
-    @media (max-width: 1008px) {
+    @media ${maxDevice.laptop} {
       display: none;
     }
   }
@@ -25,7 +24,6 @@ const HomeContainer = styled.div`
 
 const HomeTitle = styled.h1`
   font-family: din-2014;
-  z-index: 0;
 `;
 
 const Row = styled.div`

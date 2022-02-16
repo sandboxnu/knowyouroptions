@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import SvgRightArrow from '../public/right-arrow.svg';
+import { device, maxDevice } from '../templates/mediaSizes';
 
 const StyledCard = styled(AntdCard)`
   background-color: white;
@@ -16,7 +17,7 @@ const StyledCard = styled(AntdCard)`
   max-width: 281px;
   margin-right: min(3%, 39px);
 
-  @media (max-width: 1008px) {
+  @media ${maxDevice.laptop} {
     flex-grow: 1;
     width: 45%;
     max-width: 100%;
@@ -24,7 +25,7 @@ const StyledCard = styled(AntdCard)`
     height: 138px;
   }
 
-  @media (min-width: 1009px) {
+  @media ${device.laptop} {
     &:nth-child(3) {
       max-width: 381px;
       width: 30%;

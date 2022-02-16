@@ -1,9 +1,6 @@
 import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import SvgBookmarkIcon from '../public/BookmarkOutline.svg';
-import SvgProfileIcon from '../public/ProfileOutline.svg';
-import SvgSearchOutline from '../public/SearchOutline.svg';
-import SvgSettingsOutline from '../public/SettingsOutline.svg';
+import SvgBookmarkIcon from '../public/bookmark-nav-bar.svg';
 import { Menu } from 'antd';
 
 class Link {
@@ -133,7 +130,7 @@ const NavBar = (): ReactElement => {
   return (
     <NavMenu>
       <Icon>
-        <SvgProfileIcon />
+        <SvgBookmarkIcon />
       </Icon>
 
       <MenuElements>
@@ -146,18 +143,18 @@ const NavBar = (): ReactElement => {
 
       <MenuIcons>
         <Icon>
-          <SvgSearchOutline />
+          <SvgBookmarkIcon />
         </Icon>
 
         <Icon>
           <SvgBookmarkIcon />
         </Icon>
         <Icon>
-          <SvgSettingsOutline />
+          <SvgBookmarkIcon />
         </Icon>
 
         <Icon>
-          <SvgProfileIcon />
+          <SvgBookmarkIcon />
         </Icon>
       </MenuIcons>
     </NavMenu>
