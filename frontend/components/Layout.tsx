@@ -1,11 +1,11 @@
 import MenuBar from './Menubar';
 import styled from 'styled-components';
 import { ReactElement } from 'react';
-
+import { colors } from '../templates/mediaSizes';
 const PageContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #ef8b6f;
+  background-color: ${colors.homepageBackground};
 `;
 
 interface LayoutProps {

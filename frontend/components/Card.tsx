@@ -25,7 +25,7 @@ const StyledCard = styled(AntdCard)`
     height: 138px;
   }
 
-  @media ${device.laptop} {
+  @media (min-width: 1025px) {
     &:nth-child(3) {
       max-width: 381px;
       width: 30%;

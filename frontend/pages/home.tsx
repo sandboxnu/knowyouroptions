@@ -4,26 +4,28 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { device, maxDevice } from '../templates/mediaSizes';
+import { maxDevice } from '../templates/mediaSizes';
 
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  .title-above {
-    @media ${device.laptop} {
-      display: none;
+  .title-below {
+    #mi
+    @media min-width: 1023px {
+      display: block;
     }
   }
-  .title-below {
+  .title-above {
     @media ${maxDevice.laptop} {
-      display: none;
+      display: block;
     }
   }
 `;
 
 const HomeTitle = styled.h1`
   font-family: din-2014;
+  display: none;
 `;
 
 const Row = styled.div`
@@ -37,8 +39,12 @@ const Row = styled.div`
 
 const ImageContainer = styled(Row)`
   margin: 1rem 0rem 1rem 0rem;
-  height: 100%;
+  @media ${maxDevice.laptop} {
+    height: auto;
+    max-width: 600px;
+  }
 `;
+const ImageContent = styled(Image)``;
 
 const Home = (): ReactElement => {
   return (
@@ -46,8 +52,7 @@ const Home = (): ReactElement => {
       <HomeContainer>
         <HomeTitle className="title-above">Home</HomeTitle>
         <ImageContainer>
-          {' '}
-          <Image src={homepagePic} placeholder="blur" />{' '}
+          <ImageContent src={homepagePic} placeholder="blur" />{' '}
         </ImageContainer>
         <HomeTitle className="title-below">Home</HomeTitle>
         <Row>

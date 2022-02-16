@@ -2,7 +2,7 @@ import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import SvgBookmarkIcon from '../public/bookmark-nav-bar.svg';
 import { Menu } from 'antd';
-
+import { colors } from '../templates/mediaSizes';
 class Link {
   title: string;
   url: string;
@@ -37,7 +37,8 @@ const DropdownColumns = styled.ul`
   columns: 2;
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #6abdc1;
+  border-top-color: ${colors.homepageNavBarDropdown};
+  z-index: 5;
 `;
 
 const StyledMenu = styled(Menu)`
@@ -48,7 +49,7 @@ const MenuItem = styled(Menu.Item)`
   list-style: none;
 
   a:hover {
-    color: #6abdc1;
+    color: ${colors.homepageNavBarDropdown};
     text-decoration: underline;
   }
 `;
@@ -58,7 +59,7 @@ const ArrowDropdown = styled.div`
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-bottom: 5px solid #6abdc1;
+  border-bottom: 5px solid ${colors.homepageNavBarDropdown};
   position: absolute;
   margin-top: 45px;
   margin-left: 40px;
@@ -114,8 +115,8 @@ const NavMenu = styled.div`
   justify-content: space-between;
   align-items: center;
   background: white;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   z-index: 3;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 const MenuIcons = styled.div`
