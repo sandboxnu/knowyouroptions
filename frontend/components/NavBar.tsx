@@ -16,6 +16,22 @@ class Link {
     this.url = url;
   }
 }
+
+const quickLinks = [
+  new Link('Cervical Cap', "https://www.google.com'"),
+  new Link('Condom', "https://www.google.com'"),
+  new Link('Copper IUD', "https://www.google.com'"),
+  new Link('Diaphragm', "https://www.google.com'"),
+  new Link('Hormonal IUD', 'https://www.google.com'),
+  new Link('Implant', 'implant'),
+  new Link('Patch', "https://www.google.com'"),
+  new Link('Pill', "https://www.google.com'"),
+  new Link('Ring', "https://www.google.com'"),
+  new Link('Shot', "https://www.google.com'"),
+  new Link('Spermicide', "https://www.google.com'"),
+  new Link('Sterilization', "https://www.google.com'"),
+];
+
 function MenuHeading(props) {
   const headingStyle = {
     color: 'black',
@@ -37,7 +53,6 @@ function MenuHeading(props) {
     borderTopStyle: 'solid',
     borderTopWidth: 1,
     borderTopColor: '#6abdc1',
-    //padding: '20px',
   };
   const ArrowStyle = {
     position: 'absolute',
@@ -81,7 +96,7 @@ function MenuHeading(props) {
       {props.title}
       {dropdown && props.title == 'Quick Access' ? (
         <div>
-          <ArrowDropdown style={ArrowStyle}></ArrowDropdown>
+          <ArrowDropdown style={ArrowStyle} />
           <ul style={dropdownStyle}>
             {props.links?.map((link: Link) => linkToItem(link))}
           </ul>
@@ -90,6 +105,7 @@ function MenuHeading(props) {
     </Menu>
   );
 }
+
 const ArrowDropdown = styled.div`
 width: 0; 
 height: 0; 
@@ -131,28 +147,11 @@ const Sidebar = (): ReactElement => {
       </Icon>
 
       <MenuElements>
-        <MenuHeading title={'Take Questionnaire'}></MenuHeading>
+        <MenuHeading title={'Take Questionnaire'} />
 
-        <MenuHeading title={'Q&A'}></MenuHeading>
+        <MenuHeading title={'Q&A'} />
 
-        <MenuHeading
-          title={'Quick Access'}
-          links={[
-            new Link('Cervical Cap', 'google.com'),
-            new Link('Condom', 'google.com'),
-            new Link('Copper IUD', 'google.com'),
-            new Link('Diaphragm', 'google.com'),
-            new Link('Hormonal IUD', 'google.com'),
-            new Link('Implant', 'google.com'),
-
-            new Link('Patch', 'google.com'),
-            new Link('Pill', 'google.com'),
-            new Link('Ring', 'google.com'),
-            new Link('Shot', 'google.com'),
-            new Link('Spermicide', 'google.com'),
-            new Link('Sterilization', 'google.com'),
-          ]}
-        ></MenuHeading>
+        <MenuHeading title={'Quick Access'} links={quickLinks} />
       </MenuElements>
 
       <MenuIcons>
@@ -161,7 +160,7 @@ const Sidebar = (): ReactElement => {
         </Icon>
 
         <Icon>
-          <SvgBookmarkIcon></SvgBookmarkIcon>
+          <SvgBookmarkIcon />
         </Icon>
         <Icon>
           <SvgSettingsOutline />
