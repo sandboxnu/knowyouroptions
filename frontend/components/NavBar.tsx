@@ -31,7 +31,12 @@ const quickLinks = [
   new Link('Sterilization', "https://www.google.com'"),
 ];
 
-function MenuHeading(props) {
+interface MenuHeadingProps {
+  title: string;
+  links: Link[];
+}
+
+const MenuHeading = ({ title, links }: MenuHeadingProps): ReactElement => {
   const headingStyle = {
     color: 'black',
     fontFamily: 'roboto',
@@ -53,6 +58,7 @@ function MenuHeading(props) {
     borderTopWidth: 1,
     borderTopColor: '#6abdc1',
   };
+
   const ArrowStyle = {
     position: 'absolute',
     marginTop: 45,
@@ -92,18 +98,18 @@ function MenuHeading(props) {
       onMouseEnter={() => setDropdown(true)}
       onMouseLeave={() => setDropdown(false)}
     >
-      {props.title}
-      {dropdown && props.title == 'Quick Access' ? (
+      {title}
+      {dropdown && title == 'Quick Access' ? (
         <div>
           <ArrowDropdown style={ArrowStyle} />
           <ul style={dropdownStyle}>
-            {props.links?.map((link: Link) => linkToItem(link))}
+            {links?.map((link: Link) => linkToItem(link))}
           </ul>
         </div>
       ) : null}
     </Menu>
   );
-}
+};
 
 const ArrowDropdown = styled.div`
 width: 0; 
