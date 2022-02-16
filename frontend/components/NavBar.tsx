@@ -1,5 +1,4 @@
 import { ReactElement, useState } from 'react';
-import { SolutionOutlined, UserOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import SvgBookmarkIcon from '../public/BookmarkOutline.svg';
 import SvgProfileIcon from '../public/ProfileOutline.svg';
