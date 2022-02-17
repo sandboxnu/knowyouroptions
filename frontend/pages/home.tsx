@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { maxDevice } from '../templates/mediaSizes';
+import { colors, maxDevice } from '../templates/mediaSizes';
 
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
+  background-color: ${colors.homepageBackground};
   .title-below {
     #mi
     @media min-width: 1023px {
