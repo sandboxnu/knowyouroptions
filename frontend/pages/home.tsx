@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { colors, maxDevice } from '../templates/mediaSizes';
+import { colors, size, maxDevice } from '../templates/mediaSizes';
 
 const HomeContainer = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const HomeContainer = styled.div`
   background-color: ${colors.homepageBackground};
   .title-below {
     #mi
-    @media min-width: 1023px {
+    @media min-width: ${size.laptop + 1}px {
       display: block;
     }
   }
