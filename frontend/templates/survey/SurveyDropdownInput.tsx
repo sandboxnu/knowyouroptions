@@ -32,8 +32,6 @@ const InputStyled = styled.input`
   padding: 0rem 1rem;
   ::placeholder {
   }
-  text-decoration: underline;
-  text-decoration-color: gray;
   width: 100%;
 `;
 
