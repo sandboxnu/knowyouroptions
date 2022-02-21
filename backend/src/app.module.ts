@@ -8,12 +8,10 @@ import { Benefit } from './entities/benefits.entity';
 import { SideEffect } from './entities/side-effects.entity';
 import { ThingToKnow } from './entities/things-to-know.entity';
 import { Contraceptive } from './entities/contraceptive.entity';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
-import { UserService } from './user/user.service';
-import { JwtModule } from '@nestjs/jwt';
 import { User } from './entities/user.entity';
 import { AuthModule } from './auth/auth.module';
+import { UserController } from './user/user.controller';
+import { UserModule } from './user/user.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -28,13 +26,10 @@ import { AuthModule } from './auth/auth.module';
       entities: [Tag, Benefit, SideEffect, ThingToKnow, Contraceptive, User],
       synchronize: true, // TODO: synchronize true should not be used in a production environment
     }),
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '24h' },
-    }),
     AuthModule,
+    UserModule,
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService, UserService],
+  controllers: [AppController, UserController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -57,6 +57,16 @@ export class AuthService {
   }
 
   /**
+   * Returns the User ID that corresponds to the given auth token.
+   *
+   * @param authToken User Authorization Token
+   */
+  public decodeToken(authToken: string): number {
+    const decoded = this.jwtService.decode(authToken) as { userId: number };
+    return decoded.userId;
+  }
+
+  /**
    * TODO: Implement this
    * @param password
    */

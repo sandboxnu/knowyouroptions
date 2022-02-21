@@ -1,14 +1,14 @@
 import { Controller, Get, Req } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { AppService } from './app.service';
 import { UserService } from './user/user.service';
+import { AuthService } from './auth/auth.service';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly jwtService: JwtService,
+    private readonly authService: AuthService,
     private readonly userService: UserService,
   ) {}
 
@@ -25,8 +25,7 @@ export class AppController {
   @Get('cookieTest')
   cookieTest(@Req() request: Request): number {
     const authToken = request.cookies.auth_token;
-    const userId = this.jwtService.decode(authToken) as { userId: number };
-    return userId.userId;
+    return this.authService.decodeToken(authToken);
   }
 
   @Get('name')
