@@ -9,18 +9,12 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignInInfo, UserInfo } from '../types/user';
-import { JwtService } from '@nestjs/jwt';
+import { UserInfo } from '../types/user';
 import { Response } from 'express';
-import { Connection } from 'typeorm';
 
 @Controller()
 export class AuthController {
-  constructor(
-    private connection: Connection,
-    private readonly authService: AuthService,
-    private readonly jwtService: JwtService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Get('/sign-in')
   async signIn(
@@ -49,38 +43,33 @@ export class AuthController {
     @Res() res: Response,
     @Query('token') token: string,
   ): Promise<void> {
-    const isVerified = await this.jwtService.verifyAsync(token);
+    const isVerified = await this.authService.verifyAsync(token);
 
     if (!isVerified) {
       throw new UnauthorizedException();
     }
 
-    const payload = this.jwtService.decode(token) as { userId: number };
+    const payload = this.authService.decodeToken(token);
 
     if (payload === null || payload === undefined) {
       console.error('Decoded JWT is invalid');
       throw new HttpException('JWT is invalid', 500);
     }
 
-    this.enter(res, payload.userId);
+    await this.enter(res, payload.userId);
   }
 
   // Set cookie and redirect to proper page
   private async enter(res: Response, userId: number) {
     // Expires in 30 days
-    const authToken = await this.jwtService.signAsync({
-      userId,
-      expiresIn: 2629800000,
+    const authToken = await this.authService.createAuthToken({
+      userId: userId,
     });
-
-    if (authToken === null || authToken === undefined) {
-      throw new HttpException('invalid jwt', 500);
-    }
 
     res
       .cookie('auth_token', authToken, {
         httpOnly: true,
-        maxAge: 2629800000,
+        maxAge: this.authService.getTokenMaxAge(),
         secure: false,
       })
       .redirect(302, '/');

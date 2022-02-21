@@ -25,7 +25,7 @@ export class AppController {
   @Get('cookieTest')
   cookieTest(@Req() request: Request): number {
     const authToken = request.cookies.auth_token;
-    return this.authService.decodeToken(authToken);
+    return this.authService.decodeToken(authToken).userId;
   }
 
   @Get('name')

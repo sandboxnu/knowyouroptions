@@ -13,7 +13,13 @@ import { UserModule } from '../user/user.module';
     UserModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    {
+      provide: 'AUTH_TOKEN_MAX_AGE',
+      useValue: 2629800000,
+    },
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

@@ -13,3 +13,7 @@ export type AuthenticatedUser = {
   readonly email: string;
   readonly accessToken: string;
 };
+
+export type UserAuthPayload = {
+  readonly userId: number;
+};
