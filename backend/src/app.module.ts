@@ -10,7 +10,6 @@ import { ThingToKnow } from './entities/things-to-know.entity';
 import { Contraceptive } from './entities/contraceptive.entity';
 import { User } from './entities/user.entity';
 import { AuthModule } from './auth/auth.module';
-import { UserController } from './user/user.controller';
 import { UserModule } from './user/user.module';
 @Module({
   imports: [
@@ -29,7 +28,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     UserModule,
   ],
-  controllers: [AppController, UserController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
