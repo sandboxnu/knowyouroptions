@@ -1,44 +1,38 @@
-import { Controller, Get, HttpException, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
-import { UserService } from './user/user.service';
-import { AuthService } from './auth/auth.service';
-import { NotLoggedInError } from './error/not-logged-in-error';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { CurrentUser } from './decorators/currentuser.decorator';
+import { User } from './entities/user.entity';
 
 @Controller()
 export class AppController {
-  constructor(
-    private readonly appService: AppService,
-    private readonly authService: AuthService,
-    private readonly userService: UserService,
-  ) {}
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   getHello(): string {
     return this.appService.getHello();
   }
 
-  /**
-   * This is a proof of concept for cookies and basically just returns the cookie
-   *
-   * @param request
-   * @returns
+  /*
+    NOTES:
+    - JwtAuthGuard is an AuthGuard that restricts this route to only authenticated users
+        - Currently, this means that anyone making a GET request to /name/ has to have
+          a JWT auth_token in their cookies, attached to the request
+        - JwtAuthGuard takes the request, verifies the JWT in the cookies, and injects 
+          the current user into the Request  (see JwtStrategy)
+    - AuthGuards can be used at the route level, or the controller level
+    
+    - @CurrentUser() is a decorator that allows us to access the currently authenticated
+      user in a route that uses the JwtAuthGuard
    */
-  @Get('cookieTest')
-  async cookieTest(@Req() request: Request): Promise<number> {
-    const authToken = request.cookies.auth_token;
-
-    if (!authToken) {
-      throw new NotLoggedInError();
-    }
-
-    return (await this.authService.verifyAsync(authToken)).userId;
-  }
-
+  /**
+   * Returns the name of the currently logged-in user
+   *
+   * @param user
+   */
   @Get('name')
-  async name(@Req() request: Request): Promise<string> {
-    const userId = await this.cookieTest(request);
-    const user = await this.userService.getById(userId);
+  @UseGuards(JwtAuthGuard)
+  async name(@CurrentUser() user: User): Promise<string> {
     return user.name;
   }
 }

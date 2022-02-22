@@ -1,4 +1,4 @@
-import { HttpException, Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   AuthenticatedUser,
@@ -7,6 +7,7 @@ import {
   UserInfo,
 } from 'src/types/user';
 import { UserService } from 'src/user/user.service';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -16,10 +17,14 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  /**
+   *
+   * @param info
+   */
   public async signIn(info: SignInInfo): Promise<AuthenticatedUser> {
     const user = await this.usersService.getUser(info);
 
-    // Create temporary login token to send user to.
+    // Create temporary auth token, so we can route them to /login/
     const token = await this.createAuthToken({ userId: user.id }, 60);
 
     return {
@@ -35,7 +40,7 @@ export class AuthService {
 
     const user = await this.usersService.createUser(userInfo);
 
-    // Create temporary login token to send user to.
+    // Create temporary auth token, so we can route them to /login/
     const token = await this.createAuthToken({ userId: user.id }, 60);
 
     return {
@@ -99,5 +104,17 @@ export class AuthService {
    */
   public getTokenMaxAge(): number {
     return this.maxAge;
+  }
+
+  /**
+   * Gets the user that was specified in the JWT Payload, based on their ID
+   * @param payload JWT Payload including user ID
+   */
+  async validateUser(payload: UserAuthPayload): Promise<User> {
+    const user = await this.usersService.getById(payload.userId);
+    if (!user) {
+      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+    }
+    return user;
   }
 }

@@ -66,11 +66,13 @@ export class AuthController {
       userId: userId,
     });
 
+    //TODO: if authToken undefined
+
     res
       .cookie('auth_token', authToken, {
         httpOnly: true,
         maxAge: this.authService.getTokenMaxAge(),
-        secure: false,
+        secure: false, // true only sends cookies with requests over HTTPS
       })
       .redirect(302, '/');
   }
