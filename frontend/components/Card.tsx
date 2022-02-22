@@ -13,25 +13,23 @@ const StyledCard = styled(AntdCard)`
   flex-direction: column;
   font-size: 0.8rem;
   padding: 1rem;
-  width: 30%;
 
-  margin-right: min(3%, 39px);
+  margin-right: 3%;
 
   @media ${maxDevice.laptop} {
     flex-grow: 1;
     width: 45%;
     max-width: 100%;
     margin: 0.25rem;
-    height: 138px;
   }
 
   @media (min-width: ${size.laptop + 1}px) {
     &:nth-child(3) {
-      max-width: 41vh;
-      width: 30%;
+      max-width: 35%;
+      margin-right: 0;
     }
 
-    max-width: 31vh;
+    max-width: 28%;
     padding: 2rem;
   }
 `;
