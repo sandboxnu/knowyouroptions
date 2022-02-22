@@ -5,6 +5,7 @@ import QuestionnaireStartPage from '../templates/questionnaire/QuestionnaireStar
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyMethods from '../templates/survey/SurveyMethods';
+import Layout from '../components/Layout';
 
 import SvgCramps from '../public/cramps.svg';
 import SvgAches from '../public/aches.svg';
@@ -323,7 +324,9 @@ const Questionnaire = (): ReactElement => {
   const Page = pages[curPage];
   return (
     <>
-      <Page />
+      <Layout>
+        <Page />
+      </Layout>
     </>
   );
 };
