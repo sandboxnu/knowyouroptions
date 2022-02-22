@@ -1,4 +1,5 @@
 import { ReactElement, useState } from 'react';
+import { useRouter } from 'next/router';
 
 import QuestionnaireDiagram from '../templates/questionnaire/QuestionnaireDiagram';
 import QuestionnaireStartPage from '../templates/questionnaire/QuestionnaireStartPage';
@@ -20,6 +21,7 @@ import SvgBreastTenderness from '../public/breast-tenderness.svg';
 import SvgMood from '../public/mood-depression.svg';
 
 const Questionnaire = (): ReactElement => {
+  const router = useRouter();
   const QuestionnaireKeys = [
     'Intro',
     'WhenPlanPregnant',
@@ -41,6 +43,15 @@ const Questionnaire = (): ReactElement => {
   const onClickBackwards = (event: React.MouseEvent<HTMLDivElement>) => {
     setCurPage(curPage - 1);
   };
+  const redirectToHome = (event: React.MouseEvent<HTMLDivElement>) => {
+    router.push(
+      {
+        pathname: '/home',
+        query: { popup: true },
+      },
+      '/home',
+    );
+  };
 
   // create an initial response to have keys
   const initialResponse: Record<string, string[]> = {};
@@ -52,10 +63,12 @@ const Questionnaire = (): ReactElement => {
   // INTRO PAGE
   const IntroPage = ({}): ReactElement => {
     return (
-      <QuestionnaireStartPage
-        onClickForwards={onClickForwards}
-        onClickBackwards={onClickBackwards}
-      />
+      <Layout>
+        <QuestionnaireStartPage
+          onClickForwards={onClickForwards}
+          onClickBackwards={onClickBackwards}
+        />
+      </Layout>
     );
   };
 
@@ -293,7 +306,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
-        onClickForwards={onClickForwards}
+        onClickForwards={redirectToHome}
         onClickBackwards={onClickBackwards}
         pageNumber={10}
         question="How much are you willing to pay yourself for contraception?"
@@ -324,9 +337,7 @@ const Questionnaire = (): ReactElement => {
   const Page = pages[curPage];
   return (
     <>
-      <Layout>
-        <Page />
-      </Layout>
+      <Page />
     </>
   );
 };
