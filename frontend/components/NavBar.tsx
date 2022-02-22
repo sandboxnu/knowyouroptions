@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import SvgBookmarkIcon from '../public/bookmark-nav-bar.svg';
 import { Menu } from 'antd';
 import { colors } from '../templates/mediaSizes';
-class Link {
+import Link from 'next/link';
+
+class QuickLink {
   title: string;
   url: string;
 
@@ -14,18 +16,18 @@ class Link {
 }
 
 const quickLinks = [
-  new Link('Cervical Cap', "https://www.google.com'"),
-  new Link('Condom', "https://www.google.com'"),
-  new Link('Copper IUD', "https://www.google.com'"),
-  new Link('Diaphragm', "https://www.google.com'"),
-  new Link('Hormonal IUD', 'https://www.google.com'),
-  new Link('Implant', 'implant'),
-  new Link('Patch', "https://www.google.com'"),
-  new Link('Pill', "https://www.google.com'"),
-  new Link('Ring', "https://www.google.com'"),
-  new Link('Shot', "https://www.google.com'"),
-  new Link('Spermicide', "https://www.google.com'"),
-  new Link('Sterilization', "https://www.google.com'"),
+  new QuickLink('Cervical Cap', 'https://www.google.com'),
+  new QuickLink('Condom', 'https://www.google.com'),
+  new QuickLink('Copper IUD', 'https://www.google.com'),
+  new QuickLink('Diaphragm', 'https://www.google.com'),
+  new QuickLink('Hormonal IUD', 'https://www.google.com'),
+  new QuickLink('Implant', '/implant'),
+  new QuickLink('Patch', 'https://www.google.com'),
+  new QuickLink('Pill', 'https://www.google.com'),
+  new QuickLink('Ring', 'https://www.google.com'),
+  new QuickLink('Shot', 'https://www.google.com'),
+  new QuickLink('Spermicide', 'https://www.google.com'),
+  new QuickLink('Sterilization', 'https://www.google.com'),
 ];
 
 const DropdownColumns = styled.ul`
@@ -71,16 +73,16 @@ const MenuHeading = ({
   links = [],
 }: {
   title: string;
-  links?: Link[];
+  links?: QuickLink[];
 }): ReactElement => {
   const [dropdown, setDropdown] = useState(false);
 
-  const linkToItem = (link: Link) => {
+  const linkToItem = (link: QuickLink) => {
     return (
       <MenuItem>
-        <a target="_blank" rel="noopener noreferrer" href={link.url}>
-          {link.title}
-        </a>
+        <Link href={link.url}>
+          <a>{link.title}</a>
+        </Link>
       </MenuItem>
     );
   };
@@ -95,7 +97,7 @@ const MenuHeading = ({
         <div>
           <ArrowDropdown />
           <DropdownColumns>
-            {links?.map((link: Link) => linkToItem(link))}
+            {links?.map((link: QuickLink) => linkToItem(link))}
           </DropdownColumns>
         </div>
       ) : null}
