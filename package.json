@@ -32,8 +32,8 @@
     "husky": "^4.3.8",
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1",
-    "tslint": "^5.12.1",
-    "typescript": "^3.3.3"
+    "tslint": "^5.20.1",
+    "typescript": "^3.9.10"
   },
   "dependencies": {
     "next": "^11.1.2",

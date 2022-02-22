@@ -34,13 +34,13 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Oswald&display=optional"
             rel="stylesheet"
           />
-          <link rel="stylesheet" href="https://use.typekit.net/ejt2fks.css"/>
+          <link rel="stylesheet" href="https://use.typekit.net/ejt2fks.css" />
         </Head>
         <body>
-          <Main/>
-          <NextScript/>
+          <Main />
+          <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
