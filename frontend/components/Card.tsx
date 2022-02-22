@@ -14,7 +14,7 @@ const StyledCard = styled(AntdCard)`
   font-size: 0.8rem;
   padding: 1rem;
   width: 30%;
-  max-width: 281px;
+
   margin-right: min(3%, 39px);
 
   @media ${maxDevice.laptop} {
@@ -25,11 +25,13 @@ const StyledCard = styled(AntdCard)`
     height: 138px;
   }
 
-  @media (min-width: ${size.laptop}px) {
+  @media (min-width: ${size.laptop + 1}px) {
     &:nth-child(3) {
-      max-width: 381px;
+      max-width: 41vh;
       width: 30%;
     }
+
+    max-width: 31vh;
     padding: 2rem;
   }
 `;

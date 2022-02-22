@@ -2,44 +2,13 @@ import { ReactElement, useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import NavBar from './NavBar';
 import { size } from '../templates/mediaSizes';
-
+import sizeOfWindowHook from '../hooks/WindowSize';
 const Menubar = (): ReactElement => {
-  const windowSize = useWindowSize();
+  const windowSize = sizeOfWindowHook();
 
   if (!windowSize.width) return <Sidebar />;
 
-  return windowSize.width < size.laptop ? <Sidebar /> : <NavBar />;
+  return windowSize.width < size.laptop + 1 ? <Sidebar /> : <NavBar />;
 };
-
-// Hook - https://usehooks.com/useWindowSize/
-function useWindowSize() {
-  const initialState: {
-    width: number | undefined;
-    height: number | undefined;
-  } = {
-    width: undefined,
-    height: undefined,
-  };
-
-  const [windowSize, setWindowSize] = useState(initialState);
-
-  useEffect(() => {
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowSize;
-}
 
 export default Menubar;

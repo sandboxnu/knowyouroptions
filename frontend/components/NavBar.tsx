@@ -33,7 +33,7 @@ const DropdownColumns = styled.ul`
   background-color: white;
   margin-left: -75px;
   padding: 25px;
-  margin-top: 49px;
+  margin-top: 40px;
   columns: 2;
   border-top-style: solid;
   border-top-width: 1px;
@@ -61,7 +61,7 @@ const ArrowDropdown = styled.div`
   border-right: 5px solid transparent;
   border-bottom: 5px solid ${colors.homepageNavBarDropdown};
   position: absolute;
-  margin-top: 45px;
+  margin-top: 37px;
   margin-left: 40px;
 `;
 
@@ -109,7 +109,7 @@ const MenuElements = styled.div`
 `;
 
 const NavMenu = styled.div`
-  height: 120px;
+  height: 11vh;
   display: flex;
   flex-wrap: no-wrap;
   justify-content: space-between;

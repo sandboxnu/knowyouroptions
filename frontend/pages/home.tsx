@@ -12,8 +12,7 @@ const HomeContainer = styled.div`
   padding: 2rem;
   background-color: ${colors.homepageBackground};
   .title-below {
-    #mi
-    @media min-width: ${size.laptop + 1}px {
+    @media (min-width: ${size.laptop + 1}px) {
       display: block;
     }
   }
