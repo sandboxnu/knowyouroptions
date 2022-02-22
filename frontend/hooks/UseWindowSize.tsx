@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useState } from 'react';
 // Hook - https://usehooks.com/useWindowSize/
-const sizeOfWindowHook = () => {
+const useWindowSize = () => {
   const initialState: {
     width: number | undefined;
     height: number | undefined;
@@ -30,4 +30,4 @@ const sizeOfWindowHook = () => {
   return windowSize;
 };
 
-export default sizeOfWindowHook;
+export default useWindowSize;
