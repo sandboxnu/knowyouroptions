@@ -4,12 +4,13 @@ import { EmailIsTakenError } from 'src/error/email-taken-error';
 import { IncorrectPasswordError } from 'src/error/incorrect-password-error';
 import { UnknownEmailError } from 'src/error/unknown-email-error';
 import { SignInInfo, UserInfo } from 'src/types/user';
-import { Connection } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
   constructor(
-    private connection: Connection, // @InjectRepository(User) private readonly userRepository: Repository<User>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) {}
 
   /**
@@ -19,19 +20,19 @@ export class UserService {
    * @throws EmailIsTakenError if the email is taken
    */
   public async createUser(userInfo: UserInfo): Promise<User> {
-    const existingUser = await User.findOne({
+    const existingUser = await this.userRepository.findOne({
       email: userInfo.email,
     });
 
     if (existingUser) {
       throw new EmailIsTakenError();
     } else {
-      const user = User.create();
+      const user = this.userRepository.create();
       user.email = userInfo.email;
       user.name = userInfo.name;
       user.password = userInfo.password;
 
-      await User.save(user);
+      await this.userRepository.save(user);
       return user;
     }
   }
@@ -43,7 +44,7 @@ export class UserService {
    * @throws UnknownEmailError email not found
    */
   public async getUser(info: SignInInfo): Promise<User> {
-    const existingUser = await User.findOne({
+    const existingUser = await this.userRepository.findOne({
       email: info.email,
     });
 
@@ -63,7 +64,7 @@ export class UserService {
    * @param id user ID
    */
   public async getById(id: number): Promise<User> {
-    const existingUser = await User.findOne({
+    const existingUser = await this.userRepository.findOne({
       id: id,
     });
 
