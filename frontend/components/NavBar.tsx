@@ -109,7 +109,7 @@ const MenuElements = styled.div`
 `;
 
 const NavMenu = styled.div`
-  height: 11vh;
+  height: 85px;
   display: flex;
   flex-wrap: no-wrap;
   justify-content: space-between;
