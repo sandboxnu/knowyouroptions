@@ -105,7 +105,7 @@ const Survey = ({
   return (
     <Wrapper>
       <HeaderElm>
-        <SvgLeftArrow onClick={onClick} />
+        {pageNumber !== 1 && <SvgLeftArrow onClick={onClick} />}
         <PageNumberFraction number={pageNumber} />
         <Question
           dangerouslySetInnerHTML={{ __html: makeBold(question, boldedWord) }}
