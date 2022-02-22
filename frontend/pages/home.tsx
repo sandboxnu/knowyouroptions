@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { colors, size, maxDevice } from '../templates/mediaSizes';
+import { colors, size, maxDevice, device } from '../templates/mediaSizes';
 
 const HomeContainer = styled.div`
   display: flex;
@@ -39,10 +39,7 @@ const Row = styled.div`
 
 const ImageContainer = styled(Row)`
   margin: 1rem 0rem 1rem 0rem;
-  @media ${maxDevice.laptop} {
-    height: auto;
-    max-width: 600px;
-  }
+  max-width: 75vh;
 `;
 const ImageContent = styled(Image)``;
 
