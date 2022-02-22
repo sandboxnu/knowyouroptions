@@ -7,12 +7,17 @@ import {
   Row,
 } from './StyledComponents';
 import styled from 'styled-components';
+import { size, device, maxDevice } from '../../mediaSizes';
 
 // Styles
 
 const AlphaList = styled.ol`
   color: #7c7c7c;
   padding-left: 1.25rem;
+
+  @media ${device.laptop} {
+    width: 30vw;
+  }
 `;
 
 const CategoryValueStyled = styled(CategoryValue)`

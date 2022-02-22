@@ -68,6 +68,17 @@ const Header = styled(Container)`
   }
 `;
 
+const HeaderSmall = styled(Container)`
+  background-color: #febba8;
+  display: flex;
+  flex-direction: row;
+
+  @media ${device.laptop} {
+    height: 30vh;
+    position: relative;
+  }
+`;
+
 const SvgCircle = styled.div`
   background-color: white;
   border-radius: 50%;
@@ -138,7 +149,7 @@ const TitleDesktop = styled.h1`
   display: inline;
   font-size: 40px;
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.4rem;
 
   @media ${maxDevice.laptop} {
     display: none;
@@ -146,8 +157,9 @@ const TitleDesktop = styled.h1`
 `;
 
 const PillDesktop = styled(Pill)`
+  align-items: center;
   background: #fffefe;
-  display: inline;
+  display: flex;
   margin: 1rem;
   padding: 0.2rem 0.3rem;
 `;
@@ -157,11 +169,18 @@ const QuickAccess = styled.div`
     display: flex;
     flex-direction: row;
     padding: 1.5rem 1.5rem;
+    padding-left: 0.8rem;
   }
 `;
 
 const SvgBookmarkDesktopStyled = styled(SvgDesktopBookmark)`
   margin: 0.7rem 0rem;
+`;
+
+const SvgContainer = styled.div`
+  @media ${device.laptop} {
+    padding-left: 1.2rem;
+  }
 `;
 
 // components
@@ -218,14 +237,15 @@ const Contraceptives = ({
       <Bookmark />
     </SvgCircleSecond>
   );
+  const HeaderElm = tabIndex === 0 ? Header : HeaderSmall;
   return (
     <>
-      <Header>
+      <HeaderElm>
         <SvgDesktopColumn>
-          <div>
+          <SvgContainer>
             {tabIndex === 0 && SvgContraceptive}
             <Title>{title}</Title>
-          </div>
+          </SvgContainer>
           <SvgDesktopRow>
             <QuickAccess>
               <SvgBookmarkDesktopStyled />
@@ -249,7 +269,7 @@ const Contraceptives = ({
             {CompareMethodsIcon}
           </SvgRow>
         )}
-      </Header>
+      </HeaderElm>
 
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
       <Body>{tabComponents[tabIndex]}</Body>

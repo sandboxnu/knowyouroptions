@@ -2,6 +2,7 @@ import { API } from '../api-client';
 import useSWR from 'swr';
 import Sidebar from '../components/Sidebar';
 import styled from 'styled-components';
+import Implant from './implant';
 
 const Background = styled.div`
   background-color: #ef8b6f;
@@ -13,12 +14,7 @@ const Background = styled.div`
 const Test = () => {
   const { data } = useSWR('/', async () => API.helloWorld.get());
 
-  return (
-    <Background>
-      <Sidebar />
-      {data}
-    </Background>
-  );
+  return <Implant />;
 };
 
 export default Test;

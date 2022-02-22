@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, { ReactElement } from 'react';
+import { size, device, maxDevice } from '../../../mediaSizes';
 
 const CategoryValueNumber = styled.span`
   color: #1da3aa;
@@ -41,6 +42,10 @@ const Column = styled.div`
 
 const Description = styled.p`
   color: #7c7c7c;
+
+  @media ${device.laptop} {
+    width: 30vw;
+  }
 `;
 
 const DescriptionBold = styled(Description)`
@@ -94,6 +99,10 @@ const Row = styled.div`
 
 const Subtitle = styled.h3`
   margin-bottom: 0.5rem;
+
+  @media ${device.laptop} {
+    font-size: 1.5rem;
+  }
 `;
 
 export {
