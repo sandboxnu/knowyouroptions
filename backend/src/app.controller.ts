@@ -23,14 +23,14 @@ export class AppController {
    * @returns
    */
   @Get('cookieTest')
-  cookieTest(@Req() request: Request): number {
+  async cookieTest(@Req() request: Request): Promise<number> {
     const authToken = request.cookies.auth_token;
-    return this.authService.decodeToken(authToken).userId;
+    return (await this.authService.verifyAsync(authToken)).userId;
   }
 
   @Get('name')
   async name(@Req() request: Request): Promise<string> {
-    const userId = this.cookieTest(request);
+    const userId = await this.cookieTest(request);
     const user = await this.userService.getById(userId);
     return user.name;
   }
