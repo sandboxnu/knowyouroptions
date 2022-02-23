@@ -42,6 +42,7 @@ const Title = styled.h2`
 const Description = styled.p`
   margin: 0.5rem 0;
   color: gray;
+  font-size: 1.9vh;
 `;
 
 const RightArrow = styled(SvgRightArrow)`
