@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { colors, size, maxDevice, device } from '../templates/mediaSizes';
+import { colors, size, maxDevice } from '../templates/mediaSizes';
 
 const HomeContainer = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ const Home = (): ReactElement => {
       <HomeContainer>
         <HomeTitle className="title-above">Home</HomeTitle>
         <ImageContainer>
-          <ImageContent src={homepagePic} placeholder="blur" />{' '}
+          <ImageContent src={homepagePic} placeholder="blur" />
         </ImageContainer>
         <HomeTitle className="title-below">Home</HomeTitle>
         <Row>

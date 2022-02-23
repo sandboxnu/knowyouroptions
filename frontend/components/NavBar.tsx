@@ -1,6 +1,9 @@
 import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import SvgBookmarkIcon from '../public/bookmark-nav-bar.svg';
+import SvgBookmarkIcon from '../public/desktop-icons/desktop-bookmark.svg';
+import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
+import SvgSearchIcon from '../public/desktop-icons/search.svg';
+import SvgProfileIcon from '../public/desktop-icons/profile.svg';
 import { Menu } from 'antd';
 import { colors } from '../templates/mediaSizes';
 import Link from 'next/link';
@@ -123,37 +126,56 @@ const NavMenu = styled.div`
 `;
 
 const MenuIcons = styled.div`
+  width: 20%;
+  margin-right: 30px;
   display: flex;
-`;
-const Icon = styled.div`
-  padding: 1.5rem;
+  align-items: flex-end;
+  flex-wrap: no-wrap;
+  justify-content: space-between;
 `;
 
-// TODO: Update icons.
+const ICON_HEIGHT = '30px';
+
+const SearchIcon = styled(SvgSearchIcon)`
+  height: ${ICON_HEIGHT};
+  width: auto;
+`;
+
+const BookmarkIcon = styled(SvgBookmarkIcon)`
+  height: ${ICON_HEIGHT};
+  width: auto;
+`;
+
+const SettingsIcon = styled(SvgSettingsIcon)`
+  height: ${ICON_HEIGHT};
+  width: auto;
+`;
+
+const ProfileIcon = styled(SvgProfileIcon)`
+  height: ${ICON_HEIGHT};
+  width: auto;
+`;
+
+const Logo = styled(SvgSettingsIcon)`
+  height: ${ICON_HEIGHT};
+  width: auto;
+  margin-left: 30px;
+`;
+
 const NavBar = (): ReactElement => {
   return (
     <NavMenu>
-      <Icon>
-        <SvgBookmarkIcon />
-      </Icon>
+      <Logo />
       <MenuElements>
         <MenuHeading title={'Take Questionnaire'} />
         <MenuHeading title={'Q&A'} />
         <MenuHeading title={'Quick Access'} links={quickLinks} />
       </MenuElements>
       <MenuIcons>
-        <Icon>
-          <SvgBookmarkIcon />
-        </Icon>
-        <Icon>
-          <SvgBookmarkIcon />
-        </Icon>
-        <Icon>
-          <SvgBookmarkIcon />
-        </Icon>
-        <Icon>
-          <SvgBookmarkIcon />
-        </Icon>
+        <SearchIcon />
+        <BookmarkIcon />
+        <SettingsIcon />
+        <ProfileIcon />
       </MenuIcons>
     </NavMenu>
   );
