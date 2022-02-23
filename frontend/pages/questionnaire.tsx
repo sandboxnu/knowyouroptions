@@ -1,7 +1,7 @@
 import { ReactElement, useState } from 'react';
 
-import QuestionnaireDiagram from '../templates/questionnaire/QuestionnaireDiagram';
-import QuestionnaireStartPage from '../templates/questionnaire/QuestionnaireStartPage';
+import QuestionnaireDiagram from '../templates/survey/questionnaire/QuestionnaireDiagram';
+import QuestionnaireStartPage from '../templates/survey/questionnaire/QuestionnaireStartPage';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyMethods from '../templates/survey/SurveyMethods';
@@ -20,17 +20,16 @@ import SvgMood from '../public/mood-depression.svg';
 
 const Questionnaire = (): ReactElement => {
   const QuestionnaireKeys = [
-    'Intro',
-    'WhenPlanPregnant',
+    'PregnancyAge',
     'TopPriority',
     'AdditionalBenefit',
     'SideEffects',
-    'UsageFrequency',
+    'Frequency',
     'PreferredMethods',
-    'WhoAdministers',
+    'Administration',
     'PreferredAccess',
     'HealthInsurance',
-    'Payment',
+    'PreferredCost',
   ];
 
   const [curPage, setCurPage] = useState(0);
@@ -117,7 +116,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
-        headerSize="medium"
+        headerSize={1}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={3}
@@ -149,6 +148,7 @@ const Questionnaire = (): ReactElement => {
   const SideEffectsPage = ({}): ReactElement => {
     return (
       <SurveyMethods
+        headerSize={2}
         methodInfos={sideEffectInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -176,6 +176,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        headerSize={3}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={5}
@@ -206,6 +207,7 @@ const Questionnaire = (): ReactElement => {
     ];
     return (
       <QuestionnaireDiagram
+        headerSize={3}
         methodInfos={methods}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -225,7 +227,6 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
-        headerSize="medium"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={7}
@@ -248,7 +249,6 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
-        headerSize="medium"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={8}

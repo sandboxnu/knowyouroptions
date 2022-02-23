@@ -69,7 +69,7 @@ const PillColumn = ({
 
 export interface SurveyPillProps {
   answers: string[];
-  headerSize?: string;
+  headerSize?: number;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;

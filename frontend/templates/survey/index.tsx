@@ -17,17 +17,21 @@ const Fraction = styled.p`
   font-size: 1.2rem;
 `;
 
-const Header = styled(Container)`
-  height: 80%;
+const HeaderDefault = styled(Container)`
+  height: 44%;
   padding: 1rem 1.5rem;
 `;
 
-const HeaderMed = styled(Container)`
-  height: 68%;
+const Header1 = styled(HeaderDefault)`
+  height: 41%;
 `;
 
-const HeaderSmall = styled(Container)`
-  height: 55%;
+const Header2 = styled(HeaderDefault)`
+  height: 39%;
+`;
+
+const Header3 = styled(HeaderDefault)`
+  height: 36%;
 `;
 
 const PageNumber = styled.span`
@@ -67,7 +71,7 @@ const PageNumberFraction = ({
 };
 
 export interface SurveyProps {
-  headerSize?: string;
+  headerSize?: number;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
@@ -83,14 +87,14 @@ const Survey = ({
   question,
   totalPages,
 }: SurveyProps): ReactElement => {
-  let HeaderElm = Header;
-  if (headerSize === 'small') {
-    HeaderElm = HeaderSmall;
-  } else if (headerSize === 'medium') {
-    HeaderElm = HeaderMed;
-  } else {
-    HeaderElm = Header;
-  }
+  const HeaderElm =
+    headerSize === 1
+      ? Header1
+      : headerSize === 2
+      ? Header2
+      : headerSize === 3
+      ? Header3
+      : HeaderDefault;
   return (
     <Wrapper>
       <HeaderElm>

@@ -93,6 +93,7 @@ const MethodsName = styled.div`
 
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
+  headerSize?: number;
   methodInfos: [ReactElement, string][];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -102,6 +103,7 @@ export interface SurveyMethodsProps {
 }
 
 const SurveyMethods = ({
+  headerSize,
   methodInfos,
   onClickForwards,
   onClickBackwards,
@@ -114,7 +116,7 @@ const SurveyMethods = ({
   return (
     <>
       <Survey
-        headerSize={'small'}
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <Container>

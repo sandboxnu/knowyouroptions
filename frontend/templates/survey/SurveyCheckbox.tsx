@@ -81,7 +81,7 @@ const CheckboxColumn = ({
 export interface SurveyCheckboxProps {
   answers: string[];
   hasInputBox?: boolean;
-  headerSize?: string;
+  headerSize?: number;
   responseKey: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;

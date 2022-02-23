@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import QuestionnaireSvg from '../../public/questionnaire.svg';
+import QuestionnaireSvg from '../../../public/questionnaire.svg';
 
 const Body = styled.div`
   display: flex;

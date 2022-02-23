@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
+import { SubmitButton } from './StyledComponents';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -72,18 +73,6 @@ const OptionStyled = styled.option`
     cursor: pointer;
     font-color: white;
   }
-`;
-
-const SubmitButtonStyled = styled.div`
-  background-color: #911d7a;
-  border-radius: 0.25rem;
-  color: white;
-  height: 7vh;
-  justify-content: center;
-  margin-left: auto;
-  padding: 1rem 4rem;
-  vertical-align: middle;
-  width: 50vw;
 `;
 
 const DropdownColumn = ({
@@ -170,25 +159,9 @@ const InputBox = ({
   );
 };
 
-const SubmitButton = ({
-  onClick,
-}: {
-  onClick: React.MouseEventHandler<HTMLDivElement>;
-}): ReactElement => {
-  return (
-    <SubmitButtonStyled
-      onClick={(event) => {
-        onClick(event);
-      }}
-    >
-      Submit
-    </SubmitButtonStyled>
-  );
-};
-
 export interface SurveyDropdownInputProps {
   dropdownInfos: [string, string[]][];
-  headerSize?: string;
+  headerSize?: number;
   inputQuestion: string;
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;

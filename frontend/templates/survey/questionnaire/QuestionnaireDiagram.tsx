@@ -1,8 +1,8 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import Survey from './index';
-import { MoveForwardButton } from '../survey/StyledComponents';
-import SvgDiagram from '../../public/preferred-methods.svg';
+import Survey from '../index';
+import { MoveForwardButton } from '../StyledComponents';
+import SvgDiagram from '../../../public/preferred-methods.svg';
 
 // styling
 
@@ -16,6 +16,7 @@ const Container = styled.div`
 `;
 
 export interface QuestionnaireDiagramProps {
+  headerSize?: number;
   methodInfos: string[];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -28,6 +29,7 @@ export interface QuestionnaireDiagramProps {
 }
 
 const QuestionnaireDiagram = ({
+  headerSize,
   methodInfos,
   onClickForwards,
   onClickBackwards,
@@ -43,7 +45,7 @@ const QuestionnaireDiagram = ({
   return (
     <>
       <Survey
-        headerSize={'small'}
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <Container>

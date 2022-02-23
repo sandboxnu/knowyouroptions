@@ -10,6 +10,18 @@ const MoveForwardButtonStyled = styled.div`
   padding: 0.75rem 1.5rem;
 `;
 
+const SubmitButtonStyled = styled.div`
+  background-color: #911d7a;
+  border-radius: 0.25rem;
+  color: white;
+  height: 7vh;
+  justify-content: center;
+  margin-left: auto;
+  padding: 1rem 4rem;
+  vertical-align: middle;
+  width: 50vw;
+`;
+
 const MoveForwardButton = ({
   onClick,
 }: {
@@ -26,4 +38,20 @@ const MoveForwardButton = ({
   );
 };
 
-export { MoveForwardButton };
+const SubmitButton = ({
+  onClick,
+}: {
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+}): ReactElement => {
+  return (
+    <SubmitButtonStyled
+      onClick={(event) => {
+        onClick(event);
+      }}
+    >
+      Submit
+    </SubmitButtonStyled>
+  );
+};
+
+export { MoveForwardButton, SubmitButton };

@@ -177,7 +177,7 @@ const DropdownColumnBody = ({
 
 export interface SurveyDropdownProps {
   dropdownInfos: [string, string[]][];
-  headerSize?: string;
+  headerSize?: number;
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
