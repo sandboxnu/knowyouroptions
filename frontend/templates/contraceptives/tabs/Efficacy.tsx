@@ -29,7 +29,7 @@ const IconContainer = styled(Row)`
 `;
 
 const StopIconDescription = styled(Description)`
-  margin: .5rem 0 0 0;
+  margin: 0.5rem 0 0 0;
 `;
 
 const StopIconWrapper = styled.div`
@@ -44,9 +44,7 @@ const StopIcons = ({ icon, label }: { icon: ReactElement; label: string }) => {
   return (
     <>
       <Column>
-        <StopIconWrapper>
-          {icon}
-        </StopIconWrapper>
+        <StopIconWrapper>{icon}</StopIconWrapper>
         <StopIconDescription>{label}</StopIconDescription>
       </Column>
     </>
@@ -92,7 +90,7 @@ const Efficacy = ({
             <StyledLi key={index}>
               <HighlightedDescription description={desc} />
             </StyledLi>
-          )
+          );
         })}
       </AlphaList>
 
