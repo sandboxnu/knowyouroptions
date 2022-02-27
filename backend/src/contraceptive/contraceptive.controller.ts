@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ContraceptiveService } from './contraceptive.service';
 
 @Controller('contraceptive')
@@ -8,5 +8,9 @@ export class ContraceptiveController {
   @Get()
   async getContraceptives() {
     return this.contraceptiveService.getContraceptives();
+  }
+  @Get(':idd')
+  public getContraceptive(@Param('id') id: String) {
+    return 'getContraceptive';
   }
 }
