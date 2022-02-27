@@ -20,4 +20,8 @@ export class ContraceptiveService {
     });
     return contraceptive;
   }
+
+  public async postContraceptive(contraceptive) {
+    return this.contraceptiveRepository.insert(contraceptive);
+  }
 }
