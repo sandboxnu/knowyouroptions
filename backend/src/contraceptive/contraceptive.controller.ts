@@ -10,9 +10,10 @@ export class ContraceptiveController {
   async getContraceptives() {
     return this.contraceptiveService.getContraceptives();
   }
-  @Get(':idd')
-  public getContraceptive(@Param('id') id: string) {
-    return 'getContraceptive';
+
+  @Get(':name')
+  public getContraceptive(@Param('name') name: string) {
+    return this.contraceptiveService.getContraceptive(name);
   }
 
   @Post()

@@ -8,15 +8,14 @@ export class ContraceptiveService {
     private readonly contraceptiveRepository: Repository<Contraceptive>,
   ) {}
 
-  public async getContraceptives(): Promise<String> {
+  public async getContraceptives(): Promise<Contraceptive[]> {
     const contraceptiveList = await this.contraceptiveRepository.find();
-
-    return 'what is up';
+    return contraceptiveList;
   }
 
-  public getContraceptive(name: String) {
+  public getContraceptive(names: String) {
     const contraceptive = this.contraceptiveRepository.findOne({
-      where: [{ name: name }],
+      where: [{ name: names }],
     });
     return contraceptive;
   }
