@@ -3,6 +3,17 @@ import styled from 'styled-components';
 import Survey from '../index';
 import { MoveForwardButton } from '../StyledComponents';
 import SvgDiagram from '../../../public/preferred-methods.svg';
+import PillLine from '../../../public/questionnaire-diagram-lines/pill-line.svg';
+import ImplantLine from '../../../public/questionnaire-diagram-lines/implant-line.svg';
+import PatchLine from '../../../public/questionnaire-diagram-lines/patch-line.svg';
+import IUDLine from '../../../public/questionnaire-diagram-lines/iud-line.svg';
+import RingLine from '../../../public/questionnaire-diagram-lines/ring-line.svg';
+import SpermicideLine from '../../../public/questionnaire-diagram-lines/spermicide-line.svg';
+import CondomLine from '../../../public/questionnaire-diagram-lines/condom-line.svg';
+import DiaphragmLine from '../../../public/questionnaire-diagram-lines/diaphragm-line.svg';
+import SterilizationLine from '../../../public/questionnaire-diagram-lines/sterilization-lines.svg';
+import ShotLine from '../../../public/questionnaire-diagram-lines/shot-line.svg';
+import PillButton from '../../../components/PillButton';
 
 // styling
 
@@ -50,6 +61,7 @@ const QuestionnaireDiagram = ({
         Options={
           <Container>
             <SvgDiagram />
+            <PillButton> hello </PillButton>
             <MoveForwardButton onClick={onClickForwards} />
           </Container>
         }
