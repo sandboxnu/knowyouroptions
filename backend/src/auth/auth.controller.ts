@@ -9,22 +9,28 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { UserInfo } from '../types/user';
+import { SignInInfo, UserInfo } from '../types/user';
 import { Response } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Controller()
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  private readonly domain: string;
 
-  @Get('/sign-in')
-  async signIn(
-    @Query('email') email: string,
-    @Query('password') password: string,
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService,
   ) {
-    const result = await this.authService.signIn({ email, password });
+    this.domain = configService.get<string>('DOMAIN');
+  }
+
+  @Post('/sign-in')
+  async signIn(@Body() signInInfo: SignInInfo) {
+    // TODO: *should* sanitize signInInfo
+    const result = await this.authService.signIn(signInInfo);
 
     return {
-      redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
+      redirect: this.domain + `/login/entry?token=${result.accessToken}`,
     };
   }
 
@@ -32,7 +38,7 @@ export class AuthController {
   async signUp(@Body() userInfo: UserInfo) {
     const result = await this.authService.signUp(userInfo);
     return {
-      redirect: `http://localhost:3001/login/entry?token=${result.accessToken}`,
+      redirect: this.domain + `/login/entry?token=${result.accessToken}`,
     };
   }
 

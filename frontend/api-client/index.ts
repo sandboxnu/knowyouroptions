@@ -41,15 +41,11 @@ class APIClient {
   }
 
   signIn = {
-    get: async (body: {
+    post: async (body: {
       email: string;
       password: string;
     }): Promise<Redirect> => {
-      return this.req(
-        'GET',
-        `${API_URL}/sign-in?email=${body.email}&password=${body.password}`,
-        Redirect,
-      );
+      return this.req('POST', `${API_URL}/sign-in`, Redirect, body);
     },
   };
 

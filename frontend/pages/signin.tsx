@@ -170,7 +170,7 @@ const SignInForm = (): ReactElement => {
     };
 
     try {
-      const response: Redirect = await API.signIn.get({
+      const response: Redirect = await API.signIn.post({
         email: elements['E-MAIL'].value,
         password: elements.PASSWORD.value,
       });
