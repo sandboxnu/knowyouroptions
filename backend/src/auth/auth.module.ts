@@ -20,18 +20,7 @@ import { JwtStrategy } from './jwt.strategy';
     UserModule,
   ],
   controllers: [AuthController],
-  providers: [
-    AuthService,
-    {
-      provide: 'AUTH_TOKEN_MAX_AGE',
-      useValue: process.env.JWT_EXPIRATION,
-    },
-    {
-      provide: 'JWT_SECRET_KEY',
-      useValue: process.env.JWT_SECRET,
-    },
-    JwtStrategy,
-  ],
+  providers: [AuthService, JwtStrategy],
   exports: [AuthService, JwtModule, PassportModule],
 })
 export class AuthModule {}

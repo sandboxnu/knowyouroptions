@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import {
   AuthenticatedUser,
@@ -8,14 +8,18 @@ import {
 } from 'src/types/user';
 import { UserService } from 'src/user/user.service';
 import { User } from '../entities/user.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
+  private readonly maxAge: number;
   constructor(
-    @Inject('AUTH_TOKEN_MAX_AGE') private readonly maxAge: number,
     private readonly usersService: UserService,
     private jwtService: JwtService,
-  ) {}
+    private configService: ConfigService,
+  ) {
+    this.maxAge = this.configService.get<number>('JWT_EXPIRATION');
+  }
 
   /**
    *
@@ -64,7 +68,6 @@ export class AuthService {
     });
 
     if (token === null || token === undefined) {
-      console.error('Temporary JWT is invalid');
       throw new HttpException('Invalid JWT Token', 500);
     }
 
