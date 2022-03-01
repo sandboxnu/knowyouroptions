@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Delete } from '@nestjs/common';
 import { ContraceptiveService } from './contraceptive.service';
 import { Contraceptive } from 'src/entities/contraceptive.entity';
 
@@ -19,5 +19,9 @@ export class ContraceptiveController {
   @Post()
   async postContraceptive(@Body() contraceptive: Contraceptive) {
     return this.contraceptiveService.postContraceptive(contraceptive);
+  }
+  @Delete(':name')
+  public deleteContraceptive(@Param('name') name: string) {
+    return this.contraceptiveService.deleteContraceptive(name);
   }
 }

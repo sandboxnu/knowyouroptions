@@ -13,14 +13,17 @@ export class ContraceptiveService {
     return contraceptiveList;
   }
 
-  public getContraceptive(names: String) {
+  public async getContraceptive(name: String) {
     const contraceptive = this.contraceptiveRepository.findOne({
-      where: [{ name: names }],
+      where: [{ name: name }],
     });
     return contraceptive;
   }
 
   public async postContraceptive(contraceptive) {
     return this.contraceptiveRepository.insert(contraceptive);
+  }
+  public async deleteContraceptive(name: string) {
+    return this.contraceptiveRepository.delete({ name: name });
   }
 }
