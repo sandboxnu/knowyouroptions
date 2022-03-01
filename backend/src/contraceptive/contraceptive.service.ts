@@ -13,7 +13,7 @@ export class ContraceptiveService {
     return contraceptiveList;
   }
 
-  public async getContraceptive(name: String) {
+  public async getContraceptive(name: string) {
     const contraceptive = this.contraceptiveRepository.findOne({
       where: [{ name: name }],
     });
