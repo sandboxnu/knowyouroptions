@@ -25,6 +25,39 @@ const Container = styled.div`
   justify-content: center;
   padding: 1.5rem 1rem;
 `;
+const Pill = styled.div`
+  border-radius: 1rem;
+  color: #000000;
+`;
+
+const PillContainer = styled(Pill)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const PillAnswers = styled(PillContainer)`
+  left: 850px;
+  top: 350px;
+  position: absolute;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding-top: 1rem;
+  row-gap: 1rem;
+  & > div {
+    background-color: #ffebe5;
+    border: 0;
+
+    color: black;
+    font-weight: 500;
+    padding: 1rem 3rem;
+    width: 100%;
+  }
+  & > div:hover {
+    background-color: purple;
+    cursor: pointer;
+  }
+  padding: 1rem 2.5rem;
+`;
 
 export interface QuestionnaireDiagramProps {
   headerSize?: number;
@@ -61,7 +94,7 @@ const QuestionnaireDiagram = ({
         Options={
           <Container>
             <SvgDiagram />
-            <PillButton> hello </PillButton>
+            <PillAnswers> Pill </PillAnswers>
             <MoveForwardButton onClick={onClickForwards} />
           </Container>
         }
