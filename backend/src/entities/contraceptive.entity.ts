@@ -60,6 +60,12 @@ export class Contraceptive extends BaseEntity {
   howToStop: string;
 
   @Column()
+  howToStopMethod: string;
+
+  @Column()
+  howToStopDurationText: string;
+
+  @Column()
   howLongUntilFertility: string;
 
   @OneToMany((type) => Benefit, (benefit) => benefit.id)
@@ -74,8 +80,8 @@ export class Contraceptive extends BaseEntity {
   @Column()
   healthRisks: string;
 
-  @Column()
-  whoCantUse: string;
+  @Column({ type: 'text', array: true, default: [] })
+  whoCantUse: string[];
 
   @Column({ type: 'text', array: true, default: [] })
   whereToAccess: string[];
@@ -85,6 +91,9 @@ export class Contraceptive extends BaseEntity {
 
   @Column()
   costDescription: string;
+
+  @Column()
+  warning: string;
 
   @OneToMany((type) => ThingToKnow, (thingToKnow) => thingToKnow.id)
   thingsToKnow: ThingToKnow[];
