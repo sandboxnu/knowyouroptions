@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from 'react';
+import LineTo from 'react-lineto';
 import styled from 'styled-components';
 import Survey from '../index';
 import { MoveForwardButton } from '../StyledComponents';
@@ -13,7 +14,7 @@ import CondomLine from '../../../public/questionnaire-diagram-lines/condom-line.
 import DiaphragmLine from '../../../public/questionnaire-diagram-lines/diaphragm-line.svg';
 import SterilizationLine from '../../../public/questionnaire-diagram-lines/sterilization-lines.svg';
 import ShotLine from '../../../public/questionnaire-diagram-lines/shot-line.svg';
-import PillButton from '../../../components/PillButton';
+import PillButton from '../../../components/PillButton'; // delete later!!!
 import SvgEndpoint from '../../../public/diagram-endpoint-circle.svg';
 
 // styling
@@ -154,6 +155,16 @@ const ButtonOther = styled(ButtonShot)`
   top: 80%;
 `;
 
+// interface LineToProps {
+//   from: string;
+//   to: string;
+// }
+
+interface LineToProps extends React.Component {}
+
+const LineToButton = LineTo as any as {
+  new (): LineToProps;
+};
 export interface QuestionnaireDiagramProps {
   headerSize?: number;
   methodInfos: string[];
@@ -181,6 +192,14 @@ const QuestionnaireDiagram = ({
 }: QuestionnaireDiagramProps): ReactElement => {
   const [methodsClicked, setMethodsClicked] = useState(new Set());
 
+  const pillLineProps: any = {
+    borderColor: 'gray',
+    from: 'PillButton',
+    fromAnchor: '0 40%',
+    to: 'PillEndpoint',
+    toAnchor: 'center left',
+  };
+
   return (
     <>
       <Survey
@@ -189,8 +208,9 @@ const QuestionnaireDiagram = ({
         Options={
           <Container>
             <SvgDiagramStyled />
-            <ButtonPill> Pill </ButtonPill>
-            <ButtonPillEndpoint />
+            <ButtonPill className="PillButton"> Pill </ButtonPill>
+            <ButtonPillEndpoint className="PillEndpoint" />
+            <LineToButton {...pillLineProps} />
             <ButtonImplant> Implant </ButtonImplant>
             <ButtonImplantEndpoint />
             <ButtonPatch> Patch </ButtonPatch>
