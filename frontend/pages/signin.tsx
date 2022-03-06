@@ -11,10 +11,11 @@ import Toast from '../components/Toast';
 import { HttpException } from '@nestjs/common';
 import { Redirect } from '../classes/response-classes';
 
+// TODO: need to make this responsive
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5rem 1rem;
+  padding: 5rem 5vw;
 `;
 
 const Continue = styled.button`
@@ -151,7 +152,7 @@ const Submit = styled(Input)`
 const GuestButton = styled.button`
   margin-top: 5px;
   font-family: Roboto;
-  font-size: 18px;
+  font-size: 1rem;
   font-style: normal;
   text-underline-offset: 1px;
   text-align: center;
