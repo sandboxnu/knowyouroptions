@@ -148,6 +148,23 @@ const Submit = styled(Input)`
   cursor: pointer;
 `;
 
+const GuestButton = styled.button`
+  margin-top: 5px;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  text-underline-offset: 1px;
+  text-align: center;
+  color: #535353;
+  text-decoration-line: underline;
+  background-color: transparent;
+  border: none;
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 const signInFields: Array<[string, boolean]> = [
   ['E-MAIL', false],
   ['PASSWORD', true],
@@ -297,6 +314,7 @@ const SignIn = (): ReactElement => {
       {tabIndex === 0 ? (
         <>
           <SignInForm />
+          <GuestButton>Continue as Guest</GuestButton>
           <OAuth>OR CONTINUE WITH</OAuth>
           <OAuthIconContainer>
             <FacebookIcon />
