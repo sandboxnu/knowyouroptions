@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance, Method } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
+import { Redirect } from '../classes/response-classes';
 
 // Return type of array item, if T is an array
 type ItemIfArray<T> = T extends (infer I)[] ? I : T;
@@ -33,11 +34,36 @@ class APIClient {
         method,
         url,
         data: body,
-        headers: { 'Access-Control-Allow-Origin': '*' },
+        withCredentials: true,
       })
     ).data;
     return responseClass ? plainToClass(responseClass, res) : res;
   }
+
+  signIn = {
+    post: async (body: {
+      email: string;
+      password: string;
+    }): Promise<Redirect> => {
+      return this.req('POST', `${API_URL}/sign-in`, Redirect, body);
+    },
+  };
+
+  signUp = {
+    post: async (body: {
+      email: string;
+      password: string;
+      name: string;
+    }): Promise<Redirect> => {
+      return this.req('POST', `${API_URL}/sign-up`, Redirect, body);
+    },
+  };
+
+  user = {
+    getName: async (): Promise<string> => {
+      return this.req('GET', `${API_URL}/name`);
+    },
+  };
 
   helloWorld = {
     get: async (): Promise<string> => {

@@ -1,4 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  BaseEntity,
+} from 'typeorm';
 import { Benefit } from './benefits.entity';
 import { SideEffect } from './side-effects.entity';
 import { Tag } from './tags.entity';
@@ -7,7 +13,7 @@ import { ThingToKnow } from './things-to-know.entity';
 type TimeUnits = 'years' | 'months' | 'days' | 'weeks';
 
 @Entity()
-export class Contraceptive {
+export class Contraceptive extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
