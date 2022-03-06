@@ -14,7 +14,7 @@ import { Redirect } from '../classes/response-classes';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5rem 0.5rem;
+  padding: 5rem 1rem;
 `;
 
 const Continue = styled.button`
