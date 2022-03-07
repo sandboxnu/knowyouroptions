@@ -36,4 +36,5 @@ export const maxDevice = {
 export const colors = {
   homepageBackground: '#ef8b6f',
   homepageNavBarDropdown: '#6abdc1',
+  comparePageText: '#808080',
 };
