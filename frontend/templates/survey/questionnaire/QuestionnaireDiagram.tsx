@@ -164,7 +164,6 @@ const ButtonOther = styled(ButtonShot)`
 
 export interface QuestionnaireDiagramProps {
   headerSize?: number;
-  methodInfos: string[];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
@@ -177,7 +176,6 @@ export interface QuestionnaireDiagramProps {
 
 const QuestionnaireDiagram = ({
   headerSize,
-  methodInfos,
   onClickForwards,
   onClickBackwards,
   pageNumber,
@@ -189,15 +187,55 @@ const QuestionnaireDiagram = ({
 }: QuestionnaireDiagramProps): ReactElement => {
   const [methodsClicked, setMethodsClicked] = useState(new Set());
 
-  /*const pillLineProps: LineToProps = {
-    borderColor: 'gray',
-    from: 'PillButton',
-    fromAnchor: '0 40%',
-    to: 'PillEndpoint',
-    toAnchor: 'center left',
-  };
+  const methodInfos = [
+    'Pill',
+    'Implant',
+    'Patch',
+    'IUD',
+    'Ring',
+    'Spermicide',
+    'Shot',
+    'Sterilization',
+    'Diaphragm',
+    'Condom',
+  ];
 
-   */
+  const ButtonEndpoints: [ReactElement, ReactElement][] = [
+    [<ButtonPill key="Pill">Pill</ButtonPill>, <ButtonPillEndpoint />],
+    [<ButtonImplant>Implant</ButtonImplant>, <ButtonImplantEndpoint />],
+    [<ButtonPatch>Patch</ButtonPatch>, <ButtonPatchEndpoint />],
+    [<ButtonIUD>IUD</ButtonIUD>, <ButtonIUDEndpoint />],
+    [<ButtonRing>Ring</ButtonRing>, <ButtonRingEndpoint />],
+    [
+      <ButtonSpermicide>Spermicide</ButtonSpermicide>,
+      <ButtonSpermicideEndpoint />,
+    ],
+    [<ButtonShot>Shot</ButtonShot>, <ButtonShotEndpoint />],
+    [
+      <ButtonSterilization>Sterilization</ButtonSterilization>,
+      <ButtonSterilizationEndpoint />,
+    ],
+    [<ButtonDiaphragm>Diaphragm</ButtonDiaphragm>, <ButtonDiaphragmEndpoint />],
+    [<ButtonCondom>Condom</ButtonCondom>, <ButtonCondomEndpoint />],
+  ];
+
+  const mapMethodInfos = () => {
+    return (
+      <>
+        {ButtonEndpoints.map((methodArray) => {
+          const [Button, Endpoint] = methodArray;
+
+          return (
+            <>
+              {Button}
+              {Endpoint}
+              {/* insert lineTo here*/}
+            </>
+          );
+        })}
+      </>
+    );
+  };
 
   return (
     <>
