@@ -48,7 +48,8 @@ const SvgDiagramStyled = styled(SvgDiagram)`
   margin-top=1.5rem;
 `;
 
-// styled buttons followed by their "endpoints", listed from top to bottom, right to left
+// styled buttons followed by their selected counterpart and "endpoints",
+// listed from top to bottom, right to left
 const ButtonPill = styled(PillContainer)`
   align-items: center;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
@@ -71,6 +72,11 @@ const ButtonPill = styled(PillContainer)`
   }
 `;
 
+const ButtonPillSelected = styled(ButtonPill)`
+  background-color: purple;
+  color: white;
+`;
+
 const ButtonPillEndpoint = styled(SvgEndpoint)`
   position: absolute;
   top: 32%;
@@ -78,6 +84,11 @@ const ButtonPillEndpoint = styled(SvgEndpoint)`
 
 const ButtonImplant = styled(ButtonPill)`
   top: 39%;
+`;
+
+const ButtonImplantSelected = styled(ButtonImplant)`
+  background-color: purple;
+  color: white;
 `;
 
 const ButtonImplantEndpoint = styled(ButtonPillEndpoint)`
@@ -89,6 +100,11 @@ const ButtonPatch = styled(ButtonPill)`
   top: 49.4%;
 `;
 
+const ButtonPatchSelected = styled(ButtonPatch)`
+  background-color: purple;
+  color: white;
+`;
+
 const ButtonPatchEndpoint = styled(ButtonPillEndpoint)`
   left: 65%;
   top: 52%;
@@ -96,6 +112,11 @@ const ButtonPatchEndpoint = styled(ButtonPillEndpoint)`
 
 const ButtonIUD = styled(ButtonPill)`
   top: 55.6%;
+`;
+
+const ButtonIUDSelected = styled(ButtonIUD)`
+  background-color: purple;
+  color: white;
 `;
 
 const ButtonIUDEndpoint = styled(ButtonPillEndpoint)`
@@ -106,12 +127,22 @@ const ButtonRing = styled(ButtonPill)`
   top: 61.8%;
 `;
 
+const ButtonRingSelected = styled(ButtonRing)`
+  background-color: purple;
+  color: white;
+`;
+
 const ButtonRingEndpoint = styled(ButtonPillEndpoint)`
   top: 58%;
 `;
 
 const ButtonSpermicide = styled(ButtonPill)`
   top: 68%;
+`;
+
+const ButtonSpermicideSelected = styled(ButtonSpermicide)`
+  background-color: purple;
+  color: white;
 `;
 
 const ButtonSpermicideEndpoint = styled(ButtonPillEndpoint)`
@@ -123,6 +154,11 @@ const ButtonShot = styled(ButtonPill)`
   top: 36%;
 `;
 
+const ButtonShotSelected = styled(ButtonShot)`
+  background-color: purple;
+  color: white;
+`;
+
 const ButtonShotEndpoint = styled(ButtonPillEndpoint)`
   left: 30%
   top: 42%;
@@ -130,6 +166,11 @@ const ButtonShotEndpoint = styled(ButtonPillEndpoint)`
 
 const ButtonSterilization = styled(ButtonShot)`
   top: 52%;
+`;
+
+const ButtonSterilizationSelected = styled(ButtonSterilization)`
+  background-color: purple;
+  color: white;
 `;
 
 const ButtonSterilizationEndpoint = styled(ButtonPillEndpoint)`
@@ -146,6 +187,11 @@ const ButtonDiaphragm = styled(ButtonShot)`
   top: 59%;
 `;
 
+const ButtonDiaphragmSelected = styled(ButtonDiaphragm)`
+  background-color: purple;
+  color: white;
+`;
+
 const ButtonDiaphragmEndpoint = styled(ButtonPillEndpoint)`
   top: 59%;
 `;
@@ -154,12 +200,22 @@ const ButtonCondom = styled(ButtonShot)`
   top: 67%;
 `;
 
+const ButtonCondomSelected = styled(ButtonCondom)`
+  background-color: purple;
+  color: white;
+`;
+
 const ButtonCondomEndpoint = styled(ButtonPillEndpoint)`
   top: 62%;
 `;
 
 const ButtonOther = styled(ButtonShot)`
   top: 80%;
+`;
+
+const ButtonOtherSelected = styled(ButtonOther)`
+  background-color: purple;
+  color: white;
 `;
 
 export interface QuestionnaireDiagramProps {
@@ -200,36 +256,69 @@ const QuestionnaireDiagram = ({
     'Condom',
   ];
 
-  const ButtonEndpoints: [ReactElement, ReactElement][] = [
-    [<ButtonPill key="Pill">Pill</ButtonPill>, <ButtonPillEndpoint />],
-    [<ButtonImplant>Implant</ButtonImplant>, <ButtonImplantEndpoint />],
-    [<ButtonPatch>Patch</ButtonPatch>, <ButtonPatchEndpoint />],
-    [<ButtonIUD>IUD</ButtonIUD>, <ButtonIUDEndpoint />],
-    [<ButtonRing>Ring</ButtonRing>, <ButtonRingEndpoint />],
+  const ButtonEndpoints: [ReactElement, ReactElement, ReactElement][] = [
+    [
+      <ButtonPill>Pill</ButtonPill>,
+      <ButtonPillSelected>Pill</ButtonPillSelected>,
+      <ButtonPillEndpoint />,
+    ],
+    [
+      <ButtonImplant>Implant</ButtonImplant>,
+      <ButtonImplantSelected>Implant</ButtonImplantSelected>,
+      <ButtonImplantEndpoint />,
+    ],
+    [
+      <ButtonPatch>Patch</ButtonPatch>,
+      <ButtonPatchSelected>Patch</ButtonPatchSelected>,
+      <ButtonPatchEndpoint />,
+    ],
+    [
+      <ButtonIUD>IUD</ButtonIUD>,
+      <ButtonIUDSelected>IUD</ButtonIUDSelected>,
+      <ButtonIUDEndpoint />,
+    ],
+    [
+      <ButtonRing>Ring</ButtonRing>,
+      <ButtonRingSelected>Ring</ButtonRingSelected>,
+      <ButtonRingEndpoint />,
+    ],
     [
       <ButtonSpermicide>Spermicide</ButtonSpermicide>,
+      <ButtonSpermicideSelected>Spermicide</ButtonSpermicideSelected>,
       <ButtonSpermicideEndpoint />,
     ],
-    [<ButtonShot>Shot</ButtonShot>, <ButtonShotEndpoint />],
+    [
+      <ButtonShot>Shot</ButtonShot>,
+      <ButtonShotSelected>Shot</ButtonShotSelected>,
+      <ButtonShotEndpoint />,
+    ],
     [
       <ButtonSterilization>Sterilization</ButtonSterilization>,
+      <ButtonSterilizationSelected>Sterilization</ButtonSterilizationSelected>,
       <ButtonSterilizationEndpoint />,
     ],
-    [<ButtonDiaphragm>Diaphragm</ButtonDiaphragm>, <ButtonDiaphragmEndpoint />],
-    [<ButtonCondom>Condom</ButtonCondom>, <ButtonCondomEndpoint />],
+    [
+      <ButtonDiaphragm>Diaphragm</ButtonDiaphragm>,
+      <ButtonDiaphragmSelected>Diaphragm</ButtonDiaphragmSelected>,
+      <ButtonDiaphragmEndpoint />,
+    ],
+    [
+      <ButtonCondom>Condom</ButtonCondom>,
+      <ButtonCondomSelected>Condom</ButtonCondomSelected>,
+      <ButtonCondomEndpoint />,
+    ],
   ];
 
   const mapMethodInfos = () => {
     return (
       <>
         {ButtonEndpoints.map((methodArray) => {
-          const [Button, Endpoint] = methodArray;
+          const [Button, ButtonSelected, Endpoint] = methodArray;
 
           return (
             <>
               {Button}
               {Endpoint}
-              {/* insert lineTo here*/}
             </>
           );
         })}
