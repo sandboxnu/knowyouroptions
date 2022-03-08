@@ -209,7 +209,12 @@ const QuestionnaireDiagram = ({
             <SvgDiagramStyled />
             <ButtonPill className="PillButton"> Pill </ButtonPill>
             <ButtonPillEndpoint className="PillEndpoint" />
-            <LineComponent from={'PillButton'} to={'PillEndpoint'} />
+            <LineComponent
+              from={'PillButton'}
+              fromAnchor={'0 20%'}
+              to={'PillEndpoint'}
+              toAnchor={'center right'}
+            />
             <ButtonImplant> Implant </ButtonImplant>
             <ButtonImplantEndpoint />
             <ButtonPatch> Patch </ButtonPatch>
