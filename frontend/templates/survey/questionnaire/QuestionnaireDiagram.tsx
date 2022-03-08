@@ -1,5 +1,4 @@
 import React, { ReactElement, useState } from 'react';
-import LineTo from 'react-lineto';
 import styled from 'styled-components';
 import Survey from '../index';
 import { MoveForwardButton } from '../StyledComponents';
@@ -16,6 +15,14 @@ import SterilizationLine from '../../../public/questionnaire-diagram-lines/steri
 import ShotLine from '../../../public/questionnaire-diagram-lines/shot-line.svg';
 import PillButton from '../../../components/PillButton'; // delete later!!!
 import SvgEndpoint from '../../../public/diagram-endpoint-circle.svg';
+import dynamic from 'next/dynamic';
+
+const LineComponent = dynamic(
+  () => import('../../../components/LineComponent'),
+  {
+    ssr: false,
+  },
+);
 
 // styling
 
@@ -155,16 +162,6 @@ const ButtonOther = styled(ButtonShot)`
   top: 80%;
 `;
 
-// interface LineToProps {
-//   from: string;
-//   to: string;
-// }
-
-interface LineToProps extends React.Component {}
-
-const LineToButton = LineTo as any as {
-  new (): LineToProps;
-};
 export interface QuestionnaireDiagramProps {
   headerSize?: number;
   methodInfos: string[];
@@ -192,13 +189,15 @@ const QuestionnaireDiagram = ({
 }: QuestionnaireDiagramProps): ReactElement => {
   const [methodsClicked, setMethodsClicked] = useState(new Set());
 
-  const pillLineProps: any = {
+  /*const pillLineProps: LineToProps = {
     borderColor: 'gray',
     from: 'PillButton',
     fromAnchor: '0 40%',
     to: 'PillEndpoint',
     toAnchor: 'center left',
   };
+
+   */
 
   return (
     <>
@@ -210,7 +209,7 @@ const QuestionnaireDiagram = ({
             <SvgDiagramStyled />
             <ButtonPill className="PillButton"> Pill </ButtonPill>
             <ButtonPillEndpoint className="PillEndpoint" />
-            <LineToButton {...pillLineProps} />
+            <LineComponent from={'PillButton'} to={'PillEndpoint'} />
             <ButtonImplant> Implant </ButtonImplant>
             <ButtonImplantEndpoint />
             <ButtonPatch> Patch </ButtonPatch>
