@@ -2,6 +2,8 @@ import { ReactElement, useState } from 'react';
 import * as React from 'react';
 import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
 import Layout from '../components/Layout';
+import StyledDropdown from '../components/Dropdown';
+
 import SvgAcne from '../public/acne.svg';
 import SvgBed from '../public/bed.svg';
 import SvgBreastFeeding from '../public/breastfeeding.svg';
@@ -107,11 +109,12 @@ const account = async () => {
   await axios.get('localhost:3001/contraceptve');
   console.log(axios.get('localhost:3001/contraceptve'));
 };
+
 // https://ant.design/components/tabs/ good to use for the Mechnanism tab
 const Compare = (): ReactElement => {
   const [value, setValue] = useState<string | string[]>(['']);
 
-  const Title = (title: String): ReactElement => {
+  const Title = (title: string): ReactElement => {
     return <Col span={24}>{<Header>{title}</Header>}</Col>;
   };
   const ColText = (
@@ -227,4 +230,5 @@ const Compare = (): ReactElement => {
     </BodyContainer>
   );
 };
+
 export default Compare;
