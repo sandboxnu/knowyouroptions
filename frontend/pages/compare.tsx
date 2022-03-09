@@ -35,6 +35,8 @@ import SvgPullCondom from '../public/pull-condom.svg';
 import SvgBed from '../public/bed-image.svg';
 import SvgSave from '../public/save.svg';
 import Column from 'antd/lib/table/Column';
+import SvgPlus from '../public/plus.svg';
+import SvgMinus from '../public/minus.svg';
 import { colors } from '../templates/mediaSizes';
 import axios from 'axios';
 import Contraceptives from '../templates/contraceptives';
@@ -59,7 +61,7 @@ const CircleNumber = styled.div`
   background-color: #16999f;
   line-height: 50px; //same value as heights
   float: left;
-  margin-left: 5%;
+  margin-left: 3%;
 `;
 const TextHeader = styled.p`
   font-size: 20px;
@@ -68,10 +70,12 @@ const TextHeader = styled.p`
   margin: 0;
   padding-top: 8px;
   padding-left: 15px;
+  font-weight: bold;
 `;
 
 const PanelDrop = styled(Panel)`
   background-color: white;
+  padding: 2vh;
 `;
 const NumberText = styled.p`
   color: white;
@@ -114,6 +118,12 @@ const SaveImage = styled(SvgSave)`
   margin-left: auto;
   margin-right: auto;
 `;
+const PlusImage = styled(SvgPlus)`
+  fill: ${colors.comparePageText};
+`;
+const MinusImage = styled(SvgMinus)`
+  fill: ${colors.comparePageText};
+`;
 const Text = styled.p`
   color: ${colors.comparePageText};
   text-align: center;
@@ -135,6 +145,12 @@ const BoldText = styled.p`
   padding: 0;
   margin: 0;
   display: inline-block;
+`;
+
+const PanelIndicator = styled.p`
+  font-size: 60px;
+  padding: 0;
+  margin: 0;
 `;
 const StatText = styled.h1`
   padding: 0;
@@ -213,7 +229,7 @@ const CeneteredContainer = styled.div`
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 36%;
+  width: 70%;
 `;
 
 const ListBullets = styled.ol`
@@ -514,24 +530,24 @@ const Compare = (): ReactElement => {
           {ColText(
             <ListBullets>
               <ListElement>
-                <Text>Drug Store</Text>
+                <TextLeft>Drug Store</TextLeft>
               </ListElement>
               <ListElement>
-                <Text>Contraception clinics</Text>
+                <TextLeft>Contraception clinics</TextLeft>
               </ListElement>
               <ListElement>
-                <Text>Sexual health clinics</Text>
+                <TextLeft>Sexual health clinics</TextLeft>
               </ListElement>
             </ListBullets>,
             <ListBullets>
               <ListElement>
-                <Text>Drug Store</Text>
+                <TextLeft>Drug Store</TextLeft>
               </ListElement>
               <ListElement>
-                <Text>Contraception clinics</Text>
+                <TextLeft>Contraception clinics</TextLeft>
               </ListElement>
               <ListElement>
-                <Text>Sexual health clinics</Text>
+                <TextLeft>Sexual health clinics</TextLeft>
               </ListElement>
             </ListBullets>,
           )}
@@ -615,7 +631,11 @@ const Compare = (): ReactElement => {
             showArrow={false}
             extra={
               <TextHeader>
-                {value.includes(i.toString()) ? '-' : '+'}
+                {value.includes(i.toString()) ? (
+                  <MinusImage></MinusImage>
+                ) : (
+                  <PlusImage></PlusImage>
+                )}
               </TextHeader>
             }
             header={
