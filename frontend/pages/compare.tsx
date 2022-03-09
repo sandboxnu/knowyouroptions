@@ -1,5 +1,6 @@
 import { ReactElement, useState } from 'react';
 import * as React from 'react';
+import { Contraceptive } from '../../backend/src/entities/contraceptive.entity';
 import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
 import Layout from '../components/Layout';
 import StyledDropdown from '../components/Dropdown';
@@ -52,7 +53,14 @@ const Container = styled.div`
   padding: 0;
   display: inline-block;
 `;
+
 const EmptyContainer = styled.div``;
+
+const DropdownContainer = styled(Row)`
+  justify-content: center;
+  gap: 100px;
+  padding: 50px;
+`;
 
 const CircleNumber = styled.div`
   height: 50px;
@@ -249,60 +257,13 @@ const TitleL = styled.h1`
   color: #009ca3;
 `;
 
+type CompareProps = {
+  contraceptives: [Contraceptive];
+};
+
 // https://ant.design/components/tabs/ good to use for the Mechnanism tab
-const Compare = (): ReactElement => {
+const Compare = (compareProps: CompareProps): ReactElement => {
   const [value, setValue] = useState<string | string[]>(['']);
-  const contraceptives = [
-    {
-      id: 1,
-      name: 'implant',
-      usePatternLowBound: 3,
-      usePatternHighBound: 5,
-      usePatternUnits: 'Years',
-      effectiveRate: 99,
-      costMin: 0,
-      costMax: 1300,
-      accessibility: 'Operation by doctor',
-      description:
-        'The implant is a tiny, flexible rod (the size of a matchstick) that is inserted under the skin of your upper arm to prevent pregnancy. It is a long-acting hormonal methods.',
-      use: 'It is inserted by a doctor or nurse under the skin of your upper arm. Once it’s in, you can’t feel it unless you try to find it with your fingers.',
-      inCaseOfProblem:
-        'Talk with your doctor first and try to avoid having sex or use another contraceptive method until you confirm remedial actions with your doctor.',
-      whenItStartsToWork: [
-        "A. If the implant is fitted during <b>the first 5 days of your menstrual cycle</b> you'll be immediately protected against becoming pregnant.",
-        "B. If it's fitted on any other day of your menstrual cycle, you'll need to use additional contraceptives (such as condoms) for the first week.",
-      ],
-      howToStop:
-        'The implant can be removed at any time by a trained doctor or nurse.',
-      howToStopMethod:
-        'A trained doctor or nurses will make a tiny cut in your skin to gently pull the implant out.',
-      howToStopDurationText:
-        'The process only takes a few minutes to remove, and a local anesthetic will be used.',
-      howLongUntilFertility:
-        'Once the implant is removed your ability to get pregnant quickly returns.',
-      howItWorks:
-        'The implant releases the hormone progestogen into your bloodstream, which prevents the release of an egg each month (ovulation) to prevent pregnancy.',
-      healthRisks:
-        'Serious problems with Nexplanon are rare, but they include arm pain that lasts for longer than a few days, an infection in the arm that needs medicine, or a scar on your arm where the implant goes.',
-      whoCantUse: [
-        "can't use an Estrogen-based method",
-        'have arterial disease or a history of a heart disease or stroke',
-        'have liver disease',
-        'have breast cancer or have had it in the past',
-        'have unexplained bleeding in between periods or after sex',
-      ],
-      whereToAccess: [
-        'Contraception clinics',
-        'Sexual health clinics',
-        'GP surgeries',
-      ],
-      whoAdministers: 'Put in by doctor or nurse.',
-      costDescription:
-        'Price may vary from geographic regions and health insurers. But the good news is that implants are totally free (or low cost) with most health insurance plans, Medicaid, and some other government programs.',
-      warning:
-        'Tell your doctor or nurse if you have any unexpected symptoms while using Nexplanon.',
-    },
-  ];
 
   const Title = (title: string): ReactElement => {
     return <Col span={24}>{<Header>{title}</Header>}</Col>;
@@ -623,6 +584,17 @@ const Compare = (): ReactElement => {
 
   return (
     <BodyContainer>
+      <DropdownContainer>
+        <StyledDropdown
+          title={'Method 1'}
+          dropdownStrings={compareProps.contraceptives.map((c) => c.name)}
+        />
+        <StyledDropdown
+          title={'Method 2'}
+          dropdownStrings={compareProps.contraceptives.map((c) => c.name)}
+        />
+      </DropdownContainer>
+
       <Collapse
         defaultActiveKey={['-1']}
         bordered={false}
@@ -657,6 +629,12 @@ const Compare = (): ReactElement => {
       <Row></Row>
     </BodyContainer>
   );
+};
+
+Compare.getInitialProps = async (ctx) => {
+  const res = await axios.get('http://localhost:3001/contraceptive');
+  const contraceptiveList = res.data;
+  return { contraceptives: contraceptiveList };
 };
 
 export default Compare;
