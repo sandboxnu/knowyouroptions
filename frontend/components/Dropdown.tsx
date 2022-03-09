@@ -4,8 +4,7 @@ import { ReactElement } from 'react';
 import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import SvgDownArrow from '../public/down-arrow.svg';
-
-const contraceptives = ['Implant', 'Condom', 'IUD'];
+import { Contraceptive } from '../../backend/src/entities/contraceptive.entity';
 
 const StyledArrow = styled(SvgDownArrow)`
   align-self: center;
@@ -17,7 +16,7 @@ const StyledDropdown = styled(Dropdown)`
   padding-bottom: 9px;
   color: #808080;
   border-bottom: 5px solid #3f3f3f;
-  width: 50%;
+  width: 33%;
   display: flex;
   justify-content: space-between;
 
@@ -26,21 +25,30 @@ const StyledDropdown = styled(Dropdown)`
   }
 `;
 
-const StyledMenu = styled;
+type MenuItemInfo = {
+  title: string;
+  action: Function;
+};
 
-const CompareDropdown = (): ReactElement => {
-  const menuMap = (contraceptive: string, index: number) => (
-    <Menu.Item key={`${index}`}>
-      <a>{contraceptive}</a>
+type DropdownProps = {
+  title: string;
+  menuItemInfos: MenuItemInfo[];
+};
+
+const CompareDropdown = (dropdownProps: DropdownProps): ReactElement => {
+  const menuMap = (menuItemInfo: MenuItemInfo, index: number) => (
+    <Menu.Item key={index} onClick={(e) => menuItemInfo.action(index)}>
+      {menuItemInfo.title}
     </Menu.Item>
   );
 
-  const menu = <Menu>{contraceptives.map(menuMap)}</Menu>;
+  const menu = <Menu>{dropdownProps.menuItemInfos.map(menuMap)}</Menu>;
 
   return (
     <StyledDropdown overlay={menu} trigger={['click']}>
       <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-        Method 1<StyledArrow />
+        {dropdownProps.title}
+        <StyledArrow />
       </a>
     </StyledDropdown>
   );
