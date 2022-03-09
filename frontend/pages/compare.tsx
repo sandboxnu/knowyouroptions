@@ -58,8 +58,8 @@ const EmptyContainer = styled.div``;
 
 const DropdownContainer = styled(Row)`
   justify-content: center;
-  gap: 100px;
-  padding: 50px;
+  gap: 19%;
+  padding: 100px;
 `;
 
 const CircleNumber = styled.div`
@@ -264,6 +264,9 @@ type CompareProps = {
 // https://ant.design/components/tabs/ good to use for the Mechnanism tab
 const Compare = (compareProps: CompareProps): ReactElement => {
   const [value, setValue] = useState<string | string[]>(['']);
+  // Indicies of selected methods
+  const [method1, setMethod1] = useState<number>(-1);
+  const [method2, setMethod2] = useState<number>(-1);
 
   const Title = (title: string): ReactElement => {
     return <Col span={24}>{<Header>{title}</Header>}</Col>;
@@ -295,22 +298,27 @@ const Compare = (compareProps: CompareProps): ReactElement => {
             </Col>
           </Row>
           {ColText(
-            <Text>
-              Placed on male tip of the penis, roll it down over the length of
-              the erect penis.
-            </Text>,
-            <Text>It is inserted under the skin of your upper arm.</Text>,
+            <Text>{compareProps.contraceptives[method1]?.howItWorks}</Text>,
+            <Text>{compareProps.contraceptives[method2]?.howItWorks}</Text>,
           )}
           {Title('How often to use?')}
           {ColText(
             <Text>
               <BoldText>
-                <ColorText>Every time before sex</ColorText>
+                <ColorText>
+                  Lasts up to{' '}
+                  {compareProps.contraceptives[method1]?.usePatternHighBound}{' '}
+                  {compareProps.contraceptives[method1]?.usePatternUnits}
+                </ColorText>
               </BoldText>
             </Text>,
             <Text>
               <BoldText>
-                <ColorText>Last up to 5 years</ColorText>
+                <ColorText>
+                  Lasts up to{' '}
+                  {compareProps.contraceptives[method2]?.usePatternHighBound}{' '}
+                  {compareProps.contraceptives[method2]?.usePatternUnits}
+                </ColorText>
               </BoldText>
             </Text>,
           )}
@@ -586,12 +594,22 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     <BodyContainer>
       <DropdownContainer>
         <StyledDropdown
-          title={'Method 1'}
-          dropdownStrings={compareProps.contraceptives.map((c) => c.name)}
+          title={compareProps.contraceptives[method1]?.name ?? 'Method 1'}
+          menuItemInfos={compareProps.contraceptives.map((c) => {
+            return {
+              title: c.name,
+              action: setMethod1,
+            };
+          })}
         />
         <StyledDropdown
-          title={'Method 2'}
-          dropdownStrings={compareProps.contraceptives.map((c) => c.name)}
+          title={compareProps.contraceptives[method2]?.name ?? 'Method 2'}
+          menuItemInfos={compareProps.contraceptives.map((c) => {
+            return {
+              title: c.name,
+              action: setMethod2,
+            };
+          })}
         />
       </DropdownContainer>
 

@@ -16,7 +16,7 @@ const StyledDropdown = styled(Dropdown)`
   padding-bottom: 9px;
   color: #808080;
   border-bottom: 5px solid #3f3f3f;
-  width: 40%;
+  width: 33%;
   display: flex;
   justify-content: space-between;
 
@@ -25,18 +25,24 @@ const StyledDropdown = styled(Dropdown)`
   }
 `;
 
+type MenuItemInfo = {
+  title: string;
+  action: Function;
+};
+
 type DropdownProps = {
   title: string;
-  dropdownStrings: string[];
+  menuItemInfos: MenuItemInfo[];
 };
+
 const CompareDropdown = (dropdownProps: DropdownProps): ReactElement => {
-  const menuMap = (title: string, index: number) => (
-    <Menu.Item key={`${index}`}>
-      <a>{title}</a>
+  const menuMap = (menuItemInfo: MenuItemInfo, index: number) => (
+    <Menu.Item key={index} onClick={(e) => menuItemInfo.action(index)}>
+      {menuItemInfo.title}
     </Menu.Item>
   );
 
-  const menu = <Menu>{dropdownProps.dropdownStrings.map(menuMap)}</Menu>;
+  const menu = <Menu>{dropdownProps.menuItemInfos.map(menuMap)}</Menu>;
 
   return (
     <StyledDropdown overlay={menu} trigger={['click']}>
