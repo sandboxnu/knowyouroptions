@@ -263,10 +263,20 @@ type CompareProps = {
 
 // https://ant.design/components/tabs/ good to use for the Mechnanism tab
 const Compare = (compareProps: CompareProps): ReactElement => {
+  const { contraceptives } = compareProps;
   const [value, setValue] = useState<string | string[]>(['']);
   // Indicies of selected methods
   const [method1, setMethod1] = useState<number>(-1);
   const [method2, setMethod2] = useState<number>(-1);
+
+  const SummaryItem = (props): ReactElement => {
+    return (
+      <div>
+        <h1>{props.title}</h1>
+        <p>{props.subtitle}</p>
+      </div>
+    );
+  };
 
   const Title = (title: string): ReactElement => {
     return <Col span={24}>{<Header>{title}</Header>}</Col>;
@@ -298,26 +308,24 @@ const Compare = (compareProps: CompareProps): ReactElement => {
             </Col>
           </Row>
           {ColText(
-            <Text>{compareProps.contraceptives[method1]?.howItWorks}</Text>,
-            <Text>{compareProps.contraceptives[method2]?.howItWorks}</Text>,
+            <Text>{contraceptives[method1]?.howItWorks}</Text>,
+            <Text>{contraceptives[method2]?.howItWorks}</Text>,
           )}
           {Title('How often to use?')}
           {ColText(
             <Text>
               <BoldText>
                 <ColorText>
-                  Lasts up to{' '}
-                  {compareProps.contraceptives[method1]?.usePatternHighBound}{' '}
-                  {compareProps.contraceptives[method1]?.usePatternUnits}
+                  Lasts up to {contraceptives[method1]?.usePatternHighBound}{' '}
+                  {contraceptives[method1]?.usePatternUnits}
                 </ColorText>
               </BoldText>
             </Text>,
             <Text>
               <BoldText>
                 <ColorText>
-                  Lasts up to{' '}
-                  {compareProps.contraceptives[method2]?.usePatternHighBound}{' '}
-                  {compareProps.contraceptives[method2]?.usePatternUnits}
+                  Lasts up to {contraceptives[method2]?.usePatternHighBound}{' '}
+                  {contraceptives[method2]?.usePatternUnits}
                 </ColorText>
               </BoldText>
             </Text>,
@@ -594,8 +602,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     <BodyContainer>
       <DropdownContainer>
         <StyledDropdown
-          title={compareProps.contraceptives[method1]?.name ?? 'Method 1'}
-          menuItemInfos={compareProps.contraceptives.map((c) => {
+          title={contraceptives[method1]?.name ?? 'Method 1'}
+          menuItemInfos={contraceptives.map((c) => {
             return {
               title: c.name,
               action: setMethod1,
@@ -603,8 +611,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
           })}
         />
         <StyledDropdown
-          title={compareProps.contraceptives[method2]?.name ?? 'Method 2'}
-          menuItemInfos={compareProps.contraceptives.map((c) => {
+          title={contraceptives[method2]?.name ?? 'Method 2'}
+          menuItemInfos={contraceptives.map((c) => {
             return {
               title: c.name,
               action: setMethod2,
@@ -612,6 +620,36 @@ const Compare = (compareProps: CompareProps): ReactElement => {
           })}
         />
       </DropdownContainer>
+      <Row>
+        <Col span="12">
+          <SummaryItem
+            title={`${contraceptives[method1]?.effectiveRate}% Effective`}
+            subtitle={'Efficacy'}
+          />
+          <SummaryItem
+            title={`Lasts up to ${contraceptives[method1]?.usePatternHighBound} ${contraceptives[method1]?.usePatternUnits}`}
+            subtitle={'Frequency of use'}
+          />
+          <SummaryItem
+            title={`\$${contraceptives[method1]?.costMin} - \$${contraceptives[method1]?.costMax}`}
+            subtitle={'Cost'}
+          />
+        </Col>
+        <Col span="12">
+          <SummaryItem
+            title={`${contraceptives[method2]?.effectiveRate}% Effective`}
+            subtitle={'Efficacy'}
+          />
+          <SummaryItem
+            title={`Lasts up to ${contraceptives[method2]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
+            subtitle={'Frequency of use'}
+          />
+          <SummaryItem
+            title={`\$${contraceptives[method2]?.costMin} - \$${contraceptives[method2]?.costMax}`}
+            subtitle={'Cost'}
+          />
+        </Col>
+      </Row>
 
       <Collapse
         defaultActiveKey={['-1']}
