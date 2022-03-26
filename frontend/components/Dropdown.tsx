@@ -16,7 +16,6 @@ const StyledDropdown = styled(Dropdown)`
   padding-bottom: 9px;
   color: #808080;
   border-bottom: 5px solid #3f3f3f;
-  width: 33%;
   display: flex;
   justify-content: space-between;
 
