@@ -54,3 +54,13 @@ a {
   color: #3f3f3f;
   opacity: 0.5;
 }
+
+.bold {
+  font-weight: bold;
+}
+
+/* Alignment */
+
+.centerText {
+  text-align: center;
+}

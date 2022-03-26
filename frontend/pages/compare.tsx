@@ -271,12 +271,12 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   const [method2, setMethod2] = useState<number>(-1);
 
   const AboutUses: AboutUseProps = {
-    howItWorks: 'bye',
-    howItWorksRight: 'hi',
-    usePatternHighBound: 3,
-    usePatternHighBoundRight: 3,
-    usePatternUnits: 'hi',
-    usePatternUnitsRight: 'bye',
+    howItWorks: contraceptives[method1]?.howItWorks,
+    howItWorksRight: contraceptives[method2]?.howItWorks,
+    usePatternHighBound: contraceptives[method1]?.usePatternHighBound,
+    usePatternHighBoundRight: contraceptives[method2]?.usePatternHighBound,
+    usePatternUnits: contraceptives[method1]?.usePatternUnits,
+    usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
   };
 
   const SummaryItem = (props): ReactElement => {
