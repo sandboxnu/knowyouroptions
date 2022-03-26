@@ -4,7 +4,7 @@ import { Contraceptive } from '../../backend/src/entities/contraceptive.entity';
 import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
 import Layout from '../components/Layout';
 import StyledDropdown from '../components/Dropdown';
-
+import AboutUse, { AboutUseProps } from '../templates/compare/AboutUse';
 import SvgAcne from '../public/acne.svg';
 
 import SvgBreastFeeding from '../public/breastfeeding.svg';
@@ -269,6 +269,15 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   const [method1, setMethod1] = useState<number>(-1);
   const [method2, setMethod2] = useState<number>(-1);
 
+  const AboutUses: AboutUseProps = {
+    howItWorks: 'bye',
+    howItWorksRight: 'hi',
+    usePatternHighBound: 3,
+    usePatternHighBoundRight: 3,
+    usePatternUnits: 'hi',
+    usePatternUnitsRight: 'bye',
+  };
+
   const SummaryItem = (props): ReactElement => {
     return (
       <div>
@@ -296,49 +305,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   const headers = [
     {
       header: 'About use',
-      reactContent: (
-        <EmptyContainer>
-          {Title('How To Use')}
-          <Row>
-            <Col span={12}>
-              <RollCondomImage></RollCondomImage>
-            </Col>
-            <Col span={12}>
-              <RemoveImplantImage></RemoveImplantImage>
-            </Col>
-          </Row>
-          {ColText(
-            <Text>{contraceptives[method1]?.howItWorks}</Text>,
-            <Text>{contraceptives[method2]?.howItWorks}</Text>,
-          )}
-          {Title('How often to use?')}
-          {ColText(
-            <Text>
-              <BoldText>
-                <ColorText>
-                  Lasts up to {contraceptives[method1]?.usePatternHighBound}{' '}
-                  {contraceptives[method1]?.usePatternUnits}
-                </ColorText>
-              </BoldText>
-            </Text>,
-            <Text>
-              <BoldText>
-                <ColorText>
-                  Lasts up to {contraceptives[method2]?.usePatternHighBound}{' '}
-                  {contraceptives[method2]?.usePatternUnits}
-                </ColorText>
-              </BoldText>
-            </Text>,
-          )}
-          {ColText(
-            <Text>
-              Placed on male tip of the penis, roll it down over the length of
-              the erect penis.
-            </Text>,
-            <Text>It is inserted under the skin of your upper arm.</Text>,
-          )}
-        </EmptyContainer>
-      ),
+      reactContent: <AboutUse {...AboutUses} />,
     },
     {
       header: 'Efficacy',
