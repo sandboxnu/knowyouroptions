@@ -43,6 +43,7 @@ import SvgMinus from '../public/minus.svg';
 import { colors } from '../templates/mediaSizes';
 import axios from 'axios';
 import Contraceptives from '../templates/contraceptives';
+import Category from '../components/Category';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -600,54 +601,64 @@ const Compare = (compareProps: CompareProps): ReactElement => {
 
   return (
     <BodyContainer>
-      <DropdownContainer>
-        <StyledDropdown
-          title={contraceptives[method1]?.name ?? 'Method 1'}
-          menuItemInfos={contraceptives.map((c) => {
-            return {
-              title: c.name,
-              action: setMethod1,
-            };
-          })}
-        />
-        <StyledDropdown
-          title={contraceptives[method2]?.name ?? 'Method 2'}
-          menuItemInfos={contraceptives.map((c) => {
-            return {
-              title: c.name,
-              action: setMethod2,
-            };
-          })}
-        />
-      </DropdownContainer>
       <Row>
-        <Col span="12">
-          <SummaryItem
-            title={`${contraceptives[method1]?.effectiveRate}% Effective`}
-            subtitle={'Efficacy'}
+        <Col span="9" offset={2}>
+          <StyledDropdown
+            title={contraceptives[method1]?.name ?? 'Method 1'}
+            menuItemInfos={contraceptives.map((c) => {
+              return {
+                title: c.name,
+                action: setMethod1,
+              };
+            })}
           />
-          <SummaryItem
-            title={`Lasts up to ${contraceptives[method1]?.usePatternHighBound} ${contraceptives[method1]?.usePatternUnits}`}
-            subtitle={'Frequency of use'}
+          <Category
+            value={`${contraceptives[method1]?.effectiveRate}% Effective`}
+            valueClass="teal title1"
+            title="Efficacy"
+            titleClass="lightGray subtitle1"
           />
-          <SummaryItem
-            title={`\$${contraceptives[method1]?.costMin} - \$${contraceptives[method1]?.costMax}`}
-            subtitle={'Cost'}
+          <Category
+            value={`Lasts up to ${contraceptives[method1]?.usePatternHighBound} ${contraceptives[method1]?.usePatternUnits}`}
+            valueClass="teal title1"
+            title="Frequency of use"
+            titleClass="lightGray subtitle1"
           />
+          <Category
+            value={`\$${contraceptives[method1]?.costMin} - \$${contraceptives[method1]?.costMax}`}
+            valueClass="teal title1"
+            title="Cost"
+            titleClass="lightGray subtitle1"
+          ></Category>
         </Col>
-        <Col span="12">
-          <SummaryItem
-            title={`${contraceptives[method2]?.effectiveRate}% Effective`}
-            subtitle={'Efficacy'}
+        <Col span="9" offset={2}>
+          <StyledDropdown
+            title={contraceptives[method2]?.name ?? 'Method 2'}
+            menuItemInfos={contraceptives.map((c) => {
+              return {
+                title: c.name,
+                action: setMethod2,
+              };
+            })}
           />
-          <SummaryItem
-            title={`Lasts up to ${contraceptives[method2]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
-            subtitle={'Frequency of use'}
+          <Category
+            value={`${contraceptives[method2]?.effectiveRate}% Effective`}
+            valueClass="teal title1"
+            title="Efficacy"
+            titleClass="lightGray subtitle1"
           />
-          <SummaryItem
-            title={`\$${contraceptives[method2]?.costMin} - \$${contraceptives[method2]?.costMax}`}
-            subtitle={'Cost'}
+          <Category
+            value={`Lasts up to ${contraceptives[method2]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
+            valueClass="teal title1"
+            title="Frequency of use"
+            titleClass="lightGray subtitle1"
           />
+          <Category
+            value={`\$${contraceptives[method2]?.costMin} - \$${contraceptives[method2]?.costMax}`}
+            valueClass="teal title1"
+            title="Cost"
+            titleClass="lightGray subtitle1"
+          ></Category>
         </Col>
       </Row>
 

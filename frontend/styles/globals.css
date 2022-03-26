@@ -16,3 +16,41 @@ a {
 * {
   box-sizing: border-box;
 }
+
+/* Text */
+
+.title1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 30px;
+}
+
+.subtitle1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.subtitle2 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* Colors */
+
+.teal {
+  color: #1899a0;
+}
+
+.gray {
+  color: #808080;
+}
+
+.lightGray {
+  color: #3f3f3f;
+  opacity: 0.5;
+}
