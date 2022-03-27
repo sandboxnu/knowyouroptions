@@ -44,6 +44,9 @@ import { colors } from '../templates/mediaSizes';
 import axios from 'axios';
 import Contraceptives from '../templates/contraceptives';
 import Category from '../components/Category';
+import AdditionalInformation, {
+  AdditionalInfoProps,
+} from '../templates/compare/AdditonalInformation';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -284,6 +287,11 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     usePatternHighBoundRight: contraceptives[method2]?.usePatternHighBound,
     usePatternUnits: contraceptives[method1]?.usePatternUnits,
     usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
+  };
+
+  const AdditionalInfoProps: AdditionalInfoProps = {
+    thingsToKnowLeft: contraceptives[method1]?.thingsToKnow,
+    thingsToKnowRight: contraceptives[method2]?.thingsToKnow,
   };
 
   const SummaryItem = (props): ReactElement => {
@@ -538,38 +546,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     },
     {
       header: 'Additional information',
-      reactContent: (
-        <EmptyContainer>
-          {Title('Things to notice about this method')}
-          {ColText(
-            <CeneteredContainer>
-              <TitleL>Skin Allergies</TitleL>
-            </CeneteredContainer>,
-            <CeneteredContainer>
-              <TitleL>Needle phobia</TitleL>
-            </CeneteredContainer>,
-          )}
-          {ColText(
-            <CeneteredContainer>
-              <TextLeft>Latex allergy</TextLeft>
-            </CeneteredContainer>,
-            <CeneteredContainer>
-              <TextLeft>
-                Needles will be included in the inserting process.
-              </TextLeft>
-            </CeneteredContainer>,
-          )}
-          {Title('Things to notice about this method')}
-          <Row>
-            <Text>
-              Some forms of birth control are considered a violation of certain
-              religious laws or cultural traditions. Weigh the risks and
-              benefits of a birth control method against your personal
-              convictions.
-            </Text>
-          </Row>
-        </EmptyContainer>
-      ),
+      reactContent: <AdditionalInformation {...AdditionalInfoProps} />,
     },
   ];
 
