@@ -22,7 +22,6 @@ const RollCondomImage = styled(SvgRollCondom)`
   margin-left: auto;
   margin-right: auto;
 `;
-
 export interface AboutUseProps {
   howItWorks: string;
   howItWorksRight: string;
@@ -42,28 +41,39 @@ const AboutUse = ({
 }: AboutUseProps): ReactElement => {
   return (
     <div>
-      {Title('How To Use')}
-      {TwoColumns(
-        <RollCondomImage></RollCondomImage>,
-        <RemoveImplantImage></RemoveImplantImage>,
-      )}
-      {TwoColumns(<Text>{howItWorks}</Text>, <Text>{howItWorksRight}</Text>)}
-      {Title('How often to use?')}
-      {TwoColumns(
-        <Text className="centerText bold teal">
-          Lasts up to {usePatternHighBound} {usePatternUnits}
-        </Text>,
-        <Text className="centerText bold teal">
-          Lasts up to {usePatternHighBoundRight} {usePatternUnitsRight}
-        </Text>,
-      )}
-      {TwoColumns(
-        <Text>
-          Placed on male tip of the penis, roll it down over the length of the
-          erect penis.
-        </Text>,
-        <Text>It is inserted under the skin of your upper arm.</Text>,
-      )}
+      <Title title="How To Use" />
+      <TwoColumns
+        LeftElm={<RollCondomImage />}
+        RightElm={<RemoveImplantImage />}
+      />
+      <TwoColumns
+        LeftElm={<Text>{howItWorks}</Text>}
+        RightElm={<Text>{howItWorksRight}</Text>}
+      />
+      <Title title="How often to use?" />
+
+      <TwoColumns
+        LeftElm={
+          <Text className="centerText bold teal">
+            Lasts up to {usePatternHighBound} {usePatternUnits}
+          </Text>
+        }
+        RightElm={
+          <Text className="centerText bold teal">
+            Lasts up to {usePatternHighBoundRight} {usePatternUnitsRight}
+          </Text>
+        }
+      />
+
+      <TwoColumns
+        LeftElm={
+          <Text>
+            Placed on male tip of the penis, roll it down over the length of the
+            erect penis.
+          </Text>
+        }
+        RightElm={<Text>It is inserted under the skin of your upper arm.</Text>}
+      />
     </div>
   );
 };

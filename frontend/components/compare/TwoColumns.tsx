@@ -1,17 +1,20 @@
 import { ReactElement } from 'react';
 import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
-const TwoColumns = (
-  leftText: ReactElement,
-  rightText: ReactElement,
-): ReactElement => {
+const TwoColumns = ({
+  LeftElm,
+  RightElm,
+}: {
+  LeftElm: ReactElement;
+  RightElm: ReactElement;
+}): ReactElement => {
   return (
     <Row>
       <Col span={9} offset={2}>
-        {leftText}
+        {LeftElm}
       </Col>
       <Col span={9} offset={2}>
-        {rightText}
+        {RightElm}
       </Col>
     </Row>
   );
