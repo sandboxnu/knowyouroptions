@@ -37,12 +37,10 @@ const Home = (): ReactElement => {
   const router = useRouter();
 
   const buttonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('hi');
     togglePopup(false);
   };
 
   useEffect(() => {
-    console.log(router.query.popup);
     router.query.popup ? togglePopup(true) : togglePopup(false);
   }, [showPopup]);
 

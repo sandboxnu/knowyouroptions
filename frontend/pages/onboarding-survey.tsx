@@ -1,7 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import { SurveyKeys } from '../templates/survey';
 import SurveyPill from '../templates/survey/SurveyPill';
