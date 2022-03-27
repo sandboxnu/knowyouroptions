@@ -25,7 +25,9 @@ import { EffectProps } from '../templates/contraceptives/tabs/Effect';
 import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
 import { UseProps } from '../templates/contraceptives/tabs/Use';
 import { MechanismProps } from '../templates/contraceptives/tabs/Mechanism';
-import { PracticalProps } from '../templates/contraceptives/tabs/PracticalQuestions';
+import PracticalQuestions, {
+  PracticalQuestionsProps,
+} from '../templates/compare/PracticalQuestions';
 import { AdditionalProps } from '../templates/contraceptives/tabs/AdditionalInfo';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
@@ -44,6 +46,9 @@ import { colors } from '../templates/mediaSizes';
 import axios from 'axios';
 import Contraceptives from '../templates/contraceptives';
 import Category from '../components/Category';
+import AdditionalInformation, {
+  AdditionalInfoProps,
+} from '../templates/compare/AdditonalInformation';
 
 const { Panel } = Collapse;
 const { TabPane } = Tabs;
@@ -295,6 +300,24 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     howLongUntilFertilityRight: contraceptives[method2]?.howLongUntilFertility,
   };
 
+  const PracticalQuestionsProps: PracticalQuestionsProps = {
+    whereToAccessLeft: contraceptives[method1]?.whereToAccess,
+    whereToAccessRight: contraceptives[method2]?.whereToAccess,
+    whoWillAdministerLeft: contraceptives[method1]?.whoAdministers,
+    whoWillAdministerRight: contraceptives[method2]?.whoAdministers,
+    costLowLeft: contraceptives[method1]?.costMin,
+    costHighLeft: contraceptives[method1]?.costMax,
+    costLowRight: contraceptives[method2]?.costMin,
+    costHighRight: contraceptives[method2]?.costMax,
+  };
+
+  const AdditionalInfoProps: AdditionalInfoProps = {
+    thingsToKnowLeft: contraceptives[method1]?.thingsToKnow,
+    thingsToKnowRight: contraceptives[method2]?.thingsToKnow,
+  };
+
+  console.log(PracticalQuestionsProps);
+
   const SummaryItem = (props): ReactElement => {
     return (
       <div>
@@ -425,98 +448,11 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     },
     {
       header: 'Practical questions',
-      reactContent: (
-        <EmptyContainer>
-          {Title('Where to access?')}
-          {ColText(
-            <ListBullets>
-              <ListElement>
-                <TextLeft>Drug Store</TextLeft>
-              </ListElement>
-              <ListElement>
-                <TextLeft>Contraception clinics</TextLeft>
-              </ListElement>
-              <ListElement>
-                <TextLeft>Sexual health clinics</TextLeft>
-              </ListElement>
-            </ListBullets>,
-            <ListBullets>
-              <ListElement>
-                <TextLeft>Drug Store</TextLeft>
-              </ListElement>
-              <ListElement>
-                <TextLeft>Contraception clinics</TextLeft>
-              </ListElement>
-              <ListElement>
-                <TextLeft>Sexual health clinics</TextLeft>
-              </ListElement>
-            </ListBullets>,
-          )}
-          {Title('Who will administer this method?')}
-          {ColText(
-            <Text>
-              Purchased <ColorText>over-the-counter</ColorText> at drugstores
-            </Text>,
-            <Text>
-              Put in by <ColorText>doctor or nurse.</ColorText>
-            </Text>,
-          )}
-          {Title('How much could it cost?')}
-          {ColText(
-            <CeneteredContainer>
-              <ColorText>$ 0 - $ 3</ColorText>
-            </CeneteredContainer>,
-            <CeneteredContainer>
-              <ColorText>$ 0 - $ 1,300</ColorText>
-            </CeneteredContainer>,
-          )}
-          {ColText(
-            <CeneteredContainer>
-              <TextLeft>Price may vary from geographic regions</TextLeft>
-            </CeneteredContainer>,
-            <CeneteredContainer>
-              <TextLeft>
-                Price may vary from geographic regions and health insurers
-              </TextLeft>
-            </CeneteredContainer>,
-          )}
-        </EmptyContainer>
-      ),
+      reactContent: <PracticalQuestions {...PracticalQuestionsProps} />,
     },
     {
       header: 'Additional information',
-      reactContent: (
-        <EmptyContainer>
-          {Title('Things to notice about this method')}
-          {ColText(
-            <CeneteredContainer>
-              <TitleL>Skin Allergies</TitleL>
-            </CeneteredContainer>,
-            <CeneteredContainer>
-              <TitleL>Needle phobia</TitleL>
-            </CeneteredContainer>,
-          )}
-          {ColText(
-            <CeneteredContainer>
-              <TextLeft>Latex allergy</TextLeft>
-            </CeneteredContainer>,
-            <CeneteredContainer>
-              <TextLeft>
-                Needles will be included in the inserting process.
-              </TextLeft>
-            </CeneteredContainer>,
-          )}
-          {Title('Things to notice about this method')}
-          <Row>
-            <Text>
-              Some forms of birth control are considered a violation of certain
-              religious laws or cultural traditions. Weigh the risks and
-              benefits of a birth control method against your personal
-              convictions.
-            </Text>
-          </Row>
-        </EmptyContainer>
-      ),
+      reactContent: <AdditionalInformation {...AdditionalInfoProps} />,
     },
   ];
 
