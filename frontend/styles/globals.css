@@ -83,3 +83,6 @@ a {
   margin: 0;
   padding: 0;
 }
+.paddingBelow {
+  padding-bottom: 5vh;
+}
