@@ -1,27 +1,11 @@
 import { ReactElement } from 'react';
-import styled from 'styled-components';
 import 'antd/dist/antd.css';
-import SvgRemoveImplant from '../../public/remove-implant.svg';
-import SvgRollCondom from '../../public/roll-condom.svg';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../pages/compare';
+import Image from '../../components/compare/Image';
 
 // Styling
-
-const RemoveImplantImage = styled(SvgRemoveImplant)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const RollCondomImage = styled(SvgRollCondom)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
 export interface AboutUseProps {
   howItWorks: string;
   howItWorksRight: string;
@@ -29,6 +13,8 @@ export interface AboutUseProps {
   usePatternHighBoundRight: number;
   usePatternUnits: string;
   usePatternUnitsRight: string;
+  contraceptiveNameLeft: string;
+  contraceptiveNameRight: string;
 }
 
 const AboutUse = ({
@@ -38,13 +24,19 @@ const AboutUse = ({
   usePatternHighBoundRight,
   usePatternUnits,
   usePatternUnitsRight,
+  contraceptiveNameLeft,
+  contraceptiveNameRight,
 }: AboutUseProps): ReactElement => {
   return (
     <div>
       <Title title="How To Use" />
       <TwoColumns
-        LeftElm={<RollCondomImage />}
-        RightElm={<RemoveImplantImage />}
+        LeftElm={
+          <Image src={`compare/${contraceptiveNameLeft?.toLowerCase()}.svg`} />
+        }
+        RightElm={
+          <Image src={`compare/${contraceptiveNameRight?.toLowerCase()}.svg`} />
+        }
       />
       <TwoColumns
         LeftElm={<Text>{howItWorks}</Text>}
