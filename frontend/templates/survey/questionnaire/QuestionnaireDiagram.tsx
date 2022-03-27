@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Survey from '../index';
 import { MoveForwardButton } from '../StyledComponents';
@@ -17,12 +17,17 @@ import PillButton from '../../../components/PillButton'; // delete later!!!
 import SvgEndpoint from '../../../public/diagram-endpoint-circle.svg';
 import dynamic from 'next/dynamic';
 
-const LineComponent = dynamic(
-  () => import('../../../components/LineComponent'),
-  {
-    ssr: false,
-  },
-);
+/**
+ * BUG: when back button is used to get to page lines do not render
+ * perhaps side effect? tbf lines > no lines
+ * BUG: Foward/next page button is fucked Returns to normal when next page or prev but then above error happens
+ * Also related to line compoentns?
+ *
+ */
+
+let LineComponent = dynamic(() => import('../../../components/LineComponent'), {
+  ssr: false,
+});
 
 // styling
 
@@ -106,8 +111,8 @@ const ButtonPatchSelected = styled(ButtonPatch)`
 `;
 
 const ButtonPatchEndpoint = styled(ButtonPillEndpoint)`
-  left: 65%;
-  top: 52%;
+  left: 58%;
+  top: 45%;
 `;
 
 const ButtonIUD = styled(ButtonPill)`
@@ -121,6 +126,7 @@ const ButtonIUDSelected = styled(ButtonIUD)`
 
 const ButtonIUDEndpoint = styled(ButtonPillEndpoint)`
   top: 57%;
+  top: 50%;
 `;
 
 const ButtonRing = styled(ButtonPill)`
@@ -133,7 +139,7 @@ const ButtonRingSelected = styled(ButtonRing)`
 `;
 
 const ButtonRingEndpoint = styled(ButtonPillEndpoint)`
-  top: 58%;
+  top: 51%;
 `;
 
 const ButtonSpermicide = styled(ButtonPill)`
@@ -146,7 +152,7 @@ const ButtonSpermicideSelected = styled(ButtonSpermicide)`
 `;
 
 const ButtonSpermicideEndpoint = styled(ButtonPillEndpoint)`
-  top: 59%;
+  top: 52%;
 `;
 
 const ButtonShot = styled(ButtonPill)`
@@ -160,8 +166,8 @@ const ButtonShotSelected = styled(ButtonShot)`
 `;
 
 const ButtonShotEndpoint = styled(ButtonPillEndpoint)`
-  left: 30%
-  top: 42%;
+  left: 33%;
+  top: 36%;
 `;
 
 const ButtonSterilization = styled(ButtonShot)`
@@ -174,13 +180,13 @@ const ButtonSterilizationSelected = styled(ButtonSterilization)`
 `;
 
 const ButtonSterilizationEndpoint = styled(ButtonPillEndpoint)`
-  left: 40%
-  top: 54%;
+  top: 47.5%;
+  left: 40%;
 `;
 
 const ButtonSterilizationEndpoint2 = styled(ButtonPillEndpoint)`
-  left: 63%
-  top: 54%;
+  top: 47.5%;
+  left: 57%;
 `;
 
 const ButtonDiaphragm = styled(ButtonShot)`
@@ -192,9 +198,7 @@ const ButtonDiaphragmSelected = styled(ButtonDiaphragm)`
   color: white;
 `;
 
-const ButtonDiaphragmEndpoint = styled(ButtonPillEndpoint)`
-  top: 59%;
-`;
+const ButtonDiaphragmEndpoint = styled(ButtonPillEndpoint)``;
 
 const ButtonCondom = styled(ButtonShot)`
   top: 67%;
@@ -206,7 +210,7 @@ const ButtonCondomSelected = styled(ButtonCondom)`
 `;
 
 const ButtonCondomEndpoint = styled(ButtonPillEndpoint)`
-  top: 62%;
+  top: 55%;
 `;
 
 const ButtonOther = styled(ButtonShot)`
@@ -242,6 +246,12 @@ const QuestionnaireDiagram = ({
   totalPages,
 }: QuestionnaireDiagramProps): ReactElement => {
   const [methodsClicked, setMethodsClicked] = useState(new Set());
+
+  useEffect(() => {
+    LineComponent = dynamic(() => import('../../../components/LineComponent'), {
+      ssr: false,
+    });
+  }, []);
 
   const methodInfos = [
     'Pill',
@@ -309,23 +319,6 @@ const QuestionnaireDiagram = ({
     ],
   ];
 
-  const mapMethodInfos = () => {
-    return (
-      <>
-        {ButtonEndpoints.map((methodArray) => {
-          const [Button, ButtonSelected, Endpoint] = methodArray;
-
-          return (
-            <>
-              {Button}
-              {Endpoint}
-            </>
-          );
-        })}
-      </>
-    );
-  };
-
   return (
     <>
       <Survey
@@ -338,29 +331,100 @@ const QuestionnaireDiagram = ({
             <ButtonPillEndpoint className="PillEndpoint" />
             <LineComponent
               from={'PillButton'}
-              fromAnchor={'0 20%'}
+              fromAnchor={'0% 50%'}
               to={'PillEndpoint'}
-              toAnchor={'center right'}
+              toAnchor={'95% 50%'}
             />
-            <ButtonImplant> Implant </ButtonImplant>
-            <ButtonImplantEndpoint />
-            <ButtonPatch> Patch </ButtonPatch>
-            <ButtonPatchEndpoint />
-            <ButtonIUD> IUD </ButtonIUD>
-            <ButtonIUDEndpoint />
-            <ButtonRing> Ring </ButtonRing>
-            <ButtonRingEndpoint />
-            <ButtonSpermicide> Spermicide </ButtonSpermicide>
-            <ButtonSpermicideEndpoint />
-            <ButtonShot> Shot </ButtonShot>
-            <ButtonShotEndpoint />
-            <ButtonSterilization> Sterilization </ButtonSterilization>
-            <ButtonSterilizationEndpoint />
-            <ButtonDiaphragm> Diaphragm </ButtonDiaphragm>
+            <ButtonImplant className="ButtonImplant"> Implant </ButtonImplant>
+            <ButtonImplantEndpoint className="ButtonImplantEndpoint" />
+            <LineComponent
+              from={'ButtonImplant'}
+              fromAnchor={'9% 101%'}
+              to={'ButtonImplantEndpoint'}
+              toAnchor={'80% 20%'}
+            />
+            <ButtonPatch className="ButtonPatch"> Patch </ButtonPatch>
+            <ButtonPatchEndpoint className="ButtonPatchEndpoint " />
+            <LineComponent
+              from={'ButtonPatch'}
+              fromAnchor={'1% 15%'}
+              to={'ButtonPatchEndpoint'}
+              toAnchor={'80% 80%'}
+            />
+            <ButtonIUD className="ButtonIUD"> IUD </ButtonIUD>
+            <ButtonIUDEndpoint className="ButtonIUDEndpoint" />
+            <LineComponent
+              from={'ButtonIUD'}
+              fromAnchor={'1% 15%'}
+              to={'ButtonIUDEndpoint'}
+              toAnchor={'80% 80%'}
+            />
+            <ButtonRing className="ButtonRing"> Ring </ButtonRing>
+            <ButtonRingEndpoint className="ButtonRingEndpoint" />
+            <LineComponent
+              from={'ButtonRing'}
+              fromAnchor={'1% 15%'}
+              to={'ButtonRingEndpoint'}
+              toAnchor={'80% 80%'}
+            />
+            <ButtonSpermicide className="ButtonSpermicide">
+              {' '}
+              Spermicide{' '}
+            </ButtonSpermicide>
+            <ButtonSpermicideEndpoint className="ButtonSpermicideEndpoint" />
+            <LineComponent
+              from={'ButtonSpermicide'}
+              fromAnchor={'1% 15%'}
+              to={'ButtonSpermicideEndpoint'}
+              toAnchor={'80% 80%'}
+            />
+            <ButtonShot className="ButtonShot"> Shot </ButtonShot>
+            <ButtonShotEndpoint className="ButtonShotEndpoint" />
+            <LineComponent
+              from={'ButtonShot'}
+              fromAnchor={'98% 10%'}
+              to={'ButtonShotEndpoint'}
+              toAnchor={'10% 35%'}
+            />
+            <ButtonSterilization className="ButtonSterilization">
+              {' '}
+              Sterilization{' '}
+            </ButtonSterilization>
+            <ButtonSterilizationEndpoint className="ButtonSterilizationEndpoint" />
+            <ButtonSterilizationEndpoint2 className="ButtonSterilizationEndpoint2" />
+            <LineComponent
+              from={'ButtonSterilization'}
+              fromAnchor={'99% 15%'}
+              to={'ButtonSterilizationEndpoint'}
+              toAnchor={'19% 40%'}
+            />
+            <LineComponent
+              from={'ButtonSterilization'}
+              fromAnchor={'99% 15%'}
+              to={'ButtonSterilizationEndpoint2'}
+              toAnchor={'19% 40%'}
+            />
+            <ButtonDiaphragm className="ButtonDiaphragm">
+              {' '}
+              Diaphragm{' '}
+            </ButtonDiaphragm>
             <ButtonDiaphragmEndpoint />
-            <ButtonCondom> Condom </ButtonCondom>
-            <ButtonCondomEndpoint />
+            <LineComponent
+              from={'ButtonDiaphragm'}
+              fromAnchor={'99% 16%'}
+              to={'ButtonSpermicideEndpoint'}
+              toAnchor={'20% 70%'}
+            />
+            <ButtonCondom className="ButtonCondom"> Condom </ButtonCondom>
+            <ButtonCondomEndpoint className="ButtonCondomEndpoint" />
+            <LineComponent
+              from={'ButtonCondom'}
+              fromAnchor={'99% 16%'}
+              to={'ButtonCondomEndpoint'}
+              toAnchor={'20% 70%'}
+            />
             <ButtonOther> Other </ButtonOther>
+
             <MoveForwardButton onClick={onClickForwards} />
           </Container>
         }
