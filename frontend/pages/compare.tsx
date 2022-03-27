@@ -196,16 +196,6 @@ const api = axios.create({
   baseURL: 'http://localhost:3001/contraceptive',
 });
 
-const ListLetters = styled.ol`
-  list-style-type: upper-alpha;
-`;
-const ListElement = styled.li`
-  padding-left: 1%;
-  max-width: 200px;
-  padding-bottom: 1vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
 const TextLong = styled.p`
   width: 60%;
   margin: auto;
@@ -297,7 +287,9 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     effectiveRate: contraceptives[method1]?.effectiveRate,
     effectiveRateRight: contraceptives[method2]?.effectiveRate,
     whenItStartsToWork: contraceptives[method1]?.whenItStartsToWork,
-    whenItStartsToWorkRight: [contraceptives[method2]?.whenItStartsToWork],
+    whenItStartsToWorkRight: contraceptives[method2]?.whenItStartsToWork,
+    howToStopMethod: contraceptives[method1]?.howToStop,
+    howToStopMethodRight: contraceptives[method2]?.howToStop,
     howLongUntilFertility: contraceptives[method1]?.howLongUntilFertility,
     howLongUntilFertilityRight: contraceptives[method2]?.howLongUntilFertility,
   };
