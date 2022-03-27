@@ -5,6 +5,8 @@ import { Text } from '../../pages/compare';
 import styled, { keyframes } from 'styled-components';
 const { TabPane } = Tabs;
 export interface MechanismProps {
+  contraceptive: string;
+  contraceptiveRight: string;
   howItWorks: string;
   howItWorksRight: string;
   healthRisks: string;
@@ -22,13 +24,27 @@ border-style: none;
   !important;
   border-style: none;
   border-width: 0;
+  
 }
 .ant-tabs-tab.ant-tabs-tab-active  .ant-tabs-tab-btn {
-    color: #89006C !important; 
+    
+    color: #3F3F3F;
     font-weight:bold;
+    font-size: 20px;
+}
+.ant-tabs-tab-btn{
+    color:gray;
+    font-size: 20px;
 }
 .ant-tabs-tab-btn:hover {
-  color: #89006C !important;
+    color: #3F3F3F !important;
+  
+}
+.ant-tabs-nav::before{
+    display:none;
+    color:blue;
+
+
 }
 .ant-tabs-ink-bar::after {
  content: " ";
@@ -38,11 +54,12 @@ border-style: none;
  bottom: 0;
  height: 5px;
  background: #89006C;
- width: 80px;
+ width: 100px;
  transform: translateX(-50%);
- font-size: 15pt;
- 
+ font-size: 30px;
+ border-radius: 50px;
  }
+ .ant-tabs
 }
 
 
@@ -53,6 +70,8 @@ const TextLong = styled.p`
   margin: auto;
 `;
 const Mechanism = ({
+  contraceptive,
+  contraceptiveRight,
   howItWorks,
   howItWorksRight,
   healthRisks,
@@ -66,32 +85,29 @@ const Mechanism = ({
     <div>
       <Title title="How it works?"></Title>
       <Tabss defaultActiveKey="1" centered>
-        <TabPane tab="test" key="1">
-          <TextLong>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu
-            varius libero. Sed eu laoreet mauris, ac interdum enim.{' '}
-          </TextLong>
+        <TabPane tab={contraceptive} key="1">
+          <Text>{howItWorks}</Text>
         </TabPane>
-        <TabPane tab={<Text>Implant</Text>} key="2">
-          <TextLong>
-            The implant releases the hormone progestogen into your bloodstream,
-            which prevents the release of an egg each month (ovulation) to
-            prevent pregnancy.
-          </TextLong>
+        <TabPane tab={contraceptiveRight} key="2">
+          <Text>{howItWorksRight}</Text>
         </TabPane>
       </Tabss>
 
-      <Tabs defaultActiveKey="1" onChange={console.log('hello')}>
-        <TabPane tab="Tab 1" key="1">
-          Content of Tab Pane 1
+      <Title title="Health Risk"></Title>
+      <Tabss defaultActiveKey="1" centered>
+        <TabPane tab={contraceptive} key="1">
+          <Text>{healthRisks}</Text>
+          <TextLong>{'*' + warning}</TextLong>
+          <Title title="Who can't use"></Title>
+          <Text>{whoCantUse}</Text>
         </TabPane>
-        <TabPane tab="Tab 2" key="2">
-          Content of Tab Pane 2
+        <TabPane tab={contraceptiveRight} key="2">
+          <Text>{healthRisksRight}</Text>
+          <TextLong>{'*' + warningRight}</TextLong>
+          <Title title="Who can't use"></Title>
+          <Text>{whoCantUseRight}</Text>
         </TabPane>
-        <TabPane tab="Tab 3" key="3">
-          Content of Tab Pane 3
-        </TabPane>
-      </Tabs>
+      </Tabss>
     </div>
   );
 };

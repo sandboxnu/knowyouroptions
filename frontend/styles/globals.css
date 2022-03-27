@@ -59,11 +59,15 @@ a {
 .teal {
   color: #1899a0;
 }
-
+.purple {
+  color: #89006c;
+}
 .gray {
   color: #808080;
 }
-
+.black {
+  color: black;
+}
 .lightGray {
   color: #3f3f3f;
   opacity: 0.5;

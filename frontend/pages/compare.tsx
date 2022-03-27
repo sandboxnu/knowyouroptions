@@ -160,42 +160,6 @@ const TextLong = styled.p`
   width: 60%;
   margin: auto;
 `;
-const Tabss = styled(Tabs)`
-border-style: none;
-.ant-tabs-ink-bar {
-  height: 20px;
-  background: #ffffff;
-  !important;
-  border-style: none;
-  border-width: 0;
-}
-  .ant-tabs-tab.ant-tabs-tab-active  .ant-tabs-tab-btn {
-    color: #89006C !important; 
-    font-weight:bold;
-    
-
-    
- }
- .ant-tabs-tab-btn:hover {
-  color: #89006C !important;
- }
- .ant-tabs-ink-bar::after {
- content: " ";
- position: absolute;
- left: 50%;
- right: 0;
- bottom: 0;
- height: 5px;
- background: #89006C;
- width: 80px;
- transform: translateX(-50%);
- font-size: 15pt;
- 
- }
-}
-
-
-`;
 
 const CeneteredContainer = styled.div`
   display: block;
@@ -235,8 +199,6 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     usePatternHighBoundRight: contraceptives[method2]?.usePatternHighBound,
     usePatternUnits: contraceptives[method1]?.usePatternUnits,
     usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
-    contraceptiveNameLeft: contraceptives[method1]?.name,
-    contraceptiveNameRight: contraceptives[method2]?.name,
   };
 
   const EfficacyContent: EfficacyProps = {
@@ -251,6 +213,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   };
 
   const MechanismContent: MechanismProps = {
+    contraceptive: contraceptives[method1]?.name,
+    contraceptiveRight: contraceptives[method2]?.name,
     howItWorks: contraceptives[method1]?.howItWorks,
     howItWorksRight: contraceptives[method2]?.howItWorks,
     healthRisks: contraceptives[method1]?.healthRisks,
