@@ -1,8 +1,6 @@
 import { ReactElement, useState } from 'react';
 import * as React from 'react';
 import { Contraceptive } from '../../backend/src/entities/contraceptive.entity';
-import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
-import Layout from '../components/Layout';
 import StyledDropdown from '../components/Dropdown';
 import AboutUse, { AboutUseProps } from '../templates/compare/AboutUse';
 import Efficacy, { EfficacyProps } from '../templates/compare/Efficacy';
@@ -10,50 +8,21 @@ import Mechanism, { MechanismProps } from '../templates/compare/Mechanism';
 import PracticalQuestions, {
   PracticalQuestionsProps,
 } from '../templates/compare/PracticalQuestions';
-
-import SvgAcne from '../public/acne.svg';
-
-import SvgBreastFeeding from '../public/breastfeeding.svg';
-import SvgBreastTenderness from '../public/breast-tenderness.svg';
-import SvgCalendar from '../public/calendar.svg';
-import SvgDepressed from '../public/depressed.svg';
-import SvgDoctor from '../public/doctor.svg';
-import SvgHeadache from '../public/headache.svg';
-import SvgImplant from '../public/implant.svg';
-import SvgImplantRemoval from '../public/implant-removal.svg';
-import SvgPad from '../public/pad.svg';
-import SvgTime from '../public/time.svg';
-
 import 'antd/dist/antd.css';
-import ContraceptiveTemplate from '../templates/contraceptives';
-import { EffectProps } from '../templates/contraceptives/tabs/Effect';
-import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
-import { UseProps } from '../templates/contraceptives/tabs/Use';
-
-import { AdditionalProps } from '../templates/contraceptives/tabs/AdditionalInfo';
-import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import styled, { keyframes } from 'styled-components';
 import { Collapse, Tabs } from 'antd';
 import { Row, Col } from 'antd';
-import SvgRemoveImplant from '../public/remove-implant.svg';
-import SvgRollCondom from '../public/roll-condom.svg';
-import SvgPullCondom from '../public/pull-condom.svg';
 import SvgBed from '../public/bed-image.svg';
 import SvgSave from '../public/save.svg';
-import Column from 'antd/lib/table/Column';
 import SvgPlus from '../public/plus.svg';
 import SvgMinus from '../public/minus.svg';
 import { colors } from '../templates/mediaSizes';
 import axios from 'axios';
-import Contraceptives from '../templates/contraceptives';
 import Category from '../components/Category';
 import AdditionalInformation, {
   AdditionalInfoProps,
 } from '../templates/compare/AdditonalInformation';
-
 const { Panel } = Collapse;
-const { TabPane } = Tabs;
 const BodyContainer = styled.body``;
 const Container = styled.div`
   width: 80%;
@@ -125,59 +94,6 @@ const PlusImage = styled(SvgPlus)`
 
 const MinusImage = styled(SvgMinus)`
   fill: ${colors.comparePageText};
-`;
-
-const PanelIndicator = styled.p`
-  font-size: 60px;
-  padding: 0;
-  margin: 0;
-`;
-
-const StatText = styled.h1`
-  padding: 0;
-  margin: 0;
-  text-align: center;
-`;
-
-const NoSpaceText = styled.p`
-  color: ${colors.comparePageText};
-  text-align: center;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  padding-bottom: 6vh;
-`;
-
-const NoSpaceRow = styled(Row)`
-  padding: 0;
-  margin: 0;
-`;
-
-const api = axios.create({
-  baseURL: 'http://localhost:3001/contraceptive',
-});
-
-const TextLong = styled.p`
-  width: 60%;
-  margin: auto;
-`;
-
-const CeneteredContainer = styled.div`
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
-`;
-
-const ListBullets = styled.ol`
-  list-style-type: disc;
-  display: block;
-
-  margin-left: auto;
-  margin-right: auto;
-`;
-const TextLeft = styled.p`
-  text-align: left;
-  color: ${colors.comparePageText};
 `;
 
 type CompareProps = {
