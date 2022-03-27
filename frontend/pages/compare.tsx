@@ -54,6 +54,11 @@ const Container = styled.div`
   padding: 0;
   display: inline-block;
 `;
+export const Text = styled.p`
+  max-width: 400px;
+  margin: 0 auto;
+  color: #808080;
+`;
 
 const EmptyContainer = styled.div``;
 
@@ -74,6 +79,7 @@ const CircleNumber = styled.div`
   float: left;
   margin-left: 3%;
 `;
+
 const TextHeader = styled.p`
   font-size: 20px;
   color: ${colors.comparePageText};
@@ -88,9 +94,11 @@ const PanelDrop = styled(Panel)`
   background-color: white;
   padding: 2vh;
 `;
+
 const NumberText = styled.p`
   color: white;
 `;
+
 const Header = styled.h1`
   padding-top: 1vh;
   padding-bottom: 3vh;
@@ -111,40 +119,36 @@ const RollCondomImage = styled(SvgRollCondom)`
   margin-left: auto;
   margin-right: auto;
 `;
+
 const PullCondomImage = styled(SvgPullCondom)`
   display: block;
   margin-bottom: 2vh;
   margin-left: auto;
   margin-right: auto;
 `;
+
 const BedImage = styled(SvgBed)`
   display: block;
   margin-bottom: 2vh;
   margin-left: auto;
   margin-right: auto;
 `;
+
 const SaveImage = styled(SvgSave)`
   display: block;
   margin-bottom: 2vh;
   margin-left: auto;
   margin-right: auto;
 `;
+
 const PlusImage = styled(SvgPlus)`
   fill: ${colors.comparePageText};
 `;
+
 const MinusImage = styled(SvgMinus)`
   fill: ${colors.comparePageText};
 `;
-const Text = styled.p`
-  color: ${colors.comparePageText};
-  text-align: center;
 
-  max-width: 400px;
-
-  margin: 0 auto;
-
-  flex-wrap: wrap;
-`;
 const ColorText = styled.p`
   color: #009ca3;
   padding: 0;
@@ -163,11 +167,13 @@ const PanelIndicator = styled.p`
   padding: 0;
   margin: 0;
 `;
+
 const StatText = styled.h1`
   padding: 0;
   margin: 0;
   text-align: center;
 `;
+
 const NoSpaceText = styled.p`
   color: ${colors.comparePageText};
   text-align: center;
@@ -180,6 +186,7 @@ const NoSpaceRow = styled(Row)`
   padding: 0;
   margin: 0;
 `;
+
 const api = axios.create({
   baseURL: 'http://localhost:3001/contraceptive',
 });
