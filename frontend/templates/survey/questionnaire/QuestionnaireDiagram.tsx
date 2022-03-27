@@ -3,20 +3,10 @@ import styled from 'styled-components';
 import Survey from '../index';
 import { MoveForwardButton } from '../StyledComponents';
 import SvgDiagram from '../../../public/preferred-methods.svg';
-import PillLine from '../../../public/questionnaire-diagram-lines/pill-line.svg';
-import ImplantLine from '../../../public/questionnaire-diagram-lines/implant-line.svg';
-import PatchLine from '../../../public/questionnaire-diagram-lines/patch-line.svg';
-import IUDLine from '../../../public/questionnaire-diagram-lines/iud-line.svg';
-import RingLine from '../../../public/questionnaire-diagram-lines/ring-line.svg';
-import SpermicideLine from '../../../public/questionnaire-diagram-lines/spermicide-line.svg';
-import CondomLine from '../../../public/questionnaire-diagram-lines/condom-line.svg';
-import DiaphragmLine from '../../../public/questionnaire-diagram-lines/diaphragm-line.svg';
-import SterilizationLine from '../../../public/questionnaire-diagram-lines/sterilization-lines.svg';
-import ShotLine from '../../../public/questionnaire-diagram-lines/shot-line.svg';
-import PillButton from '../../../components/PillButton'; // delete later!!!
 import SvgEndpoint from '../../../public/diagram-endpoint-circle.svg';
 import dynamic from 'next/dynamic';
 
+// import line component
 const LineComponent = dynamic(
   () => import('../../../components/LineComponent'),
   {
@@ -48,7 +38,7 @@ const SvgDiagramStyled = styled(SvgDiagram)`
   margin-top=1.5rem;
 `;
 
-// styled buttons followed by their selected counterpart and "endpoints",
+// styled buttons followed by their clicked counterpart and "endpoints",
 // listed from top to bottom, right to left
 const ButtonPill = styled(PillContainer)`
   align-items: center;
@@ -241,9 +231,14 @@ const QuestionnaireDiagram = ({
   setResponse,
   totalPages,
 }: QuestionnaireDiagramProps): ReactElement => {
-  const [methodsClicked, setMethodsClicked] = useState(new Set());
+  // initialize state with methodsClicked
+  const methodsClickedInit =
+    response[responseKey] === undefined ? [] : response[responseKey];
+  const [methodsClicked, setMethodsClicked] = useState(
+    new Set(methodsClickedInit),
+  );
 
-  const methodInfos = [
+  const methodNames = [
     'Pill',
     'Implant',
     'Patch',
@@ -254,77 +249,8 @@ const QuestionnaireDiagram = ({
     'Sterilization',
     'Diaphragm',
     'Condom',
+    'Other',
   ];
-
-  const ButtonEndpoints: [ReactElement, ReactElement, ReactElement][] = [
-    [
-      <ButtonPill>Pill</ButtonPill>,
-      <ButtonPillSelected>Pill</ButtonPillSelected>,
-      <ButtonPillEndpoint />,
-    ],
-    [
-      <ButtonImplant>Implant</ButtonImplant>,
-      <ButtonImplantSelected>Implant</ButtonImplantSelected>,
-      <ButtonImplantEndpoint />,
-    ],
-    [
-      <ButtonPatch>Patch</ButtonPatch>,
-      <ButtonPatchSelected>Patch</ButtonPatchSelected>,
-      <ButtonPatchEndpoint />,
-    ],
-    [
-      <ButtonIUD>IUD</ButtonIUD>,
-      <ButtonIUDSelected>IUD</ButtonIUDSelected>,
-      <ButtonIUDEndpoint />,
-    ],
-    [
-      <ButtonRing>Ring</ButtonRing>,
-      <ButtonRingSelected>Ring</ButtonRingSelected>,
-      <ButtonRingEndpoint />,
-    ],
-    [
-      <ButtonSpermicide>Spermicide</ButtonSpermicide>,
-      <ButtonSpermicideSelected>Spermicide</ButtonSpermicideSelected>,
-      <ButtonSpermicideEndpoint />,
-    ],
-    [
-      <ButtonShot>Shot</ButtonShot>,
-      <ButtonShotSelected>Shot</ButtonShotSelected>,
-      <ButtonShotEndpoint />,
-    ],
-    [
-      <ButtonSterilization>Sterilization</ButtonSterilization>,
-      <ButtonSterilizationSelected>Sterilization</ButtonSterilizationSelected>,
-      <ButtonSterilizationEndpoint />,
-    ],
-    [
-      <ButtonDiaphragm>Diaphragm</ButtonDiaphragm>,
-      <ButtonDiaphragmSelected>Diaphragm</ButtonDiaphragmSelected>,
-      <ButtonDiaphragmEndpoint />,
-    ],
-    [
-      <ButtonCondom>Condom</ButtonCondom>,
-      <ButtonCondomSelected>Condom</ButtonCondomSelected>,
-      <ButtonCondomEndpoint />,
-    ],
-  ];
-
-  const mapMethodInfos = () => {
-    return (
-      <>
-        {ButtonEndpoints.map((methodArray) => {
-          const [Button, ButtonSelected, Endpoint] = methodArray;
-
-          return (
-            <>
-              {Button}
-              {Endpoint}
-            </>
-          );
-        })}
-      </>
-    );
-  };
 
   return (
     <>
@@ -334,6 +260,7 @@ const QuestionnaireDiagram = ({
         Options={
           <Container>
             <SvgDiagramStyled />
+            {/*}
             <ButtonPill className="PillButton"> Pill </ButtonPill>
             <ButtonPillEndpoint className="PillEndpoint" />
             <LineComponent
@@ -341,25 +268,175 @@ const QuestionnaireDiagram = ({
               fromAnchor={'0 20%'}
               to={'PillEndpoint'}
               toAnchor={'center right'}
-            />
-            <ButtonImplant> Implant </ButtonImplant>
-            <ButtonImplantEndpoint />
-            <ButtonPatch> Patch </ButtonPatch>
-            <ButtonPatchEndpoint />
-            <ButtonIUD> IUD </ButtonIUD>
-            <ButtonIUDEndpoint />
-            <ButtonRing> Ring </ButtonRing>
-            <ButtonRingEndpoint />
-            <ButtonSpermicide> Spermicide </ButtonSpermicide>
-            <ButtonSpermicideEndpoint />
-            <ButtonShot> Shot </ButtonShot>
-            <ButtonShotEndpoint />
-            <ButtonSterilization> Sterilization </ButtonSterilization>
-            <ButtonSterilizationEndpoint />
-            <ButtonDiaphragm> Diaphragm </ButtonDiaphragm>
-            <ButtonDiaphragmEndpoint />
-            <ButtonCondom> Condom </ButtonCondom>
-            <ButtonCondomEndpoint />
+        /> */}
+            {methodNames.map((methodName) => {
+              const isThisMethodHighlighted = methodsClicked.has(methodName);
+              const onClick = (
+                event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+              ) => {
+                const newMethodsClicked = methodsClicked;
+                if (methodsClicked.has(methodName)) {
+                  // user wants to unselect this selected method
+                  newMethodsClicked.delete(methodName);
+                } else {
+                  // user wants to select this unselected method
+                  newMethodsClicked.add(methodName);
+                }
+                setMethodsClicked(new Set(newMethodsClicked));
+
+                response[responseKey] = Array.from(methodsClicked);
+                setResponse(response);
+              };
+              console.log(response);
+
+              switch (methodName) {
+                case 'Pill': {
+                  const PillButton = isThisMethodHighlighted
+                    ? ButtonPillSelected
+                    : ButtonPill;
+                  return (
+                    <>
+                      <PillButton className="PillButton" onClick={onClick}>
+                        {methodName}
+                      </PillButton>
+                      <ButtonPillEndpoint className="PillEndpoint" />
+                    </>
+                  );
+                }
+                case 'Implant': {
+                  const ImplantButton = isThisMethodHighlighted
+                    ? ButtonImplantSelected
+                    : ButtonImplant;
+                  return (
+                    <>
+                      <ImplantButton
+                        className="ImplantButton"
+                        onClick={onClick}
+                      >
+                        {methodName}
+                      </ImplantButton>
+                      <ButtonImplantEndpoint className="ImplantEndpoint" />
+                    </>
+                  );
+                }
+                case 'Patch': {
+                  const PatchButton = isThisMethodHighlighted
+                    ? ButtonPatchSelected
+                    : ButtonPatch;
+                  return (
+                    <>
+                      <PatchButton className="PatchButton" onClick={onClick}>
+                        {methodName}
+                      </PatchButton>
+                      <ButtonPatchEndpoint className="PatchEndpoint" />
+                    </>
+                  );
+                }
+                case 'IUD': {
+                  const IUDButton = isThisMethodHighlighted
+                    ? ButtonIUDSelected
+                    : ButtonIUD;
+                  return (
+                    <>
+                      <IUDButton className="IUDButton" onClick={onClick}>
+                        {methodName}
+                      </IUDButton>
+                      <ButtonIUDEndpoint className="IUDEndpoint" />
+                    </>
+                  );
+                }
+                case 'Ring': {
+                  const RingButton = isThisMethodHighlighted
+                    ? ButtonRingSelected
+                    : ButtonRing;
+                  return (
+                    <>
+                      <RingButton className="RingButton" onClick={onClick}>
+                        {methodName}
+                      </RingButton>
+                      <ButtonRingEndpoint className="RingEndpoint" />
+                    </>
+                  );
+                }
+                case 'Spermicide': {
+                  const SpermicideButton = isThisMethodHighlighted
+                    ? ButtonSpermicideSelected
+                    : ButtonSpermicide;
+                  return (
+                    <>
+                      <SpermicideButton
+                        className="PillSpermicide"
+                        onClick={onClick}
+                      >
+                        {methodName}
+                      </SpermicideButton>
+                      <ButtonSpermicideEndpoint className="SpermicideEndpoint" />
+                    </>
+                  );
+                }
+                case 'Shot': {
+                  const ShotButton = isThisMethodHighlighted
+                    ? ButtonShotSelected
+                    : ButtonShot;
+                  return (
+                    <>
+                      <ShotButton className="ShotButton" onClick={onClick}>
+                        {methodName}
+                      </ShotButton>
+                      <ButtonShotEndpoint className="ShotEndpoint" />
+                    </>
+                  );
+                }
+                case 'Sterilization': {
+                  const SterilizationButton = isThisMethodHighlighted
+                    ? ButtonSterilizationSelected
+                    : ButtonSterilization;
+                  return (
+                    <>
+                      <SterilizationButton
+                        className="SterilizationButton"
+                        onClick={onClick}
+                      >
+                        {methodName}
+                      </SterilizationButton>
+                      <ButtonSterilizationEndpoint className="SterilizationEndpoint" />
+                    </>
+                  );
+                }
+                case 'Diaphragm': {
+                  const DiaphragmButton = isThisMethodHighlighted
+                    ? ButtonDiaphragmSelected
+                    : ButtonDiaphragm;
+                  return (
+                    <>
+                      <DiaphragmButton
+                        className="DiaphragmButton"
+                        onClick={onClick}
+                      >
+                        {methodName}
+                      </DiaphragmButton>
+                      <ButtonDiaphragmEndpoint className="DiaphragmEndpoint" />
+                    </>
+                  );
+                }
+                case 'Condom': {
+                  const CondomButton = isThisMethodHighlighted
+                    ? ButtonCondomSelected
+                    : ButtonCondom;
+                  return (
+                    <>
+                      <CondomButton className="CondomButton" onClick={onClick}>
+                        {methodName}
+                      </CondomButton>
+                      <ButtonCondomEndpoint className="CondomEndpoint" />
+                    </>
+                  );
+                }
+                default: {
+                  return <></>;
+                }
+              }
+            })}
             <ButtonOther> Other </ButtonOther>
             <MoveForwardButton onClick={onClickForwards} />
           </Container>
