@@ -13,7 +13,7 @@ import { Column, Row } from './tabs/StyledComponents';
 import SvgBookmark from '../../public/bookmark.svg';
 import SvgDesktopBookmark from '../../public/desktop-icons/desktop-bookmark.svg';
 import SvgDesktopDropdown from '../../public/desktop-icons/desktop-dropdown.svg';
-import { size, device, maxDevice } from '../../pages/mediaSizes';
+import { size, device, maxDevice } from '../mediaSizes';
 import Pill from '../../components/Pill';
 
 // styled
@@ -189,21 +189,6 @@ const Contraceptives = ({
   additionalProps,
 }: ContraceptivesProps): ReactElement => {
   const [tabIndex, setTabIndex] = useState(0);
-  const [isMobile, changeIsMobile] = useState(false);
-  let width = 0;
-
-  //const {width, height} = useWindowDimensions();
-
-  useEffect(() => {});
-
-  useEffect(() => {
-    width = window?.innerWidth;
-    if (width > 600) {
-      changeIsMobile(false);
-    } else {
-      changeIsMobile(true);
-    }
-  }, []);
 
   const tabs = [
     'Overview',
@@ -266,17 +251,8 @@ const Contraceptives = ({
         )}
       </Header>
 
-      {
-        isMobile ? '' : ''
-        //reserved for displaying things based off view (js way)
-      }
-
       <TabBar tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
       <Body>{tabComponents[tabIndex]}</Body>
-
-      {/*tabIndex < tabs.length - 1 && (
-        <DownArrow onClick={() => setTabIndex(tabIndex + 1)} />
-      )*/}
     </>
   );
 };

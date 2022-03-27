@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { Column, Row } from './StyledComponents';
-import { device } from '../../../pages/mediaSizes';
+import { device } from '../../mediaSizes';
 import styled from 'styled-components';
 import PillRow from '../../../components/PillRow';
 

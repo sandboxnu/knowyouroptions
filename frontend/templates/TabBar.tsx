@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import styled from 'styled-components';
-import { device } from '../pages/mediaSizes';
+import { device } from './mediaSizes';
 
 const HighlightedTab = styled.h2`
   border: 0rem;
@@ -44,13 +44,15 @@ const TabBar = ({
   tabs,
   tabIndex,
   setTabIndex,
+  className,
 }: {
   tabs: Array<string>;
   tabIndex: number;
   setTabIndex: Function;
+  className?: string;
 }): ReactElement => {
   return (
-    <Row>
+    <Row className={className}>
       {tabs.map((tab: string, index: number) => {
         const highlightedTab = <HighlightedTab key={tab}>{tab}</HighlightedTab>;
         const regularTab = (
