@@ -198,7 +198,7 @@ const ButtonDiaphragmSelected = styled(ButtonDiaphragm)`
   color: white;
 `;
 
-const ButtonDiaphragmEndpoint = styled(ButtonPillEndpoint)``;
+const ButtonDiaphragmEndpoint = styled(ButtonSpermicideEndpoint)``;
 
 const ButtonCondom = styled(ButtonShot)`
   top: 67%;
@@ -326,9 +326,12 @@ const QuestionnaireDiagram = ({
         onClick={onClickBackwards}
         Options={
           <Container>
-            <SvgDiagramStyled />
+            <div>
+              <SvgDiagramStyled />
+              <ButtonPillEndpoint className="PillEndpoint" />
+            </div>
             <ButtonPill className="PillButton"> Pill </ButtonPill>
-            <ButtonPillEndpoint className="PillEndpoint" />
+
             <LineComponent
               from={'PillButton'}
               fromAnchor={'0% 50%'}
