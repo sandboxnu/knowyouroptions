@@ -235,6 +235,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     usePatternHighBoundRight: contraceptives[method2]?.usePatternHighBound,
     usePatternUnits: contraceptives[method1]?.usePatternUnits,
     usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
+    contraceptiveNameLeft: contraceptives[method1]?.name,
+    contraceptiveNameRight: contraceptives[method2]?.name,
   };
 
   const EfficacyContent: EfficacyProps = {
