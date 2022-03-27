@@ -58,6 +58,7 @@ const Questionnaire = (): ReactElement => {
     initialResponse[QuestionnaireKeys[index]] = [];
   }
   const [response, setResponse] = useState(initialResponse);
+  console.log(response);
 
   // INTRO PAGE
   const IntroPage = ({}): ReactElement => {
@@ -222,7 +223,6 @@ const Questionnaire = (): ReactElement => {
     return (
       <QuestionnaireDiagram
         headerSize={3}
-        methodInfos={methods}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={6}
