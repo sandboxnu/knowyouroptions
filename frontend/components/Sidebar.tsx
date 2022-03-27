@@ -102,8 +102,7 @@ const Sidebar = (): ReactElement => {
     ? slideStyle.slide
     : closing
     ? slideStyle.close
-    : undefined;
-  console.log(animation);
+    : slideStyle.default;
 
   const closeMenu = () => {
     setOpen(false);
@@ -121,7 +120,6 @@ const Sidebar = (): ReactElement => {
             cursor="pointer"
             onClick={closeMenu}
             style={{ width: '30px' }}
-            ghost
           />
           <MenuSection>
             <div>
@@ -231,7 +229,6 @@ const Sidebar = (): ReactElement => {
           cursor="pointer"
           onClick={() => setOpen(true)}
           style={{ width: '30px', marginLeft: '30px', marginTop: '30px' }}
-          ghost
         />
       )}
     </SidebarDiv>

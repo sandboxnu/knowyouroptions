@@ -360,7 +360,7 @@ const QuestionnaireDiagram = ({
               toAnchor={'20% 70%'}
             />
             <SvgDiagramStyled />
-            {methodNames.map((methodName) => {
+            {methodNames.map((methodName, idx) => {
               const isThisMethodHighlighted = methodsClicked.has(methodName);
               const onClick = (
                 event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -386,12 +386,12 @@ const QuestionnaireDiagram = ({
                     ? ButtonPillSelected
                     : ButtonPill;
                   return (
-                    <>
+                    <div key={idx}>
                       <PillButton className="PillButton" onClick={onClick}>
                         {methodName}
                       </PillButton>
                       <ButtonPillEndpoint className="PillEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Implant': {
@@ -399,7 +399,7 @@ const QuestionnaireDiagram = ({
                     ? ButtonImplantSelected
                     : ButtonImplant;
                   return (
-                    <>
+                    <div key={idx}>
                       <ImplantButton
                         className="ImplantButton"
                         onClick={onClick}
@@ -407,7 +407,7 @@ const QuestionnaireDiagram = ({
                         {methodName}
                       </ImplantButton>
                       <ButtonImplantEndpoint className="ImplantEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Patch': {
@@ -415,12 +415,12 @@ const QuestionnaireDiagram = ({
                     ? ButtonPatchSelected
                     : ButtonPatch;
                   return (
-                    <>
+                    <div key={idx}>
                       <PatchButton className="PatchButton" onClick={onClick}>
                         {methodName}
                       </PatchButton>
                       <ButtonPatchEndpoint className="PatchEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'IUD': {
@@ -428,12 +428,12 @@ const QuestionnaireDiagram = ({
                     ? ButtonIUDSelected
                     : ButtonIUD;
                   return (
-                    <>
+                    <div key={idx}>
                       <IUDButton className="IUDButton" onClick={onClick}>
                         {methodName}
                       </IUDButton>
                       <ButtonIUDEndpoint className="IUDEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Ring': {
@@ -441,12 +441,12 @@ const QuestionnaireDiagram = ({
                     ? ButtonRingSelected
                     : ButtonRing;
                   return (
-                    <>
+                    <div key={idx}>
                       <RingButton className="RingButton" onClick={onClick}>
                         {methodName}
                       </RingButton>
                       <ButtonRingEndpoint className="RingEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Spermicide': {
@@ -454,7 +454,7 @@ const QuestionnaireDiagram = ({
                     ? ButtonSpermicideSelected
                     : ButtonSpermicide;
                   return (
-                    <>
+                    <div key={idx}>
                       <SpermicideButton
                         className="PillSpermicide"
                         onClick={onClick}
@@ -462,7 +462,7 @@ const QuestionnaireDiagram = ({
                         {methodName}
                       </SpermicideButton>
                       <ButtonSpermicideEndpoint className="SpermicideEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Shot': {
@@ -470,12 +470,12 @@ const QuestionnaireDiagram = ({
                     ? ButtonShotSelected
                     : ButtonShot;
                   return (
-                    <>
+                    <div key={idx}>
                       <ShotButton className="ShotButton" onClick={onClick}>
                         {methodName}
                       </ShotButton>
                       <ButtonShotEndpoint className="ShotEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Sterilization': {
@@ -483,7 +483,7 @@ const QuestionnaireDiagram = ({
                     ? ButtonSterilizationSelected
                     : ButtonSterilization;
                   return (
-                    <>
+                    <div key={idx}>
                       <SterilizationButton
                         className="SterilizationButton"
                         onClick={onClick}
@@ -491,7 +491,7 @@ const QuestionnaireDiagram = ({
                         {methodName}
                       </SterilizationButton>
                       <ButtonSterilizationEndpoint className="SterilizationEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Diaphragm': {
@@ -499,7 +499,7 @@ const QuestionnaireDiagram = ({
                     ? ButtonDiaphragmSelected
                     : ButtonDiaphragm;
                   return (
-                    <>
+                    <div key={idx}>
                       <DiaphragmButton
                         className="DiaphragmButton"
                         onClick={onClick}
@@ -507,7 +507,7 @@ const QuestionnaireDiagram = ({
                         {methodName}
                       </DiaphragmButton>
                       <ButtonDiaphragmEndpoint className="DiaphragmEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 case 'Condom': {
@@ -515,16 +515,16 @@ const QuestionnaireDiagram = ({
                     ? ButtonCondomSelected
                     : ButtonCondom;
                   return (
-                    <>
+                    <div key={idx}>
                       <CondomButton className="CondomButton" onClick={onClick}>
                         {methodName}
                       </CondomButton>
                       <ButtonCondomEndpoint className="CondomEndpoint" />
-                    </>
+                    </div>
                   );
                 }
                 default: {
-                  return <></>;
+                  return <div key={idx}></div>;
                 }
               }
             })}

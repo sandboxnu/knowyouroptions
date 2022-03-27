@@ -50,13 +50,13 @@ const CheckboxColumn = ({
 }): ReactElement => {
   return (
     <>
-      {checkboxTitles.map((checkboxTitle) => {
+      {checkboxTitles.map((checkboxTitle, idx) => {
         return (
-          <CheckboxContainer>
+          <CheckboxContainer key={idx}>
             <CheckboxStyled
               type="checkbox"
               onChange={(event) => {
-                let answers =
+                const answers =
                   response[responseKey] === undefined
                     ? []
                     : response[responseKey];
