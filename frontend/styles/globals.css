@@ -64,3 +64,8 @@ a {
 .centerText {
   text-align: center;
 }
+
+.noSpacing {
+  margin: 0;
+  padding: 0;
+}

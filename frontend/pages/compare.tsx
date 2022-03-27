@@ -5,6 +5,7 @@ import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
 import Layout from '../components/Layout';
 import StyledDropdown from '../components/Dropdown';
 import AboutUse, { AboutUseProps } from '../templates/compare/AboutUse';
+import Efficacy, { EfficacyProps } from '../templates/compare/Efficacy';
 import SvgAcne from '../public/acne.svg';
 
 import SvgBreastFeeding from '../public/breastfeeding.svg';
@@ -21,7 +22,6 @@ import SvgTime from '../public/time.svg';
 import 'antd/dist/antd.css';
 import ContraceptiveTemplate from '../templates/contraceptives';
 import { EffectProps } from '../templates/contraceptives/tabs/Effect';
-import { EfficacyProps } from '../templates/contraceptives/tabs/Efficacy';
 import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
 import { UseProps } from '../templates/contraceptives/tabs/Use';
 import { MechanismProps } from '../templates/contraceptives/tabs/Mechanism';
@@ -286,6 +286,15 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
   };
 
+  const Efficacys: EfficacyProps = {
+    effectiveRate: contraceptives[method1]?.effectiveRate,
+    effectiveRateRight: contraceptives[method2]?.effectiveRate,
+    whenItStartsToWork: contraceptives[method1]?.whenItStartsToWork,
+    whenItStartsToWorkRight: [contraceptives[method2]?.whenItStartsToWork],
+    howLongUntilFertility: contraceptives[method1]?.howLongUntilFertility,
+    howLongUntilFertilityRight: contraceptives[method2]?.howLongUntilFertility,
+  };
+
   const SummaryItem = (props): ReactElement => {
     return (
       <div>
@@ -317,69 +326,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     },
     {
       header: 'Efficacy',
-      reactContent: (
-        <EmptyContainer>
-          {Title('How well does it prevent preganancy?')}
-          <NoSpaceRow>
-            <Col span={12}>
-              {
-                <StatText>
-                  <ColorText>99%</ColorText>
-                </StatText>
-              }
-            </Col>
-            <Col span={12}>
-              {
-                <StatText>
-                  <ColorText>99%</ColorText>
-                </StatText>
-              }
-            </Col>
-          </NoSpaceRow>
-          <NoSpaceRow>
-            <Col span={12}>
-              <NoSpaceText>Effective</NoSpaceText>
-            </Col>
-            <Col span={12}>
-              <NoSpaceText>Effective</NoSpaceText>
-            </Col>
-          </NoSpaceRow>
-          {Title('When does it start to work?')}
-          {ColText(
-            <Text>
-              <ColorText>Every time</ColorText> if the condom is placed and used
-              correctly
-            </Text>,
-            <ListLetters>
-              <ListElement>
-                <ColorText>Immediately</ColorText> if the implant is fitted
-                during the{' '}
-                <ColorText>first 5 days of your menstrual cycle</ColorText>
-              </ListElement>
-              <ListElement>
-                <ColorText>After a week of additional contraception</ColorText>{' '}
-                if the implant is fitted on any other day of your menstrual
-                cycle
-              </ListElement>
-            </ListLetters>,
-          )}
-          {Title('Getting back to fertility')}
-          {ColText(
-            <PullCondomImage></PullCondomImage>,
-            <RemoveImplantImage></RemoveImplantImage>,
-          )}
-          {ColText(
-            <Text>
-              Once the use of condom stops, you can immediately get back to
-              pregnancy.
-            </Text>,
-            <Text>
-              Once the implant is removed your ability to get pregnant quickly
-              returns.
-            </Text>,
-          )}
-        </EmptyContainer>
-      ),
+      reactContent: <Efficacy {...Efficacys} />,
     },
     {
       header: 'Effect',
