@@ -260,15 +260,6 @@ const QuestionnaireDiagram = ({
         Options={
           <Container>
             <SvgDiagramStyled />
-            {/*}
-            <ButtonPill className="PillButton"> Pill </ButtonPill>
-            <ButtonPillEndpoint className="PillEndpoint" />
-            <LineComponent
-              from={'PillButton'}
-              fromAnchor={'0 20%'}
-              to={'PillEndpoint'}
-              toAnchor={'center right'}
-        /> */}
             {methodNames.map((methodName) => {
               const isThisMethodHighlighted = methodsClicked.has(methodName);
               const onClick = (
