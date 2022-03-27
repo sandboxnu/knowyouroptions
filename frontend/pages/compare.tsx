@@ -6,6 +6,11 @@ import Layout from '../components/Layout';
 import StyledDropdown from '../components/Dropdown';
 import AboutUse, { AboutUseProps } from '../templates/compare/AboutUse';
 import Efficacy, { EfficacyProps } from '../templates/compare/Efficacy';
+import Mechanism, { MechanismProps } from '../templates/compare/Mechanism';
+import PracticalQuestions, {
+  PracticalQuestionsProps,
+} from '../templates/compare/PracticalQuestions';
+
 import SvgAcne from '../public/acne.svg';
 
 import SvgBreastFeeding from '../public/breastfeeding.svg';
@@ -24,10 +29,7 @@ import ContraceptiveTemplate from '../templates/contraceptives';
 import { EffectProps } from '../templates/contraceptives/tabs/Effect';
 import { OverviewProps } from '../templates/contraceptives/tabs/Overview';
 import { UseProps } from '../templates/contraceptives/tabs/Use';
-import { MechanismProps } from '../templates/contraceptives/tabs/Mechanism';
-import PracticalQuestions, {
-  PracticalQuestionsProps,
-} from '../templates/compare/PracticalQuestions';
+
 import { AdditionalProps } from '../templates/contraceptives/tabs/AdditionalInfo';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
@@ -63,14 +65,6 @@ export const Text = styled.p`
   max-width: 400px;
   margin: 0 auto;
   color: #808080;
-`;
-
-const EmptyContainer = styled.div``;
-
-const DropdownContainer = styled(Row)`
-  justify-content: center;
-  gap: 19%;
-  padding: 100px;
 `;
 
 const CircleNumber = styled.div`
@@ -111,27 +105,6 @@ const Header = styled.h1`
   margin: 0;
 `;
 
-const RemoveImplantImage = styled(SvgRemoveImplant)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const RollCondomImage = styled(SvgRollCondom)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const PullCondomImage = styled(SvgPullCondom)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 const BedImage = styled(SvgBed)`
   display: block;
   margin-bottom: 2vh;
@@ -152,19 +125,6 @@ const PlusImage = styled(SvgPlus)`
 
 const MinusImage = styled(SvgMinus)`
   fill: ${colors.comparePageText};
-`;
-
-const ColorText = styled.p`
-  color: #009ca3;
-  padding: 0;
-  margin: 0;
-  display: inline-block;
-`;
-const BoldText = styled.p`
-  font-weight: bold;
-  padding: 0;
-  margin: 0;
-  display: inline-block;
 `;
 
 const PanelIndicator = styled.p`
@@ -236,7 +196,6 @@ border-style: none;
 
 
 `;
-const TextPurple = styled.p``;
 
 const CeneteredContainer = styled.div`
   display: block;
@@ -256,9 +215,6 @@ const TextLeft = styled.p`
   text-align: left;
   color: ${colors.comparePageText};
 `;
-const TitleL = styled.h1`
-  color: #009ca3;
-`;
 
 type CompareProps = {
   contraceptives: [Contraceptive];
@@ -272,7 +228,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   const [method1, setMethod1] = useState<number>(-1);
   const [method2, setMethod2] = useState<number>(-1);
 
-  const AboutUses: AboutUseProps = {
+  const AboutUseContent: AboutUseProps = {
     howItWorks: contraceptives[method1]?.howItWorks,
     howItWorksRight: contraceptives[method2]?.howItWorks,
     usePatternHighBound: contraceptives[method1]?.usePatternHighBound,
@@ -281,7 +237,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
   };
 
-  const Efficacys: EfficacyProps = {
+  const EfficacyContent: EfficacyProps = {
     effectiveRate: contraceptives[method1]?.effectiveRate,
     effectiveRateRight: contraceptives[method2]?.effectiveRate,
     whenItStartsToWork: contraceptives[method1]?.whenItStartsToWork,
@@ -292,7 +248,17 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     howLongUntilFertilityRight: contraceptives[method2]?.howLongUntilFertility,
   };
 
-  const PracticalQuestionsProps: PracticalQuestionsProps = {
+  const MechanismContent: MechanismProps = {
+    howItWorks: contraceptives[method1]?.howItWorks,
+    howItWorksRight: contraceptives[method2]?.howItWorks,
+    healthRisks: contraceptives[method1]?.healthRisks,
+    healthRisksRight: contraceptives[method2]?.healthRisks,
+    warning: contraceptives[method1]?.warning,
+    warningRight: contraceptives[method2]?.warning,
+    whoCantUse: contraceptives[method1]?.whoCantUse,
+    whoCantUseRight: contraceptives[method2]?.whoCantUse,
+  };
+  const PracticalQuestionsContent: PracticalQuestionsProps = {
     whereToAccessLeft: contraceptives[method1]?.whereToAccess,
     whereToAccessRight: contraceptives[method2]?.whereToAccess,
     whoWillAdministerLeft: contraceptives[method1]?.whoAdministers,
@@ -303,12 +269,12 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     costHighRight: contraceptives[method2]?.costMax,
   };
 
-  const AdditionalInfoProps: AdditionalInfoProps = {
+  const AdditionalInfoContent: AdditionalInfoProps = {
     thingsToKnowLeft: contraceptives[method1]?.thingsToKnow,
     thingsToKnowRight: contraceptives[method2]?.thingsToKnow,
   };
 
-  console.log(PracticalQuestionsProps);
+  console.log(PracticalQuestions);
 
   const SummaryItem = (props): ReactElement => {
     return (
@@ -337,16 +303,16 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   const headers = [
     {
       header: 'About use',
-      reactContent: <AboutUse {...AboutUses} />,
+      reactContent: <AboutUse {...AboutUseContent} />,
     },
     {
       header: 'Efficacy',
-      reactContent: <Efficacy {...Efficacys} />,
+      reactContent: <Efficacy {...EfficacyContent} />,
     },
     {
       header: 'Effect',
       reactContent: (
-        <EmptyContainer>
+        <div>
           {Title('Non-contraceptive benefits')}
           <Row>
             <Col span={6}>
@@ -387,64 +353,20 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               <SaveImage></SaveImage>
             </Col>
           </Row>
-        </EmptyContainer>
+        </div>
       ),
     },
     {
       header: 'Mechanism',
-      reactContent: (
-        <EmptyContainer>
-          {Title('How it works?')}
-          <Tabss defaultActiveKey="1" centered>
-            <TabPane tab={<TextPurple>Condom</TextPurple>} key="1">
-              <TextLong>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu
-                varius libero. Sed eu laoreet mauris, ac interdum enim.{' '}
-              </TextLong>
-            </TabPane>
-            <TabPane tab={<TextPurple>Implant</TextPurple>} key="2">
-              <TextLong>
-                The implant releases the hormone progestogen into your
-                bloodstream, which prevents the release of an egg each month
-                (ovulation) to prevent pregnancy.
-              </TextLong>
-            </TabPane>
-          </Tabss>
-          {Title('Health Risk')}
-          <Tabss defaultActiveKey="1" centered>
-            <TabPane tab={<TextPurple>Condom</TextPurple>} key="1">
-              <TextLong>
-                Reactions to latex can include rash, hives, runny nose, and in
-                severe cases tightening of the airways and loss of blood
-                pressure. If you or your partner is allergic to latex, a
-                polyurethane or lambskin condom may be an alternative. * Tell
-                your doctor or nurse if you have any unexpected symptoms while
-                using Nexplanon.{' '}
-              </TextLong>
-            </TabPane>
-            <TabPane tab={<TextPurple>Implant</TextPurple>} key="2">
-              <TextLong>
-                The implant releases the hormone progestogen into your
-                bloodstream, which prevents the release of an egg each month
-                (ovulation) to prevent pregnancy.
-              </TextLong>
-            </TabPane>
-          </Tabss>
-          {Title("Who Can't Use")}
-          <Text>
-            Check with your doctor on your medical history and see if the
-            methods are appropriate with your health condition.
-          </Text>
-        </EmptyContainer>
-      ),
+      reactContent: <Mechanism {...MechanismContent} />,
     },
     {
       header: 'Practical questions',
-      reactContent: <PracticalQuestions {...PracticalQuestionsProps} />,
+      reactContent: <PracticalQuestions {...PracticalQuestionsContent} />,
     },
     {
       header: 'Additional information',
-      reactContent: <AdditionalInformation {...AdditionalInfoProps} />,
+      reactContent: <AdditionalInformation {...AdditionalInfoContent} />,
     },
   ];
 
