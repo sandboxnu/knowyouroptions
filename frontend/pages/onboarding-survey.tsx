@@ -1,7 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import Survey from '../templates/survey';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import { SurveyKeys } from '../templates/survey';
 import SurveyPill from '../templates/survey/SurveyPill';
@@ -39,6 +38,7 @@ const OnboardingSurvey = (): ReactElement => {
       },
       '/home',
     );
+    //console.log('ive been hit D:');
   };
 
   // create an initial response to have keys
@@ -283,6 +283,8 @@ const OnboardingSurvey = (): ReactElement => {
       />
     );
   };
+
+  console.log('response: ', response);
 
   // DISPLAY
 

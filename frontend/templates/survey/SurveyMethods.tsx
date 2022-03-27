@@ -74,49 +74,56 @@ const MethodCardSelected = styled(MethodCard)`
 `;
 
 const MethodsContainer = styled.div`
-  column-gap: 1rem;
+  column-gap: 0.5rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: left;
-  padding-right: 0;
-  row-gap: 1rem;
+  justify-content: center;
+  row-gap: 0.5rem;
 `;
 
-const MethodsName = styled.div`
-  font-size: 80%;
+const MethodsName = styled.span`
   margin-top: 0.5rem;
-  text-align: center;
 `;
 
 // components
 
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
-  headerSize?: number;
+  boldedWord: string;
   methodInfos: [ReactElement, string][];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
-  totalPages: number;
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyMethods = ({
-  headerSize,
+  boldedWord,
   methodInfos,
   onClickForwards,
   onClickBackwards,
   pageNumber,
   question,
-  totalPages,
+  response,
+  responseKey,
+  setResponse,
+  subHeader,
 }: SurveyMethodsProps): ReactElement => {
-  const [methodsClicked, setMethodsClicked] = useState(new Set());
+  const methodsClickedInit =
+    response[responseKey] === undefined ? [] : response[responseKey];
+  const [methodsClicked, setMethodsClicked] = useState(
+    new Set(methodsClickedInit),
+  );
 
   return (
     <>
       <Survey
-        headerSize={headerSize}
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <Container>
@@ -124,8 +131,8 @@ const SurveyMethods = ({
               {methodInfos.map((method) => {
                 const [MethodIcon, methodName] = method;
 
-                // if this card is selected t
-                const Card = methodsClicked.has(methodName)
+                const isThisMethodHighlighted = methodsClicked.has(methodName);
+                const Card = isThisMethodHighlighted
                   ? MethodCardSelected
                   : MethodCard;
 
@@ -142,6 +149,10 @@ const SurveyMethods = ({
                   }
 
                   setMethodsClicked(new Set(newMethodsClicked));
+
+                  // Update the state that was passed in as a prop
+                  response[responseKey] = Array.from(methodsClicked);
+                  setResponse(response);
                 };
                 return (
                   <Card onClick={onClick} key={methodName}>
@@ -156,7 +167,8 @@ const SurveyMethods = ({
         }
         pageNumber={pageNumber}
         question={question}
-        totalPages={totalPages}
+        smallHeader={true}
+        subHeader={subHeader}
       />
     </>
   );

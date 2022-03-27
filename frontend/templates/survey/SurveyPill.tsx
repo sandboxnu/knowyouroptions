@@ -20,7 +20,6 @@ const PillAnswers = styled(PillContainer)`
     border: 0;
     border-radius: 3rem;
     color: black;
-    font-weight: 500;
     padding: 1rem 3rem;
     width: 100%;
   }
@@ -69,7 +68,7 @@ const PillColumn = ({
 
 export interface SurveyPillProps {
   answers: string[];
-  headerSize?: number;
+  boldedWord: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
@@ -77,12 +76,12 @@ export interface SurveyPillProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
-  totalPages: number;
+  subHeader: string;
 }
 
 const SurveyPill = ({
   answers,
-  headerSize,
+  boldedWord,
   onClickForwards,
   onClickBackwards,
   pageNumber,
@@ -90,12 +89,12 @@ const SurveyPill = ({
   response,
   responseKey,
   setResponse,
-  totalPages,
+  subHeader,
 }: SurveyPillProps): ReactElement => {
   return (
     <>
       <Survey
-        headerSize={headerSize}
+        boldedWord={boldedWord}
         onClick={onClickBackwards}
         Options={
           <PillColumn
@@ -108,7 +107,7 @@ const SurveyPill = ({
         }
         pageNumber={pageNumber}
         question={question}
-        totalPages={totalPages}
+        subHeader={subHeader}
       />
     </>
   );

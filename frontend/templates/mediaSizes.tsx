@@ -32,3 +32,8 @@ export const maxDevice = {
   desktop: `(max-width: ${size.desktop})`,
   desktopL: `(max-width: ${size.desktop})`,
 };
+
+export const colors = {
+  homepageBackground: '#ef8b6f',
+  homepageNavBarDropdown: '#6abdc1',
+};

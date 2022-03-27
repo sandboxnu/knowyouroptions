@@ -8,7 +8,10 @@ import { Benefit } from './entities/benefits.entity';
 import { SideEffect } from './entities/side-effects.entity';
 import { ThingToKnow } from './entities/things-to-know.entity';
 import { Contraceptive } from './entities/contraceptive.entity';
-
+import { User } from './entities/user.entity';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { ContraceptiveModule } from './contraceptive/contraceptive.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,9 +23,12 @@ import { Contraceptive } from './entities/contraceptive.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DB_URL,
-      entities: [Tag, Benefit, SideEffect, ThingToKnow, Contraceptive],
+      entities: [Tag, Benefit, SideEffect, ThingToKnow, Contraceptive, User],
       synchronize: true, // TODO: synchronize true should not be used in a production environment
     }),
+    AuthModule,
+    UserModule,
+    ContraceptiveModule,
   ],
   controllers: [AppController],
   providers: [AppService],

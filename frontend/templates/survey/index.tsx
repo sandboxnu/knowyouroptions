@@ -17,34 +17,37 @@ const Fraction = styled.p`
   font-size: 1.2rem;
 `;
 
-const HeaderDefault = styled(Container)`
-  height: 44%;
-  padding: 1rem 1.5rem;
+const Header = styled(Container)`
+  min-height: 40%;
+  padding: 1.5rem;
 `;
 
-const Header1 = styled(HeaderDefault)`
-  height: 41%;
-`;
-
-const Header2 = styled(HeaderDefault)`
-  height: 39%;
-`;
-
-const Header3 = styled(HeaderDefault)`
-  height: 36%;
+const HeaderSmall = styled(Container)`
+  min-height: 35%;
+  padding: 1.5rem;
 `;
 
 const PageNumber = styled.span`
   color: black;
+  font-family: 'Din 2014';
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 900;
 `;
 
 const Question = styled.h1`
-  color: gray;
+  color: #5d5d5d;
   font-family: 'Roboto';
-  font-size: 1.75rem;
-  font-weight: 300;
+  font-size: 28px;
+  font-weight: lighter;
+  margin-bottom: 0.5rem;
+`;
+
+const Subheader = styled.h6`
+  color: #707070;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 100;
+  margin: 0;
 `;
 
 const Wrapper = styled.div`
@@ -54,53 +57,60 @@ const Wrapper = styled.div`
 `;
 
 // components
-const PageNumberFraction = ({
-  curPage,
-  totalPages,
-}: {
-  curPage: number;
-  totalPages: number;
-}): ReactElement => {
+const PageNumberFraction = ({ number }: { number: number }): ReactElement => {
   return (
     <>
       <Fraction>
-        <PageNumber>{curPage}</PageNumber> / {totalPages}
+        <PageNumber>{number}</PageNumber> / 7
       </Fraction>
     </>
   );
 };
 
 export interface SurveyProps {
-  headerSize?: number;
+  boldedWord: string; // the bolded word in the question
   onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
   question: string;
-  totalPages: number;
+  smallHeader?: boolean;
+  subHeader: string;
 }
 
 const Survey = ({
-  headerSize,
+  boldedWord,
   onClick,
   Options,
   pageNumber,
   question,
-  totalPages,
+  smallHeader,
+  subHeader,
 }: SurveyProps): ReactElement => {
-  const HeaderElm =
-    headerSize === 1
-      ? Header1
-      : headerSize === 2
-      ? Header2
-      : headerSize === 3
-      ? Header3
-      : HeaderDefault;
+  const HeaderElm = smallHeader ? HeaderSmall : Header;
+
+  // escape special characters to use with RegExp
+  function escapeRegExp(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // bold the keyword in the question
+  const makeBold = (question: string, toBold: string) => {
+    const boldedQuestion = question.replace(
+      new RegExp(escapeRegExp(toBold), 'g'),
+      '<b>' + toBold + '</b>',
+    );
+    return boldedQuestion;
+  };
+
   return (
     <Wrapper>
       <HeaderElm>
-        <SvgLeftArrow onClick={onClick} />
-        <PageNumberFraction curPage={pageNumber} totalPages={totalPages} />
-        <Question> {question} </Question>
+        {pageNumber !== 1 && <SvgLeftArrow onClick={onClick} />}
+        <PageNumberFraction number={pageNumber} />
+        <Question
+          dangerouslySetInnerHTML={{ __html: makeBold(question, boldedWord) }}
+        ></Question>
+        <Subheader>{subHeader}</Subheader>
       </HeaderElm>
 
       <Content>{Options}</Content>
@@ -109,3 +119,17 @@ const Survey = ({
 };
 
 export default Survey;
+
+const SurveyKeys = [
+  'PregnancyAge',
+  'SexuallyActiveStage',
+  'TriedMethods',
+  'UsedMethods',
+  'MoreInformationMethods',
+  'WhereEducation',
+  'LookingFor',
+  'Demographics',
+  'Location',
+];
+
+export { SurveyKeys };
