@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../pages/compare';
-import Image from '../../components/compare/Image';
+import StyledImage from '../../components/compare/StyledImage';
 
 // Styling
 export interface AboutUseProps {
@@ -31,43 +31,52 @@ const AboutUse = ({
     <div>
       <Title title="How To Use" />
       <TwoColumns
+        span={6}
         LeftElm={
-          <Image src={`compare/${contraceptiveNameLeft?.toLowerCase()}.svg`} />
+          <div>
+            <StyledImage
+              className="gray subtitle1"
+              src={`compare/${contraceptiveNameLeft?.toLowerCase()}.svg`}
+            />
+            <figcaption className="gray subtitle1">{howItWorks}</figcaption>
+          </div>
         }
         RightElm={
-          <Image src={`compare/${contraceptiveNameRight?.toLowerCase()}.svg`} />
+          <div>
+            <StyledImage
+              className="gray subtitle1"
+              src={`compare/${contraceptiveNameRight?.toLowerCase()}.svg`}
+            />
+            <figcaption className="gray subtitle1">
+              {howItWorksRight}
+            </figcaption>
+          </div>
         }
       />
-      <TwoColumns
-        LeftElm={<Text className="subtitle1 gray">{howItWorks}</Text>}
-        RightElm={<Text className="subtitle1 gray">{howItWorksRight}</Text>}
-      />
+
       <Title title="How often to use?" />
-
       <TwoColumns
+        span={6}
         LeftElm={
-          <Text className="centerText bold teal">
-            Lasts up to {usePatternHighBound} {usePatternUnits}
-          </Text>
+          <div>
+            <Text className="centerText bold teal">
+              Lasts up to {usePatternHighBound} {usePatternUnits}
+            </Text>
+            <Text className="gray">
+              Placed on male tip of the penis, roll it down over the length of
+              the erect penis.
+            </Text>
+          </div>
         }
         RightElm={
-          <Text className="centerText bold teal">
-            Lasts up to {usePatternHighBoundRight} {usePatternUnitsRight}
-          </Text>
-        }
-      />
-
-      <TwoColumns
-        LeftElm={
-          <Text className="gray">
-            Placed on male tip of the penis, roll it down over the length of the
-            erect penis.
-          </Text>
-        }
-        RightElm={
-          <Text className="gray">
-            It is inserted under the skin of your upper arm.
-          </Text>
+          <div>
+            <Text className="centerText bold teal">
+              Lasts up to {usePatternHighBoundRight} {usePatternUnitsRight}
+            </Text>
+            <Text className="gray">
+              It is inserted under the skin of your upper arm.
+            </Text>
+          </div>
         }
       />
     </div>

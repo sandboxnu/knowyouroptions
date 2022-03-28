@@ -31,7 +31,6 @@ const Container = styled.div`
   display: inline-block;
 `;
 export const Text = styled.p`
-  max-width: 400px;
   margin: 0 auto;
   font-family: 'Roboto';
   font-style: normal;
@@ -119,6 +118,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     usePatternHighBoundRight: contraceptives[method2]?.usePatternHighBound,
     usePatternUnits: contraceptives[method1]?.usePatternUnits,
     usePatternUnitsRight: contraceptives[method2]?.usePatternUnits,
+    contraceptiveNameLeft: contraceptives[method1]?.name,
+    contraceptiveNameRight: contraceptives[method2]?.name,
   };
 
   const EfficacyContent: EfficacyProps = {
@@ -159,8 +160,6 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     thingsToKnowLeft: contraceptives[method1]?.thingsToKnow,
     thingsToKnowRight: contraceptives[method2]?.thingsToKnow,
   };
-
-  console.log(PracticalQuestions);
 
   const SummaryItem = (props): ReactElement => {
     return (
