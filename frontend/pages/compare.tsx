@@ -33,7 +33,10 @@ const Container = styled.div`
 export const Text = styled.p`
   max-width: 400px;
   margin: 0 auto;
-  color: #808080;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
 `;
 
 const CircleNumber = styled.div`
@@ -65,6 +68,7 @@ const PanelDrop = styled(Panel)`
 
 const NumberText = styled.p`
   color: white;
+  font-size: 20px;
 `;
 
 const Header = styled.h1`
@@ -100,10 +104,10 @@ type CompareProps = {
   contraceptives: [Contraceptive];
 };
 
-// https://ant.design/components/tabs/ good to use for the Mechnanism tab
 const Compare = (compareProps: CompareProps): ReactElement => {
   const { contraceptives } = compareProps;
   const [value, setValue] = useState<string | string[]>(['']);
+
   // Indicies of selected methods
   const [method1, setMethod1] = useState<number>(-1);
   const [method2, setMethod2] = useState<number>(-1);
@@ -265,24 +269,32 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               };
             })}
           />
-          <Category
-            value={`${contraceptives[method1]?.effectiveRate}% Effective`}
-            valueClass="teal title1"
-            title="Efficacy"
-            titleClass="lightGray subtitle1"
-          />
-          <Category
-            value={`Lasts up to ${contraceptives[method1]?.usePatternHighBound} ${contraceptives[method1]?.usePatternUnits}`}
-            valueClass="teal title1"
-            title="Frequency of use"
-            titleClass="lightGray subtitle1"
-          />
-          <Category
-            value={`\$${contraceptives[method1]?.costMin} - \$${contraceptives[method1]?.costMax}`}
-            valueClass="teal title1"
-            title="Cost"
-            titleClass="lightGray subtitle1"
-          ></Category>
+
+          {contraceptives[method1]?.name != null &&
+          contraceptives[method2]?.name != null ? (
+            <div>
+              <Category
+                value={`${contraceptives[method1]?.effectiveRate}% Effective`}
+                valueClass="teal title1"
+                title="Efficacy"
+                titleClass="lightGray subtitle1"
+              />
+              <Category
+                value={`Lasts up to ${contraceptives[method1]?.usePatternHighBound} ${contraceptives[method1]?.usePatternUnits}`}
+                valueClass="teal title1"
+                title="Frequency of use"
+                titleClass="lightGray subtitle1"
+              />
+              <Category
+                value={`\$${contraceptives[method1]?.costMin} - \$${contraceptives[method1]?.costMax}`}
+                valueClass="teal title1"
+                title="Cost"
+                titleClass="lightGray subtitle1"
+              ></Category>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </Col>
         <Col span="9" offset={2}>
           <StyledDropdown
@@ -294,24 +306,31 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               };
             })}
           />
-          <Category
-            value={`${contraceptives[method2]?.effectiveRate}% Effective`}
-            valueClass="teal title1"
-            title="Efficacy"
-            titleClass="lightGray subtitle1"
-          />
-          <Category
-            value={`Lasts up to ${contraceptives[method2]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
-            valueClass="teal title1"
-            title="Frequency of use"
-            titleClass="lightGray subtitle1"
-          />
-          <Category
-            value={`\$${contraceptives[method2]?.costMin} - \$${contraceptives[method2]?.costMax}`}
-            valueClass="teal title1"
-            title="Cost"
-            titleClass="lightGray subtitle1"
-          ></Category>
+          {contraceptives[method1]?.name != null &&
+          contraceptives[method2]?.name != null ? (
+            <div>
+              <Category
+                value={`${contraceptives[method2]?.effectiveRate}% Effective`}
+                valueClass="teal title1"
+                title="Efficacy"
+                titleClass="lightGray subtitle1"
+              />
+              <Category
+                value={`Lasts up to ${contraceptives[method2]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
+                valueClass="teal title1"
+                title="Frequency of use"
+                titleClass="lightGray subtitle1"
+              />
+              <Category
+                value={`\$${contraceptives[method2]?.costMin} - \$${contraceptives[method2]?.costMax}`}
+                valueClass="teal title1"
+                title="Cost"
+                titleClass="lightGray subtitle1"
+              ></Category>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </Col>
       </Row>
 

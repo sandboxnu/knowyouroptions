@@ -86,26 +86,26 @@ const Mechanism = ({
       <Title title="How it works?"></Title>
       <Tabss defaultActiveKey="1" centered>
         <TabPane tab={contraceptive} key="1">
-          <Text>{howItWorks}</Text>
+          <Text className="gray">{howItWorks}</Text>
         </TabPane>
         <TabPane tab={contraceptiveRight} key="2">
-          <Text>{howItWorksRight}</Text>
+          <Text className="gray">{howItWorksRight}</Text>
         </TabPane>
       </Tabss>
 
       <Title title="Health Risk"></Title>
       <Tabss defaultActiveKey="1" centered>
         <TabPane tab={contraceptive} key="1">
-          <Text>{healthRisks}</Text>
+          <Text className="gray">{healthRisks}</Text>
           <TextLong>{'*' + warning}</TextLong>
           <Title title="Who can't use"></Title>
-          <Text>{whoCantUse}</Text>
+          <Text className="gray">{whoCantUse}</Text>
         </TabPane>
         <TabPane tab={contraceptiveRight} key="2">
-          <Text>{healthRisksRight}</Text>
+          <Text className="gray">{healthRisksRight}</Text>
           <TextLong>{'*' + warningRight}</TextLong>
           <Title title="Who can't use"></Title>
-          <Text>{whoCantUseRight}</Text>
+          <Text className="gray">{whoCantUseRight}</Text>
         </TabPane>
       </Tabss>
     </div>
@@ -113,36 +113,3 @@ const Mechanism = ({
 };
 
 export default Mechanism;
-/*{
-  
-}
-
-{
-  Title('Health Risk');
-}
-<Tabss defaultActiveKey="1" centered>
-  <TabPane tab={<TextPurple>Condom</TextPurple>} key="1">
-    <TextLong>
-      Reactions to latex can include rash, hives, runny nose, and in severe
-      cases tightening of the airways and loss of blood pressure. If you or your
-      partner is allergic to latex, a polyurethane or lambskin condom may be an
-      alternative. * Tell your doctor or nurse if you have any unexpected
-      symptoms while using Nexplanon.{' '}
-    </TextLong>
-  </TabPane>
-  <TabPane tab={<TextPurple>Implant</TextPurple>} key="2">
-    <TextLong>
-      The implant releases the hormone progestogen into your bloodstream, which
-      prevents the release of an egg each month (ovulation) to prevent
-      pregnancy.
-    </TextLong>
-  </TabPane>
-</Tabss>;
-{
-  Title("Who Can't Use");
-}
-<Text>
-  Check with your doctor on your medical history and see if the methods are
-  appropriate with your health condition.
-</Text>;
-*/

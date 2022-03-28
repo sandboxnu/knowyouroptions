@@ -39,8 +39,8 @@ const AboutUse = ({
         }
       />
       <TwoColumns
-        LeftElm={<Text>{howItWorks}</Text>}
-        RightElm={<Text>{howItWorksRight}</Text>}
+        LeftElm={<Text className="subtitle1 gray">{howItWorks}</Text>}
+        RightElm={<Text className="subtitle1 gray">{howItWorksRight}</Text>}
       />
       <Title title="How often to use?" />
 
@@ -59,12 +59,16 @@ const AboutUse = ({
 
       <TwoColumns
         LeftElm={
-          <Text>
+          <Text className="gray">
             Placed on male tip of the penis, roll it down over the length of the
             erect penis.
           </Text>
         }
-        RightElm={<Text>It is inserted under the skin of your upper arm.</Text>}
+        RightElm={
+          <Text className="gray">
+            It is inserted under the skin of your upper arm.
+          </Text>
+        }
       />
     </div>
   );

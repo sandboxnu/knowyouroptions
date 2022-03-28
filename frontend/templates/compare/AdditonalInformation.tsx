@@ -32,7 +32,7 @@ const AdditionalInformation = ({
         RightElm={<div>{thingsToKnowRight.map(categoryMap)}</div>}
       />
       <Title title="Things to notice about this method" />
-      <Text>
+      <Text className="gray">
         Some forms of birth control are considered a violation of certain
         religious laws or cultural traditions. Weigh the risks and benefits of a
         birth control method against your personal convictions.

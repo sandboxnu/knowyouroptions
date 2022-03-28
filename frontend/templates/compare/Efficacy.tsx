@@ -77,7 +77,7 @@ const Efficacy = ({
         span={8}
         LeftElm={
           whenItStartsToWork.length != 1 ? (
-            <ListLetters>
+            <ListLetters className="subtitle1">
               {whenItStartsToWork.map((elm) => (
                 <ListElement>{elm}</ListElement>
               ))}{' '}
@@ -88,7 +88,7 @@ const Efficacy = ({
         }
         RightElm={
           whenItStartsToWorkRight.length != 1 ? (
-            <ListLetters>
+            <ListLetters className="subtitle1">
               {whenItStartsToWorkRight.map((elm) => (
                 <ListElement>{elm}</ListElement>
               ))}{' '}
@@ -105,16 +105,16 @@ const Efficacy = ({
       />
       <Row className="paddingBelow">
         <Col span={9} offset={2}>
-          <Text>{howToStopMethod}</Text>
+          <Text className="gray">{howToStopMethod}</Text>
         </Col>
         <Col span={9} offset={2}>
-          <Text>{howToStopMethodRight}</Text>
+          <Text className="gray">{howToStopMethodRight}</Text>
         </Col>
       </Row>
       <Title title="Getting back to fertility" />
       <TwoColumns
-        LeftElm={<Text>{howLongUntilFertility}</Text>}
-        RightElm={<Text>{howLongUntilFertilityRight}</Text>}
+        LeftElm={<Text className="gray">{howLongUntilFertility}</Text>}
+        RightElm={<Text className="gray">{howLongUntilFertilityRight}</Text>}
       />
     </div>
   );
