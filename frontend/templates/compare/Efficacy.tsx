@@ -4,9 +4,8 @@ import 'antd/dist/antd.css';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../pages/compare';
-import { Row, Col } from 'antd';
-import SvgRemoveImplant from '../../public/remove-implant.svg';
-import SvgPullCondom from '../../public/pull-condom.svg';
+import Category from '../../components/Category';
+import StyledImage from '../../components/compare/StyledImage';
 export interface EfficacyProps {
   effectiveRate: number;
   effectiveRateRight: number;
@@ -16,6 +15,8 @@ export interface EfficacyProps {
   howToStopMethodRight: string;
   howLongUntilFertility: string;
   howLongUntilFertilityRight: string;
+  contraceptiveNameLeft: string;
+  contraceptiveNameRight: string;
 }
 const ListLetters = styled.ol`
   list-style-type: upper-alpha;
@@ -29,19 +30,6 @@ const ListElement = styled.li`
   color: #808080;
 `;
 
-const RemoveImplantImage = styled(SvgRemoveImplant)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const PullCondomImage = styled(SvgPullCondom)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
 const Efficacy = ({
   effectiveRate,
   effectiveRateRight,
@@ -51,28 +39,32 @@ const Efficacy = ({
   howToStopMethodRight,
   howLongUntilFertility,
   howLongUntilFertilityRight,
+  contraceptiveNameLeft,
+  contraceptiveNameRight,
 }: EfficacyProps): ReactElement => {
   return (
     <div>
       <Title title="How well does it prevent preganancy?" />
-      <Row className="noSpace bold teal centerText title1">
-        <Col span={9} offset={2}>
-          {effectiveRate}%
-        </Col>
-        <Col span={9} offset={2}>
-          {effectiveRateRight}%
-        </Col>
-      </Row>
+      <TwoColumns
+        LeftElm={
+          <Category
+            value={`${effectiveRate}%`}
+            valueClass="bold teal centerText title1"
+            title="Effective"
+            titleClass="gray centerText subtitle1"
+          />
+        }
+        RightElm={
+          <Category
+            value={`${effectiveRateRight}%`}
+            valueClass="bold teal centerText title1"
+            title="Effective"
+            titleClass="gray centerText subtitle1"
+          />
+        }
+      />
 
-      <Row className="noSpace centerText">
-        <Col span={9} offset={2}>
-          <Text>Effective</Text>
-        </Col>
-        <Col span={9} offset={2}>
-          <Text>Effective</Text>
-        </Col>
-      </Row>
-      <Title title="When does it starts to work?" />
+      <Title title="When it starts to work?" />
       <TwoColumns
         span={8}
         LeftElm={
@@ -100,17 +92,27 @@ const Efficacy = ({
       />
       <Title title="How can I stop it?" />
       <TwoColumns
-        LeftElm={<PullCondomImage />}
-        RightElm={<RemoveImplantImage />}
+        LeftElm={
+          <div>
+            <StyledImage
+              src={`compare/howtostop/${contraceptiveNameLeft}.svg`}
+            />
+            <figcaption className="gray subtitle1">
+              {howToStopMethod}
+            </figcaption>
+          </div>
+        }
+        RightElm={
+          <div>
+            <StyledImage
+              src={`compare/howtostop/${contraceptiveNameRight}.svg`}
+            />
+            <figcaption className="gray subtitle1">
+              {howToStopMethodRight}
+            </figcaption>
+          </div>
+        }
       />
-      <Row className="paddingBelow">
-        <Col span={9} offset={2}>
-          <Text className="gray">{howToStopMethod}</Text>
-        </Col>
-        <Col span={9} offset={2}>
-          <Text className="gray">{howToStopMethodRight}</Text>
-        </Col>
-      </Row>
       <Title title="Getting back to fertility" />
       <TwoColumns
         LeftElm={<Text className="gray">{howLongUntilFertility}</Text>}

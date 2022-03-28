@@ -131,6 +131,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     howToStopMethodRight: contraceptives[method2]?.howToStop,
     howLongUntilFertility: contraceptives[method1]?.howLongUntilFertility,
     howLongUntilFertilityRight: contraceptives[method2]?.howLongUntilFertility,
+    contraceptiveNameLeft: contraceptives[method1]?.name,
+    contraceptiveNameRight: contraceptives[method2]?.name,
   };
 
   const MechanismContent: MechanismProps = {
