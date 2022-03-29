@@ -18,20 +18,20 @@ const Fraction = styled.p`
 `;
 
 const HeaderDefault = styled(Container)`
-  height: 44%;
+  min-height: 44%;
   padding: 1rem 1.5rem;
 `;
 
 const Header1 = styled(HeaderDefault)`
-  height: 41%;
+  min-height: 41%;
 `;
 
 const Header2 = styled(HeaderDefault)`
-  height: 39%;
+  min-height: 39%;
 `;
 
 const Header3 = styled(HeaderDefault)`
-  height: 36%;
+  min-height: 36%;
 `;
 
 const PageNumber = styled.span`
