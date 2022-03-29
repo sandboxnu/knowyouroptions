@@ -1,10 +1,8 @@
 import { Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import { ReactElement } from 'react';
 import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import SvgDownArrow from '../public/down-arrow.svg';
-import { Contraceptive } from '../../backend/src/entities/contraceptive.entity';
 
 const StyledArrow = styled(SvgDownArrow)`
   align-self: center;
@@ -32,6 +30,7 @@ type MenuItemInfo = {
 type DropdownProps = {
   title: string;
   menuItemInfos: MenuItemInfo[];
+  filter: number[];
 };
 
 const CompareDropdown = (dropdownProps: DropdownProps): ReactElement => {
@@ -41,7 +40,15 @@ const CompareDropdown = (dropdownProps: DropdownProps): ReactElement => {
     </Menu.Item>
   );
 
-  const menu = <Menu>{dropdownProps.menuItemInfos.map(menuMap)}</Menu>;
+  console.log(dropdownProps.filter);
+
+  const menu = (
+    <Menu>
+      {dropdownProps.menuItemInfos
+        .map(menuMap)
+        .filter((_item, index) => !dropdownProps.filter?.includes(index))}
+    </Menu>
+  );
 
   return (
     <StyledDropdown overlay={menu} trigger={['click']}>

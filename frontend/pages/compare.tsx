@@ -213,6 +213,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
                 action: setMethod1,
               };
             })}
+            filter={[method2]}
           />
         }
         RightElm={
@@ -224,6 +225,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
                 action: setMethod2,
               };
             })}
+            filter={[method1]}
           />
         }
       />
