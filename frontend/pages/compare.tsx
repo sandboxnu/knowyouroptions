@@ -22,6 +22,7 @@ import Category from '../components/Category';
 import AdditionalInformation, {
   AdditionalInfoProps,
 } from '../templates/compare/AdditonalInformation';
+import Effect, { EffectProps } from '../templates/compare/Effect';
 const { Panel } = Collapse;
 const BodyContainer = styled.body``;
 const Container = styled.div`
@@ -135,6 +136,13 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     contraceptiveNameRight: contraceptives[method2]?.name,
   };
 
+  const EffectContent: EffectProps = {
+    benefitsLeft: contraceptives[method1]?.benefits,
+    benefitsRight: contraceptives[method2]?.benefits,
+    sideEffectsLeft: contraceptives[method1]?.sideEffects,
+    sideEffectsRight: contraceptives[method2]?.sideEffects,
+  };
+
   const MechanismContent: MechanismProps = {
     contraceptive: contraceptives[method1]?.name,
     contraceptiveRight: contraceptives[method2]?.name,
@@ -198,50 +206,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     },
     {
       header: 'Effect',
-      reactContent: (
-        <div>
-          {Title('Non-contraceptive benefits')}
-          <Row>
-            <Col span={6}>
-              <BedImage></BedImage>
-            </Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={6}>
-              <BedImage></BedImage>
-            </Col>
-            <Col span={6}></Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-            <Col span={6}></Col>
-          </Row>
-          {Title('Side effects')}
-          <Row>
-            <Col span={6}>
-              <BedImage></BedImage>
-            </Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-            <Col span={6}>
-              <SaveImage></SaveImage>
-            </Col>
-          </Row>
-        </div>
-      ),
+      reactContent: <Effect {...EffectContent} />,
     },
     {
       header: 'Mechanism',
