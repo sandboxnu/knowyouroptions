@@ -11,7 +11,6 @@ import PracticalQuestions, {
 import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import { Collapse } from 'antd';
-import { Row } from 'antd';
 import SvgPlus from '../public/plus.svg';
 import SvgMinus from '../public/minus.svg';
 import { colors } from '../templates/mediaSizes';
@@ -277,7 +276,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   );
 };
 
-Compare.getInitialProps = async (ctx) => {
+Compare.getInitialProps = async () => {
   const res = await axios.get('http://localhost:3001/contraceptive');
   const contraceptiveList = res.data;
   return { contraceptives: contraceptiveList };
