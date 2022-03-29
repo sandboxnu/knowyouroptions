@@ -1,7 +1,7 @@
 import Title from '../../components/compare/Title';
 import { ReactElement } from 'react';
 import { Collapse, Tabs } from 'antd';
-import { Text } from '../../pages/compare';
+import { Text } from '../../components/compare/Title';
 import styled, { keyframes } from 'styled-components';
 const { TabPane } = Tabs;
 export interface MechanismProps {
@@ -16,6 +16,10 @@ export interface MechanismProps {
   whoCantUse: string[];
   whoCantUseRight: string[];
 }
+const LongText = styled(Text)`
+  max-width: 550px;
+`;
+
 const Tabss = styled(Tabs)`
 border-style: none;
 .ant-tabs-ink-bar {
@@ -86,26 +90,26 @@ const Mechanism = ({
       <Title title="How it works?"></Title>
       <Tabss defaultActiveKey="1" centered>
         <TabPane tab={contraceptive} key="1">
-          <Text className="gray">{howItWorks}</Text>
+          <LongText className="gray">{howItWorks}</LongText>
         </TabPane>
         <TabPane tab={contraceptiveRight} key="2">
-          <Text className="gray">{howItWorksRight}</Text>
+          <LongText className="gray">{howItWorksRight}</LongText>
         </TabPane>
       </Tabss>
 
       <Title title="Health Risk"></Title>
       <Tabss defaultActiveKey="1" centered>
         <TabPane tab={contraceptive} key="1">
-          <Text className="gray">{healthRisks}</Text>
-          <TextLong>{'*' + warning}</TextLong>
+          <LongText className="gray">{healthRisks}</LongText>
+          <LongText>{'*' + warning}</LongText>
           <Title title="Who can't use"></Title>
-          <Text className="gray">{whoCantUse}</Text>
+          <LongText className="gray">{whoCantUse}</LongText>
         </TabPane>
         <TabPane tab={contraceptiveRight} key="2">
-          <Text className="gray">{healthRisksRight}</Text>
-          <TextLong>{'*' + warningRight}</TextLong>
+          <LongText className="gray">{healthRisksRight}</LongText>
+          <LongText>{'*' + warningRight}</LongText>
           <Title title="Who can't use"></Title>
-          <Text className="gray">{whoCantUseRight}</Text>
+          <LongText className="gray">{whoCantUseRight}</LongText>
         </TabPane>
       </Tabss>
     </div>
