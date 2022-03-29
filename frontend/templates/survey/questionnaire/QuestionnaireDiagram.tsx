@@ -23,7 +23,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 1.5rem 1rem;
+  position: relative;
+  height: 100%;
 `;
+
 const Pill = styled.div`
   border-radius: 1rem;
   color: #000000;
@@ -35,7 +38,9 @@ const PillContainer = styled(Pill)`
 `;
 
 const SvgDiagramStyled = styled(SvgDiagram)`
-  margin-top=1.5rem;
+  position: absolute;
+  top: 8.3%;
+  margin: 0;
 `;
 
 // styled buttons followed by their clicked counterpart and "endpoints",
@@ -53,7 +58,7 @@ const ButtonPill = styled(PillContainer)`
   padding: 1rem 0rem;
   position: absolute;
   row-gap: 1rem;
-  top: 31.5%;
+  top: 6.37%;
   width: 95px;
   :hover {
     background-color: purple;
@@ -69,11 +74,11 @@ const ButtonPillSelected = styled(ButtonPill)`
 
 const ButtonPillEndpoint = styled(SvgEndpoint)`
   position: absolute;
-  top: 32%;
+  top: 11.2%;
 `;
 
 const ButtonImplant = styled(ButtonPill)`
-  top: 39%;
+  top: 18.15%;
 `;
 
 const ButtonImplantSelected = styled(ButtonImplant)`
@@ -82,12 +87,12 @@ const ButtonImplantSelected = styled(ButtonImplant)`
 `;
 
 const ButtonImplantEndpoint = styled(ButtonPillEndpoint)`
-  left: 70%;
-  top: 45%;
+  left: 67.73%;
+  top: 27.03%;
 `;
 
 const ButtonPatch = styled(ButtonPill)`
-  top: 49.4%;
+  top: 34.94%;
 `;
 
 const ButtonPatchSelected = styled(ButtonPatch)`
@@ -96,12 +101,12 @@ const ButtonPatchSelected = styled(ButtonPatch)`
 `;
 
 const ButtonPatchEndpoint = styled(ButtonPillEndpoint)`
-  left: 65%;
-  top: 52%;
+  left: 60.27%;
+  top: 38.42%;
 `;
 
 const ButtonIUD = styled(ButtonPill)`
-  top: 55.6%;
+  top: 45.17%;
 `;
 
 const ButtonIUDSelected = styled(ButtonIUD)`
@@ -110,11 +115,11 @@ const ButtonIUDSelected = styled(ButtonIUD)`
 `;
 
 const ButtonIUDEndpoint = styled(ButtonPillEndpoint)`
-  top: 57%;
+  top: 47.3%;
 `;
 
 const ButtonRing = styled(ButtonPill)`
-  top: 61.8%;
+  top: 54.83%;
 `;
 
 const ButtonRingSelected = styled(ButtonRing)`
@@ -123,11 +128,11 @@ const ButtonRingSelected = styled(ButtonRing)`
 `;
 
 const ButtonRingEndpoint = styled(ButtonPillEndpoint)`
-  top: 58%;
+  top: 49.42%;
 `;
 
 const ButtonSpermicide = styled(ButtonPill)`
-  top: 68%;
+  top: 66.22%;
 `;
 
 const ButtonSpermicideSelected = styled(ButtonSpermicide)`
@@ -136,12 +141,12 @@ const ButtonSpermicideSelected = styled(ButtonSpermicide)`
 `;
 
 const ButtonSpermicideEndpoint = styled(ButtonPillEndpoint)`
-  top: 59%;
+  top: 52.32%;
 `;
 
 const ButtonShot = styled(ButtonPill)`
   left: 4%;
-  top: 36%;
+  top: 12.93%;
 `;
 
 const ButtonShotSelected = styled(ButtonShot)`
@@ -150,12 +155,12 @@ const ButtonShotSelected = styled(ButtonShot)`
 `;
 
 const ButtonShotEndpoint = styled(ButtonPillEndpoint)`
-  left: 30%
-  top: 42%;
+  left: 30%;
+  top: 23.75%;
 `;
 
 const ButtonSterilization = styled(ButtonShot)`
-  top: 52%;
+  top: 38.8%;
 `;
 
 const ButtonSterilizationSelected = styled(ButtonSterilization)`
@@ -164,17 +169,17 @@ const ButtonSterilizationSelected = styled(ButtonSterilization)`
 `;
 
 const ButtonSterilizationEndpoint = styled(ButtonPillEndpoint)`
-  left: 40%
-  top: 54%;
+  left: 40%;
+  top: 42.08%;
 `;
 
 const ButtonSterilizationEndpoint2 = styled(ButtonPillEndpoint)`
-  left: 63%
+  left: 63%;
   top: 54%;
 `;
 
 const ButtonDiaphragm = styled(ButtonShot)`
-  top: 59%;
+  top: 50%;
 `;
 
 const ButtonDiaphragmSelected = styled(ButtonDiaphragm)`
@@ -183,11 +188,11 @@ const ButtonDiaphragmSelected = styled(ButtonDiaphragm)`
 `;
 
 const ButtonDiaphragmEndpoint = styled(ButtonPillEndpoint)`
-  top: 59%;
+  top: 52.32%;
 `;
 
 const ButtonCondom = styled(ButtonShot)`
-  top: 67%;
+  top: 63.32%;
 `;
 
 const ButtonCondomSelected = styled(ButtonCondom)`
@@ -196,16 +201,24 @@ const ButtonCondomSelected = styled(ButtonCondom)`
 `;
 
 const ButtonCondomEndpoint = styled(ButtonPillEndpoint)`
-  top: 62%;
+  top: 57.14%;
 `;
 
 const ButtonOther = styled(ButtonShot)`
-  top: 80%;
+  top: 77.22%;
 `;
 
 const ButtonOtherSelected = styled(ButtonOther)`
   background-color: purple;
   color: white;
+`;
+
+const MoveForwardButtonStyled = styled(MoveForwardButton)`
+  .parent > * {
+    position: absolute;
+    top: 83.98%;
+    left: 80%;
+  }
 `;
 
 export interface QuestionnaireDiagramProps {
@@ -259,107 +272,8 @@ const QuestionnaireDiagram = ({
         onClick={onClickBackwards}
         Options={
           <Container>
-            <div>
-              <SvgDiagramStyled />
-              <ButtonPillEndpoint className="PillEndpoint" />
-            </div>
-            <ButtonPill className="PillButton"> Pill </ButtonPill>
-
-            <LineComponent
-              from={'PillButton'}
-              fromAnchor={'0% 50%'}
-              to={'PillEndpoint'}
-              toAnchor={'95% 50%'}
-            />
-            <ButtonImplant className="ButtonImplant"> Implant </ButtonImplant>
-            <ButtonImplantEndpoint className="ButtonImplantEndpoint" />
-            <LineComponent
-              from={'ButtonImplant'}
-              fromAnchor={'9% 101%'}
-              to={'ButtonImplantEndpoint'}
-              toAnchor={'80% 20%'}
-            />
-            <ButtonPatch className="ButtonPatch"> Patch </ButtonPatch>
-            <ButtonPatchEndpoint className="ButtonPatchEndpoint " />
-            <LineComponent
-              from={'ButtonPatch'}
-              fromAnchor={'1% 15%'}
-              to={'ButtonPatchEndpoint'}
-              toAnchor={'80% 80%'}
-            />
-            <ButtonIUD className="ButtonIUD"> IUD </ButtonIUD>
-            <ButtonIUDEndpoint className="ButtonIUDEndpoint" />
-            <LineComponent
-              from={'ButtonIUD'}
-              fromAnchor={'1% 15%'}
-              to={'ButtonIUDEndpoint'}
-              toAnchor={'80% 80%'}
-            />
-            <ButtonRing className="ButtonRing"> Ring </ButtonRing>
-            <ButtonRingEndpoint className="ButtonRingEndpoint" />
-            <LineComponent
-              from={'ButtonRing'}
-              fromAnchor={'1% 15%'}
-              to={'ButtonRingEndpoint'}
-              toAnchor={'80% 80%'}
-            />
-            <ButtonSpermicide className="ButtonSpermicide">
-              {' '}
-              Spermicide{' '}
-            </ButtonSpermicide>
-            <ButtonSpermicideEndpoint className="ButtonSpermicideEndpoint" />
-            <LineComponent
-              from={'ButtonSpermicide'}
-              fromAnchor={'1% 15%'}
-              to={'ButtonSpermicideEndpoint'}
-              toAnchor={'80% 80%'}
-            />
-            <ButtonShot className="ButtonShot"> Shot </ButtonShot>
-            <ButtonShotEndpoint className="ButtonShotEndpoint" />
-            <LineComponent
-              from={'ButtonShot'}
-              fromAnchor={'98% 10%'}
-              to={'ButtonShotEndpoint'}
-              toAnchor={'10% 35%'}
-            />
-            <ButtonSterilization className="ButtonSterilization">
-              {' '}
-              Sterilization{' '}
-            </ButtonSterilization>
-            <ButtonSterilizationEndpoint className="ButtonSterilizationEndpoint" />
-            <ButtonSterilizationEndpoint2 className="ButtonSterilizationEndpoint2" />
-            <LineComponent
-              from={'ButtonSterilization'}
-              fromAnchor={'99% 15%'}
-              to={'ButtonSterilizationEndpoint'}
-              toAnchor={'19% 40%'}
-            />
-            <LineComponent
-              from={'ButtonSterilization'}
-              fromAnchor={'99% 15%'}
-              to={'ButtonSterilizationEndpoint2'}
-              toAnchor={'19% 40%'}
-            />
-            <ButtonDiaphragm className="ButtonDiaphragm">
-              {' '}
-              Diaphragm{' '}
-            </ButtonDiaphragm>
-            <ButtonDiaphragmEndpoint />
-            <LineComponent
-              from={'ButtonDiaphragm'}
-              fromAnchor={'99% 16%'}
-              to={'ButtonSpermicideEndpoint'}
-              toAnchor={'20% 70%'}
-            />
-            <ButtonCondom className="ButtonCondom"> Condom </ButtonCondom>
-            <ButtonCondomEndpoint className="ButtonCondomEndpoint" />
-            <LineComponent
-              from={'ButtonCondom'}
-              fromAnchor={'99% 16%'}
-              to={'ButtonCondomEndpoint'}
-              toAnchor={'20% 70%'}
-            />
             <SvgDiagramStyled />
+
             {methodNames.map((methodName) => {
               const isThisMethodHighlighted = methodsClicked.has(methodName);
               const onClick = (
@@ -391,6 +305,12 @@ const QuestionnaireDiagram = ({
                         {methodName}
                       </PillButton>
                       <ButtonPillEndpoint className="PillEndpoint" />
+                      <LineComponent
+                        from={'PillButton'}
+                        fromAnchor={'0 78%'}
+                        to={'PillEndpoint'}
+                        toAnchor={'100% 50%'}
+                      />
                     </>
                   );
                 }
@@ -401,12 +321,18 @@ const QuestionnaireDiagram = ({
                   return (
                     <>
                       <ImplantButton
-                        className="ImplantButton"
+                        className="ButtonImplant"
                         onClick={onClick}
                       >
                         {methodName}
                       </ImplantButton>
-                      <ButtonImplantEndpoint className="ImplantEndpoint" />
+                      <ButtonImplantEndpoint className="ButtonImplantEndpoint" />
+                      <LineComponent
+                        from={'ButtonImplant'}
+                        fromAnchor={'9% 101%'}
+                        to={'ButtonImplantEndpoint'}
+                        toAnchor={'80% 20%'}
+                      />
                     </>
                   );
                 }
@@ -416,10 +342,16 @@ const QuestionnaireDiagram = ({
                     : ButtonPatch;
                   return (
                     <>
-                      <PatchButton className="PatchButton" onClick={onClick}>
+                      <PatchButton className="ButtonPatch" onClick={onClick}>
                         {methodName}
                       </PatchButton>
-                      <ButtonPatchEndpoint className="PatchEndpoint" />
+                      <ButtonPatchEndpoint className="ButtonPatchEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonPatch'}
+                        fromAnchor={'1% 15%'}
+                        to={'ButtonPatchEndpoint'}
+                  toAnchor={'80% 80%'}
+                      />*/}
                     </>
                   );
                 }
@@ -429,10 +361,16 @@ const QuestionnaireDiagram = ({
                     : ButtonIUD;
                   return (
                     <>
-                      <IUDButton className="IUDButton" onClick={onClick}>
+                      <IUDButton className="ButtonIUD" onClick={onClick}>
                         {methodName}
                       </IUDButton>
-                      <ButtonIUDEndpoint className="IUDEndpoint" />
+                      <ButtonIUDEndpoint className="ButtonIUDEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonIUD'}
+                        fromAnchor={'1% 15%'}
+                        to={'ButtonIUDEndpoint'}
+                  toAnchor={'80% 80%'}
+                      />*/}
                     </>
                   );
                 }
@@ -442,10 +380,16 @@ const QuestionnaireDiagram = ({
                     : ButtonRing;
                   return (
                     <>
-                      <RingButton className="RingButton" onClick={onClick}>
+                      <RingButton className="ButtonRing" onClick={onClick}>
                         {methodName}
                       </RingButton>
-                      <ButtonRingEndpoint className="RingEndpoint" />
+                      <ButtonRingEndpoint className="ButtonRingEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonRing'}
+                        fromAnchor={'1% 15%'}
+                        to={'ButtonRingEndpoint'}
+                  toAnchor={'80% 80%'}
+                      />*/}
                     </>
                   );
                 }
@@ -456,12 +400,18 @@ const QuestionnaireDiagram = ({
                   return (
                     <>
                       <SpermicideButton
-                        className="PillSpermicide"
+                        className="ButtonSpermicide"
                         onClick={onClick}
                       >
                         {methodName}
                       </SpermicideButton>
-                      <ButtonSpermicideEndpoint className="SpermicideEndpoint" />
+                      <ButtonSpermicideEndpoint className="ButtonSpermicideEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonSpermicide'}
+                        fromAnchor={'1% 15%'}
+                        to={'ButtonSpermicideEndpoint'}
+                  toAnchor={'80% 80%'}
+                      />*/}
                     </>
                   );
                 }
@@ -471,10 +421,16 @@ const QuestionnaireDiagram = ({
                     : ButtonShot;
                   return (
                     <>
-                      <ShotButton className="ShotButton" onClick={onClick}>
+                      <ShotButton className="ButtonShot" onClick={onClick}>
                         {methodName}
                       </ShotButton>
-                      <ButtonShotEndpoint className="ShotEndpoint" />
+                      <ButtonShotEndpoint className="ButtonShotEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonShot'}
+                        fromAnchor={'98% 10%'}
+                        to={'ButtonShotEndpoint'}
+                  toAnchor={'10% 35%'}
+                      />*/}
                     </>
                   );
                 }
@@ -485,12 +441,18 @@ const QuestionnaireDiagram = ({
                   return (
                     <>
                       <SterilizationButton
-                        className="SterilizationButton"
+                        className="ButtonSterilization"
                         onClick={onClick}
                       >
                         {methodName}
                       </SterilizationButton>
-                      <ButtonSterilizationEndpoint className="SterilizationEndpoint" />
+                      <ButtonSterilizationEndpoint className="ButtonSterilizationEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonSterilization'}
+                        fromAnchor={'99% 15%'}
+                        to={'ButtonSterilizationEndpoint'}
+                  toAnchor={'19% 40%'}
+                      />*/}
                     </>
                   );
                 }
@@ -501,12 +463,18 @@ const QuestionnaireDiagram = ({
                   return (
                     <>
                       <DiaphragmButton
-                        className="DiaphragmButton"
+                        className="ButtonDiaphragm"
                         onClick={onClick}
                       >
                         {methodName}
                       </DiaphragmButton>
-                      <ButtonDiaphragmEndpoint className="DiaphragmEndpoint" />
+                      <ButtonDiaphragmEndpoint className="ButtonSpermicideEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonDiaphragm'}
+                        fromAnchor={'99% 16%'}
+                        to={'ButtonSpermicideEndpoint'}
+                  toAnchor={'20% 70%'}
+                      />*/}
                     </>
                   );
                 }
@@ -516,10 +484,29 @@ const QuestionnaireDiagram = ({
                     : ButtonCondom;
                   return (
                     <>
-                      <CondomButton className="CondomButton" onClick={onClick}>
+                      <CondomButton className="ButtonCondom" onClick={onClick}>
                         {methodName}
                       </CondomButton>
-                      <ButtonCondomEndpoint className="CondomEndpoint" />
+                      <ButtonCondomEndpoint className="ButtonCondomEndpoint" />
+                      {/*<LineComponent
+                        from={'ButtonCondom'}
+                        fromAnchor={'99% 16%'}
+                        to={'ButtonCondomEndpoint'}
+                  toAnchor={'20% 70%'}
+                      />*/}
+                    </>
+                  );
+                }
+                case 'Other': {
+                  const OtherButton = isThisMethodHighlighted
+                    ? ButtonOtherSelected
+                    : ButtonOther;
+                  return (
+                    <>
+                      <OtherButton onClick={onClick}>
+                        {' '}
+                        {methodName}{' '}
+                      </OtherButton>
                     </>
                   );
                 }
@@ -528,8 +515,7 @@ const QuestionnaireDiagram = ({
                 }
               }
             })}
-            <ButtonOther> Other </ButtonOther>
-            <MoveForwardButton onClick={onClickForwards} />
+            <MoveForwardButtonStyled onClick={onClickForwards} />
           </Container>
         }
         pageNumber={pageNumber}
