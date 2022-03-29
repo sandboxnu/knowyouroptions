@@ -37,7 +37,8 @@ const PillContainer = styled(Pill)`
 const SvgDiagramStyled = styled(SvgDiagram)`
   position: absolute;
   top: 8.3%;
-  left: 25.07%;
+  transform: translateX(-50%);
+  left: 52%;
 `;
 
 // styled buttons followed by their clicked counterpart and "endpoints",
@@ -72,7 +73,7 @@ const ButtonPillSelected = styled(ButtonPill)`
 const ButtonPillEndpoint = styled(SvgEndpoint)`
   left: 52%;
   position: absolute;
-  top: 11.2%;
+  top: 60px;
 `;
 
 const ButtonImplant = styled(ButtonPill)`
@@ -85,8 +86,8 @@ const ButtonImplantSelected = styled(ButtonImplant)`
 `;
 
 const ButtonImplantEndpoint = styled(ButtonPillEndpoint)`
-  left: 67.73%;
-  top: 27.03%;
+  transform: translateX(59px);
+  top: 140px;
 `;
 
 const ButtonPatch = styled(ButtonPill)`
@@ -99,8 +100,8 @@ const ButtonPatchSelected = styled(ButtonPatch)`
 `;
 
 const ButtonPatchEndpoint = styled(ButtonPillEndpoint)`
-  left: 60.27%;
-  top: 38.42%;
+  transform: translateX(31px);
+  top: 199px;
 `;
 
 const ButtonIUD = styled(ButtonPill)`
@@ -113,7 +114,7 @@ const ButtonIUDSelected = styled(ButtonIUD)`
 `;
 
 const ButtonIUDEndpoint = styled(ButtonPillEndpoint)`
-  top: 47.3%;
+  top: 246px;
 `;
 
 const ButtonRing = styled(ButtonPill)`
@@ -126,7 +127,7 @@ const ButtonRingSelected = styled(ButtonRing)`
 `;
 
 const ButtonRingEndpoint = styled(ButtonPillEndpoint)`
-  top: 49.42%;
+  top: 256px;
 `;
 
 const ButtonSpermicide = styled(ButtonPill)`
@@ -139,7 +140,7 @@ const ButtonSpermicideSelected = styled(ButtonSpermicide)`
 `;
 
 const ButtonSpermicideEndpoint = styled(ButtonPillEndpoint)`
-  top: 52.32%;
+  top: 271px;
 `;
 
 const ButtonShot = styled(ButtonPill)`
@@ -153,8 +154,8 @@ const ButtonShotSelected = styled(ButtonShot)`
 `;
 
 const ButtonShotEndpoint = styled(ButtonPillEndpoint)`
-  left: 31.57%;
-  top: 23.75%;
+  top: 125px;
+  transform: translateX(-72px);
 `;
 
 const ButtonSterilization = styled(ButtonShot)`
@@ -167,18 +168,18 @@ const ButtonSterilizationSelected = styled(ButtonSterilization)`
 `;
 
 const ButtonSterilizationEndpoint = styled(ButtonPillEndpoint)`
-  left: 40%;
-  top: 42.08%;
+  top: 218px;
+  transform: translateX(-40px);
 `;
 
 const ButtonSterilizationEndpoint2 = styled(ButtonPillEndpoint)`
-  left: 60.53%;
-  top: 42.08%;
+  top: 218px;
+  transform: translateX(29px);
 `;
 
 // invisible point to connect two perpendicular lines
 const CornerPoint = styled(ButtonSterilizationEndpoint2)`
-  top: 43%;
+  top: 223px;
   visibility: hidden;
 `;
 
@@ -192,7 +193,7 @@ const ButtonDiaphragmSelected = styled(ButtonDiaphragm)`
 `;
 
 const ButtonDiaphragmEndpoint = styled(ButtonPillEndpoint)`
-  top: 52.32%;
+  top: 271px;
 `;
 
 const ButtonCondom = styled(ButtonShot)`
@@ -205,7 +206,7 @@ const ButtonCondomSelected = styled(ButtonCondom)`
 `;
 
 const ButtonCondomEndpoint = styled(ButtonPillEndpoint)`
-  top: 57.14%;
+  top: 297px;
 `;
 
 const ButtonOther = styled(ButtonShot)`
@@ -332,7 +333,7 @@ const QuestionnaireDiagram = ({
                         from={'ButtonImplant'}
                         fromAnchor={'9% 101%'}
                         to={'ButtonImplantEndpoint'}
-                        toAnchor={'80% 20%'}
+                        toAnchor={'100% 50%'}
                       />
                     </div>
                   );
@@ -460,11 +461,11 @@ const QuestionnaireDiagram = ({
                         from={'ButtonSterilization'}
                         fromAnchor={'99% 60%'}
                         to={'SterilizationCornerPoint'}
-                        toAnchor={'50% 50%'}
+                        toAnchor={'53% 50%'}
                       />
                       <LineComponent
                         from={'SterilizationCornerPoint'}
-                        fromAnchor={'50% 78%'}
+                        fromAnchor={'50% 70%'}
                         to={'ButtonSterilizationEndpoint2'}
                         toAnchor={'50% 100%'}
                       />
