@@ -9,11 +9,9 @@ import PracticalQuestions, {
   PracticalQuestionsProps,
 } from '../templates/compare/PracticalQuestions';
 import 'antd/dist/antd.css';
-import styled, { keyframes } from 'styled-components';
-import { Collapse, Tabs } from 'antd';
-import { Row, Col } from 'antd';
-import SvgBed from '../public/bed-image.svg';
-import SvgSave from '../public/save.svg';
+import styled from 'styled-components';
+import { Collapse } from 'antd';
+import { Row } from 'antd';
 import SvgPlus from '../public/plus.svg';
 import SvgMinus from '../public/minus.svg';
 import { colors } from '../templates/mediaSizes';
@@ -23,8 +21,11 @@ import AdditionalInformation, {
   AdditionalInfoProps,
 } from '../templates/compare/AdditonalInformation';
 import Effect, { EffectProps } from '../templates/compare/Effect';
+import TwoColumns from '../components/compare/TwoColumns';
 const { Panel } = Collapse;
-const BodyContainer = styled.body``;
+const BodyContainer = styled.body`
+  margin-top: 100px;
+`;
 const Container = styled.div`
   width: 80%;
   margin: 0;
@@ -71,27 +72,6 @@ const NumberText = styled.p`
   font-size: 20px;
 `;
 
-const Header = styled.h1`
-  padding-top: 1vh;
-  padding-bottom: 3vh;
-  text-align: center;
-  margin: 0;
-`;
-
-const BedImage = styled(SvgBed)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
-const SaveImage = styled(SvgSave)`
-  display: block;
-  margin-bottom: 2vh;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 const PlusImage = styled(SvgPlus)`
   fill: ${colors.comparePageText};
 `;
@@ -108,7 +88,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   const { contraceptives } = compareProps;
   const [value, setValue] = useState<string | string[]>(['']);
 
-  // Indicies of selected methods
+  // Indices of selected methods
   const [method1, setMethod1] = useState<number>(-1);
   const [method2, setMethod2] = useState<number>(-1);
 
@@ -171,30 +151,6 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     thingsToKnowRight: contraceptives[method2]?.thingsToKnow,
   };
 
-  const SummaryItem = (props): ReactElement => {
-    return (
-      <div>
-        <h1>{props.title}</h1>
-        <p>{props.subtitle}</p>
-      </div>
-    );
-  };
-
-  const Title = (title: string): ReactElement => {
-    return <Col span={24}>{<Header>{title}</Header>}</Col>;
-  };
-  const ColText = (
-    leftText: ReactElement,
-    rightText: ReactElement,
-  ): ReactElement => {
-    return (
-      <Row>
-        <Col span={12}>{leftText}</Col>
-        <Col span={12}>{rightText}</Col>
-      </Row>
-    );
-  };
-
   const headers = [
     {
       header: 'About use',
@@ -222,10 +178,34 @@ const Compare = (compareProps: CompareProps): ReactElement => {
     },
   ];
 
+  const shouldShowSections = method1 >= 0 && method2 >= 0;
+  const summaryOfMethod = (methodIndex: number) => (
+    <div>
+      <Category
+        value={`${contraceptives[methodIndex]?.effectiveRate}% Effective`}
+        valueClass="teal title1"
+        title="Efficacy"
+        titleClass="lightGray subtitle1"
+      />
+      <Category
+        value={`Lasts up to ${contraceptives[methodIndex]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
+        valueClass="teal title1"
+        title="Frequency of use"
+        titleClass="lightGray subtitle1"
+      />
+      <Category
+        value={`\$${contraceptives[methodIndex]?.costMin} - \$${contraceptives[methodIndex]?.costMax}`}
+        valueClass="teal title1"
+        title="Cost"
+        titleClass="lightGray subtitle1"
+      ></Category>
+    </div>
+  );
+
   return (
     <BodyContainer>
-      <Row>
-        <Col span="9" offset={2}>
+      <TwoColumns
+        LeftElm={
           <StyledDropdown
             title={contraceptives[method1]?.name ?? 'Method 1'}
             menuItemInfos={contraceptives.map((c) => {
@@ -235,34 +215,8 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               };
             })}
           />
-
-          {contraceptives[method1]?.name != null &&
-          contraceptives[method2]?.name != null ? (
-            <div>
-              <Category
-                value={`${contraceptives[method1]?.effectiveRate}% Effective`}
-                valueClass="teal title1"
-                title="Efficacy"
-                titleClass="lightGray subtitle1"
-              />
-              <Category
-                value={`Lasts up to ${contraceptives[method1]?.usePatternHighBound} ${contraceptives[method1]?.usePatternUnits}`}
-                valueClass="teal title1"
-                title="Frequency of use"
-                titleClass="lightGray subtitle1"
-              />
-              <Category
-                value={`\$${contraceptives[method1]?.costMin} - \$${contraceptives[method1]?.costMax}`}
-                valueClass="teal title1"
-                title="Cost"
-                titleClass="lightGray subtitle1"
-              ></Category>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </Col>
-        <Col span="9" offset={2}>
+        }
+        RightElm={
           <StyledDropdown
             title={contraceptives[method2]?.name ?? 'Method 2'}
             menuItemInfos={contraceptives.map((c) => {
@@ -272,66 +226,53 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               };
             })}
           />
-          {contraceptives[method1]?.name != null &&
-          contraceptives[method2]?.name != null ? (
-            <div>
-              <Category
-                value={`${contraceptives[method2]?.effectiveRate}% Effective`}
-                valueClass="teal title1"
-                title="Efficacy"
-                titleClass="lightGray subtitle1"
-              />
-              <Category
-                value={`Lasts up to ${contraceptives[method2]?.usePatternHighBound} ${contraceptives[method2]?.usePatternUnits}`}
-                valueClass="teal title1"
-                title="Frequency of use"
-                titleClass="lightGray subtitle1"
-              />
-              <Category
-                value={`\$${contraceptives[method2]?.costMin} - \$${contraceptives[method2]?.costMax}`}
-                valueClass="teal title1"
-                title="Cost"
-                titleClass="lightGray subtitle1"
-              ></Category>
-            </div>
-          ) : (
-            <div></div>
-          )}
-        </Col>
-      </Row>
+        }
+      />
 
-      <Collapse
-        defaultActiveKey={['-1']}
-        bordered={false}
-        onChange={(e) => setValue(e)}
-      >
-        {headers.map((h, i) => (
-          <PanelDrop
-            showArrow={false}
-            extra={
-              <TextHeader>
-                {value.includes(i.toString()) ? (
-                  <MinusImage></MinusImage>
-                ) : (
-                  <PlusImage></PlusImage>
-                )}
-              </TextHeader>
-            }
-            header={
-              <Container>
-                <TextHeader>{h.header}</TextHeader>
-                <CircleNumber>
-                  <NumberText>{i + 1 + ''}</NumberText>
-                </CircleNumber>
-              </Container>
-            }
-            key={i + ''}
-          >
-            {h.reactContent}
-          </PanelDrop>
-        ))}
-      </Collapse>
-      <Row></Row>
+      {shouldShowSections ? (
+        <TwoColumns
+          LeftElm={summaryOfMethod(method1)}
+          RightElm={summaryOfMethod(method2)}
+        />
+      ) : (
+        <div />
+      )}
+
+      {shouldShowSections ? (
+        <Collapse
+          defaultActiveKey={['-1']}
+          bordered={false}
+          onChange={(e) => setValue(e)}
+        >
+          {headers.map((h, i) => (
+            <PanelDrop
+              showArrow={false}
+              extra={
+                <TextHeader>
+                  {value.includes(i.toString()) ? (
+                    <MinusImage></MinusImage>
+                  ) : (
+                    <PlusImage></PlusImage>
+                  )}
+                </TextHeader>
+              }
+              header={
+                <Container>
+                  <TextHeader>{h.header}</TextHeader>
+                  <CircleNumber>
+                    <NumberText>{i + 1 + ''}</NumberText>
+                  </CircleNumber>
+                </Container>
+              }
+              key={i + ''}
+            >
+              {h.reactContent}
+            </PanelDrop>
+          ))}
+        </Collapse>
+      ) : (
+        <div />
+      )}
     </BodyContainer>
   );
 };
