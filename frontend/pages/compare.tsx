@@ -207,23 +207,27 @@ const Compare = (compareProps: CompareProps): ReactElement => {
         LeftElm={
           <StyledDropdown
             title={contraceptives[method1]?.name ?? 'Method 1'}
-            menuItemInfos={contraceptives.map((c) => {
-              return {
-                title: c.name,
-                action: setMethod1,
-              };
-            })}
+            menuItemInfos={contraceptives
+              .filter((_c, i) => i !== method2)
+              .map((c) => {
+                return {
+                  title: c.name,
+                  action: setMethod1,
+                };
+              })}
           />
         }
         RightElm={
           <StyledDropdown
             title={contraceptives[method2]?.name ?? 'Method 2'}
-            menuItemInfos={contraceptives.map((c) => {
-              return {
-                title: c.name,
-                action: setMethod2,
-              };
-            })}
+            menuItemInfos={contraceptives
+              .filter((_c, i) => i !== method1)
+              .map((c) => {
+                return {
+                  title: c.name,
+                  action: setMethod2,
+                };
+              })}
           />
         }
       />
