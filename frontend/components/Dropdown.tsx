@@ -40,8 +40,6 @@ const CompareDropdown = (dropdownProps: DropdownProps): ReactElement => {
     </Menu.Item>
   );
 
-  console.log(dropdownProps.filter);
-
   const menu = (
     <Menu>
       {dropdownProps.menuItemInfos

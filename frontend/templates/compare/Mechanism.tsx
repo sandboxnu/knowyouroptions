@@ -1,6 +1,6 @@
 import Title from '../../components/compare/Title';
 import { ReactElement } from 'react';
-import { Collapse, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import { Text } from '../../components/compare/Title';
 import styled, { keyframes } from 'styled-components';
 const { TabPane } = Tabs;
@@ -31,24 +31,21 @@ border-style: none;
   
 }
 .ant-tabs-tab.ant-tabs-tab-active  .ant-tabs-tab-btn {
-    
-    color: #3F3F3F;
-    font-weight:bold;
-    font-size: 20px;
+  color: #3F3F3F;
+  font-weight:bold;
+  font-size: 20px;
 }
 .ant-tabs-tab-btn{
-    color:gray;
-    font-size: 20px;
+  color:gray;
+  font-size: 20px;
 }
 .ant-tabs-tab-btn:hover {
-    color: #3F3F3F !important;
+  color: #3F3F3F !important;
   
 }
 .ant-tabs-nav::before{
-    display:none;
-    color:blue;
-
-
+  display:none;
+  color:blue;
 }
 .ant-tabs-ink-bar::after {
  content: " ";
@@ -69,10 +66,6 @@ border-style: none;
 
 `;
 
-const TextLong = styled.p`
-  width: 60%;
-  margin: auto;
-`;
 const Mechanism = ({
   contraceptive,
   contraceptiveRight,

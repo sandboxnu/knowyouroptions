@@ -1,15 +1,22 @@
 import { ReactElement } from 'react';
 import 'antd/dist/antd.css';
+import styled from 'styled-components';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
-import { Text } from '../../pages/compare';
+import { Text } from '../../components/compare/Title';
 import { ThingToKnow } from '../../../backend/src/entities/things-to-know.entity';
 import Category from '../../components/Category';
+import 'antd/dist/antd.css';
 
+import { Row, Col } from 'antd';
 export interface AdditionalInfoProps {
   thingsToKnowLeft: ThingToKnow[];
   thingsToKnowRight: ThingToKnow[];
 }
+
+const LongText = styled(Text)`
+  max-width: 550px;
+`;
 
 const AdditionalInformation = ({
   thingsToKnowLeft = [],
@@ -32,11 +39,11 @@ const AdditionalInformation = ({
         RightElm={<div>{thingsToKnowRight.map(categoryMap)}</div>}
       />
       <Title title="Things to notice about this method" />
-      <Text className="gray">
+      <LongText className="gray">
         Some forms of birth control are considered a violation of certain
         religious laws or cultural traditions. Weigh the risks and benefits of a
         birth control method against your personal convictions.
-      </Text>
+      </LongText>
     </div>
   );
 };
