@@ -7,7 +7,7 @@ import OnboardingSurvey from './onboarding-survey';
 import Questionnaire from './questionnaire';
 
 const Home: NextPage = () => {
-  return <OnboardingSurvey />;
+  return <Questionnaire />;
 };
 
 export default Home;
