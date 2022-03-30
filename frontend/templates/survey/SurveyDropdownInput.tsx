@@ -208,6 +208,7 @@ export interface SurveyDropdownInputProps {
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
   subHeader: string;
+  totalPages: number;
 }
 
 const SurveyDropdownInput = ({
@@ -224,6 +225,7 @@ const SurveyDropdownInput = ({
   responseKey,
   setResponse,
   subHeader,
+  totalPages,
 }: SurveyDropdownInputProps): ReactElement => {
   const submitOnClick = (event) => {
     onClickForwards(event);
@@ -269,6 +271,7 @@ const SurveyDropdownInput = ({
         pageNumber={pageNumber}
         question={question}
         subHeader={subHeader}
+        totalPages={totalPages}
       />
     </>
   );

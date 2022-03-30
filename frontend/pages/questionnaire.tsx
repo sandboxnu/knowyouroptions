@@ -84,6 +84,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={1}
@@ -91,6 +92,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[1]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -106,6 +108,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="top priority"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={2}
@@ -113,6 +116,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[2]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -127,10 +131,11 @@ const Questionnaire = (): ReactElement => {
       'Stabilizing period cycle',
       'Stabilizing mood swings',
       'Input other needs here',
-    ]; // TODO: Input box
+    ];
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord="benefit"
         headerSize={1}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -139,13 +144,13 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[3]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
   };
 
   // PAGE 4.1
-  // TODO: make font size adjustable
   const sideEffectInfos: [ReactElement, string][] = [
     [<SvgCramps />, 'Cramps'],
     [<SvgAches />, 'Muscle soreness / Back ache'],
@@ -160,18 +165,21 @@ const Questionnaire = (): ReactElement => {
     [<SvgMood />, 'Mood Depression'],
   ];
 
+  // TODO: move next button up
   const SideEffectsPage = ({}): ReactElement => {
     return (
       <SurveyMethods
-        headerSize={2}
+        boldedWord="side effects"
+        headerSize={3}
         methodInfos={sideEffectInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={4}
-        question="What side effects can't you tolerate?"
+        question="What side effects do you want to avoid?"
         response={response}
         responseKey={QuestionnaireKeys[4]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -191,6 +199,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord="frequently"
         headerSize={3}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -199,13 +208,13 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[5]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
   };
 
   // PAGE 6
-  // TODO: body
   const PreferredMethodsPage = ({}): ReactElement => {
     const methods = [
       'Pill',
@@ -222,6 +231,7 @@ const Questionnaire = (): ReactElement => {
     ];
     return (
       <QuestionnaireDiagram
+        boldedWord=""
         headerSize={3}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -230,6 +240,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[6]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -241,6 +252,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={7}
@@ -248,6 +260,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[7]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -263,6 +276,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord="access"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={8}
@@ -270,6 +284,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[8]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -281,6 +296,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="insurance"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={9}
@@ -288,6 +304,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[9]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -306,6 +323,7 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={redirectToHome}
         onClickBackwards={onClickBackwards}
         pageNumber={10}
@@ -313,6 +331,7 @@ const Questionnaire = (): ReactElement => {
         response={response}
         responseKey={QuestionnaireKeys[10]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );

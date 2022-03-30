@@ -225,6 +225,7 @@ const MoveForwardButtonContainer = styled.div`
 `;
 
 export interface QuestionnaireDiagramProps {
+  boldedWord: string;
   headerSize?: number;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -233,10 +234,12 @@ export interface QuestionnaireDiagramProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
   totalPages: number;
 }
 
 const QuestionnaireDiagram = ({
+  boldedWord,
   headerSize,
   onClickForwards,
   onClickBackwards,
@@ -245,6 +248,7 @@ const QuestionnaireDiagram = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
   totalPages,
 }: QuestionnaireDiagramProps): ReactElement => {
   // initialize state with methodsClicked
@@ -271,6 +275,7 @@ const QuestionnaireDiagram = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
@@ -538,6 +543,7 @@ const QuestionnaireDiagram = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
         totalPages={totalPages}
       />
     </>
