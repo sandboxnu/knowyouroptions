@@ -24,7 +24,7 @@ const StyledDropdown = styled(Dropdown)`
 
 type MenuItemInfo = {
   title: string;
-  action: Function;
+  action(n: number): void;
 };
 
 type DropdownProps = {
