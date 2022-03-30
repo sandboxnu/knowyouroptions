@@ -2,6 +2,8 @@ import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
 import { SubmitButton } from './StyledComponents';
+import { DropdownStyled } from './StyledComponents';
+import SVGDownArrow from '../../public/down-arrow.svg';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -16,25 +18,6 @@ const DropdownColumnContainer = styled.div`
   row-gap: 1rem;
 `;
 
-const DropdownStyled = styled.select`
-  align-items: center;
-  background-color: #ffebe7;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  height: 3rem;
-  :hover {
-    cursor: pointer;
-  }
-  & option:hover {
-    box-shadow: red;
-    cursor: pointer;
-    font-color: red;
-  }
-  padding: 0.75rem 0.75rem;
-  width: 100%;
-`;
-
 const InputStyled = styled.input`
   align-items: center;
   background-color: #ffebe7;
@@ -47,7 +30,7 @@ const InputStyled = styled.input`
     border-style: solid;
     border-color: purple;
   }
-  padding: 0.75rem 0.75rem;
+  padding: 0rem 1rem;
   ::placeholder {
   }
   width: 100%;
@@ -75,6 +58,19 @@ const OptionStyled = styled.option`
   }
 `;
 
+const SubmitButtonStyled = styled.div`
+  background-color: #911d7a;
+  border-radius: 0.25rem;
+  color: white;
+  height: 7vh;
+  justify-content: center;
+  margin-left: auto;
+  margin-top: 3rem;
+  padding: 1rem 4rem;
+  vertical-align: middle;
+  width: 50vw;
+`;
+
 const DropdownColumn = ({
   classNames,
   intro,
@@ -94,15 +90,21 @@ const DropdownColumn = ({
     // index is the position of the answer
     const onChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
       let answers = response[responseKey];
+
+      // if answers has not been set, initialize it
+      // to an array that is the size of the number of dropdowns
       if (answers === undefined || answers.length === 0) {
         answers = [];
         for (let i = 0; i < selectInfos.length; i++) {
           answers.push('');
         }
       }
+      // else, array has already been initialized inside the InputBox
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
+      console.log('dropdown');
+      console.log(response);
     };
     return onChange;
   };
@@ -123,7 +125,11 @@ const DropdownColumn = ({
                 name={labelName}
                 id={labelName}
                 onChange={onChange}
+                IconComponent={SVGDownArrow}
               >
+                <option value={labelName} hidden>
+                  {labelName}
+                </option>
                 {options.map((option) => {
                   return (
                     <>
@@ -142,9 +148,37 @@ const DropdownColumn = ({
 
 const InputBox = ({
   inputQuestion,
+  response,
+  responseKey,
+  selectInfosSize,
+  setResponse,
 }: {
   inputQuestion: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  selectInfosSize: number;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
+  // pass in user answers to the response
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    let answers = response[responseKey];
+
+    // if response value at responseKey has not been set, initialize it
+    // with an array that is the size of the number of dropdowns
+    if (answers === undefined || answers.length === 0) {
+      answers = [];
+      for (let i = 0; i < selectInfosSize; i++) {
+        answers.push('');
+      }
+    }
+    // push the input box value into the array
+    answers[selectInfosSize] = event.currentTarget.value;
+    response[responseKey] = answers;
+    setResponse(response);
+    console.log('input');
+    console.log(response);
+  };
+
   return (
     <>
       <ContentContainer>
@@ -152,6 +186,7 @@ const InputBox = ({
         <InputStyled
           type="text"
           id={inputQuestion}
+          onChange={(e) => onChange(e)}
           placeholder={'Input your ' + inputQuestion}
         />
       </ContentContainer>
@@ -160,6 +195,7 @@ const InputBox = ({
 };
 
 export interface SurveyDropdownInputProps {
+  boldedWord: string;
   dropdownInfos: [string, string[]][];
   headerSize?: number;
   inputQuestion: string;
@@ -171,9 +207,11 @@ export interface SurveyDropdownInputProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
 }
 
 const SurveyDropdownInput = ({
+  boldedWord,
   dropdownInfos,
   headerSize,
   inputQuestion,
@@ -185,6 +223,7 @@ const SurveyDropdownInput = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
 }: SurveyDropdownInputProps): ReactElement => {
   const submitOnClick = (event) => {
     onClickForwards(event);
@@ -205,6 +244,7 @@ const SurveyDropdownInput = ({
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
@@ -220,6 +260,7 @@ const SurveyDropdownInput = ({
               inputQuestion={inputQuestion}
               response={response}
               responseKey={responseKey}
+              selectInfosSize={dropdownInfos.length}
               setResponse={setResponse}
             />
             <SubmitButton onClick={onClickForwards} />
@@ -227,6 +268,7 @@ const SurveyDropdownInput = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
       />
     </>
   );

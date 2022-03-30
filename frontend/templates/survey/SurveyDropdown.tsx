@@ -1,7 +1,16 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
-import { MoveForwardButton } from './StyledComponents';
+import { DropdownStyled, MoveForwardButton } from './StyledComponents';
+// import { Select } from 'antd';
+// const { Option } = Select;
+// import "antd/dist/antd.css";
+import NativeSelect from '@mui/material/NativeSelect';
+import MenuItem from '@mui/material/MenuItem';
+import SVGDownArrow from '../../public/down-arrow.svg';
+// import styles from './SurveyDropdown.less';
+
+// Styles
 
 const DropdownColumnContainer = styled.div`
   display: flex;
@@ -18,24 +27,6 @@ const DropdownContainer = styled.div`
 
 // how to style the down-pointing arrow???
 // make a gap between the dropdown box and the options
-const DropdownStyled = styled.select`
-  align-items: center;
-  background-color: #ffebe7;
-  border: 0;
-  border-radius: 0.5rem;
-  font-size: 0.9rem;
-  height: 3rem;
-  :hover {
-    cursor: pointer;
-  }
-  & option:hover {
-    box-shadow: red;
-    cursor: pointer;
-    font-color: red;
-  }
-  padding: 0.75rem 0.75rem;
-  width: 100%;
-`;
 
 const DropdownSmall = styled(DropdownStyled)`
   width: 50%;
@@ -90,29 +81,51 @@ const DropdownColumn = ({
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
+      console.log(response);
     };
     return onChange;
   };
 
+  const createValue = (index: number, defaultValue: string): string => {
+    const answers = response[responseKey];
+    if (answers === undefined || answers.length === 0) {
+      return defaultValue;
+    } else {
+      return answers[index];
+    }
+  };
+
+  const firstValue = createValue(0, firstLabel);
   return (
     <>
       <IntroStyled> {intro} </IntroStyled>
-
       <DropdownContainer>
         <LabelStyled htmlFor={firstLabel}> {firstLabel} </LabelStyled>
         <DropdownSmall
           name={firstLabel}
           id={firstLabel}
           onChange={createOnChange(0)}
+          IconComponent={SVGDownArrow}
         >
-          <option value={firstLabel} selected disabled hidden>
+          <option
+            value={firstLabel}
+            selected={firstValue == firstLabel}
+            disabled
+            hidden
+          >
             {' '}
             {firstLabel}{' '}
           </option>
           {firstOptions.map((option) => {
             return (
               <>
-                <OptionStyled value={option}> {option} </OptionStyled>
+                <OptionStyled
+                  value={option}
+                  selected={firstValue == firstLabel}
+                >
+                  {' '}
+                  {option}{' '}
+                </OptionStyled>
               </>
             );
           })}
@@ -129,6 +142,7 @@ const DropdownColumn = ({
               options={options}
               response={response}
               responseKey={responseKey}
+              selectValue={createValue(index + 1, labelName)}
               setResponse={setResponse}
             />
           </>
@@ -144,6 +158,7 @@ const DropdownColumnBody = ({
   options,
   response,
   responseKey,
+  selectValue = labelName,
   setResponse,
 }: {
   labelName: string;
@@ -151,21 +166,34 @@ const DropdownColumnBody = ({
   options: string[];
   response: Record<string, string[]>;
   responseKey: string;
+  selectValue?: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
   return (
     <>
       <DropdownContainer>
         <LabelStyled htmlFor={labelName}> {labelName} </LabelStyled>
-        <DropdownStyled name={labelName} id={labelName} onChange={onChange}>
-          <option value={labelName} selected disabled hidden>
-            {' '}
-            {labelName}{' '}
+        <DropdownStyled
+          name={labelName}
+          id={labelName}
+          onChange={onChange}
+          IconComponent={SVGDownArrow}
+        >
+          <option value={labelName} selected={labelName == selectValue} hidden>
+            {labelName}
           </option>
           {options.map((option) => {
             return (
               <>
-                <OptionStyled value={option}> {option} </OptionStyled>
+                <option
+                  value={option}
+                  onClick={() => {
+                    console.log('hi');
+                  }}
+                  selected={option == selectValue}
+                >
+                  {option}
+                </option>
               </>
             );
           })}
@@ -176,6 +204,7 @@ const DropdownColumnBody = ({
 };
 
 export interface SurveyDropdownProps {
+  boldedWord: string;
   dropdownInfos: [string, string[]][];
   headerSize?: number;
   intro: string;
@@ -186,10 +215,12 @@ export interface SurveyDropdownProps {
   response: Record<string, string[]>;
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
   totalPages: number;
 }
 
 const SurveyDropdown = ({
+  boldedWord,
   dropdownInfos,
   headerSize,
   intro,
@@ -200,11 +231,13 @@ const SurveyDropdown = ({
   response,
   responseKey,
   setResponse,
+  subHeader,
   totalPages,
 }: SurveyDropdownProps): ReactElement => {
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
@@ -221,6 +254,7 @@ const SurveyDropdown = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
         totalPages={totalPages}
       />
     </>

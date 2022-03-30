@@ -36,6 +36,9 @@
     "typescript": "^3.9.10"
   },
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.2",
     "next": "^11.1.2",
     "pg": "^8.7.1",
     "react": "^17.0.2",

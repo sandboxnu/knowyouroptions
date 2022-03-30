@@ -284,6 +284,8 @@ const OnboardingSurvey = (): ReactElement => {
     );
   };
 
+  console.log('response: ', response);
+
   // DISPLAY
 
   const pages = [

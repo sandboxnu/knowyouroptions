@@ -48,6 +48,18 @@ const CheckboxColumn = ({
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
 }): ReactElement => {
+  const storeCheckedResponse = (isChecked: boolean, title: string) => {
+    const answers =
+      response[responseKey] === undefined ? [] : response[responseKey];
+    if (isChecked) {
+      answers.push(title);
+    } else {
+      const index = answers.indexOf(title);
+      answers.splice(index, 1);
+    }
+    response[responseKey] = answers;
+    setResponse(response);
+  };
   return (
     <>
       {checkboxTitles.map((checkboxTitle, idx) => {
@@ -56,18 +68,7 @@ const CheckboxColumn = ({
             <CheckboxStyled
               type="checkbox"
               onChange={(event) => {
-                const answers =
-                  response[responseKey] === undefined
-                    ? []
-                    : response[responseKey];
-                if (event.target.checked) {
-                  answers.push(checkboxTitle);
-                } else {
-                  const index = answers.indexOf(checkboxTitle);
-                  answers.splice(index, 1);
-                }
-                response[responseKey] = answers;
-                setResponse(response);
+                storeCheckedResponse(event.target.checked, checkboxTitle);
               }}
             />
             <label>{checkboxTitle}</label>
@@ -80,6 +81,7 @@ const CheckboxColumn = ({
 
 export interface SurveyCheckboxProps {
   answers: string[];
+  boldedWord: string;
   hasInputBox?: boolean;
   headerSize?: number;
   responseKey: string;
@@ -89,11 +91,13 @@ export interface SurveyCheckboxProps {
   question: string;
   response: {};
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
   totalPages: number;
 }
 
 const SurveyCheckbox = ({
   answers,
+  boldedWord,
   hasInputBox,
   headerSize,
   responseKey,
@@ -103,11 +107,14 @@ const SurveyCheckbox = ({
   question,
   response,
   setResponse,
+  subHeader,
   totalPages,
 }: SurveyCheckboxProps): ReactElement => {
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <ColumnContainer>
@@ -122,7 +129,7 @@ const SurveyCheckbox = ({
         }
         pageNumber={pageNumber}
         question={question}
-        headerSize={headerSize}
+        subHeader={subHeader}
         totalPages={totalPages}
       />
     </>

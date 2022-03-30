@@ -93,16 +93,22 @@ const MethodsName = styled.div`
 
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
+  boldedWord: string;
   headerSize?: number;
   methodInfos: [ReactElement, string][];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
   pageNumber: number;
   question: string;
+  response: Record<string, string[]>;
+  responseKey: string;
+  setResponse: React.Dispatch<React.SetStateAction<{}>>;
+  subHeader: string;
   totalPages: number;
 }
 
 const SurveyMethods = ({
+  boldedWord,
   headerSize,
   methodInfos,
   onClickForwards,
@@ -110,12 +116,21 @@ const SurveyMethods = ({
   pageNumber,
   question,
   totalPages,
+  response,
+  responseKey,
+  setResponse,
+  subHeader,
 }: SurveyMethodsProps): ReactElement => {
-  const [methodsClicked, setMethodsClicked] = useState(new Set());
+  const methodsClickedInit =
+    response[responseKey] === undefined ? [] : response[responseKey];
+  const [methodsClicked, setMethodsClicked] = useState(
+    new Set(methodsClickedInit),
+  );
 
   return (
     <>
       <Survey
+        boldedWord={boldedWord}
         headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
@@ -124,8 +139,8 @@ const SurveyMethods = ({
               {methodInfos.map((method) => {
                 const [MethodIcon, methodName] = method;
 
-                // if this card is selected t
-                const Card = methodsClicked.has(methodName)
+                const isThisMethodHighlighted = methodsClicked.has(methodName);
+                const Card = isThisMethodHighlighted
                   ? MethodCardSelected
                   : MethodCard;
 
@@ -142,6 +157,10 @@ const SurveyMethods = ({
                   }
 
                   setMethodsClicked(new Set(newMethodsClicked));
+
+                  // Update the state that was passed in as a prop
+                  response[responseKey] = Array.from(methodsClicked);
+                  setResponse(response);
                 };
                 return (
                   <Card onClick={onClick} key={methodName}>
@@ -156,6 +175,7 @@ const SurveyMethods = ({
         }
         pageNumber={pageNumber}
         question={question}
+        subHeader={subHeader}
         totalPages={totalPages}
       />
     </>

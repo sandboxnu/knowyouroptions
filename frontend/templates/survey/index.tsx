@@ -36,15 +36,25 @@ const Header3 = styled(HeaderDefault)`
 
 const PageNumber = styled.span`
   color: black;
+  font-family: 'Din 2014';
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 900;
 `;
 
 const Question = styled.h1`
-  color: gray;
+  color: #5d5d5d;
   font-family: 'Roboto';
-  font-size: 1.75rem;
-  font-weight: 300;
+  font-size: 28px;
+  font-weight: lighter;
+  margin-bottom: 0.5rem;
+`;
+
+const Subheader = styled.h6`
+  color: #707070;
+  font-family: 'Roboto';
+  font-size: 15px;
+  font-weight: 100;
+  margin: 0;
 `;
 
 const Wrapper = styled.div`
@@ -71,20 +81,24 @@ const PageNumberFraction = ({
 };
 
 export interface SurveyProps {
+  boldedWord: string; // the bolded word in the question
   headerSize?: number;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
   question: string;
+  subHeader: string;
   totalPages: number;
 }
 
 const Survey = ({
+  boldedWord,
   headerSize,
   onClick,
   Options,
   pageNumber,
   question,
+  subHeader,
   totalPages,
 }: SurveyProps): ReactElement => {
   const HeaderElm =
@@ -95,12 +109,30 @@ const Survey = ({
       : headerSize === 3
       ? Header3
       : HeaderDefault;
+
+  // escape special characters to use with RegExp
+  function escapeRegExp(string: string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // bold the keyword in the question
+  const makeBold = (question: string, toBold: string) => {
+    const boldedQuestion = question.replace(
+      new RegExp(escapeRegExp(toBold), 'g'),
+      '<b>' + toBold + '</b>',
+    );
+    return boldedQuestion;
+  };
+
   return (
     <Wrapper>
       <HeaderElm>
-        <SvgLeftArrow onClick={onClick} />
+        {pageNumber !== 1 && <SvgLeftArrow onClick={onClick} />}
         <PageNumberFraction curPage={pageNumber} totalPages={totalPages} />
-        <Question> {question} </Question>
+        <Question
+          dangerouslySetInnerHTML={{ __html: makeBold(question, boldedWord) }}
+        ></Question>
+        <Subheader>{subHeader}</Subheader>
       </HeaderElm>
 
       <Content>{Options}</Content>
