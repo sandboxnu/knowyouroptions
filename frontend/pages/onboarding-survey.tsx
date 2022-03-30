@@ -142,6 +142,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyMethods
         boldedWord="method(s)"
+        headerSize={3}
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -161,6 +162,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyMethods
         boldedWord="method(s)"
+        headerSize={3}
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}

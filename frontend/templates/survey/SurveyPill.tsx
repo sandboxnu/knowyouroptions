@@ -26,6 +26,7 @@ const PillAnswers = styled(PillContainer)`
   & > div:hover {
     background-color: purple;
     cursor: pointer;
+    color: white;
   }
   padding: 2rem 1rem;
 `;
