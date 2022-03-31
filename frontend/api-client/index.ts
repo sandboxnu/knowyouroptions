@@ -64,6 +64,11 @@ class APIClient {
       return this.req('GET', `${API_URL}/name`);
     },
   };
+  userBookmarks = {
+    getBookmarks: async (): Promise<string[]> => {
+      return this.req('GET', `${API_URL}/bookmarks`);
+    },
+  };
 
   helloWorld = {
     get: async (): Promise<string> => {

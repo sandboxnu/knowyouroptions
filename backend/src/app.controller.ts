@@ -30,9 +30,11 @@ export class AppController {
    *
    * @param user
    */
+
   @Get('name')
   @UseGuards(JwtAuthGuard)
   async name(@CurrentUser() user: User): Promise<string> {
+    console.log('in app controller');
     return user.name;
   }
 }

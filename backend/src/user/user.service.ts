@@ -19,6 +19,7 @@ export class UserService {
    * @return the created User entity
    * @throws EmailIsTakenError if the email is taken
    */
+
   public async createUser(userInfo: UserInfo): Promise<User> {
     const existingUser = await this.userRepository.findOne({
       email: userInfo.email,
@@ -31,7 +32,7 @@ export class UserService {
       user.email = userInfo.email;
       user.name = userInfo.name;
       user.password = userInfo.password;
-
+      user.bookmarks = [];
       await this.userRepository.save(user);
       return user;
     }
@@ -43,6 +44,7 @@ export class UserService {
    * @throws IncorrectPasswordError wrong password
    * @throws UnknownEmailError email not found
    */
+
   public async getUser(info: SignInInfo): Promise<User> {
     const existingUser = await this.userRepository.findOne({
       email: info.email,
@@ -69,5 +71,12 @@ export class UserService {
     });
 
     return existingUser || undefined;
+  }
+  public async getBookmarks(id: number): Promise<string[]> {
+    const existingUser = await this.userRepository.findOne({
+      id: id,
+    });
+
+    return existingUser.bookmarks || undefined;
   }
 }
