@@ -7,6 +7,60 @@ import { Redirect } from '../classes/response-classes';
 type ItemIfArray<T> = T extends (infer I)[] ? I : T;
 export const API_URL = 'http://localhost:3001';
 
+type TimeUnits = 'years' | 'months' | 'days' | 'weeks';
+
+type Tag = {
+  id: number;
+  label: string;
+};
+
+type Benefit = {
+  id: number;
+  description: string;
+};
+
+type SideEffect = {
+  id: number;
+  description: string;
+};
+
+type ThingToKnow = {
+  id: number;
+  title: string;
+  description: string;
+};
+
+export type Contraceptive = {
+  id: number;
+  name: string;
+  usePatternLowBound: number;
+  usePatternHighBound: number;
+  usePatternUnits: TimeUnits;
+  effectiveRate: number;
+  costMin: number;
+  costMax: number;
+  accessibility: string;
+  tags: Tag[];
+  description: string;
+  use: string;
+  inCaseOfProblem: string;
+  whenItStartsToWork: string[];
+  howToStop: string;
+  howToStopMethod: string;
+  howToStopDurationText: string;
+  howLongUntilFertility: string;
+  benefits: Benefit[];
+  sideEffects: SideEffect[];
+  howItWorks: string;
+  healthRisks: string;
+  whoCantUse: string[];
+  whereToAccess: string[];
+  whoAdministers: string;
+  costDescription: string;
+  warning: string;
+  thingsToKnow: ThingToKnow[];
+};
+
 class APIClient {
   private axios: AxiosInstance;
 
@@ -68,6 +122,12 @@ class APIClient {
   helloWorld = {
     get: async (): Promise<string> => {
       return this.req('GET', '');
+    },
+  };
+
+  contraceptive = {
+    getAll: async (): Promise<Contraceptive[]> => {
+      return this.req('GET', `${API_URL}/contraceptive`);
     },
   };
 

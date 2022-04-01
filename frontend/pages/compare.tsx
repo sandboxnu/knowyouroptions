@@ -1,6 +1,5 @@
 import { ReactElement, useState } from 'react';
 import * as React from 'react';
-import { Contraceptive } from '../../backend/src/entities/contraceptive.entity';
 import StyledDropdown from '../components/Dropdown';
 import AboutUse, { AboutUseProps } from '../templates/compare/AboutUse';
 import Efficacy, { EfficacyProps } from '../templates/compare/Efficacy';
@@ -14,13 +13,13 @@ import { Collapse } from 'antd';
 import SvgPlus from '../public/plus.svg';
 import SvgMinus from '../public/minus.svg';
 import { colors } from '../templates/mediaSizes';
-import axios from 'axios';
 import Category from '../components/Category';
 import AdditionalInformation, {
   AdditionalInfoProps,
 } from '../templates/compare/AdditonalInformation';
 import Effect, { EffectProps } from '../templates/compare/Effect';
 import TwoColumns from '../components/compare/TwoColumns';
+import { API, Contraceptive } from '../api-client';
 const { Panel } = Collapse;
 const BodyContainer = styled.body`
   margin-top: 100px;
@@ -80,7 +79,7 @@ const MinusImage = styled(SvgMinus)`
 `;
 
 type CompareProps = {
-  contraceptives: [Contraceptive];
+  contraceptives: Contraceptive[];
 };
 
 const Compare = (compareProps: CompareProps): ReactElement => {
@@ -197,7 +196,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
         valueClass="teal title1"
         title="Cost"
         titleClass="lightGray subtitle1"
-      ></Category>
+      />
     </div>
   );
 
@@ -251,9 +250,9 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               extra={
                 <TextHeader>
                   {value.includes(i.toString()) ? (
-                    <MinusImage></MinusImage>
+                    <MinusImage />
                   ) : (
-                    <PlusImage></PlusImage>
+                    <PlusImage />
                   )}
                 </TextHeader>
               }
@@ -279,8 +278,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
 };
 
 Compare.getInitialProps = async () => {
-  const res = await axios.get('http://localhost:3001/contraceptive');
-  const contraceptiveList = res.data;
+  const contraceptiveList = await API.contraceptive.getAll();
   return { contraceptives: contraceptiveList };
 };
 
