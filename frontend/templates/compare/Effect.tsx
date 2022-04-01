@@ -3,8 +3,7 @@ import 'antd/dist/antd.css';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import StyledImage from '../../components/compare/StyledImage';
-import { Benefit } from '../../../backend/src/entities/benefits.entity';
-import { SideEffect } from '../../../backend/src/entities/side-effects.entity';
+import { Benefit, SideEffect } from '../../api-client';
 
 // Styling
 export interface EffectProps {
@@ -23,7 +22,7 @@ const Effect = ({
   // TODO: Map to file names in public/compare/benefits
   const benefitMap = (benefit: Benefit) => (
     <div>
-      <StyledImage src={`compare/condom.svg`}></StyledImage>
+      <StyledImage src={`compare/condom.svg`} />
       <figcaption className="gray subtitle1">{'caption'}</figcaption>
     </div>
   );
@@ -31,7 +30,7 @@ const Effect = ({
   // TODO: Map to file names in public/compare/sideeffects
   const sideEffectMap = (sideEffect: SideEffect) => (
     <div>
-      <StyledImage src={`compare/condom.svg`}></StyledImage>
+      <StyledImage src={`compare/condom.svg`} />
       <figcaption className="gray subtitle1">{'caption'}</figcaption>
     </div>
   );

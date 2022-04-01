@@ -4,11 +4,10 @@ import styled from 'styled-components';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../components/compare/Title';
-import { ThingToKnow } from '../../../backend/src/entities/things-to-know.entity';
 import Category from '../../components/Category';
 import 'antd/dist/antd.css';
 
-import { Row, Col } from 'antd';
+import { ThingToKnow } from '../../api-client';
 export interface AdditionalInfoProps {
   thingsToKnowLeft: ThingToKnow[];
   thingsToKnowRight: ThingToKnow[];
@@ -28,7 +27,7 @@ const AdditionalInformation = ({
       titleClass="lightGray subtitle1"
       value={thingToKnow.title}
       valueClass="teal title1"
-    ></Category>
+    />
   );
 
   return (

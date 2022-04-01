@@ -9,22 +9,22 @@ export const API_URL = 'http://localhost:3001';
 
 type TimeUnits = 'years' | 'months' | 'days' | 'weeks';
 
-type Tag = {
+export type Tag = {
   id: number;
   label: string;
 };
 
-type Benefit = {
+export type Benefit = {
   id: number;
   description: string;
 };
 
-type SideEffect = {
+export type SideEffect = {
   id: number;
   description: string;
 };
 
-type ThingToKnow = {
+export type ThingToKnow = {
   id: number;
   title: string;
   description: string;
