@@ -194,7 +194,8 @@ const SignInForm = (): ReactElement => {
       setError('');
       await axios.get(response.redirect, { withCredentials: true });
       router.push('/');
-    } catch (err) {
+    } catch (e) {
+      const err = e as AxiosError;
       if (err.response) {
         type httpError = {
           statusCode: number;
