@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../decorators/currentuser.decorator';
 import { User } from '../entities/user.entity';
-
+//import { BookmarksInfo } from '../types/user';
 @Controller('user')
 export class UserController {
   constructor(private readonly UserService: UserService) {}
@@ -27,7 +27,7 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   async postBookmark(
     @CurrentUser() user: User,
-    @Body() bookmarks,
+    @Body() bookmarks: string,
   ): Promise<User> {
     return this.UserService.postBookmark(user, bookmarks);
   }

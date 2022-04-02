@@ -6,7 +6,7 @@ import { UnknownEmailError } from 'src/error/unknown-email-error';
 import { SignInInfo, UserInfo } from 'src/types/user';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
+//import { BookmarksInfo } from '../types/user';
 @Injectable()
 export class UserService {
   constructor(
@@ -84,7 +84,7 @@ export class UserService {
     const existingUser = await this.userRepository.findOne({
       id: user.id,
     });
-    existingUser.bookmarks.push(bookmark);
+    user.bookmarks.push(bookmark);
     return existingUser;
   }
   public async deleteBookmark(user: User, bookmark: string) {

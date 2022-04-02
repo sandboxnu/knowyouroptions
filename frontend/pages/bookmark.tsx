@@ -33,7 +33,7 @@ const changed = () => {
   console.log('test');
   const res = API.user.getBookmarks();
   res.then((value) => {
-    console.log(value + 'val');
+    console.log(value + ' val');
   });
 
   const post = API.user.postBookmark({ bookmark: 'implant' });
