@@ -8,25 +8,26 @@ import styled from 'styled-components';
 import SvgWelcomeImage from '../public/welcome.svg';
 import { API } from '../api-client';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
-const Bookmark = (): ReactElement => {
-  const router = useRouter();
-  const [contraceptives, setContraceptives] = useState(['']);
-  useEffect(() => {
-    if (contraceptives) {
-      console.log('gell');
-      getContraceptives();
-    }
-  });
-  const getContraceptives = async () => {
-    try {
-      const user = await API.userBookmarks.getBookmarks();
-      console.log('hello' + user);
-      setContraceptives(user);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  return <div>{contraceptives} hello</div>;
+type CompareProps = {
+  bookmarks: string[];
+};
+const Bookmark = (res: CompareProps): ReactElement => {
+  const { bookmarks } = res;
+  return (
+    <div>
+      <input type="text" />
+      {/* <div>{bookmarks.toString}</div> */}
+      {/* <div>{bookmarks[0]}</div> */}
+      {/* {console.log(bookmarks.length + 'length')} */}
+    </div>
+  );
+};
+
+Bookmark.getInitialProps = async () => {
+  const res = API.user.getBookmarks;
+  console.log(res + 'rest');
+  return { bookmarks: res };
 };
 export default Bookmark;

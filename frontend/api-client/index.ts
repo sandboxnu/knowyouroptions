@@ -63,10 +63,15 @@ class APIClient {
     getName: async (): Promise<string> => {
       return this.req('GET', `${API_URL}/name`);
     },
-  };
-  userBookmarks = {
     getBookmarks: async (): Promise<string[]> => {
-      return this.req('GET', `${API_URL}/bookmarks`);
+      console.log('gello2');
+      return this.req('GET', `${API_URL}/user/bookmarks`);
+    },
+    postBookmarks: async (): Promise<string[]> => {
+      return this.req('POST', `${API_URL}/user/bookmark`);
+    },
+    deletBookmarks: async (): Promise<string[]> => {
+      return this.req('DELETE', `${API_URL}/user/bookmark`);
     },
   };
 
