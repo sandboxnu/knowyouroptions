@@ -74,18 +74,16 @@ class APIClient {
       console.log('gello2');
       return this.req('GET', `${API_URL}/user/bookmarks`);
     },
-    postBookmark: async (body: { bookmark: string }): Promise<void> => {
+    postBookmark: async (body: string): Promise<void> => {
       console.log('postbookmark');
-      return this.req(
-        'POST',
-
-        `${API_URL}/
-      user/bookmark`,
-        undefined,
-        body,
+      return this.req('POST', `${API_URL}/user/bookmark`, undefined, body).then(
+        (response) => {
+          console.log(body + 'this is body');
+          console.log(response + ' response');
+        },
       );
     },
-    deletBookmarks: async (): Promise<string[]> => {
+    deleteBookmarks: async (): Promise<string[]> => {
       return this.req('DELETE', `${API_URL}/user/bookmark`);
     },
   };

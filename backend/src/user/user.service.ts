@@ -81,11 +81,10 @@ export class UserService {
     return existingUser.bookmarks || undefined;
   }
   public async postBookmark(user: User, bookmark: string) {
-    const existingUser = await this.userRepository.findOne({
-      id: user.id,
-    });
-    user.bookmarks.push(bookmark);
-    return existingUser;
+    //existingUser.bookmarks;
+    //return existingUser;
+    return user.bookmarks.push(bookmark);
+    // return existingUser.bookmarks.push(bookmark);
   }
   public async deleteBookmark(user: User, bookmark: string) {
     const existingUser = await this.userRepository.findOne({

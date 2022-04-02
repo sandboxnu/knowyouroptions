@@ -14,32 +14,20 @@ type BookmarkProps = {
   bookmarks: string[];
 };
 const Bookmark = (bookmark: BookmarkProps): ReactElement => {
-  const hello = API.user.getBookmarks;
-  const book = bookmark.bookmarks;
-  const promise = Promise.resolve(hello);
-  hello.length;
   return (
     <div>
-      <input type="text" onChange={changed} />
-      {console.log(book)}
-      {/* //<div>{bookmarks}sdfsf</div> */}
-      {/* <div>{bookmarks.toString}</div> */}
-      {/* <div>{bookmarks[0]}</div> */}
-      {/* {console.log(bookmarks.length + 'length')} */}
+      <input type="text" onChange={retriveBookmark} />
     </div>
   );
 };
-const changed = () => {
+const retriveBookmark = () => {
   console.log('test');
   const res = API.user.getBookmarks();
   res.then((value) => {
     console.log(value + ' val');
   });
 
-  const post = API.user.postBookmark({ bookmark: 'implant' });
-
-  //const val = res.apply(this);
-  //console.log(val);
+  //const post = API.user.postBookmark('IUD');
 };
 
 export default Bookmark;

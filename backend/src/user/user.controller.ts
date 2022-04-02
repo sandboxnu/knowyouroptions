@@ -1,6 +1,7 @@
 import {
   Controller,
   Get,
+  Put,
   Post,
   UseGuards,
   Body,
@@ -23,13 +24,17 @@ export class UserController {
   }
 
   //posts one bookmark
+
   @Post('bookmark')
   @UseGuards(JwtAuthGuard)
   async postBookmark(
-    @CurrentUser() user: User,
     @Body() bookmarks: string,
-  ): Promise<User> {
+    @CurrentUser() user: User,
+  ): Promise<any> {
+    //console.log('in user controller for post');
     return this.UserService.postBookmark(user, bookmarks);
+    //const updatedUser = user.bookmarks.push(bookmarks);
+    //return updatedUser;
   }
 
   //posts one bookmark
