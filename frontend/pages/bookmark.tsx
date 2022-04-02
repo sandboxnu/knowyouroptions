@@ -6,18 +6,23 @@ import { colors, size, maxDevice } from '../templates/mediaSizes';
 import React, { ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SvgWelcomeImage from '../public/welcome.svg';
-import { API } from '../api-client';
+import { API, User } from '../api-client';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
-type CompareProps = {
+type BookmarkProps = {
   bookmarks: string[];
 };
-const Bookmark = (res: CompareProps): ReactElement => {
-  const { bookmarks } = res;
+const Bookmark = (bookmark: BookmarkProps): ReactElement => {
+  const hello = API.user.getBookmarks;
+  const book = bookmark.bookmarks;
+  const promise = Promise.resolve(hello);
+  hello.length;
   return (
     <div>
       <input type="text" />
+      {console.log(book)}
+      {/* //<div>{bookmarks}sdfsf</div> */}
       {/* <div>{bookmarks.toString}</div> */}
       {/* <div>{bookmarks[0]}</div> */}
       {/* {console.log(bookmarks.length + 'length')} */}
@@ -26,8 +31,8 @@ const Bookmark = (res: CompareProps): ReactElement => {
 };
 
 Bookmark.getInitialProps = async () => {
-  const res = API.user.getBookmarks;
-  console.log(res + 'rest');
-  return { bookmarks: res };
+  const res = await API.user.getBookmarks;
+  console.log('bookmarks');
+  return res;
 };
 export default Bookmark;

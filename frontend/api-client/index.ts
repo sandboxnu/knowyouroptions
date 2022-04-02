@@ -7,6 +7,13 @@ import { Redirect } from '../classes/response-classes';
 type ItemIfArray<T> = T extends (infer I)[] ? I : T;
 export const API_URL = 'http://localhost:3001';
 
+export type User = {
+  id: number;
+  email: string;
+  bookmarks: string[];
+  password: string;
+  name: string;
+};
 class APIClient {
   private axios: AxiosInstance;
 
@@ -68,7 +75,11 @@ class APIClient {
       return this.req('GET', `${API_URL}/user/bookmarks`);
     },
     postBookmarks: async (): Promise<string[]> => {
-      return this.req('POST', `${API_URL}/user/bookmark`);
+      return this.req(
+        'POST',
+        `${API_URL}/
+      user/bookmark`,
+      );
     },
     deletBookmarks: async (): Promise<string[]> => {
       return this.req('DELETE', `${API_URL}/user/bookmark`);
