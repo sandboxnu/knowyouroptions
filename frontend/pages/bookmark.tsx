@@ -20,7 +20,7 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
   hello.length;
   return (
     <div>
-      <input type="text" />
+      <input type="text" onChange={changed} />
       {console.log(book)}
       {/* //<div>{bookmarks}sdfsf</div> */}
       {/* <div>{bookmarks.toString}</div> */}
@@ -29,10 +29,17 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
     </div>
   );
 };
+const changed = () => {
+  console.log('test');
+  const res = API.user.getBookmarks();
+  res.then((value) => {
+    console.log(value + 'val');
+  });
 
-Bookmark.getInitialProps = async () => {
-  const res = await API.user.getBookmarks;
-  console.log('bookmarks');
-  return res;
+  const post = API.user.postBookmark({ bookmark: 'implant' });
+
+  //const val = res.apply(this);
+  //console.log(val);
 };
+
 export default Bookmark;
