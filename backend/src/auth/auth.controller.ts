@@ -5,13 +5,17 @@ import {
   HttpException,
   Post,
   Query,
+  Req,
   Res,
   UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInInfo, UserInfo } from '../types/user';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from '@nestjs/passport';
+import { GoogleAuthGuard } from './guards/google-auth.guard';
 
 @Controller()
 export class AuthController {
@@ -81,5 +85,17 @@ export class AuthController {
         secure: false, // true only sends cookies with requests over HTTPS
       })
       .redirect(302, '/');
+  }
+
+  @Get('/google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuth(@Req() req) {
+    // Guard redirects
+  }
+
+  @Get('/google/redirect')
+  @UseGuards(GoogleAuthGuard)
+  googleAuthRedirect(@Req() req) {
+    return this.authService.googleLogin(req);
   }
 }
