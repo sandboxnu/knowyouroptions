@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   HttpException,
+  HttpStatus,
   Post,
   Query,
   Req,
@@ -87,6 +88,8 @@ export class AuthController {
       .redirect(302, '/');
   }
 
+  // Google Login
+
   @Get('/google')
   @UseGuards(GoogleAuthGuard)
   async googleAuth(@Req() req) {
@@ -97,5 +100,22 @@ export class AuthController {
   @UseGuards(GoogleAuthGuard)
   googleAuthRedirect(@Req() req) {
     return this.authService.googleLogin(req);
+  }
+
+  // Facebook Login
+
+  @Get('/facebook')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLogin(): Promise<any> {
+    return HttpStatus.OK;
+  }
+
+  @Get('/facebook/redirect')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLoginRedirect(@Req() req): Promise<any> {
+    return {
+      statusCode: HttpStatus.OK,
+      data: req.user,
+    };
   }
 }
