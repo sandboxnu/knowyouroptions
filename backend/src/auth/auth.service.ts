@@ -121,9 +121,9 @@ export class AuthService {
     return user;
   }
 
-  googleLogin(req) {
+  async googleLogin(req) {
     if (!req.user) {
-      return 'No user from google';
+      return { message: 'No user from google', user: undefined };
     }
 
     return {

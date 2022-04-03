@@ -318,8 +318,12 @@ const SignIn = (): ReactElement => {
           <GuestButton>Continue as Guest</GuestButton>
           <OAuth>OR CONTINUE WITH</OAuth>
           <OAuthIconContainer>
-            <FacebookIcon />
-            <GoogleIcon />
+            <a href="http://localhost:3001/facebook">
+              <FacebookIcon />
+            </a>
+            <a href="http://localhost:3001/google">
+              <GoogleIcon />
+            </a>
           </OAuthIconContainer>
         </>
       ) : (
