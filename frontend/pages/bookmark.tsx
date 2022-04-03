@@ -104,14 +104,21 @@ const Title = styled.h1`
 type BookmarkProps = {
   bookmarks: string[];
 };
-const retrieveBookmark = () => {
-  console.log('test');
+// const Bookmark = (bookmark: BookmarkProps): ReactElement => {
+//   return (
+//     <div>
+//       <input type="text" onChange={retriveBookmark} />
+//     </div>
+//   );
+// };
+const retriveBookmark = () => {
   const res = API.user.getBookmarks();
   res.then((value) => {
     console.log(value + ' val');
   });
 
-  //const post = API.user.postBookmark('IUD');
+  const post = API.user.postBookmark('IUD');
+  API.user.deleteBookmarks('Implant');
 };
 
 // PLACEHOLDER: NEED TO GET BOOKMARKED METHODS FROM CURRENT USER

@@ -32,8 +32,7 @@ export class UserService {
       user.email = userInfo.email;
       user.name = userInfo.name;
       user.password = userInfo.password;
-      console.log('ran through new user');
-      user.bookmarks = ['Implant', 'Condom'];
+      user.bookmarks = [];
       await this.userRepository.save(user);
       return user;
     }
@@ -81,18 +80,30 @@ export class UserService {
     return existingUser.bookmarks || undefined;
   }
   public async postBookmark(user: User, bookmark: string) {
-    //existingUser.bookmarks;
-    //return existingUser;
-    return user.bookmarks.push(bookmark);
-    // return existingUser.bookmarks.push(bookmark);
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    const newBookmarks =
+      existingUser.bookmarks.indexOf(bookmark) == -1
+        ? existingUser.bookmarks.concat(bookmark)
+        : existingUser.bookmarks;
+
+    this.userRepository.save({
+      ...existingUser,
+      bookmarks: newBookmarks,
+    });
   }
+
   public async deleteBookmark(user: User, bookmark: string) {
     const existingUser = await this.userRepository.findOne({
       id: user.id,
     });
     const index = existingUser.bookmarks.indexOf(bookmark);
     if (index !== -1) {
-      return existingUser.bookmarks.splice(index, 1);
+      this.userRepository.save({
+        ...existingUser,
+        bookmark: existingUser.bookmarks.splice(index, 1),
+      });
     }
   }
 }
