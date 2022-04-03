@@ -184,6 +184,7 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
   // TODO: add a button for the nav bar
   // TODO: add next page button??? ask emily
   // TODO: add learn more button
+  // TODO: scroll bar
   return (
     <>
       <Container>
