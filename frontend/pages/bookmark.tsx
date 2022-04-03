@@ -21,13 +21,13 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
   );
 };
 const retriveBookmark = () => {
-  console.log('test');
   const res = API.user.getBookmarks();
   res.then((value) => {
     console.log(value + ' val');
   });
 
-  //const post = API.user.postBookmark('IUD');
+  const post = API.user.postBookmark('IUD');
+  API.user.deleteBookmarks('Implant');
 };
 
 export default Bookmark;

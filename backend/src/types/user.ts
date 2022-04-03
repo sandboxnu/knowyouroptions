@@ -6,7 +6,7 @@ export type SignInInfo = {
   readonly email: string;
   readonly password: string;
 };
-export type bookmarksInfo = {
+export type BookmarksInfo = {
   readonly bookmarks: string[];
 };
 export type AuthenticatedUser = {
