@@ -3,7 +3,7 @@ import 'antd/dist/antd.css';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../pages/compare';
-import StyledImage from '../../components/compare/StyledImage';
+import StyledCompareSvg from '../../components/compare/StyledCompareSvg';
 
 // Styling
 export interface AboutUseProps {
@@ -34,7 +34,7 @@ const AboutUse = ({
         span={6}
         LeftElm={
           <div>
-            <StyledImage
+            <StyledCompareSvg
               className="gray subtitle1"
               src={`compare/${contraceptiveNameLeft?.toLowerCase()}.svg`}
             />
@@ -43,7 +43,7 @@ const AboutUse = ({
         }
         RightElm={
           <div>
-            <StyledImage
+            <StyledCompareSvg
               className="gray subtitle1"
               src={`compare/${contraceptiveNameRight?.toLowerCase()}.svg`}
             />

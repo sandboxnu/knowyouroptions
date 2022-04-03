@@ -8,11 +8,7 @@ const CategoryTitle = styled.h3`
 `;
 
 const CategoryValue = styled.p`
-  margin: 0;
-
-  @media ${device.laptop} {
-    margin: 0.5rem 0;
-  }
+  margin: 1rem 0 0 0;
 `;
 
 // Components

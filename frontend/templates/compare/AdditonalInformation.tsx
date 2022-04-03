@@ -15,6 +15,7 @@ export interface AdditionalInfoProps {
 
 const LongText = styled(Text)`
   max-width: 550px;
+  font-size: 1rem;
 `;
 
 const AdditionalInformation = ({

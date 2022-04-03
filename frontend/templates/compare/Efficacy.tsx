@@ -5,7 +5,7 @@ import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../pages/compare';
 import Category from '../../components/Category';
-import StyledImage from '../../components/compare/StyledImage';
+import StyledCompareSvg from '../../components/compare/StyledCompareSvg';
 export interface EfficacyProps {
   effectiveRate: number;
   effectiveRateRight: number;
@@ -94,7 +94,7 @@ const Efficacy = ({
       <TwoColumns
         LeftElm={
           <div>
-            <StyledImage
+            <StyledCompareSvg
               src={`compare/howtostop/${contraceptiveNameLeft}.svg`}
             />
             <figcaption className="gray subtitle1">
@@ -104,7 +104,7 @@ const Efficacy = ({
         }
         RightElm={
           <div>
-            <StyledImage
+            <StyledCompareSvg
               src={`compare/howtostop/${contraceptiveNameRight}.svg`}
             />
             <figcaption className="gray subtitle1">

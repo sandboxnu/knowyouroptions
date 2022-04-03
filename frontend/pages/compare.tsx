@@ -29,35 +29,36 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   display: inline-block;
+  line-height: min(3vw, 1.5rem);
 `;
 export const Text = styled.p`
   margin: 0 auto;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: min(3vw, 1rem);
 `;
 
 const CircleNumber = styled.div`
-  height: 50px;
-  width: 50px;
+  height: min(6vw, 3rem);
+  width: min(6vw, 3rem);
   display: inline-block;
   text-align: center;
   border-radius: 25px;
   background-color: #16999f;
-  line-height: 50px; //same value as heights
+  line-height: min(6vw, 3rem); //same value as heights
   float: left;
   margin-left: 3%;
 `;
 
 const TextHeader = styled.p`
-  font-size: 20px;
+  font-size: min(3vw, 1.5rem);
   color: ${colors.comparePageText};
   display: inline-block;
   margin: 0;
   padding-top: 8px;
   padding-left: 15px;
-  font-weight: bold;
+  font-weight: 500;
 `;
 
 const PanelDrop = styled(Panel)`
@@ -67,7 +68,7 @@ const PanelDrop = styled(Panel)`
 
 const NumberText = styled.p`
   color: white;
-  font-size: 20px;
+  font-size: min(3vw, 1.5rem);
 `;
 
 const PlusImage = styled(SvgPlus)`
@@ -76,6 +77,10 @@ const PlusImage = styled(SvgPlus)`
 
 const MinusImage = styled(SvgMinus)`
   fill: ${colors.comparePageText};
+`;
+
+const StyledCollapse = styled(Collapse)`
+  margin-top: 6vh;
 `;
 
 type CompareProps = {
@@ -239,9 +244,9 @@ const Compare = (compareProps: CompareProps): ReactElement => {
       )}
 
       {shouldShowSections ? (
-        <Collapse
+        <StyledCollapse
           defaultActiveKey={['-1']}
-          bordered={false}
+          bordered={true}
           onChange={(e) => setValue(e)}
         >
           {headers.map((h, i) => (
@@ -269,7 +274,7 @@ const Compare = (compareProps: CompareProps): ReactElement => {
               {h.reactContent}
             </PanelDrop>
           ))}
-        </Collapse>
+        </StyledCollapse>
       ) : (
         <div />
       )}

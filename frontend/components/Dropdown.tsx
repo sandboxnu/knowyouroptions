@@ -5,15 +5,17 @@ import styled from 'styled-components';
 import SvgDownArrow from '../public/down-arrow.svg';
 
 const StyledArrow = styled(SvgDownArrow)`
+  height: min(2.5vw, 1rem);
+  width: auto;
   align-self: center;
 `;
 
 const StyledDropdown = styled(Dropdown)`
-  font-size: 30pt;
+  font-size: min(3vw, 1.5rem);
   font-family: Roboto;
-  padding-bottom: 9px;
+  padding-bottom: 1vw;
   color: #808080;
-  border-bottom: 5px solid #3f3f3f;
+  border-bottom: min(0.7vw, 4px) solid #3f3f3f;
   display: flex;
   justify-content: space-between;
 

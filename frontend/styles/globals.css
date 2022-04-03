@@ -23,7 +23,7 @@ a {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  font-size: 30px;
+  font-size: min(3.5vw, 1.5rem);
 }
 
 .title2 {
@@ -44,7 +44,7 @@ a {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: min(2.5vw, 1rem);
 }
 
 .subtitle2 {

@@ -8,13 +8,15 @@ export const Text = styled.p`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: min(5vw, 2rem);
 `;
 
-const Header = styled.h1`
+const Header = styled(Text)`
   padding-top: 1vh;
   padding-bottom: 3vh;
-  margin: 0;
+  margin: 1rem 0 0 0;
+  font-weight: 500;
+  font-size: min(4vw, 1.5rem);
 `;
 
 const Title = ({ title }: { title: string }): ReactElement => {

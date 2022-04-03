@@ -18,6 +18,7 @@ export interface MechanismProps {
 }
 const LongText = styled(Text)`
   max-width: 550px;
+  font-size: 1rem;
 `;
 
 const Tabss = styled(Tabs)`
@@ -80,7 +81,7 @@ const Mechanism = ({
 }: MechanismProps): ReactElement => {
   return (
     <div>
-      <Title title="How it works?"></Title>
+      <Title title="How it works?" />
       <Tabss defaultActiveKey="1" centered>
         <TabPane tab={contraceptive} key="1">
           <LongText className="gray">{howItWorks}</LongText>
@@ -90,18 +91,18 @@ const Mechanism = ({
         </TabPane>
       </Tabss>
 
-      <Title title="Health Risk"></Title>
+      <Title title="Health Risk" />
       <Tabss defaultActiveKey="1" centered>
         <TabPane tab={contraceptive} key="1">
           <LongText className="gray">{healthRisks}</LongText>
           <LongText>{'*' + warning}</LongText>
-          <Title title="Who can't use"></Title>
+          <Title title="Who can't use" />
           <LongText className="gray">{whoCantUse}</LongText>
         </TabPane>
         <TabPane tab={contraceptiveRight} key="2">
           <LongText className="gray">{healthRisksRight}</LongText>
           <LongText>{'*' + warningRight}</LongText>
-          <Title title="Who can't use"></Title>
+          <Title title="Who can't use" />
           <LongText className="gray">{whoCantUseRight}</LongText>
         </TabPane>
       </Tabss>

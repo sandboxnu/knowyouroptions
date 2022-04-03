@@ -31,26 +31,26 @@ const PracticalQuestions = ({
     <div>
       <Title title="Where to access?" />
       <TwoColumns
-        span={4}
+        span={8}
         LeftElm={<ul>{whereToAccessLeft.map(toListItem)}</ul>}
         RightElm={<ul>{whereToAccessRight.map(toListItem)}</ul>}
       />
       <Title title="Who will administer this method?" />
       <TwoColumns
-        span={4}
+        span={8}
         LeftElm={<p className="gray subtitle1">{whoWillAdministerLeft}</p>}
         RightElm={<p className="gray subtitle1">{whoWillAdministerRight}</p>}
       />
-      <Title title="How much could it cost?"></Title>
+      <Title title="How much could it cost?" />
       <TwoColumns
-        span={4}
+        span={8}
         LeftElm={
           <Category
             title="Price may vary from geographic regions and health insurers."
             titleClass="gray subtitle1"
             value={`$${costLowLeft}-$${costHighLeft}`}
             valueClass="teal title3"
-          ></Category>
+          />
         }
         RightElm={
           <Category
@@ -58,9 +58,9 @@ const PracticalQuestions = ({
             titleClass="gray subtitle1"
             value={`$${costLowRight}-$${costHighRight}`}
             valueClass="teal title3"
-          ></Category>
+          />
         }
-      ></TwoColumns>
+      />
     </div>
   );
 };

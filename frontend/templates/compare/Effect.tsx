@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import 'antd/dist/antd.css';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
-import StyledImage from '../../components/compare/StyledImage';
+import StyledCompareSvg from '../../components/compare/StyledCompareSvg';
 import { Benefit, SideEffect } from '../../api-client';
 
 // Styling
@@ -22,7 +22,7 @@ const Effect = ({
   // TODO: Map to file names in public/compare/benefits
   const benefitMap = (benefit: Benefit) => (
     <div>
-      <StyledImage src={`compare/condom.svg`} />
+      <StyledCompareSvg src={`compare/condom.svg`} />
       <figcaption className="gray subtitle1">{'caption'}</figcaption>
     </div>
   );
@@ -30,7 +30,7 @@ const Effect = ({
   // TODO: Map to file names in public/compare/sideeffects
   const sideEffectMap = (sideEffect: SideEffect) => (
     <div>
-      <StyledImage src={`compare/condom.svg`} />
+      <StyledCompareSvg src={`compare/condom.svg`} />
       <figcaption className="gray subtitle1">{'caption'}</figcaption>
     </div>
   );
