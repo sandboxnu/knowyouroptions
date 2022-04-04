@@ -1,4 +1,6 @@
+import { Header } from '@nestjs/common';
 import Axios, { AxiosInstance, Method } from 'axios';
+import { AxiosError } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
 import { Redirect } from '../classes/response-classes';
@@ -29,18 +31,21 @@ class APIClient {
     url: string,
     responseClass?: ClassType<ItemIfArray<T>>,
     body?: any,
+    header?: any,
   ): Promise<T>;
   private async req<T>(
     method: Method,
     url: string,
     responseClass?: ClassType<T>,
     body?: any,
+    header?: any,
   ): Promise<T> {
     const res = (
       await this.axios.request({
         method,
         url,
         data: body,
+        headers: header,
         withCredentials: true,
       })
     ).data;
@@ -70,19 +75,20 @@ class APIClient {
     getName: async (): Promise<string> => {
       return this.req('GET', `${API_URL}/name`);
     },
-    getBookmarks: async (): Promise<string[]> => {
-      return this.req('GET', `${API_URL}/user/bookmarks`);
+    getBookmarks: async (cookie: any): Promise<string[]> => {
+      return this.req(
+        'GET',
+        `${API_URL}/user/bookmarks`,
+        undefined,
+        undefined,
+        cookie,
+      );
     },
     postBookmark: async (bookmark: string): Promise<void> => {
       let body = {
         bookmark: bookmark,
       };
-      return this.req('POST', `${API_URL}/user/bookmark`, undefined, body).then(
-        (response) => {
-          //console.log(body + 'this is body');
-          //console.log(response + ' response');
-        },
-      );
+      return this.req('POST', `${API_URL}/user/bookmark`, undefined, body);
     },
     deleteBookmarks: async (bookmark: string): Promise<string[]> => {
       let body = {

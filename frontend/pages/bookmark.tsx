@@ -7,12 +7,13 @@ import Pill from '../components/Pill';
 import { API, User } from '../api-client';
 import { useRouter } from 'next/router';
 import { size, device, maxDevice } from '../templates/mediaSizes';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import SvgImplantBookmark from '../public/bookmarks-icons/implant.svg';
 import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
 import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
 import { icons } from 'antd/lib/image/PreviewGroup';
+import { isVariableWidth } from 'class-validator';
 
 const Container = styled.div`
   width: 100%;
@@ -101,9 +102,6 @@ const Title = styled.h1`
   }
 `;
 
-type BookmarkProps = {
-  bookmarks: string[];
-};
 // const Bookmark = (bookmark: BookmarkProps): ReactElement => {
 //   return (
 //     <div>
@@ -122,7 +120,7 @@ const retriveBookmark = () => {
 };
 
 // PLACEHOLDER: NEED TO GET BOOKMARKED METHODS FROM CURRENT USER
-const BookedmarkedMethods = ['Implant', 'Patch', 'Condom'];
+const BookedmarkedMethods = API.user.getBookmarks();
 
 // PLACEHOLDER: NEED TO RETRIEVE CONTRACEPTIVE INFO FROM BOOKMARK NAME
 const BookmarkedMethodProps: MethodProps[] = [
@@ -186,12 +184,15 @@ const Method = ({
     </>
   );
 };
-
-const Bookmark = (bookmark: BookmarkProps): ReactElement => {
+type BookmarkProps = {
+  bookmark: string[];
+};
+const Bookmark = ({ bookmark }: BookmarkProps): ReactElement => {
   // TODO: add a button for the nav bar
   // TODO: add next page button??? ask emily
   // TODO: add learn more button
   // TODO: scroll bar
+
   return (
     <>
       <Container>
@@ -199,6 +200,7 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
           <SvgMenuButton />
           <Title>Bookmarks</Title>
         </Header>
+        {bookmark}
 
         <Body>
           <p> {BookmarkedMethodProps.length} methods</p>
@@ -214,6 +216,7 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
               />
             );
           })}
+          <input type="text" onChange={retriveBookmark} />
         </Body>
       </Container>
     </>
@@ -221,3 +224,21 @@ const Bookmark = (bookmark: BookmarkProps): ReactElement => {
 };
 
 export default Bookmark;
+
+// Bookmark.getInitialProps = ({ res }) => {
+//
+//   return bookmarks;
+// };
+
+Bookmark.getInitialProps = async ({ req }) => {
+  // /Get user id
+  // const newer = API.user.getBookmarks;
+  // const val = axios.get(`ocalhost:3001/user/bookmarks`, {
+  //   withCredentials: true,
+  // });
+
+  const val = await API.user.getBookmarks({ cookie: req.headers.cookie });
+
+  console.log(val + 'result');
+  return { bookmark: val };
+};
