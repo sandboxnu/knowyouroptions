@@ -4,7 +4,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { Column, Row } from '../templates/contraceptives/tabs/StyledComponents';
 import styled from 'styled-components';
 import Pill from '../components/Pill';
-import { API, User } from '../api-client';
+import { API, Contraceptive } from '../api-client';
 import { useRouter } from 'next/router';
 import { size, device, maxDevice } from '../templates/mediaSizes';
 import axios, { AxiosError } from 'axios';
@@ -14,6 +14,7 @@ import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
 import { icons } from 'antd/lib/image/PreviewGroup';
 import { isVariableWidth } from 'class-validator';
+import { CodeSandboxCircleFilled } from '@ant-design/icons';
 
 const Container = styled.div`
   width: 100%;
@@ -109,15 +110,6 @@ const Title = styled.h1`
 //     </div>
 //   );
 // };
-const retriveBookmark = () => {
-  const res = API.user.getBookmarks();
-  res.then((value) => {
-    console.log(value + ' val');
-  });
-
-  const post = API.user.postBookmark('IUD');
-  API.user.deleteBookmarks('Implant');
-};
 
 // PLACEHOLDER: NEED TO GET BOOKMARKED METHODS FROM CURRENT USER
 //const BookedmarkedMethods = API.user.getBookmarks();
@@ -185,13 +177,32 @@ const Method = ({
   );
 };
 type BookmarkProps = {
-  bookmark: string[];
+  bookmarks: string[];
 };
-const Bookmark = ({ bookmark }: BookmarkProps): ReactElement => {
+
+const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
   // TODO: add a button for the nav bar
   // TODO: add next page button??? ask emily
   // TODO: add learn more button
   // TODO: scroll bar
+
+  // const arrOfMethods: Contraceptive[] = [];
+  // bookmark.map((m) => {
+
+  //   contraceptive.then((val: Contraceptive) => {
+  //     arrOfMethods.push(val);
+  //   });
+  // });
+  // return arrOfMethods;
+
+  const [contraceptives, setContraceptives] = useState<Contraceptive[]>();
+
+  const getContraceptives = async (bookmark: string[]) => {
+    const arrOfMethods: Contraceptive[] = [];
+    bookmark.map((m) => {
+      const contraceptive = API.contraceptive.getOne('Implant');
+    });
+  };
 
   return (
     <>
@@ -200,10 +211,10 @@ const Bookmark = ({ bookmark }: BookmarkProps): ReactElement => {
           <SvgMenuButton />
           <Title>Bookmarks</Title>
         </Header>
-        {bookmark}
 
         <Body>
-          <p> {BookmarkedMethodProps.length} methods</p>
+          <p> {bookmarks.length} methods</p>
+          {console.log(contraceptives + 'contraceptives')}
           {BookmarkedMethodProps.map((method) => {
             return (
               <Method
@@ -216,7 +227,7 @@ const Bookmark = ({ bookmark }: BookmarkProps): ReactElement => {
               />
             );
           })}
-          <input type="text" onChange={retriveBookmark} />
+          <input type="text" />
         </Body>
       </Container>
     </>
@@ -225,20 +236,11 @@ const Bookmark = ({ bookmark }: BookmarkProps): ReactElement => {
 
 export default Bookmark;
 
-// Bookmark.getInitialProps = ({ res }) => {
-//
-//   return bookmarks;
-// };
-
-Bookmark.getInitialProps = async ({ req }) => {
-  // /Get user id
-  // const newer = API.user.getBookmarks;
-  // const val = axios.get(`ocalhost:3001/user/bookmarks`, {
-  //   withCredentials: true,
-  // });
-
-  const val = await API.user.getBookmarks({ cookie: req.headers.cookie });
-
-  console.log(val + 'result');
-  return { bookmark: val };
+Bookmark.getInitialProps = async ({ req }: any) => {
+  //getInitialProps is only called on the server side, and does not interact with cookies on the frontend.
+  //Therefore we must manually give the get request cookies, so we don't have a 401 authentication error.
+  const bookmarkedContraceptives = await API.user.getBookmarks({
+    cookie: req.headers.cookie,
+  });
+  return { bookmarks: bookmarkedContraceptives };
 };
