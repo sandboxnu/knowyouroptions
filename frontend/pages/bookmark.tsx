@@ -120,7 +120,7 @@ const retriveBookmark = () => {
 };
 
 // PLACEHOLDER: NEED TO GET BOOKMARKED METHODS FROM CURRENT USER
-const BookedmarkedMethods = API.user.getBookmarks();
+//const BookedmarkedMethods = API.user.getBookmarks();
 
 // PLACEHOLDER: NEED TO RETRIEVE CONTRACEPTIVE INFO FROM BOOKMARK NAME
 const BookmarkedMethodProps: MethodProps[] = [
