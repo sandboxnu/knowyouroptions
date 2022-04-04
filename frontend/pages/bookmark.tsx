@@ -4,7 +4,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { Column, Row } from '../templates/contraceptives/tabs/StyledComponents';
 import styled from 'styled-components';
 import Pill from '../components/Pill';
-import { API, Contraceptive } from '../api-client';
+import { API, Contraceptive, TimeUnits } from '../api-client';
 import { useRouter } from 'next/router';
 import { size, device, maxDevice } from '../templates/mediaSizes';
 import axios, { AxiosError } from 'axios';
@@ -115,60 +115,68 @@ const Title = styled.h1`
 //const BookedmarkedMethods = API.user.getBookmarks();
 
 // PLACEHOLDER: NEED TO RETRIEVE CONTRACEPTIVE INFO FROM BOOKMARK NAME
-const BookmarkedMethodProps: MethodProps[] = [
-  {
-    icon: <SvgImplantBookmark />,
-    name: 'Implant',
-    effectiveRate: '99% Effective',
-    useFrequency: 'Last up to 5 years',
-    cost: 'Can cost $0 - $1300',
-    application: 'Operated by doctor',
-  },
-  {
-    icon: <SvgImplantBookmark />,
-    name: 'Implant',
-    effectiveRate: '99% Effective',
-    useFrequency: 'Last up to 5 years',
-    cost: 'Can cost $0 - $1300',
-    application: 'Operated by doctor',
-  },
-  {
-    icon: <SvgImplantBookmark />,
-    name: 'Implant',
-    effectiveRate: '99% Effective',
-    useFrequency: 'Last up to 5 years',
-    cost: 'Can cost $0 - $1300',
-    application: 'Operated by doctor',
-  },
-];
+// const BookmarkedMethodProps: MethodProps[] = [
+//   {
+//     icon: <SvgImplantBookmark />,
+//     name: 'Implant',
+//     effectiveRate: '99% Effective',
+//     useFrequency: 'Last up to 5 years',
+//     cost: 'Can cost $0 - $1300',
+//     application: 'Operated by doctor',
+//   },
+//   {
+//     icon: <SvgImplantBookmark />,
+//     name: 'Implant',
+//     effectiveRate: '99% Effective',
+//     useFrequency: 'Last up to 5 years',
+//     cost: 'Can cost $0 - $1300',
+//     application: 'Operated by doctor',
+//   },
+//   {
+//     icon: <SvgImplantBookmark />,
+//     name: 'Implant',
+//     effectiveRate: '99% Effective',
+//     useFrequency: 'Last up to 5 years',
+//     cost: 'Can cost $0 - $1300',
+//     application: 'Operated by doctor',
+//   },
+// ];
 
 interface MethodProps {
-  icon: ReactElement;
+  // icon: ReactElement;
   name: string;
-  effectiveRate: string;
-  useFrequency: string;
-  cost: string;
+  effectiveRate: number;
+  usePatternHighBound: number;
+  usePatternUnits: TimeUnits;
+  costMin: number;
+  costMax: number;
   application: string;
 }
 
 const Method = ({
-  icon,
+  // icon,
   name,
   effectiveRate,
-  useFrequency,
-  cost,
+  usePatternHighBound,
+  usePatternUnits,
+  costMin,
+  costMax,
   application,
 }: MethodProps): ReactElement => {
   return (
     <>
       <MethodCard>
         <SvgRow>
-          {icon}
+          <SvgImplantBookmark />
           <SvgDesktopColumn>
             <MethodName>{name}</MethodName>
-            <MethodInfo>{effectiveRate}</MethodInfo>
-            <MethodInfo>{useFrequency}</MethodInfo>
-            <MethodInfo>{cost}</MethodInfo>
+            <MethodInfo>{effectiveRate}% Effective</MethodInfo>
+            <MethodInfo>
+              Lasts up to {usePatternHighBound} {usePatternUnits}
+            </MethodInfo>
+            <MethodInfo>
+              Can cost ${costMin} - ${costMax}
+            </MethodInfo>
             <MethodInfo>{application}</MethodInfo>
           </SvgDesktopColumn>
         </SvgRow>
@@ -185,24 +193,27 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
   // TODO: add next page button??? ask emily
   // TODO: add learn more button
   // TODO: scroll bar
+  const getBookmarks = () => {
+    const arrOfMethods: Contraceptive[] = [];
+    bookmarks.map((m) => {
+      const contraceptive = API.contraceptive.getOne(m);
+      const p = Promise.resolve(contraceptive);
+      p.then((val) => {
+        arrOfMethods.push(val);
+      });
+    });
+    return arrOfMethods;
+  };
 
-  // const arrOfMethods: Contraceptive[] = [];
-  // bookmark.map((m) => {
+  const arrOfMethods: Contraceptive[] = [];
+  const [contraceptives, setContraceptives] = useState(getBookmarks);
 
-  //   contraceptive.then((val: Contraceptive) => {
-  //     arrOfMethods.push(val);
-  //   });
-  // });
   // return arrOfMethods;
 
-  const [contraceptives, setContraceptives] = useState<Contraceptive[]>();
+  // const getContraceptives = async (bookmark: string[]) => {
+  //   const arrOfMethods: Contraceptive[] = [];
 
-  const getContraceptives = async (bookmark: string[]) => {
-    const arrOfMethods: Contraceptive[] = [];
-    bookmark.map((m) => {
-      const contraceptive = API.contraceptive.getOne('Implant');
-    });
-  };
+  // };
 
   return (
     <>
@@ -214,20 +225,21 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
 
         <Body>
           <p> {bookmarks.length} methods</p>
-          {console.log(contraceptives + 'contraceptives')}
-          {BookmarkedMethodProps.map((method) => {
+          {console.log(contraceptives)}
+          {contraceptives.map((m: Contraceptive, i) => {
             return (
               <Method
-                icon={method.icon}
-                name={method.name}
-                effectiveRate={method.effectiveRate}
-                useFrequency={method.useFrequency}
-                cost={method.cost}
-                application={method.application}
+                // icon={m.name}
+                name={m.name}
+                effectiveRate={m.effectiveRate}
+                usePatternHighBound={m.usePatternHighBound}
+                usePatternUnits={m.usePatternUnits}
+                costMin={m.costMin}
+                costMax={m.costMax}
+                application={m.whoAdministers}
               />
             );
           })}
-          <input type="text" />
         </Body>
       </Container>
     </>
@@ -242,5 +254,6 @@ Bookmark.getInitialProps = async ({ req }: any) => {
   const bookmarkedContraceptives = await API.user.getBookmarks({
     cookie: req.headers.cookie,
   });
+
   return { bookmarks: bookmarkedContraceptives };
 };

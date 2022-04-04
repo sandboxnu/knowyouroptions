@@ -16,7 +16,7 @@ export type User = {
   password: string;
   name: string;
 };
-type TimeUnits = 'years' | 'months' | 'days' | 'weeks';
+export type TimeUnits = 'years' | 'months' | 'days' | 'weeks';
 
 export type Tag = {
   id: number;
@@ -156,7 +156,7 @@ class APIClient {
       return this.req('GET', `${API_URL}/contraceptive`);
     },
     getOne: async (contraceptive: string): Promise<Contraceptive> => {
-      return this.req('GET', `${API_URL}/contraceptive/${contraceptive}`);
+      return await this.req('GET', `${API_URL}/contraceptive/${contraceptive}`);
     },
   };
 
