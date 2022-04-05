@@ -4,7 +4,6 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { Column, Row } from '../templates/contraceptives/tabs/StyledComponents';
 import styled from 'styled-components';
 import Pill from '../components/Pill';
-import { API, User } from '../api-client';
 import { useRouter } from 'next/router';
 import { size, device, maxDevice } from '../templates/mediaSizes';
 import axios from 'axios';
@@ -13,9 +12,23 @@ import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
 import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
 import { icons } from 'antd/lib/image/PreviewGroup';
+import { API, Contraceptive, User } from '../api-client';
+
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 1.5rem;
+  row-gap: 1rem;
+  width: 100%;
+  height: 100%;
+
+  @media ${device.laptop} {
+    padding: 1rem 7rem;
+  }
+`;
 
 const Container = styled.div`
-  width: 100%;
+  width: 100vw;
   margin: 0;
   padding: 0;
   display: flex;
@@ -23,74 +36,133 @@ const Container = styled.div`
   height: 100vh;
 `;
 
-const Body = styled(Container)`
-  padding: 0rem 1.5rem;
-
-  @media ${device.laptop} {
-    padding: 1rem 3rem;
-    width: 65vw;
-  }
-`;
-
 const Header = styled(Container)`
   background-color: #febba8;
   display: flex;
   flex-direction: column;
-  height: 20vh;
+  height: 20%;
+  justify-content: end;
   margin: 0;
-  padding: 2rem 1.5rem;
+  padding: 1.5rem;
   row-gap: 2rem;
   width: 100%;
 
   @media ${device.laptop} {
-    height: 57vh;
+    height: 40%;
     position: relative;
+    padding-left: 7rem;
+  }
+`;
+
+const LearnMoreButton = styled.p`
+  color: #911d7a;
+  font-family: roboto;
+  font-size: 10px;
+  position: relative;
+  top: 75%;
+
+  @media ${device.laptop} {
+    position: absolute;
+    top: 80%;
+    left: 60%;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 140%;
+    text-align: right;
   }
 `;
 
 const MethodCard = styled.div`
-  border: 2px solid;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+  column-gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 1rem;
+  @media ${device.laptop} {
+    align-items: flex-start;
+    box-shadow: 0px 4px 6px 4px rgba(0, 0, 0, 0.25);
+    column-gap: 0.5rem;
+    height: 350px;
+    justify-content: flex-start;
+    padding: 3rem 2rem;
+    position: relative;
+    width: 350px;
+  }
+`;
+
+const MethodCount = styled.p`
+  color: gray;
+  font-family: roboto;
+  font-size: 15px;
+  margin: 1rem 0 0 0;
+  @media ${device.laptop} {
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 35px;
+    margin: 2rem 0;
+  }
 `;
 
 const MethodInfo = styled.p`
-  font-size: 0.75rem;
-  margin: 0.25rem;
-`;
-
-const MethodName = styled.h1`
-  font-size: 1rem;
-  margin: 0.25rem;
-`;
-
-const PillDesktop = styled(Pill)`
-  background: #fffefe;
-  display: inline;
-  margin: 1rem;
-  padding: 0.2rem 0.3rem;
-`;
-
-const QuickAccess = styled.div`
+  color: #5d5d5d;
+  font-family: roboto;
+  font-size: 12px;
+  margin: 0.1rem;
   @media ${device.laptop} {
-    display: flex;
-    flex-direction: row;
-    padding: 1.5rem 1.5rem;
+    color: #808080;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 140%;
   }
 `;
 
-const SvgDesktopColumn = styled(Column)`
+const MethodInfoColumn = styled(Column)`
   margin-left: 0.5rem;
   justify: left;
+  width: 58%;
   @media ${device.laptop} {
     bottom: 0;
     justify: left;
-    position: absolute;
+    width: 80%;
   }
 `;
 
-const SvgRow = styled(Row)`
-  margin-left: auto;
-  margin-top: auto;
+const MethodName = styled.h1`
+  color: #212121;
+  font-family: roboto;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0.1rem;
+  @media ${device.laptop} {
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+    margin: 0 0 1rem 0;
+  }
+`;
+
+const MethodsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  @media ${device.laptop} {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    column-gap: 4rem;
+  }
+`;
+
+const SvgMenuButtonStyled = styled(SvgMenuButton)`
+  @media ${device.laptop} {
+    visibility: hidden;
+  }
 `;
 
 const Title = styled.h1`
@@ -98,27 +170,20 @@ const Title = styled.h1`
   font-size: 22px;
   margin: 0;
   @media ${device.laptop} {
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 56px;
+    letter-spacing: -0.005em;
   }
 `;
 
-type BookmarkProps = {
-  bookmarks: string[];
-};
-// const Bookmark = (bookmark: BookmarkProps): ReactElement => {
-//   return (
-//     <div>
-//       <input type="text" onChange={retriveBookmark} />
-//     </div>
-//   );
-// };
-const retriveBookmark = () => {
+const retrieveBookmark = () => {
   const res = API.user.getBookmarks();
   res.then((value) => {
     console.log(value + ' val');
   });
 
-  const post = API.user.postBookmark('IUD');
-  API.user.deleteBookmarks('Implant');
+  return res;
 };
 
 // PLACEHOLDER: NEED TO GET BOOKMARKED METHODS FROM CURRENT USER
@@ -172,48 +237,75 @@ const Method = ({
   return (
     <>
       <MethodCard>
-        <SvgRow>
-          {icon}
-          <SvgDesktopColumn>
-            <MethodName>{name}</MethodName>
-            <MethodInfo>{effectiveRate}</MethodInfo>
-            <MethodInfo>{useFrequency}</MethodInfo>
-            <MethodInfo>{cost}</MethodInfo>
-            <MethodInfo>{application}</MethodInfo>
-          </SvgDesktopColumn>
-        </SvgRow>
+        {icon}
+        <MethodInfoColumn>
+          <MethodName>{name}</MethodName>
+          <MethodInfo>{effectiveRate}</MethodInfo>
+          <MethodInfo>{useFrequency}</MethodInfo>
+          <MethodInfo>{cost}</MethodInfo>
+          <MethodInfo>{application}</MethodInfo>
+        </MethodInfoColumn>
+        <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
       </MethodCard>
     </>
   );
 };
 
-const Bookmark = (bookmark: BookmarkProps): ReactElement => {
-  // TODO: add a button for the nav bar
-  // TODO: add next page button??? ask emily
-  // TODO: add learn more button
-  // TODO: scroll bar
+type BookmarkProps = {
+  bookmarks: string[];
+};
+
+const Bookmark = (bookmarkProps: BookmarkProps): ReactElement => {
+  // TODO: connect menu icon to actual menu
+
+  // HERE: create useEffect to make API calls for the list of bookmarks
+  const { bookmarks } = bookmarkProps;
+  const router = useRouter();
+  const [methodProps, setMethodProps] = useState([{}]);
+  useEffect(() => {
+    if (!methodProps) {
+      getMethodProps();
+    }
+  });
+  const getMethodProps = async () => {
+    try {
+      let newMethodProps: Contraceptive[] = [];
+      bookmarks.map(async (methodName) => {
+        // for each methodName, retrieve the methodProps
+        let methodProp = await API.contraceptive.getContraceptive(methodName);
+        newMethodProps.push(methodProp);
+      });
+      setMethodProps(newMethodProps);
+    } catch (e) {
+      // If user is not signed in (expects not-logged-in error)
+      router.push('/signin');
+    }
+  };
+
   return (
     <>
       <Container>
         <Header>
-          <SvgMenuButton />
+          <SvgMenuButtonStyled />
           <Title>Bookmarks</Title>
         </Header>
 
         <Body>
-          <p> {BookmarkedMethodProps.length} methods</p>
-          {BookmarkedMethodProps.map((method) => {
-            return (
-              <Method
-                icon={method.icon}
-                name={method.name}
-                effectiveRate={method.effectiveRate}
-                useFrequency={method.useFrequency}
-                cost={method.cost}
-                application={method.application}
-              />
-            );
-          })}
+          <MethodCount> {BookmarkedMethodProps.length} methods</MethodCount>
+          <MethodsContainer>
+            {BookmarkedMethodProps.map((method) => {
+              return (
+                <Method
+                  icon={method.icon}
+                  name={method.name}
+                  effectiveRate={method.effectiveRate}
+                  useFrequency={method.useFrequency}
+                  cost={method.cost}
+                  application={method.application}
+                />
+              );
+            })}
+          </MethodsContainer>
         </Body>
       </Container>
     </>
