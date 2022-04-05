@@ -15,10 +15,10 @@ import { CodeSandboxCircleFilled } from '@ant-design/icons';
 const Body = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: 0rem 1.5rem;
   row-gap: 1rem;
   width: 100%;
-  height: 100%;
 
   @media ${device.laptop} {
     padding: 1rem 7rem;
@@ -26,12 +26,12 @@ const Body = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100vw;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   height: 100vh;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
 `;
 
 const Header = styled(Container)`
@@ -60,13 +60,13 @@ const LearnMoreButton = styled.p`
   top: 75%;
 
   @media ${device.laptop} {
-    position: absolute;
-    top: 80%;
-    left: 60%;
-    font-weight: 700;
     font-size: 16px;
+    font-weight: 700;
+    left: 60%;
     line-height: 140%;
+    position: absolute;
     text-align: right;
+    top: 80%;
   }
 `;
 
@@ -78,6 +78,7 @@ const MethodCard = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   padding: 1rem;
+
   @media ${device.laptop} {
     align-items: flex-start;
     box-shadow: 0px 4px 6px 4px rgba(0, 0, 0, 0.25);
@@ -95,6 +96,7 @@ const MethodCount = styled.p`
   font-family: roboto;
   font-size: 15px;
   margin: 1rem 0 0 0;
+
   @media ${device.laptop} {
     font-size: 30px;
     font-weight: 400;
@@ -108,18 +110,20 @@ const MethodInfo = styled.p`
   font-family: roboto;
   font-size: 12px;
   margin: 0.1rem;
+
   @media ${device.laptop} {
     color: #808080;
-    font-weight: 400;
     font-size: 20px;
+    font-weight: 400;
     line-height: 140%;
   }
 `;
 
 const MethodInfoColumn = styled(Column)`
-  margin-left: 0.5rem;
   justify: left;
+  margin-left: 0.5rem;
   width: 58%;
+
   @media ${device.laptop} {
     bottom: 0;
     justify: left;
@@ -133,27 +137,28 @@ const MethodName = styled.h1`
   font-size: 18px;
   font-weight: 500;
   margin: 0.1rem;
+
   @media ${device.laptop} {
-    font-weight: 700;
     font-size: 30px;
     line-height: 35px;
+    font-weight: 700;
     margin: 0 0 1rem 0;
   }
 `;
 
 const MethodsContainer = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
   row-gap: 1rem;
+  width: 100%;
 
   @media ${device.laptop} {
+    column-gap: 4rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
-    column-gap: 4rem;
   }
 `;
 
@@ -167,6 +172,7 @@ const Title = styled.h1`
   display: inline;
   font-size: 22px;
   margin: 0;
+
   @media ${device.laptop} {
     font-size: 48px;
     font-weight: 900;
