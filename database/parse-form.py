@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from math import isnan
+import numpy as np
 import pandas as pd
 import requests
 import sys
@@ -68,13 +70,12 @@ dict = df.to_dict("records")
 for contraceptive in dict:
   # Formatting
   
-  
   contraceptive["whereToAccess"] = contraceptive["whereToAccess"].split("\n")
   contraceptive["whenItStartsToWork"] = contraceptive["whenItStartsToWork"].split("\n")
   contraceptive["sideEffects"] = split_to_dict(contraceptive["sideEffects"], "description", sep="\n")
   contraceptive["benefits"] = split_to_dict(contraceptive["benefits"], "description", sep="\n")
   contraceptive["tags"] = split_to_dict(contraceptive["tags"], "label", sep=",")
-  contraceptive["whoCantUse"] = contraceptive["whoCantUse"].split("\n")
+  contraceptive["whoCantUse"] = contraceptive["whoCantUse"].split("\n") if not pd.isnull(contraceptive["whoCantUse"]) else []
   contraceptive["thingsToKnow"] = split_things_to_know(contraceptive["thingsToKnow"])
 
   # POST
@@ -82,4 +83,3 @@ for contraceptive in dict:
   database_url = "http://localhost:3001/contraceptive"
   r = requests.post(database_url, data=contraceptive)
   print(str(r.status_code) + ": " + contraceptive["name"])
-

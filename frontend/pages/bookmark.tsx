@@ -1,18 +1,16 @@
-import Card from '../components/Card';
-import Layout from '../components/Layout';
 import React, { ReactElement, useEffect, useState } from 'react';
 import { Column, Row } from '../templates/contraceptives/tabs/StyledComponents';
 import styled from 'styled-components';
-import Pill from '../components/Pill';
-import { useRouter } from 'next/router';
+import { API, Contraceptive, TimeUnits } from '../api-client';
 import { size, device, maxDevice } from '../templates/mediaSizes';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import SvgImplantBookmark from '../public/bookmarks-icons/implant.svg';
 import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
 import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
 import { icons } from 'antd/lib/image/PreviewGroup';
-import { API, Contraceptive, User } from '../api-client';
+import { isVariableWidth } from 'class-validator';
+import { CodeSandboxCircleFilled } from '@ant-design/icons';
 
 const Body = styled.div`
   display: flex;
@@ -177,62 +175,42 @@ const Title = styled.h1`
   }
 `;
 
-const retrieveBookmark = () => {
-  const res = API.user.getBookmarks();
-  res.then((value) => {
-    console.log(value + ' val');
-  });
-
-  return res;
+// TODO: ask for all icons
+const MethodIconsMap: Record<string, ReactElement> = {
+  Implant: <SvgImplantBookmark />,
+  Patch: <SvgPatchBookmark />,
+  Condom: <SvgCondomBookmark />,
+  'Copper IUD': <SvgImplantBookmark />,
+  'Hormonal IUD': <SvgImplantBookmark />,
+  Sterilization: <SvgImplantBookmark />,
+  Shot: <SvgPatchBookmark />,
+  Ring: <SvgPatchBookmark />,
+  Spermicide: <SvgPatchBookmark />,
+  Diaphragm: <SvgPatchBookmark />,
+  Pill: <SvgPatchBookmark />,
+  'Cervical Cap': <SvgPatchBookmark />,
 };
-
-// PLACEHOLDER: NEED TO GET BOOKMARKED METHODS FROM CURRENT USER
-const BookedmarkedMethods = ['Implant', 'Patch', 'Condom'];
-
-// PLACEHOLDER: NEED TO RETRIEVE CONTRACEPTIVE INFO FROM BOOKMARK NAME
-const BookmarkedMethodProps: MethodProps[] = [
-  {
-    icon: <SvgImplantBookmark />,
-    name: 'Implant',
-    effectiveRate: '99% Effective',
-    useFrequency: 'Last up to 5 years',
-    cost: 'Can cost $0 - $1300',
-    application: 'Operated by doctor',
-  },
-  {
-    icon: <SvgImplantBookmark />,
-    name: 'Implant',
-    effectiveRate: '99% Effective',
-    useFrequency: 'Last up to 5 years',
-    cost: 'Can cost $0 - $1300',
-    application: 'Operated by doctor',
-  },
-  {
-    icon: <SvgImplantBookmark />,
-    name: 'Implant',
-    effectiveRate: '99% Effective',
-    useFrequency: 'Last up to 5 years',
-    cost: 'Can cost $0 - $1300',
-    application: 'Operated by doctor',
-  },
-];
 
 interface MethodProps {
   icon: ReactElement;
   name: string;
-  effectiveRate: string;
-  useFrequency: string;
-  cost: string;
-  application: string;
+  effectiveRate: number;
+  usePatternHighBound: number;
+  usePatternUnits: TimeUnits;
+  costMin: number;
+  costMax: number;
+  whoAdministers: string;
 }
 
 const Method = ({
   icon,
   name,
   effectiveRate,
-  useFrequency,
-  cost,
-  application,
+  usePatternHighBound,
+  usePatternUnits,
+  costMin,
+  costMax,
+  whoAdministers,
 }: MethodProps): ReactElement => {
   return (
     <>
@@ -240,47 +218,41 @@ const Method = ({
         {icon}
         <MethodInfoColumn>
           <MethodName>{name}</MethodName>
-          <MethodInfo>{effectiveRate}</MethodInfo>
-          <MethodInfo>{useFrequency}</MethodInfo>
-          <MethodInfo>{cost}</MethodInfo>
-          <MethodInfo>{application}</MethodInfo>
+          <MethodInfo>{effectiveRate}% Effective</MethodInfo>
+          <MethodInfo>
+            Lasts up to {usePatternHighBound} {usePatternUnits}
+          </MethodInfo>
+          <MethodInfo>
+            Can cost ${costMin} - ${costMax}
+          </MethodInfo>
+          <MethodInfo>{whoAdministers}</MethodInfo>
         </MethodInfoColumn>
         <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
       </MethodCard>
     </>
   );
 };
-
 type BookmarkProps = {
   bookmarks: string[];
 };
 
-const Bookmark = (bookmarkProps: BookmarkProps): ReactElement => {
+const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
   // TODO: connect menu icon to actual menu
 
-  // HERE: create useEffect to make API calls for the list of bookmarks
-  const { bookmarks } = bookmarkProps;
-  const router = useRouter();
-  const [methodProps, setMethodProps] = useState([{}]);
-  useEffect(() => {
-    if (!methodProps) {
-      getMethodProps();
-    }
-  });
-  const getMethodProps = async () => {
-    try {
-      let newMethodProps: Contraceptive[] = [];
-      bookmarks.map(async (methodName) => {
-        // for each methodName, retrieve the methodProps
-        let methodProp = await API.contraceptive.getContraceptive(methodName);
-        newMethodProps.push(methodProp);
+  const getBookmarks = () => {
+    const arrOfMethods: Contraceptive[] = [];
+    bookmarks.map((m) => {
+      const contraceptive = API.contraceptive.getOne(m);
+      const p = Promise.resolve(contraceptive);
+      p.then((val) => {
+        arrOfMethods.push(val);
       });
-      setMethodProps(newMethodProps);
-    } catch (e) {
-      // If user is not signed in (expects not-logged-in error)
-      router.push('/signin');
-    }
+    });
+    return arrOfMethods;
   };
+
+  const arrOfMethods: Contraceptive[] = [];
+  const [contraceptives, setContraceptives] = useState(getBookmarks);
 
   return (
     <>
@@ -291,17 +263,19 @@ const Bookmark = (bookmarkProps: BookmarkProps): ReactElement => {
         </Header>
 
         <Body>
-          <MethodCount> {BookmarkedMethodProps.length} methods</MethodCount>
+          <MethodCount> {contraceptives.length} methods</MethodCount>
           <MethodsContainer>
-            {BookmarkedMethodProps.map((method) => {
+            {contraceptives.map((m: Contraceptive) => {
               return (
                 <Method
-                  icon={method.icon}
-                  name={method.name}
-                  effectiveRate={method.effectiveRate}
-                  useFrequency={method.useFrequency}
-                  cost={method.cost}
-                  application={method.application}
+                  icon={MethodIconsMap[m.name]}
+                  name={m.name}
+                  effectiveRate={m.effectiveRate}
+                  usePatternHighBound={m.usePatternHighBound}
+                  usePatternUnits={m.usePatternUnits}
+                  costMin={m.costMin}
+                  costMax={m.costMax}
+                  whoAdministers={m.whoAdministers}
                 />
               );
             })}
@@ -313,3 +287,13 @@ const Bookmark = (bookmarkProps: BookmarkProps): ReactElement => {
 };
 
 export default Bookmark;
+
+Bookmark.getInitialProps = async ({ req }: any) => {
+  //getInitialProps is only called on the server side, and does not interact with cookies on the frontend.
+  //Therefore we must manually give the get request cookies, so we don't have a 401 authentication error.
+  const bookmarkedContraceptives = await API.user.getBookmarks({
+    cookie: req.headers.cookie,
+  });
+
+  return { bookmarks: bookmarkedContraceptives };
+};

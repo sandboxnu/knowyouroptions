@@ -32,7 +32,7 @@ export class UserService {
       user.email = userInfo.email;
       user.name = userInfo.name;
       user.password = userInfo.password;
-      user.bookmarks = [];
+      user.bookmarks = ['Implant', 'Condom'];
       await this.userRepository.save(user);
       return user;
     }
