@@ -244,53 +244,71 @@ type BookmarkProps = {
 
 const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
   // TODO: connect menu icon to actual menu
+  const [contraceptives, setContraceptives] = useState<Contraceptive[]>([]);
+  const [isBusy, setBusy] = useState(true);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const initArrOfMethods: Contraceptive[] = [];
-  const [contraceptives, setContraceptives] = useState(initArrOfMethods);
-
-  const getBookmarks = () => {
+  const fetchData = () => {
+    setContraceptives([]);
+    console.log(bookmarks + 'bookmarks');
     const arrOfMethods: Contraceptive[] = [];
     bookmarks.map((m) => {
       const contraceptive = API.contraceptive.getOne(m);
       const p = Promise.resolve(contraceptive);
       p.then((val) => {
-        arrOfMethods.push(val);
+        setContraceptives((contraceptive) => contraceptive.concat(val));
+        console.log(val);
+        //arrOfMethods.push(val);
       });
+      setBusy(false);
+      //setContraceptives(arrOfMethods);
     });
-    setContraceptives(arrOfMethods);
+    //console.log(arrOfMethods);
+    //return arrOfMethods;
+    //const val = getContracepitves.
+
+    //console.log(contraceptives.length);
   };
+  const render = () => {
+    {
+      console.log();
+    }
+    if (isBusy) return <div>test</div>;
+    else
+      return (
+        <>
+          <Container>
+            <Header>
+              <SvgMenuButtonStyled />
+              <Title>Bookmarks</Title>
+            </Header>
 
-  return (
-    <>
-      <Container>
-        <Header>
-          <SvgMenuButtonStyled />
-          <Title>Bookmarks</Title>
-        </Header>
-
-        <Body>
-          <MethodCount> {contraceptives.length} methods</MethodCount>
-          <MethodsContainer>
-            {contraceptives.map((m: Contraceptive) => {
-              console.log(m.name);
-              return (
-                <Method
-                  icon={MethodIconsMap[m.name]}
-                  name={m.name}
-                  effectiveRate={m.effectiveRate}
-                  usePatternHighBound={m.usePatternHighBound}
-                  usePatternUnits={m.usePatternUnits}
-                  costMin={m.costMin}
-                  costMax={m.costMax}
-                  whoAdministers={m.whoAdministers}
-                />
-              );
-            })}
-          </MethodsContainer>
-        </Body>
-      </Container>
-    </>
-  );
+            <Body>
+              <MethodCount> {contraceptives.length} methods</MethodCount>
+              <MethodsContainer>
+                {contraceptives.map((m: Contraceptive) => {
+                  return (
+                    <Method
+                      icon={MethodIconsMap[m.name]}
+                      name={m.name}
+                      effectiveRate={m.effectiveRate}
+                      usePatternHighBound={m.usePatternHighBound}
+                      usePatternUnits={m.usePatternUnits}
+                      costMin={m.costMin}
+                      costMax={m.costMax}
+                      whoAdministers={m.whoAdministers}
+                    />
+                  );
+                })}
+              </MethodsContainer>
+            </Body>
+          </Container>
+        </>
+      );
+  };
+  return render();
 };
 
 export default Bookmark;
@@ -301,6 +319,10 @@ Bookmark.getInitialProps = async ({ req }: any) => {
   const bookmarkedContraceptives = await API.user.getBookmarks({
     cookie: req.headers.cookie,
   });
+  console.log(bookmarkedContraceptives + 'here');
+
+  //return arrOfMethods;
+  //const val = getContracepitves.
 
   return { bookmarks: bookmarkedContraceptives };
 };
