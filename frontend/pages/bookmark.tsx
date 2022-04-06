@@ -245,6 +245,9 @@ type BookmarkProps = {
 const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
   // TODO: connect menu icon to actual menu
 
+  const initArrOfMethods: Contraceptive[] = [];
+  const [contraceptives, setContraceptives] = useState(initArrOfMethods);
+
   const getBookmarks = () => {
     const arrOfMethods: Contraceptive[] = [];
     bookmarks.map((m) => {
@@ -254,11 +257,8 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
         arrOfMethods.push(val);
       });
     });
-    return arrOfMethods;
+    setContraceptives(arrOfMethods);
   };
-
-  const arrOfMethods: Contraceptive[] = [];
-  const [contraceptives, setContraceptives] = useState(getBookmarks);
 
   return (
     <>
@@ -272,6 +272,7 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
           <MethodCount> {contraceptives.length} methods</MethodCount>
           <MethodsContainer>
             {contraceptives.map((m: Contraceptive) => {
+              console.log(m.name);
               return (
                 <Method
                   icon={MethodIconsMap[m.name]}
