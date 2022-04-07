@@ -129,7 +129,7 @@ export class AuthService {
     console.log(storedUser);
 
     if (!storedUser) {
-      await this.signUp({ email: req.email, password: null, name: req.name });
+      await this.signUp({ email: req.email, password: '', name: req.name });
     } else {
       const token = await this.createAuthToken({ userId: storedUser.id }, 60);
 

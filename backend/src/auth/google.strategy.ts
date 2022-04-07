@@ -3,7 +3,6 @@ import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { config } from 'dotenv';
 
 import { Injectable } from '@nestjs/common';
-import { getUserByEmail } from 'src/user/user.service';
 
 // Taken from https://dev.to/imichaelowolabi/how-to-implement-login-with-google-in-nest-js-2aoa
 
