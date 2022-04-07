@@ -102,17 +102,9 @@ export class AuthController {
     const result = await this.authService.googleLogin(req);
     if (!result.user) return;
 
-    const userInfo = {
-      name: result.user.firstName,
-      email: result.user.email,
-      password: result.user.accessToken,
+    return {
+      redirect: this.domain + `/login/entry?token=${result.user.accessToken}`,
     };
-
-    try {
-      return await this.signUp(userInfo);
-    } catch (err) {
-      return await this.signIn(userInfo);
-    }
   }
 
   // Facebook Login

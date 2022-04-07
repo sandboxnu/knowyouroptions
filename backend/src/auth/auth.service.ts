@@ -125,10 +125,21 @@ export class AuthService {
     if (!req.user) {
       return { message: 'No user from google', user: undefined };
     }
+    const storedUser = await this.usersService.getUserByEmail(req.email);
+    console.log(storedUser);
 
-    return {
-      message: 'User information from google',
-      user: req.user,
-    };
+    if (!storedUser) {
+      await this.signUp({ email: req.email, password: null, name: req.name });
+    } else {
+      const token = await this.createAuthToken({ userId: storedUser.id }, 60);
+
+      const userInfo = {
+        id: storedUser.id,
+        email: storedUser.email,
+        name: storedUser.name,
+        accessToken: token,
+      };
+      return { message: undefined, user: userInfo };
+    }
   }
 }
