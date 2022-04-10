@@ -8,6 +8,7 @@ import SvgImplantBookmark from '../public/bookmarks-icons/implant.svg';
 import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
 import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
+import SvgBookmark from '../public/bookmark.svg';
 import { icons } from 'antd/lib/image/PreviewGroup';
 import { isVariableWidth } from 'class-validator';
 import { CodeSandboxCircleFilled } from '@ant-design/icons';
@@ -58,7 +59,8 @@ const LearnMoreButton = styled.p`
   font-size: 10px;
   position: relative;
   top: 75%;
-
+  float: right;
+  width: 120px;
   @media ${device.laptop} {
     font-size: 16px;
     font-weight: 700;
@@ -121,9 +123,9 @@ const MethodInfo = styled.p`
 
 const MethodInfoColumn = styled(Column)`
   justify: left;
-  margin-left: 0.5rem;
-  width: 58%;
-
+  padding-left: 1.5rem;
+  padding-left: 0px;
+  width: 100%;
   @media ${device.laptop} {
     bottom: 0;
     justify: left;
@@ -137,6 +139,8 @@ const MethodName = styled.h1`
   font-size: 18px;
   font-weight: 500;
   margin: 0.1rem;
+  width: 20%;
+  display: inline-block;
 
   @media ${device.laptop} {
     font-size: 30px;
@@ -167,7 +171,13 @@ const SvgMenuButtonStyled = styled(SvgMenuButton)`
     visibility: hidden;
   }
 `;
-
+const SvgBookmarkStyled = styled(SvgBookmark)`
+  float: right;
+`;
+const ImageContainer = styled.div`
+  padding-right: 10px;
+`;
+const ColumnExtra = styled.div``;
 const Title = styled.h1`
   display: inline;
   font-size: 22px;
@@ -221,9 +231,11 @@ const Method = ({
   return (
     <>
       <MethodCard>
-        {icon}
+        <ImageContainer>{icon}</ImageContainer>
+
         <MethodInfoColumn>
           <MethodName>{name}</MethodName>
+
           <MethodInfo>{effectiveRate}% Effective</MethodInfo>
           <MethodInfo>
             Lasts up to {usePatternHighBound} {usePatternUnits}
@@ -233,7 +245,10 @@ const Method = ({
           </MethodInfo>
           <MethodInfo>{whoAdministers}</MethodInfo>
         </MethodInfoColumn>
-        <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
+        <ColumnExtra>
+          <SvgBookmarkStyled></SvgBookmarkStyled>
+          <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
+        </ColumnExtra>
       </MethodCard>
     </>
   );
