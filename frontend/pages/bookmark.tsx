@@ -228,6 +228,10 @@ const Method = ({
   costMax,
   whoAdministers,
 }: MethodProps): ReactElement => {
+  const [bookmarked, setBookmarked] = useState<Boolean>(true);
+  const hello = () => {
+    setBookmarked(!bookmarked);
+  };
   return (
     <>
       <MethodCard>
@@ -246,7 +250,11 @@ const Method = ({
           <MethodInfo>{whoAdministers}</MethodInfo>
         </MethodInfoColumn>
         <ColumnExtra>
-          <SvgBookmarkStyled></SvgBookmarkStyled>
+          <img
+            src={bookmarked ? 'bookmark.svg' : 'unbookmarked.svg'}
+            onClick={() => hello()}
+          ></img>
+
           <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
         </ColumnExtra>
       </MethodCard>
