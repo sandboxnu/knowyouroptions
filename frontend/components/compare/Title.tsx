@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import 'antd/dist/antd.css';
 import { Col } from 'antd';
 import styled from 'styled-components';
 

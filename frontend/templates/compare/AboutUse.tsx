@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import 'antd/dist/antd.css';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../pages/compare';

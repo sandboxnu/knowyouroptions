@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import 'antd/dist/antd.css';
 import { Row, Col } from 'antd';
 const TwoColumns = ({
   LeftElm,

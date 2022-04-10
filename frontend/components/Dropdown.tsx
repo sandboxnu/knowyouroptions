@@ -1,6 +1,5 @@
 import { Menu, Dropdown } from 'antd';
 import { ReactElement } from 'react';
-import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import SvgDownArrow from '../public/down-arrow.svg';
 
