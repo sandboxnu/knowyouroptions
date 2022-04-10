@@ -121,20 +121,16 @@ export class AuthService {
     return user;
   }
 
-  async googleLogin(req) {
-    if (!req.user) {
-      return { message: 'No user from google', user: undefined };
-    }
-    const storedUser = await this.usersService.getUserByEmail(req.user.email);
-    //console.log(storedUser);
+  async googleLogin(user) {
+    const storedUser = await this.usersService.getUserByEmail(user.email);
 
     if (!storedUser) {
       const userInfo = await this.signUp({
-        email: req.user.email,
+        email: user.email,
         password: '',
-        name: `${req.user.firstName} ${req.user.lastName}`,
+        name: `${user.firstName} ${user.lastName}`,
       });
-      return { message: undefined, user: userInfo };
+      return userInfo;
     } else {
       const token = await this.createAuthToken({ userId: storedUser.id }, 60);
 
@@ -144,7 +140,7 @@ export class AuthService {
         name: storedUser.name,
         accessToken: token,
       };
-      return { message: undefined, user: userInfo };
+      return userInfo;
     }
   }
 }

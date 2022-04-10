@@ -314,20 +314,23 @@ const SignIn = (): ReactElement => {
   const router = useRouter();
 
   const oauthSignIn = async () => {
-    router.push('http://localhost:3001/google')
 
-    try {
-      const response: Redirect = await API.google.get();
-      console.log(response)
-      setError('');
-      await axios.get(response.redirect, { withCredentials: true });
-      router.push('http://localhost:3000/');
-    } catch (e) {
-      const err = e as AxiosError<HttpException>;
-      if (err.response) {
-        setError(err.response.data.message);
-      }
-    }
+    router.push('http://localhost:3001/google', undefined)
+
+    // try {
+    //   console.log("Here")
+    //   const response: Redirect = await API.google.get();
+    //   console.log(response)
+    //   console.log("here")
+    //   setError('');
+    //   await axios.get(response.redirect, { withCredentials: true });
+    //   router.push('http://localhost:3000/');
+    // } catch (e) {
+    //   const err = e as AxiosError<HttpException>;
+    //   if (err.response) {
+    //     setError(err.response.data.message);
+    //   }
+    // }
   };
 
   return (
@@ -346,7 +349,7 @@ const SignIn = (): ReactElement => {
             <a href="http://localhost:3001/facebook">
               <FacebookIcon />
             </a>
-            <a onClick={oauthSignIn}>
+            <a href={`http://localhost:3001/google`}>
               <GoogleIcon />
             </a>
           </OAuthIconContainer>

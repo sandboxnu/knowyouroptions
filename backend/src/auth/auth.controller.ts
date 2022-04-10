@@ -98,13 +98,9 @@ export class AuthController {
 
   @Get('/google/redirect')
   @UseGuards(GoogleAuthGuard)
-  async googleAuthRedirect(@Req() req) {
-    const result = await this.authService.googleLogin(req);
-    if (!result.user) return;
-
-    return {
-      redirect: this.domain + `/login/entry?token=${result.user.accessToken}`,
-    };
+  async googleAuthRedirect(@Req() req, @Res() res) {
+    //console.log(req, res)
+    res.redirect('http://localhost:3000/welcome');
   }
 
   // Facebook Login

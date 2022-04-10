@@ -1,16 +1,16 @@
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, VerifyCallback } from 'passport-google-oauth20';
 import { config } from 'dotenv';
-
 import { Injectable } from '@nestjs/common';
+import { AuthService } from './auth.service';
+
+config();
 
 // Taken from https://dev.to/imichaelowolabi/how-to-implement-login-with-google-in-nest-js-2aoa
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
-  constructor() {
-    config();
-
+  constructor(private readonly authService: AuthService) {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
@@ -33,6 +33,14 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       picture: photos[0].value,
       accessToken,
     };
-    done(null, user);
+
+    this.authService
+      .googleLogin(user)
+      .then((u) => {
+        return done(undefined, u);
+      })
+      .catch((err) => {
+        return done(err, undefined);
+      });
   }
 }
