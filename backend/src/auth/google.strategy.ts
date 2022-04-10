@@ -34,13 +34,11 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
       accessToken,
     };
 
-    this.authService
-      .googleLogin(user)
-      .then((u) => {
-        return done(undefined, u);
-      })
-      .catch((err) => {
-        return done(err, undefined);
-      });
+    try {
+      const u = await this.authService.googleLogin(user);
+      return done(undefined, u);
+    } catch (err) {
+      return done(err, undefined);
+    }
   }
 }

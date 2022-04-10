@@ -99,7 +99,7 @@ export class AuthController {
   @Get('/google/redirect')
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res) {
-    //console.log(req, res)
+    console.log(req.user)
     res.redirect('http://localhost:3000/welcome');
   }
 
