@@ -1,65 +1,11 @@
 import Axios, { AxiosInstance, Method } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
-import { Redirect } from '../classes/response-classes';
+import { Contraceptive, Redirect } from '../classes/response-classes';
 
 // Return type of array item, if T is an array
 type ItemIfArray<T> = T extends (infer I)[] ? I : T;
 export const API_URL = 'http://localhost:3001';
-
-type TimeUnits = 'years' | 'months' | 'days' | 'weeks';
-
-export type Tag = {
-  id: number;
-  label: string;
-};
-
-export type Benefit = {
-  id: number;
-  description: string;
-};
-
-export type SideEffect = {
-  id: number;
-  description: string;
-};
-
-export type ThingToKnow = {
-  id: number;
-  title: string;
-  description: string;
-};
-
-export type Contraceptive = {
-  id: number;
-  name: string;
-  usePatternLowBound: number;
-  usePatternHighBound: number;
-  usePatternUnits: TimeUnits;
-  effectiveRate: number;
-  costMin: number;
-  costMax: number;
-  accessibility: string;
-  tags: Tag[];
-  description: string;
-  use: string;
-  inCaseOfProblem: string;
-  whenItStartsToWork: string[];
-  howToStop: string;
-  howToStopMethod: string;
-  howToStopDurationText: string;
-  howLongUntilFertility: string;
-  benefits: Benefit[];
-  sideEffects: SideEffect[];
-  howItWorks: string;
-  healthRisks: string;
-  whoCantUse: string[];
-  whereToAccess: string[];
-  whoAdministers: string;
-  costDescription: string;
-  warning: string;
-  thingsToKnow: ThingToKnow[];
-};
 
 class APIClient {
   private axios: AxiosInstance;
