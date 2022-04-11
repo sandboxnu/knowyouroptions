@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import StyledCompareSvg from '../../components/compare/StyledCompareSvg';
-import { Benefit, SideEffect } from '../../api-client';
+import { Benefit, SideEffect } from '../../classes/response-classes';
 
 // Styling
 export interface EffectProps {

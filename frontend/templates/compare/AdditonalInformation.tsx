@@ -4,8 +4,8 @@ import TwoColumns from '../../components/compare/TwoColumns';
 import Title from '../../components/compare/Title';
 import { Text } from '../../components/compare/Title';
 import Category from '../../components/Category';
+import { ThingToKnow } from '../../classes/response-classes';
 
-import { ThingToKnow } from '../../api-client';
 export interface AdditionalInfoProps {
   thingsToKnowLeft: ThingToKnow[];
   thingsToKnowRight: ThingToKnow[];
