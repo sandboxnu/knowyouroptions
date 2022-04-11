@@ -18,6 +18,10 @@ a {
   box-sizing: border-box;
 }
 
+h1 {
+  font-weight: 700;
+}
+
 /* Text */
 
 .title1 {

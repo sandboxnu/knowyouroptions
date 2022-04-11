@@ -7,12 +7,11 @@ import Mechanism, { MechanismProps } from '../templates/compare/Mechanism';
 import PracticalQuestions, {
   PracticalQuestionsProps,
 } from '../templates/compare/PracticalQuestions';
-import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import { Collapse } from 'antd';
 import SvgPlus from '../public/plus.svg';
 import SvgMinus from '../public/minus.svg';
-import { colors } from '../templates/mediaSizes';
+import { colors, device } from '../templates/mediaSizes';
 import Category from '../components/Category';
 import AdditionalInformation, {
   AdditionalInfoProps,
@@ -20,9 +19,13 @@ import AdditionalInformation, {
 import Effect, { EffectProps } from '../templates/compare/Effect';
 import TwoColumns from '../components/compare/TwoColumns';
 import { API, Contraceptive } from '../api-client';
+import Menubar from '../components/Menubar';
+import Layout from '../components/Layout';
+
 const { Panel } = Collapse;
-const BodyContainer = styled.body`
-  margin-top: 100px;
+const MainContainer = styled.div`
+  background-color: white;
+  margin-top: 2rem;
 `;
 const Container = styled.div`
   width: 80%;
@@ -81,6 +84,24 @@ const MinusImage = styled(SvgMinus)`
 
 const StyledCollapse = styled(Collapse)`
   margin-top: 6vh;
+`;
+
+const Header = styled.div`
+  background-color: #febba8;
+  display: flex;
+  flex-direction: row;
+
+  height: 12rem;
+
+  @media ${device.laptop} {
+    height: 10rem;
+    position: relative;
+  }
+`;
+
+const Title = styled.h1`
+  align-self: flex-end;
+  margin-left: 10vw;
 `;
 
 type CompareProps = {
@@ -206,79 +227,86 @@ const Compare = (compareProps: CompareProps): ReactElement => {
   );
 
   return (
-    <BodyContainer>
-      <TwoColumns
-        LeftElm={
-          <StyledDropdown
-            title={contraceptives[method1]?.name ?? 'Method 1'}
-            menuItemInfos={contraceptives.map((c) => {
-              return {
-                title: c.name,
-                action: setMethod1,
-              };
-            })}
-            filter={[method2, method1]}
+    <Layout>
+      <>
+        <Header>
+          <Title>Compare Methods</Title>
+        </Header>
+        <MainContainer>
+          <TwoColumns
+            LeftElm={
+              <StyledDropdown
+                title={contraceptives[method1]?.name ?? 'Method 1'}
+                menuItemInfos={contraceptives.map((c) => {
+                  return {
+                    title: c.name,
+                    action: setMethod1,
+                  };
+                })}
+                filter={[method2, method1]}
+              />
+            }
+            RightElm={
+              <StyledDropdown
+                title={contraceptives[method2]?.name ?? 'Method 2'}
+                menuItemInfos={contraceptives.map((c) => {
+                  return {
+                    title: c.name,
+                    action: setMethod2,
+                  };
+                })}
+                filter={[method1, method2]}
+              />
+            }
           />
-        }
-        RightElm={
-          <StyledDropdown
-            title={contraceptives[method2]?.name ?? 'Method 2'}
-            menuItemInfos={contraceptives.map((c) => {
-              return {
-                title: c.name,
-                action: setMethod2,
-              };
-            })}
-            filter={[method1, method2]}
-          />
-        }
-      />
 
-      {shouldShowSections ? (
-        <TwoColumns
-          LeftElm={summaryOfMethod(method1)}
-          RightElm={summaryOfMethod(method2)}
-        />
-      ) : (
-        <div />
-      )}
+          {shouldShowSections ? (
+            <TwoColumns
+              LeftElm={summaryOfMethod(method1)}
+              RightElm={summaryOfMethod(method2)}
+            />
+          ) : (
+            <></>
+          )}
 
-      {shouldShowSections ? (
-        <StyledCollapse
-          defaultActiveKey={['-1']}
-          bordered={true}
-          onChange={(e) => setValue(e)}
-        >
-          {headers.map((h, i) => (
-            <PanelDrop
-              showArrow={false}
-              extra={
-                <TextHeader>
-                  {value.includes(i.toString()) ? (
-                    <MinusImage />
-                  ) : (
-                    <PlusImage />
-                  )}
-                </TextHeader>
-              }
-              header={
-                <Container>
-                  <TextHeader>{h.header}</TextHeader>
-                  <CircleNumber>
-                    <NumberText>{i + 1 + ''}</NumberText>
-                  </CircleNumber>
-                </Container>
-              }
-              key={i + ''}
+          {shouldShowSections ? (
+            <StyledCollapse
+              defaultActiveKey={['-1']}
+              bordered={true}
+              onChange={(e) => setValue(e)}
             >
-              {h.reactContent}
-            </PanelDrop>
-          ))}
-        </StyledCollapse>
-      ) : (
-        <div />
-      )}
-    </BodyContainer>
+              {headers.map((h, i) => (
+                <PanelDrop
+                  showArrow={false}
+                  extra={
+                    <TextHeader>
+                      {value.includes(i.toString()) ? (
+                        <MinusImage />
+                      ) : (
+                        <PlusImage />
+                      )}
+                    </TextHeader>
+                  }
+                  header={
+                    <Container>
+                      <TextHeader>{h.header}</TextHeader>
+                      <CircleNumber>
+                        <NumberText>{i + 1 + ''}</NumberText>
+                      </CircleNumber>
+                    </Container>
+                  }
+                  key={i + ''}
+                >
+                  {h.reactContent}
+                </PanelDrop>
+              ))}
+            </StyledCollapse>
+          ) : (
+            <></>
+          )}
+        </MainContainer>
+      </>
+    </Layout>
   );
 };
 
