@@ -18,9 +18,9 @@ import AdditionalInformation, {
 } from '../templates/compare/AdditonalInformation';
 import Effect, { EffectProps } from '../templates/compare/Effect';
 import TwoColumns from '../components/compare/TwoColumns';
-import { API, Contraceptive } from '../api-client';
-import Menubar from '../components/Menubar';
+import { API } from '../api-client';
 import Layout from '../components/Layout';
+import { Contraceptive } from '../classes/response-classes';
 
 const { Panel } = Collapse;
 const MainContainer = styled.div`
