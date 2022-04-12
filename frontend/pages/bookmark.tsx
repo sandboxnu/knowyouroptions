@@ -47,7 +47,7 @@ const Header = styled(Container)`
   width: 100%;
 
   @media ${device.laptop} {
-    height: 40%;
+    min-height: 40%;
     position: relative;
     padding-left: 7rem;
   }
@@ -158,11 +158,12 @@ const MethodsContainer = styled.div`
   width: 100%;
 
   @media ${device.laptop} {
-    column-gap: 4rem;
+    column-gap: 3rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
+    row-gap: 3rem;
   }
 `;
 
@@ -278,7 +279,9 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
       const contraceptive = API.contraceptive.getOne(m);
       const p = Promise.resolve(contraceptive);
       p.then((val) => {
-        setContraceptives((contraceptive) => contraceptive.concat(val));
+        setContraceptives((contraceptive) =>
+          contraceptive.concat(val).concat(val),
+        );
         console.log(val);
       });
     });
