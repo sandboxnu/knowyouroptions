@@ -3,20 +3,17 @@ import { Column, Row } from '../templates/contraceptives/tabs/StyledComponents';
 import styled from 'styled-components';
 import { API, Contraceptive, TimeUnits } from '../api-client';
 import { size, device, maxDevice } from '../templates/mediaSizes';
-import axios, { AxiosError } from 'axios';
+import MenuBar from '../components/Menubar';
 import SvgImplantBookmark from '../public/bookmarks-icons/implant.svg';
 import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
 import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
-import SvgBookmark from '../public/bookmark.svg';
-import { icons } from 'antd/lib/image/PreviewGroup';
-import { isVariableWidth } from 'class-validator';
-import { CodeSandboxCircleFilled } from '@ant-design/icons';
+import SvgBookmarked from '../public/bookmarks-icons/bookmarked.svg';
+import SvgUnbookmarked from '../public/bookmarks-icons/unbookmarked.svg';
 
 const Body = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 0rem 1.5rem;
   row-gap: 1rem;
   width: 100%;
@@ -26,10 +23,21 @@ const Body = styled.div`
   }
 `;
 
+const ColumnExtra = styled.div`
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 25%;
+  @media ${device.laptop} {
+    min-width: 5%;
+  }
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   margin: 0;
   padding: 0;
   width: 100vw;
@@ -39,7 +47,7 @@ const Header = styled(Container)`
   background-color: #febba8;
   display: flex;
   flex-direction: column;
-  height: 20%;
+  min-height: 20vh;
   justify-content: end;
   margin: 0;
   padding: 1.5rem;
@@ -47,7 +55,7 @@ const Header = styled(Container)`
   width: 100%;
 
   @media ${device.laptop} {
-    min-height: 40%;
+    min-height: 30vh;
     position: relative;
     padding-left: 7rem;
   }
@@ -57,10 +65,8 @@ const LearnMoreButton = styled.p`
   color: #911d7a;
   font-family: roboto;
   font-size: 10px;
-  position: relative;
-  top: 75%;
-  float: right;
-  width: 120px;
+  margin: 0;
+
   @media ${device.laptop} {
     font-size: 16px;
     font-weight: 700;
@@ -150,6 +156,9 @@ const MethodName = styled.h1`
   }
 `;
 
+// there will be white space after the cards if the desktop view is expanded;
+// however this looks better than using justify-content: space-between because
+// of awkward white space between cards
 const MethodsContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -167,18 +176,28 @@ const MethodsContainer = styled.div`
   }
 `;
 
-const SvgMenuButtonStyled = styled(SvgMenuButton)`
+const SvgBookmarkedStyled = styled(SvgBookmarked)`
   @media ${device.laptop} {
-    visibility: hidden;
+    left: 85%;
+    position: absolute;
+    top: 2%;
+    transform: scale(2);
   }
 `;
-const SvgBookmarkStyled = styled(SvgBookmark)`
-  float: right;
+
+const SvgUnbookmarkedStyled = styled(SvgUnbookmarked)`
+  @media ${device.laptop} {
+    left: 85%;
+    position: absolute;
+    top: 2%;
+    transform: scale(2);
+  }
 `;
+
 const ImageContainer = styled.div`
   padding-right: 10px;
 `;
-const ColumnExtra = styled.div``;
+
 const Title = styled.h1`
   display: inline;
   font-size: 22px;
@@ -233,6 +252,7 @@ const Method = ({
   const hello = () => {
     setBookmarked(!bookmarked);
   };
+  const BookmarkIcon = bookmarked ? SvgBookmarkedStyled : SvgUnbookmarkedStyled;
   return (
     <>
       <MethodCard>
@@ -251,10 +271,7 @@ const Method = ({
           <MethodInfo>{whoAdministers}</MethodInfo>
         </MethodInfoColumn>
         <ColumnExtra>
-          <img
-            src={bookmarked ? 'bookmark.svg' : 'unbookmarked.svg'}
-            onClick={() => hello()}
-          ></img>
+          <BookmarkIcon onClick={() => hello()} />
 
           <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
         </ColumnExtra>
@@ -290,8 +307,8 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
   return (
     <>
       <Container>
+        <MenuBar />
         <Header>
-          <SvgMenuButtonStyled />
           <Title>Bookmarks</Title>
         </Header>
 
