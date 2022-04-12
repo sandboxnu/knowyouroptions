@@ -177,6 +177,8 @@ const MethodsContainer = styled.div`
 `;
 
 const SvgBookmarkedStyled = styled(SvgBookmarked)`
+  cursor: pointer;
+
   @media ${device.laptop} {
     left: 85%;
     position: absolute;
@@ -186,6 +188,8 @@ const SvgBookmarkedStyled = styled(SvgBookmarked)`
 `;
 
 const SvgUnbookmarkedStyled = styled(SvgUnbookmarked)`
+  cursor: pointer;
+
   @media ${device.laptop} {
     left: 85%;
     position: absolute;
