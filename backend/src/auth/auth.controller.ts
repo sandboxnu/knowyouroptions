@@ -99,7 +99,7 @@ export class AuthController {
   @Get('/google/redirect')
   @UseGuards(GoogleAuthGuard)
   async googleAuthRedirect(@Req() req, @Res() res) {
-    console.log(req.user)
+    console.log(req)
     res.redirect('http://localhost:3000/welcome');
   }
 
@@ -107,16 +107,13 @@ export class AuthController {
 
   @Get('/facebook')
   @UseGuards(AuthGuard('facebook'))
-  async facebookLogin(): Promise<any> {
-    return HttpStatus.OK;
+  async facebookLogin(@Req() req) {
+    // Guard redirects
   }
 
   @Get('/facebook/redirect')
   @UseGuards(AuthGuard('facebook'))
-  async facebookLoginRedirect(@Req() req): Promise<any> {
-    return {
-      statusCode: HttpStatus.OK,
-      data: req.user,
-    };
+  async facebookLoginRedirect(@Req() req, @Res() res): Promise<any> {
+    res.redirect('http://localhost:3000/welcome');
   }
 }

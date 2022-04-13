@@ -121,13 +121,18 @@ export class AuthService {
     return user;
   }
 
-  async googleLogin(user) {
+  async oauthLogin(user: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    accessToken: string;
+  }) {
     const storedUser = await this.usersService.getUserByEmail(user.email);
 
     if (!storedUser) {
       const userInfo = await this.signUp({
         email: user.email,
-        password: '',
+        password: user.accessToken,
         name: `${user.firstName} ${user.lastName}`,
       });
       return userInfo;
