@@ -71,6 +71,12 @@ class APIClient {
     },
   };
 
+  google = {
+    get: async (): Promise<Redirect> => {
+      return this.req('GET', `${API_URL}/google`, Redirect)
+    }
+  }
+
   constructor(baseURL = '') {
     this.axios = Axios.create({ baseURL: baseURL });
   }

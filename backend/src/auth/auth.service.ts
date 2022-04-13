@@ -120,4 +120,32 @@ export class AuthService {
     }
     return user;
   }
+
+  async oauthLogin(user: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    accessToken: string;
+  }) {
+    const storedUser = await this.usersService.getUserByEmail(user.email);
+
+    if (!storedUser) {
+      const userInfo = await this.signUp({
+        email: user.email,
+        password: user.accessToken,
+        name: `${user.firstName} ${user.lastName}`,
+      });
+      return userInfo;
+    } else {
+      const token = await this.createAuthToken({ userId: storedUser.id }, 60);
+
+      const userInfo = {
+        id: storedUser.id,
+        email: storedUser.email,
+        name: storedUser.name,
+        accessToken: token,
+      };
+      return userInfo;
+    }
+  }
 }

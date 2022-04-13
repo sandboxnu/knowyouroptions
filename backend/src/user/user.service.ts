@@ -59,6 +59,11 @@ export class UserService {
     }
   }
 
+  public async getUserByEmail(email: string): Promise<User | null> {
+    // should return null lmao if user not exist :)
+    return await this.userRepository.findOne({ email });
+  }
+
   /**
    * Returns the user associated with the given ID
    * @param id user ID

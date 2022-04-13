@@ -3,15 +3,20 @@ import {
   Controller,
   Get,
   HttpException,
+  HttpStatus,
   Post,
   Query,
+  Req,
   Res,
   UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInInfo, UserInfo } from '../types/user';
 import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
+import { AuthGuard } from '@nestjs/passport';
+import { GoogleAuthGuard } from './guards/google-auth.guard';
 
 @Controller()
 export class AuthController {
@@ -81,5 +86,34 @@ export class AuthController {
         secure: false, // true only sends cookies with requests over HTTPS
       })
       .redirect(302, '/');
+  }
+
+  // Google Login
+
+  @Get('/google')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuth(@Req() req) {
+    // Guard redirects
+  }
+
+  @Get('/google/redirect')
+  @UseGuards(GoogleAuthGuard)
+  async googleAuthRedirect(@Req() req, @Res() res) {
+    console.log(req)
+    res.redirect('http://localhost:3000/welcome');
+  }
+
+  // Facebook Login
+
+  @Get('/facebook')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLogin(@Req() req) {
+    // Guard redirects
+  }
+
+  @Get('/facebook/redirect')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookLoginRedirect(@Req() req, @Res() res): Promise<any> {
+    res.redirect('http://localhost:3000/welcome');
   }
 }

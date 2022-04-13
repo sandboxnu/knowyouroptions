@@ -80,7 +80,7 @@ const Welcome = (): ReactElement => {
       setName(user);
     } catch (e) {
       // If user is not signed in (expects not-logged-in error)
-      router.push('/signin');
+      // router.push('/signin');
     }
   };
   return (

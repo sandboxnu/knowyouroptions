@@ -182,11 +182,13 @@ const SignInForm = (): ReactElement => {
   const signin = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
+    // Pull values from form
     const elements = form.elements as typeof form.elements & {
       'E-MAIL': { value: string };
       PASSWORD: { value: string };
     };
 
+    // Hit the signin endpoint
     try {
       const response: Redirect = await API.signIn.post({
         email: elements['E-MAIL'].value,
@@ -232,6 +234,7 @@ const SignUpForm = (): ReactElement => {
   const signup = async (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
+    // Pull values from form
     const elements = form.elements as typeof form.elements & {
       'E-MAIL': { value: string };
       PASSWORD: { value: string };
@@ -239,11 +242,13 @@ const SignUpForm = (): ReactElement => {
       NAME: { value: string };
     };
 
+    // Make sure passwords match
     if (elements['CONFIRM PASSWORD'].value !== elements.PASSWORD.value) {
       setError('Password and confirm password do not match.');
       return;
     }
 
+    // Hit the signup endpoint on the backend
     try {
       const response: Redirect = await API.signUp.post({
         email: elements['E-MAIL'].value,
@@ -304,7 +309,30 @@ const SignUpForm = (): ReactElement => {
 
 const SignIn = (): ReactElement => {
   const tabNames = ['Sign In', 'Sign Up'];
+  const [error, setError] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
+  const router = useRouter();
+
+  const oauthSignIn = async () => {
+
+    router.push('http://localhost:3001/google', undefined)
+
+    // try {
+    //   console.log("Here")
+    //   const response: Redirect = await API.google.get();
+    //   console.log(response)
+    //   console.log("here")
+    //   setError('');
+    //   await axios.get(response.redirect, { withCredentials: true });
+    //   router.push('http://localhost:3000/');
+    // } catch (e) {
+    //   const err = e as AxiosError<HttpException>;
+    //   if (err.response) {
+    //     setError(err.response.data.message);
+    //   }
+    // }
+  };
+
   return (
     <Container>
       <SignInTabBar
@@ -318,8 +346,12 @@ const SignIn = (): ReactElement => {
           <GuestButton>Continue as Guest</GuestButton>
           <OAuth>OR CONTINUE WITH</OAuth>
           <OAuthIconContainer>
-            <FacebookIcon />
-            <GoogleIcon />
+            <a href="http://localhost:3001/facebook">
+              <FacebookIcon />
+            </a>
+            <a href={`http://localhost:3001/google`}>
+              <GoogleIcon />
+            </a>
           </OAuthIconContainer>
         </>
       ) : (
