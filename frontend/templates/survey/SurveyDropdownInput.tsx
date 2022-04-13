@@ -103,8 +103,6 @@ const DropdownColumn = ({
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
-      console.log('dropdown');
-      console.log(response);
     };
     return onChange;
   };
@@ -175,8 +173,6 @@ const InputBox = ({
     answers[selectInfosSize] = event.currentTarget.value;
     response[responseKey] = answers;
     setResponse(response);
-    console.log('input');
-    console.log(response);
   };
 
   return (
