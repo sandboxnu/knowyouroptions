@@ -299,7 +299,6 @@ const QuestionnaireDiagram = ({
                 response[responseKey] = Array.from(methodsClicked);
                 setResponse(response);
               };
-              console.log(response);
 
               switch (methodName) {
                 case 'Pill': {

@@ -81,7 +81,6 @@ const DropdownColumn = ({
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
-      console.log(response);
     };
     return onChange;
   };
@@ -187,9 +186,7 @@ const DropdownColumnBody = ({
               <>
                 <option
                   value={option}
-                  onClick={() => {
-                    console.log('hi');
-                  }}
+                  onClick={() => {}}
                   selected={option == selectValue}
                 >
                   {option}

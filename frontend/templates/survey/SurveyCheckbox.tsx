@@ -12,9 +12,15 @@ const CheckboxContainer = styled.div`
   padding: 0.75rem 1rem;
 `;
 
+const CheckboxContainerSelected = styled(CheckboxContainer)`
+  background-color: purple;
+  color: white;
+`;
+
 const CheckboxStyled = styled.input`
   // TODO: change checkbox color
-  background-color: #ffebe7;
+  color: #ffebe7;
+  cursor: pointer;
   height: 1.1rem;
   margin-right: 2rem;
   width: 1.25rem;
@@ -27,6 +33,7 @@ const ColumnContainer = styled.div`
   row-gap: 1rem;
   & > div:hover {
     background-color: purple;
+    color: white;
     cursor: pointer;
   }
 `;
@@ -35,14 +42,12 @@ const CheckboxColumn = ({
   checkboxTitles,
   className,
   responseKey,
-  onClick,
   setCurPage,
   response,
   setResponse,
 }: {
   checkboxTitles: string[];
   className?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
   setCurPage?: React.Dispatch<React.SetStateAction<string>>;
   response: Record<string, string[]>;
   responseKey: string;
@@ -60,19 +65,28 @@ const CheckboxColumn = ({
     response[responseKey] = answers;
     setResponse(response);
   };
+
   return (
     <>
       {checkboxTitles.map((checkboxTitle, idx) => {
+        const [checked, setChecked] = useState(false);
+        const onClick = (event: React.MouseEvent<HTMLDivElement>) => {
+          setChecked(!checked);
+          storeCheckedResponse(!checked, checkboxTitle);
+        };
+        const Container = checked
+          ? CheckboxContainerSelected
+          : CheckboxContainer;
+
         return (
-          <CheckboxContainer key={idx}>
+          <Container key={idx} onClick={onClick}>
             <CheckboxStyled
               type="checkbox"
-              onChange={(event) => {
-                storeCheckedResponse(event.target.checked, checkboxTitle);
-              }}
+              checked={checked}
+              onChange={() => {}}
             />
             <label>{checkboxTitle}</label>
-          </CheckboxContainer>
+          </Container>
         );
       })}
     </>

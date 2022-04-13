@@ -25,7 +25,7 @@ import SvgMood from '../public/mood-depression.svg';
 const Questionnaire = (): ReactElement => {
   const router = useRouter();
   const QuestionnaireKeys = [
-    'PregnancyAge',
+    'WhenPregnant',
     'TopPriority',
     'AdditionalBenefit',
     'SideEffects',
@@ -60,6 +60,7 @@ const Questionnaire = (): ReactElement => {
     initialResponse[QuestionnaireKeys[index]] = [];
   }
   const [response, setResponse] = useState(initialResponse);
+  console.log('response');
   console.log(response);
 
   // INTRO PAGE
@@ -92,7 +93,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={1}
         question="When do you plan on getting pregnant?"
         response={response}
-        responseKey={QuestionnaireKeys[1]}
+        responseKey={QuestionnaireKeys[0]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -116,7 +117,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={2}
         question="What is your top priority in using contraceptive methods?"
         response={response}
-        responseKey={QuestionnaireKeys[2]}
+        responseKey={QuestionnaireKeys[1]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -144,7 +145,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={3}
         question="What additional benefit do you hope to get from contraception?"
         response={response}
-        responseKey={QuestionnaireKeys[3]}
+        responseKey={QuestionnaireKeys[2]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -179,7 +180,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={4}
         question="What side effects do you want to avoid?"
         response={response}
-        responseKey={QuestionnaireKeys[4]}
+        responseKey={QuestionnaireKeys[3]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -208,7 +209,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={5}
         question="How frequently do you care to use contraceptive methods?"
         response={response}
-        responseKey={QuestionnaireKeys[5]}
+        responseKey={QuestionnaireKeys[4]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -240,7 +241,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={6}
         question="What methods of use do you prefer?"
         response={response}
-        responseKey={QuestionnaireKeys[6]}
+        responseKey={QuestionnaireKeys[5]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -260,7 +261,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={7}
         question="Would you like to take the contraceptive method yourself or have a healthcare professional to administer for you?"
         response={response}
-        responseKey={QuestionnaireKeys[7]}
+        responseKey={QuestionnaireKeys[6]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -284,7 +285,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={8}
         question="How do you prefer to access the contraception methods?"
         response={response}
-        responseKey={QuestionnaireKeys[8]}
+        responseKey={QuestionnaireKeys[7]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -304,7 +305,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={9}
         question="Do you have health insurance?"
         response={response}
-        responseKey={QuestionnaireKeys[9]}
+        responseKey={QuestionnaireKeys[8]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
@@ -331,7 +332,7 @@ const Questionnaire = (): ReactElement => {
         pageNumber={10}
         question="How much are you willing to pay yourself for contraception?"
         response={response}
-        responseKey={QuestionnaireKeys[10]}
+        responseKey={QuestionnaireKeys[9]}
         setResponse={setResponse}
         subHeader=""
         totalPages={10}
