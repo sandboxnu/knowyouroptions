@@ -3,10 +3,12 @@ import { useRouter } from 'next/router';
 
 import QuestionnaireDiagram from '../templates/survey/questionnaire/QuestionnaireDiagram';
 import QuestionnaireStartPage from '../templates/survey/questionnaire/QuestionnaireStartPage';
+import QuestionnaireEndPage from '../templates/survey/questionnaire/QuestionnaireEndPage';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyMethods from '../templates/survey/SurveyMethods';
 import Layout from '../components/Layout';
+import styled from 'styled-components';
 
 import SvgCramps from '../public/cramps.svg';
 import SvgAches from '../public/aches.svg';
@@ -46,7 +48,7 @@ const Questionnaire = (): ReactElement => {
     router.push(
       {
         pathname: '/home',
-        query: { popup: true },
+        query: { popup: true, response: response },
       },
       '/home',
     );
@@ -321,7 +323,7 @@ const Questionnaire = (): ReactElement => {
       "I don't know",
     ];
     return (
-      <SurveyPill
+      <QuestionnaireEndPage
         answers={answers}
         boldedWord=""
         onClickForwards={redirectToHome}

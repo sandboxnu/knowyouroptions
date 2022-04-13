@@ -44,7 +44,7 @@ const Home = (): ReactElement => {
   useEffect(() => {
     console.log(router.query.popup);
     router.query.popup ? togglePopup(true) : togglePopup(false);
-  }, [showPopup]);
+  }, []);
 
   return (
     <Layout>
