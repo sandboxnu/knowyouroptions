@@ -143,7 +143,7 @@ class APIClient {
       };
       return this.req('POST', `${API_URL}/user/bookmark`, undefined, body);
     },
-    deleteBookmarks: async (bookmark: string): Promise<string[]> => {
+    deleteBookmark: async (bookmark: string): Promise<string[]> => {
       let body = {
         bookmark: bookmark,
       };
@@ -157,6 +157,14 @@ class APIClient {
     },
     getOne: async (contraceptive: string): Promise<Contraceptive> => {
       return await this.req('GET', `${API_URL}/contraceptive/${contraceptive}`);
+    },
+    getMany: async (contraceptive: string[]): Promise<Contraceptive[]> => {
+      return this.req(
+        'GET',
+        `${API_URL}/contraceptive/many`,
+        undefined,
+        contraceptive,
+      );
     },
   };
 

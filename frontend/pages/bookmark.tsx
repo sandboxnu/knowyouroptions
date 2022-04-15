@@ -66,6 +66,10 @@ const LearnMoreButton = styled.p`
   font-family: roboto;
   font-size: 10px;
   margin: 0;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 
   @media ${device.laptop} {
     font-size: 16px;
@@ -86,6 +90,10 @@ const MethodCard = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   padding: 1rem;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 
   @media ${device.laptop} {
     align-items: flex-start;
@@ -253,8 +261,13 @@ const Method = ({
   whoAdministers,
 }: MethodProps): ReactElement => {
   const [bookmarked, setBookmarked] = useState<Boolean>(true);
-  const hello = () => {
+  const bookmarkClicked = (name: string) => {
     setBookmarked(!bookmarked);
+    if (bookmarked) {
+      API.user.postBookmark(name);
+    } else {
+      API.user.deleteBookmark(name);
+    }
   };
   const BookmarkIcon = bookmarked ? SvgBookmarkedStyled : SvgUnbookmarkedStyled;
   return (
@@ -275,7 +288,7 @@ const Method = ({
           <MethodInfo>{whoAdministers}</MethodInfo>
         </MethodInfoColumn>
         <ColumnExtra>
-          <BookmarkIcon onClick={() => hello()} />
+          <BookmarkIcon onClick={() => bookmarkClicked(name)} />
 
           <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
         </ColumnExtra>
@@ -283,31 +296,12 @@ const Method = ({
     </>
   );
 };
-type BookmarkProps = {
-  bookmarks: string[];
+type CompareProps = {
+  contraceptives: Contraceptive[];
 };
-
-const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
-  const [contraceptives, setContraceptives] = useState<Contraceptive[]>([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
-    setContraceptives([]);
-    bookmarks.map((m) => {
-      const contraceptive = API.contraceptive.getOne(m);
-      const p = Promise.resolve(contraceptive);
-      p.then((val) => {
-        setContraceptives((contraceptive) =>
-          contraceptive.concat(val).concat(val),
-        );
-        console.log(val);
-      });
-    });
-  };
-
+const Bookmark = (compareProps: CompareProps): ReactElement => {
+  //const [contraceptives, setContraceptives] = useState<Contraceptive[]>([]);
+  const { contraceptives } = compareProps;
   return (
     <>
       <Container>
@@ -315,7 +309,7 @@ const Bookmark = ({ bookmarks }: BookmarkProps): ReactElement => {
         <Header>
           <Title>Bookmarks</Title>
         </Header>
-
+        {console.log(contraceptives[0] + 'val')}
         <Body>
           <MethodCount> {contraceptives.length} methods</MethodCount>
           <MethodsContainer>
@@ -345,9 +339,14 @@ export default Bookmark;
 Bookmark.getInitialProps = async ({ req }: any) => {
   //getInitialProps is only called on the server side, and does not interact with cookies on the frontend.
   //Therefore we must manually give the get request cookies, so we don't have a 401 authentication error.
+  //This gets the bookmarked contracetpives of the user as a list of strings
   const bookmarkedContraceptives = await API.user.getBookmarks({
     cookie: req.headers.cookie,
   });
 
-  return { bookmarks: bookmarkedContraceptives };
+  //gets the contraceptives entities from the string of bookmarked contraceptives from the user(_bookmarkedContraceptives_)
+  const contraceptives = await API.contraceptive.getMany(
+    bookmarkedContraceptives,
+  );
+  return { contraceptives: contraceptives };
 };
