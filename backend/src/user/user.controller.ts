@@ -12,7 +12,6 @@ import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../decorators/currentuser.decorator';
 import { User } from '../entities/user.entity';
-//import { BookmarksInfo } from '../types/user';
 
 type BookmarkPostBody = {
   bookmark: string;
@@ -34,16 +33,18 @@ export class UserController {
     @Body() body: BookmarkPostBody,
     @CurrentUser() user: User,
   ): Promise<void> {
+    console.log('test');
     await this.UserService.postBookmark(user, body.bookmark);
   }
 
-  //posts one bookmark
-  @Delete(':bookmark')
+  //deletes one bookmark
+  @Delete('bookmark')
   @UseGuards(JwtAuthGuard)
   async deleteBookmark(
-    @CurrentUser() user: User,
     @Body() body: BookmarkPostBody,
+    @CurrentUser() user: User,
   ): Promise<void> {
+    console.log(body);
     this.UserService.deleteBookmark(user, body.bookmark);
   }
 }

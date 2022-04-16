@@ -143,7 +143,7 @@ class APIClient {
       };
       return this.req('POST', `${API_URL}/user/bookmark`, undefined, body);
     },
-    deleteBookmark: async (bookmark: string): Promise<string[]> => {
+    deleteBookmark: async (bookmark: string): Promise<void> => {
       let body = {
         bookmark: bookmark,
       };

@@ -1,8 +1,8 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { Column, Row } from '../templates/contraceptives/tabs/StyledComponents';
+import React, { ReactElement, useState } from 'react';
+import { Column } from '../templates/contraceptives/tabs/StyledComponents';
 import styled from 'styled-components';
 import { API, Contraceptive, TimeUnits } from '../api-client';
-import { size, device, maxDevice } from '../templates/mediaSizes';
+import { device } from '../templates/mediaSizes';
 import MenuBar from '../components/Menubar';
 import SvgImplantBookmark from '../public/bookmarks-icons/implant.svg';
 import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
@@ -263,9 +263,10 @@ const Method = ({
   const [bookmarked, setBookmarked] = useState<Boolean>(true);
   const bookmarkClicked = (name: string) => {
     setBookmarked(!bookmarked);
-    if (bookmarked) {
+    if (!bookmarked) {
       API.user.postBookmark(name);
     } else {
+      console.log(name);
       API.user.deleteBookmark(name);
     }
   };

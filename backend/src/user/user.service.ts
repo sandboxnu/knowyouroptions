@@ -83,11 +83,12 @@ export class UserService {
     const existingUser = await this.userRepository.findOne({
       id: user.id,
     });
+    //Should never be the case that the user is posting a contraceptive they already have,
+    //but in the case they do, we do a check here to make sure it isn't uploaded twice
     const newBookmarks =
       existingUser.bookmarks.indexOf(bookmark) == -1
         ? existingUser.bookmarks.concat(bookmark)
         : existingUser.bookmarks;
-
     this.userRepository.save({
       ...existingUser,
       bookmarks: newBookmarks,
@@ -100,7 +101,7 @@ export class UserService {
     });
     const index = existingUser.bookmarks.indexOf(bookmark);
     if (index !== -1) {
-      this.userRepository.save({
+      return this.userRepository.save({
         ...existingUser,
         bookmark: existingUser.bookmarks.splice(index, 1),
       });
