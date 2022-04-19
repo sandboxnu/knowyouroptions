@@ -27,18 +27,27 @@ const SelectContainer = styled.div`
   width: 70%;
   margin-right: 3%;
   margin-top: 2vh;
+  /* border around the select */
   .ant-select .ant-select-selector {
     border-radius: 15px;
     height: 50px;
+  }
+  /* an option when it's selected
+  .ant-select-single {
+    border-radius: 15px;
     box-shadow: 0px 4px 6px 4px #00000040;
   }
+
+  /* font size of the select */
   .ant-select {
     font-size: 18px;
   }
+  /* This is where the text would be placed in the bar */
   .ant-select-single .ant-select-selector .ant-select-selection-item,
   .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
     line-height: 45px;
   }
+  /* gets rid of the blue effect when clicked */
   .ant-select-focused .ant-select-selector,
   .ant-select-selector:focus,
   .ant-select-selector:active,
@@ -48,26 +57,70 @@ const SelectContainer = styled.div`
   }
 `;
 const StyeldEditSvg = styled(EditSvg)`
-  right: 20px;
+  right: 15px;
   position: absolute;
 `;
 const SelectN = styled(Select)``;
 const Profile = () => {
   return (
-    <Card>
-      <DemoQuestion>
-        What age do you consider appropriate for you to become pregnant?
-      </DemoQuestion>
-      <SelectContainer>
-        <SelectN
-          defaultValue="Please Select"
-          style={{ width: '100%', height: 45 }}
-          suffixIcon={<StyeldEditSvg />}
-        >
-          <Option value="lucy">Lucy</Option>
-        </SelectN>
-      </SelectContainer>
-    </Card>
+    <div>
+      <Card>
+        <DemoQuestion>
+          What age do you consider appropriate for you to become pregnant?
+        </DemoQuestion>
+        <SelectContainer>
+          <SelectN
+            defaultValue="Please Select"
+            style={{ width: '100%', height: 45 }}
+            suffixIcon={<StyeldEditSvg />}
+          >
+            <Option value="under-12">Under 12</Option>
+            <Option value="13-15">13 - 15</Option>
+            <Option value="16-18">16 - 18</Option>
+            <Option value="19-22">19 - 22</Option>
+            <Option value="23-30">23 - 30</Option>
+            <Option value="above-30">Above 30</Option>
+          </SelectN>
+        </SelectContainer>
+      </Card>
+
+      <Card>
+        <DemoQuestion>
+          At what stage do you think you will be (or currently are) sexually
+          active?
+        </DemoQuestion>
+        <SelectContainer>
+          <SelectN
+            defaultValue="Please Select"
+            style={{ width: '100%', height: 45 }}
+            suffixIcon={<StyeldEditSvg />}
+          >
+            <Option value="middle-school">Middle School</Option>
+            <Option value="high-school">High School</Option>
+            <Option value="late-teen">Late teen</Option>
+            <Option value="early-20s">Early 20s</Option>
+            <Option value="after-marriage">After Marriage</Option>
+            <Option value="Other">Other</Option>
+          </SelectN>
+        </SelectContainer>
+      </Card>
+
+      <Card>
+        <DemoQuestion>
+          Have you tried any contraception/birth control methods?
+        </DemoQuestion>
+        <SelectContainer>
+          <SelectN
+            defaultValue="Please Select"
+            style={{ width: '100%', height: 45 }}
+            suffixIcon={<StyeldEditSvg />}
+          >
+            <Option value="yes">Yes</Option>
+            <Option value="no">No</Option>
+          </SelectN>
+        </SelectContainer>
+      </Card>
+    </div>
   );
 };
 
