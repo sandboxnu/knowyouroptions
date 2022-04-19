@@ -6,7 +6,7 @@ import { UnknownEmailError } from 'src/error/unknown-email-error';
 import { SignInInfo, UserInfo } from 'src/types/user';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-
+//import { BookmarksInfo } from '../types/user';
 @Injectable()
 export class UserService {
   constructor(
@@ -19,6 +19,7 @@ export class UserService {
    * @return the created User entity
    * @throws EmailIsTakenError if the email is taken
    */
+
   public async createUser(userInfo: UserInfo): Promise<User> {
     const existingUser = await this.userRepository.findOne({
       email: userInfo.email,
@@ -31,7 +32,7 @@ export class UserService {
       user.email = userInfo.email;
       user.name = userInfo.name;
       user.password = userInfo.password;
-
+      user.bookmarks = ['Implant', 'Condom'];
       await this.userRepository.save(user);
       return user;
     }
@@ -43,6 +44,7 @@ export class UserService {
    * @throws IncorrectPasswordError wrong password
    * @throws UnknownEmailError email not found
    */
+
   public async getUser(info: SignInInfo): Promise<User> {
     const existingUser = await this.userRepository.findOne({
       email: info.email,
@@ -69,5 +71,40 @@ export class UserService {
     });
 
     return existingUser || undefined;
+  }
+  public async getBookmarks(id: number): Promise<string[]> {
+    const existingUser = await this.userRepository.findOne({
+      id: id,
+    });
+
+    return existingUser.bookmarks || undefined;
+  }
+  public async postBookmark(user: User, bookmark: string) {
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    //Should never be the case that the user is posting a contraceptive they already have,
+    //but in the case they do, we do a check here to make sure it isn't uploaded twice
+    const newBookmarks =
+      existingUser.bookmarks.indexOf(bookmark) == -1
+        ? existingUser.bookmarks.concat(bookmark)
+        : existingUser.bookmarks;
+    this.userRepository.save({
+      ...existingUser,
+      bookmarks: newBookmarks,
+    });
+  }
+
+  public async deleteBookmark(user: User, bookmark: string) {
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    const index = existingUser.bookmarks.indexOf(bookmark);
+    if (index !== -1) {
+      return this.userRepository.save({
+        ...existingUser,
+        bookmark: existingUser.bookmarks.splice(index, 1),
+      });
+    }
   }
 }

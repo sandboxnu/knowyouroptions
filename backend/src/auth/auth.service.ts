@@ -35,6 +35,7 @@ export class AuthService {
       id: user.id,
       email: user.email,
       name: user.name,
+      bookmarks: user.bookmarks,
       accessToken: token,
     };
   }
@@ -51,6 +52,7 @@ export class AuthService {
       id: user.id,
       email: user.email,
       name: user.name,
+      bookmarks: user.bookmarks,
       accessToken: token,
     };
   }

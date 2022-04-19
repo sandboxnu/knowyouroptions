@@ -10,6 +10,9 @@ export class User extends BaseEntity {
   @Column()
   email: string;
 
+  @Column({ type: 'text', array: true, default: [] })
+  bookmarks: string[];
+
   @Column({
     type: 'varchar',
     nullable: false,
