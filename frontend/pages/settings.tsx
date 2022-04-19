@@ -7,6 +7,7 @@ import { Select } from 'antd';
 import { Input } from 'antd';
 import MenuBar from '../components/Menubar';
 import { API } from '../api-client';
+import { useRouter } from 'next/router';
 const { Option } = Select;
 
 const ContainerPage = styled.div`
@@ -147,16 +148,25 @@ const SecurityInput = styled(Input)`
   width: 70%;
 `;
 const Profile = () => {
+  const router = useRouter();
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [pronouns, setPronouns] = useState('');
+  const [firstLoad, setFirstLoad] = useState(true);
   useEffect(() => {
-    if (!name) {
-      getName();
+    if (firstLoad) {
+      getUser();
+      setFirstLoad(false);
     }
   });
-  const getName = async () => {
+  const getUser = async () => {
     try {
       const user = await API.user.getName();
       setName(user);
+      const userEmail = await API.user.getEmail();
+      setEmail(userEmail);
+      const userPronouns = await API.user.getPronouns();
+      setPronouns(userPronouns);
     } catch (e) {
       // If user is not signed in (expects not-logged-in error)
       router.push('/signin');
@@ -175,12 +185,18 @@ const Profile = () => {
         <Card>
           <BoxTitle>Full Name</BoxTitle>
 
-          <InputN value={name} suffix={<StyeldEditSvg></StyeldEditSvg>} />
+          <InputN
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            suffix={<StyeldEditSvg></StyeldEditSvg>}
+          />
         </Card>
 
         <Card>
           <BoxTitle>Pronouns</BoxTitle>
           <InputN
+            onChange={(e) => setPronouns(e.target.value)}
+            value={pronouns}
             placeholder="Add pronouns"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
           />
@@ -190,7 +206,8 @@ const Profile = () => {
         <Card>
           <SecurityTitle>Email</SecurityTitle>
           <SecurityInput
-            defaultValue="john.smith@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
             suffix={<StyeldEditSvg></StyeldEditSvg>}
           ></SecurityInput>
         </Card>

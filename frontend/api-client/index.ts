@@ -128,6 +128,12 @@ class APIClient {
     getName: async (): Promise<string> => {
       return this.req('GET', `${API_URL}/name`);
     },
+    getEmail: async (): Promise<string> => {
+      return this.req('GET', `${API_URL}/user/email`);
+    },
+    getPronouns: async (): Promise<string> => {
+      return this.req('GET', `${API_URL}/user/pronouns`);
+    },
     getBookmarks: async (cookie: any): Promise<string[]> => {
       return this.req(
         'GET',

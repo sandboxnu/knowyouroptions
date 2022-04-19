@@ -32,7 +32,8 @@ export class UserService {
       user.email = userInfo.email;
       user.name = userInfo.name;
       user.password = userInfo.password;
-      user.bookmarks = ['Implant', 'Condom'];
+      user.bookmarks = ['Implant', 'Condom']; //THIS SHOULD BE TEMPORARY BOOKMARKS SHOULD BE DEFAULT
+      user.pronouns = '';
       await this.userRepository.save(user);
       return user;
     }

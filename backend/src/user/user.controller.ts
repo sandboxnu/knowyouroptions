@@ -25,7 +25,16 @@ export class UserController {
   async getBookmarks(@CurrentUser() user: User): Promise<string[]> {
     return user.bookmarks;
   }
-
+  @Get('email')
+  @UseGuards(JwtAuthGuard)
+  async getEmail(@CurrentUser() user: User): Promise<string> {
+    return user.email;
+  }
+  @Get('pronouns')
+  @UseGuards(JwtAuthGuard)
+  async getPronouns(@CurrentUser() user: User): Promise<string> {
+    return user.pronouns;
+  }
   //posts one bookmark
   @Post('bookmark')
   @UseGuards(JwtAuthGuard)
