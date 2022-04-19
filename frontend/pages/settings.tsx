@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { colors, device } from '../templates/mediaSizes';
 import 'antd/dist/antd.css';
@@ -6,6 +6,7 @@ import EditSvg from '../public/edit.svg';
 import { Select } from 'antd';
 import { Input } from 'antd';
 import MenuBar from '../components/Menubar';
+import { API } from '../api-client';
 const { Option } = Select;
 
 const ContainerPage = styled.div`
@@ -72,7 +73,6 @@ const BoxTitle = styled.h1`
 const Card = styled.div`
   display: flex;
   flex-direction: row;
-
   border-radius: 15px;
 `;
 
@@ -95,6 +95,12 @@ const InputN = styled(Input)`
   border-radius: 15px;
   height: 40px;
   box-shadow: 0px 4px 6px 4px #00000040;
+`;
+const SecurityInputPassword = styled(Input.Password)`
+  border-radius: 15px;
+  height: 40px;
+  box-shadow: 0px 4px 6px 4px #00000040;
+  width: 70%;
 `;
 const DeleteDataButton = styled.div`
   width: 158px;
@@ -141,6 +147,24 @@ const SecurityInput = styled(Input)`
   width: 70%;
 `;
 const Profile = () => {
+  const [name, setName] = useState('');
+  useEffect(() => {
+    if (!name) {
+      getName();
+    }
+  });
+  const getName = async () => {
+    try {
+      const user = await API.user.getName();
+      setName(user);
+    } catch (e) {
+      // If user is not signed in (expects not-logged-in error)
+      router.push('/signin');
+    }
+  };
+
+  console.log(name + 'name');
+
   return (
     <div>
       <MenuBar />
@@ -151,16 +175,13 @@ const Profile = () => {
         <Card>
           <BoxTitle>Full Name</BoxTitle>
 
-          <InputN
-            placeholder="John Smith"
-            suffix={<StyeldEditSvg></StyeldEditSvg>}
-          />
+          <InputN value={name} suffix={<StyeldEditSvg></StyeldEditSvg>} />
         </Card>
 
         <Card>
           <BoxTitle>Pronouns</BoxTitle>
           <InputN
-            placeholder="he/him"
+            placeholder="Add pronouns"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
           />
         </Card>
@@ -169,16 +190,16 @@ const Profile = () => {
         <Card>
           <SecurityTitle>Email</SecurityTitle>
           <SecurityInput
-            placeholder="john.smith@gmail.com"
+            defaultValue="john.smith@gmail.com"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
           ></SecurityInput>
         </Card>
         <Card>
           <SecurityTitle>Password</SecurityTitle>
-          <SecurityInput
-            placeholder="*********"
+          <SecurityInputPassword
+            defaultValue="*******"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
-          ></SecurityInput>
+          ></SecurityInputPassword>
         </Card>
         <SmallHeader>Data</SmallHeader>
         <p>
