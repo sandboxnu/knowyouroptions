@@ -1,6 +1,5 @@
 import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import 'antd/dist/antd.css';
 import SvgBookmarkIcon from '../public/desktop-icons/desktop-bookmark.svg';
 import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
 import SvgSearchIcon from '../public/desktop-icons/search.svg';
