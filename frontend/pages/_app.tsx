@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+
 import { AppProps } from 'next/app';
 import { ReactElement } from 'react';
 

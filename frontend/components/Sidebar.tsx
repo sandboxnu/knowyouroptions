@@ -51,6 +51,15 @@ const SidebarDiv = styled.div`
   z-index: 10;
 `;
 
+const MenuIconDiv = styled.div`
+  position: absolute;
+  x: 0;
+  y: 0;
+  width: 60px;
+  height: 60px;
+  z-index: 10;
+`;
+
 const MenuSection = styled.div`
   border-bottom: 1.5px solid #d6d6d6;
   padding: 1rem 0rem;
@@ -114,127 +123,131 @@ const Sidebar = (): ReactElement => {
   };
 
   return (
-    <SidebarDiv>
+    <>
       {open || closing ? (
-        <Menu className={animation}>
+        <SidebarDiv>
+          <Menu className={animation}>
+            <SvgMenuIcon
+              cursor="pointer"
+              onClick={closeMenu}
+              style={{ width: '30px' }}
+              ghost
+            />
+            <MenuSection>
+              <div>
+                <div>
+                  <MenuHeading>
+                    <UserOutlined />
+                    Profile
+                  </MenuHeading>
+                  <MenuElements>
+                    <div>
+                      <a href={'https://google.com'}>Survey Report</a>
+                    </div>
+                  </MenuElements>
+                </div>
+                <div>
+                  <MenuHeading>
+                    <SvgBookmarkIcon color="purple" />
+                    Bookmarks
+                  </MenuHeading>
+                  <MenuElements>
+                    <div>
+                      <a href={'https://google.com'}>My method list</a>
+                    </div>
+                    <div>
+                      <a href={'https://google.com'}>Saved Posts</a>
+                    </div>
+                    <div>
+                      <a href={'https://google.com'}>Saved Topics</a>
+                    </div>
+                  </MenuElements>
+                </div>
+                <div>
+                  <MenuHeading>
+                    <SvgTakeQuestionnaire />
+                    Take Questionnaire
+                  </MenuHeading>
+                </div>
+                <div>
+                  <MenuHeading>
+                    <QuestionCircleOutlined /> Q&A
+                  </MenuHeading>
+                </div>
+              </div>
+            </MenuSection>
+            <MenuSection>
+              <div>
+                <MenuHeading>
+                  <SvgQuickAccessButton />
+                  Quick Access
+                </MenuHeading>
+                <TwoColumns>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Sterilization</a>
+                  </ColumnItem>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Implant</a>
+                  </ColumnItem>
+                </TwoColumns>
+                <TwoColumns>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Copper IUD</a>
+                  </ColumnItem>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Hormonal IUD</a>
+                  </ColumnItem>
+                </TwoColumns>
+                <TwoColumns>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Shot</a>
+                  </ColumnItem>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Ring</a>
+                  </ColumnItem>
+                </TwoColumns>
+                <TwoColumns>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Patch</a>
+                  </ColumnItem>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Condom</a>
+                  </ColumnItem>
+                </TwoColumns>
+                <TwoColumns>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Spermicide</a>
+                  </ColumnItem>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Diaphram</a>
+                  </ColumnItem>
+                </TwoColumns>
+                <TwoColumns>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Pill</a>
+                  </ColumnItem>
+                  <ColumnItem>
+                    <a href={'https://google.com'}>Cervical Cap</a>
+                  </ColumnItem>
+                </TwoColumns>
+              </div>
+            </MenuSection>
+            <div>
+              <MenuHeading>Settings and privacy</MenuHeading>
+            </div>
+          </Menu>
+        </SidebarDiv>
+      ) : (
+        <MenuIconDiv>
           <SvgMenuIcon
             cursor="pointer"
-            onClick={closeMenu}
-            style={{ width: '30px' }}
+            onClick={() => setOpen(true)}
+            style={{ width: '30px', marginLeft: '30px', marginTop: '30px' }}
             ghost
           />
-          <MenuSection>
-            <div>
-              <div>
-                <MenuHeading>
-                  <UserOutlined />
-                  Profile
-                </MenuHeading>
-                <MenuElements>
-                  <div>
-                    <a href={'https://google.com'}>Survey Report</a>
-                  </div>
-                </MenuElements>
-              </div>
-              <div>
-                <MenuHeading>
-                  <SvgBookmarkIcon color="purple" />
-                  Bookmarks
-                </MenuHeading>
-                <MenuElements>
-                  <div>
-                    <a href={'https://google.com'}>My method list</a>
-                  </div>
-                  <div>
-                    <a href={'https://google.com'}>Saved Posts</a>
-                  </div>
-                  <div>
-                    <a href={'https://google.com'}>Saved Topics</a>
-                  </div>
-                </MenuElements>
-              </div>
-              <div>
-                <MenuHeading>
-                  <SvgTakeQuestionnaire />
-                  Take Questionnaire
-                </MenuHeading>
-              </div>
-              <div>
-                <MenuHeading>
-                  <QuestionCircleOutlined /> Q&A
-                </MenuHeading>
-              </div>
-            </div>
-          </MenuSection>
-          <MenuSection>
-            <div>
-              <MenuHeading>
-                <SvgQuickAccessButton />
-                Quick Access
-              </MenuHeading>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Sterilization</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Implant</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Copper IUD</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Hormonal IUD</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Shot</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Ring</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Patch</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Condom</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Spermicide</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Diaphram</a>
-                </ColumnItem>
-              </TwoColumns>
-              <TwoColumns>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Pill</a>
-                </ColumnItem>
-                <ColumnItem>
-                  <a href={'https://google.com'}>Cervical Cap</a>
-                </ColumnItem>
-              </TwoColumns>
-            </div>
-          </MenuSection>
-          <div>
-            <MenuHeading>Settings and privacy</MenuHeading>
-          </div>
-        </Menu>
-      ) : (
-        <SvgMenuIcon
-          cursor="pointer"
-          onClick={() => setOpen(true)}
-          style={{ width: '30px', marginLeft: '30px', marginTop: '30px' }}
-          ghost
-        />
+        </MenuIconDiv>
       )}
-    </SidebarDiv>
+    </>
   );
 };
 

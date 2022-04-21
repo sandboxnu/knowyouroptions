@@ -16,3 +16,81 @@ a {
 * {
   box-sizing: border-box;
 }
+
+h1 {
+  font-weight: 700 !important;
+}
+
+/* Text */
+
+.title1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: min(3.5vw, 1.5rem);
+}
+
+.title2 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.title3 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.subtitle1 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: min(2.5vw, 1rem);
+}
+
+.subtitle2 {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+/* Colors */
+
+.teal {
+  color: #1899a0;
+}
+.purple {
+  color: #89006c;
+}
+.gray {
+  color: #808080;
+}
+.black {
+  color: black;
+}
+.lightGray {
+  color: #3f3f3f;
+  opacity: 0.5;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* Alignment */
+
+.centerText {
+  text-align: center;
+}
+
+.noSpacing {
+  margin: 0;
+  padding: 0;
+}
+.paddingBelow {
+  padding-bottom: 5vh;
+}

@@ -8,7 +8,6 @@ import { API } from '../api-client';
 import { useRouter } from 'next/router';
 import axios, { AxiosError } from 'axios';
 import Toast from '../components/Toast';
-import { HttpException } from '@nestjs/common';
 import { Redirect } from '../classes/response-classes';
 
 // TODO: need to make this responsive
@@ -196,9 +195,14 @@ const SignInForm = (): ReactElement => {
       await axios.get(response.redirect, { withCredentials: true });
       router.push('/');
     } catch (e) {
-      const err = e as AxiosError<HttpException>;
+      const err = e as AxiosError;
       if (err.response) {
-        setError(err.response.data.message);
+        type httpError = {
+          statusCode: number;
+          message: string;
+        };
+        const errorData = err.response.data as httpError;
+        setError(errorData.message);
       }
     }
   };
@@ -255,9 +259,14 @@ const SignUpForm = (): ReactElement => {
 
       router.push('/welcome');
     } catch (e) {
-      const err = e as AxiosError<HttpException>;
+      const err = e as AxiosError;
       if (err.response) {
-        setError(err.response.data.message);
+        type httpError = {
+          statusCode: number;
+          message: string;
+        };
+        const errorData = err.response.data as httpError;
+        setError(errorData.message);
       }
     }
   };

@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance, Method } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
-import { Redirect } from '../classes/response-classes';
+import { Contraceptive, Redirect } from '../classes/response-classes';
 
 // Return type of array item, if T is an array
 type ItemIfArray<T> = T extends (infer I)[] ? I : T;
@@ -68,6 +68,12 @@ class APIClient {
   helloWorld = {
     get: async (): Promise<string> => {
       return this.req('GET', '');
+    },
+  };
+
+  contraceptive = {
+    getAll: async (): Promise<Contraceptive[]> => {
+      return this.req('GET', `${API_URL}/contraceptive`);
     },
   };
 
