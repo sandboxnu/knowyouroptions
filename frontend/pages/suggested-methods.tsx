@@ -1,8 +1,10 @@
-import Text from 'antd/lib/typography/Text';
+import { Button } from 'antd';
 import styled from 'styled-components';
 import { API, Contraceptive } from '../api-client';
 import Header from '../components/Header';
 import { Method } from '../components/Method';
+import 'antd/dist/antd.css';
+import router from 'next/router';
 
 const MethodsCount = styled.h1`
   font-family: 'Roboto';
@@ -11,6 +13,8 @@ const MethodsCount = styled.h1`
   font-size: 30px;
   line-height: 35px;
   color: #808080;
+  margin-top: 54px;
+  margin-bottom: 40px;
 `;
 
 const BodyWidthContainer = styled.div`
@@ -21,6 +25,19 @@ const BodyWidthContainer = styled.div`
 const Container = styled.div`
   display: flex;
   gap: 48px;
+`;
+
+const MoveForwardButtonStyled = styled(Button)`
+  position: fixed;
+  right: 30px;
+  bottom: 34px;
+  background: #911d7a;
+  border-color: #911d7a;
+
+  :hover {
+    background: #911d7a;
+    border-color: #911d7a;
+  }
 `;
 
 const SuggestedMethods = ({
@@ -48,6 +65,10 @@ const SuggestedMethods = ({
     );
   };
 
+  const continueClicked = () => {
+    router.push('/');
+  };
+
   return (
     <div>
       <Header title="Suggested methods"></Header>
@@ -55,6 +76,13 @@ const SuggestedMethods = ({
         <MethodsCount>{`${contraceptives.length} methods`}</MethodsCount>
         <Container>{contraceptives.map(contraceptiveMap)}</Container>{' '}
       </BodyWidthContainer>
+      <MoveForwardButtonStyled
+        type="primary"
+        shape="round"
+        icon={<img src="right-arrow-white.svg"></img>}
+        size="large"
+        onClick={continueClicked}
+      />
     </div>
   );
 };
