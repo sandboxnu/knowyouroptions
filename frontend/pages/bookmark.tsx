@@ -341,10 +341,13 @@ Bookmark.getInitialProps = async ({ req }: any) => {
   //getInitialProps is only called on the server side, and does not interact with cookies on the frontend.
   //Therefore we must manually give the get request cookies, so we don't have a 401 authentication error.
   //This gets the bookmarked contracetpives of the user as a list of strings
+
   const bookmarkedContraceptives = await API.user.getBookmarks({
     cookie: req.headers.cookie,
   });
-
+  console.log({
+    cookie: req.headers.cookie,
+  });
   //gets the contraceptives entities from the string of bookmarked contraceptives from the user(_bookmarkedContraceptives_)
   const contraceptives = await API.contraceptive.getMany(
     bookmarkedContraceptives,

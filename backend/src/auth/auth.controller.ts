@@ -82,4 +82,14 @@ export class AuthController {
       })
       .redirect(302, '/');
   }
+  @Get('/delete-token')
+  async deleteToken(@Res() res: Response): Promise<void> {
+    res
+      .cookie('auth_token', '', {
+        httpOnly: true,
+        maxAge: 1,
+        secure: false, // true only sends cookies with requests over HTTPS
+      })
+      .redirect(302, '/');
+  }
 }

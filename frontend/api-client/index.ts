@@ -78,6 +78,7 @@ class APIClient {
    * @param url URL to send req to
    * @param responseClass Class with class-transformer decorators to serialize response to
    * @param body body to send with req
+   * @param header
    */
   private async req<T>(
     method: Method,
@@ -113,7 +114,11 @@ class APIClient {
       return this.req('POST', `${API_URL}/sign-in`, Redirect, body);
     },
   };
-
+  deleteToken = {
+    tokenDelete: async (): Promise<any> => {
+      return this.req('GET', `${API_URL}/delete-token`, Redirect);
+    },
+  };
   signUp = {
     post: async (body: {
       email: string;

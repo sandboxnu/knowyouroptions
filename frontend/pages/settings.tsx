@@ -121,7 +121,7 @@ const SignOutButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SignOutButton = styled.div`
+const SignOutButton = styled.button`
   width: 158px;
   height: 53px;
   background: #89006c;
@@ -131,6 +131,7 @@ const SignOutButton = styled.div`
   display: flex;
   color: white;
   align-items: center;
+  z-index: 20;
 `;
 const SecurityTitle = styled.h1`
   font-family: Roboto;
@@ -147,12 +148,17 @@ const SecurityInput = styled(Input)`
   box-shadow: 0px 4px 6px 4px #00000040;
   width: 70%;
 `;
-const Profile = () => {
+type CookieProps = {
+  cookies: any;
+};
+const Profile = (CookieProps: CookieProps) => {
+  const { cookies } = CookieProps;
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pronouns, setPronouns] = useState('');
   const [firstLoad, setFirstLoad] = useState(true);
+  const [cookie, setCookie] = useState(cookies);
   useEffect(() => {
     if (firstLoad) {
       getUser();
@@ -172,7 +178,10 @@ const Profile = () => {
       router.push('/signin');
     }
   };
-
+  const signOut = () => {
+    API.deleteToken.tokenDelete();
+    router.push('/signin');
+  };
   console.log(name + 'name');
 
   return (
@@ -212,11 +221,11 @@ const Profile = () => {
           ></SecurityInput>
         </Card>
         <Card>
-          <SecurityTitle>Password</SecurityTitle>
-          <SecurityInputPassword
-            defaultValue="*******"
+          <BoxTitle>Password</BoxTitle>
+          <InputN
+            defaultValue="******"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
-          ></SecurityInputPassword>
+          ></InputN>
         </Card>
         <SmallHeader>Data</SmallHeader>
         <p>
@@ -225,11 +234,17 @@ const Profile = () => {
         </p>
         <DeleteDataButton>Delete Data</DeleteDataButton>
         <SignOutButtonContainer>
-          <SignOutButton>Sign Out</SignOutButton>
+          <SignOutButton onClick={signOut}>Sign Out</SignOutButton>
         </SignOutButtonContainer>
       </ContainerPage>
     </div>
   );
 };
+Profile.getInitialProps = async ({ req }: any) => {
+  console.log({
+    cookie: '',
+  });
 
+  return { cookie: req.headers.cookie };
+};
 export default Profile;
