@@ -8,6 +8,7 @@ import SvgImplantBookmark from '../public/bookmarks-icons/implant.svg';
 import SvgPatchBookmark from '../public/bookmarks-icons/patch.svg';
 import SvgCondomBookmark from '../public/bookmarks-icons/condom.svg';
 import SvgMenuButton from '../public/menu.svg';
+import Header from '../components/Header';
 
 const Body = styled.div`
   display: flex;
@@ -28,24 +29,6 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100vw;
-`;
-
-const Header = styled(Container)`
-  background-color: #febba8;
-  display: flex;
-  flex-direction: column;
-  min-height: 20vh;
-  justify-content: end;
-  margin: 0;
-  padding: 1.5rem;
-  row-gap: 2rem;
-  width: 100%;
-
-  @media ${device.laptop} {
-    min-height: 30vh;
-    position: relative;
-    padding-left: 7rem;
-  }
 `;
 
 const MethodCount = styled.p`
@@ -82,19 +65,6 @@ const MethodsContainer = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  display: inline;
-  font-size: 22px;
-  margin: 0;
-
-  @media ${device.laptop} {
-    font-size: 48px;
-    font-weight: 900;
-    line-height: 56px;
-    letter-spacing: -0.005em;
-  }
-`;
-
 // TODO: ask for all icons
 const MethodIconsMap: Record<string, ReactElement> = {
   Implant: <SvgImplantBookmark />,
@@ -121,9 +91,7 @@ const Bookmark = (compareProps: CompareProps): ReactElement => {
     <>
       <Container>
         <MenuBar />
-        <Header>
-          <Title>Bookmarks</Title>
-        </Header>
+        <Header title="Bookmarks"></Header>
         {console.log(contraceptives[0] + 'val')}
         <Body>
           <MethodCount> {contraceptives.length} methods</MethodCount>
