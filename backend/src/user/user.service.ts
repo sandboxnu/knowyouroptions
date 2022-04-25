@@ -108,4 +108,41 @@ export class UserService {
       });
     }
   }
+  public async postName(user: User, name: string) {
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    return this.userRepository.save({
+      ...existingUser,
+      name: name,
+    });
+  }
+  public async postEmail(user: User, email: string) {
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    return this.userRepository.save({
+      ...existingUser,
+      email: email,
+    });
+  }
+  public async postPronouns(user: User, pronouns: string) {
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    return this.userRepository.save({
+      ...existingUser,
+      pronouns: pronouns,
+    });
+  }
+  public async deleteData(user: User) {
+    const existingUser = await this.userRepository.findOne({
+      id: user.id,
+    });
+    return this.userRepository.save({
+      ...existingUser,
+      bookmarks: [],
+      pronouns: '',
+    });
+  }
 }

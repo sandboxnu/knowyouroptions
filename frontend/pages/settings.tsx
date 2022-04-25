@@ -1,14 +1,13 @@
-import { ReactElement, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { colors, device } from '../templates/mediaSizes';
+import { device } from '../templates/mediaSizes';
 import 'antd/dist/antd.css';
 import EditSvg from '../public/edit.svg';
 import { Select } from 'antd';
 import { Input } from 'antd';
 import MenuBar from '../components/Menubar';
-import { API } from '../api-client';
+import { API, UserInfoType } from '../api-client';
 import { useRouter } from 'next/router';
-const { Option } = Select;
 
 const ContainerPage = styled.div`
   display: flex;
@@ -114,6 +113,7 @@ const DeleteDataButton = styled.div`
   justify-content: center;
   display: flex;
   align-items: center;
+  z-index: 20;
 `;
 const SignOutButtonContainer = styled.div`
   width: 100%;
@@ -121,7 +121,7 @@ const SignOutButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const SignOutButton = styled.button`
+const SignOutButton = styled.div`
   width: 158px;
   height: 53px;
   background: #89006c;
@@ -148,17 +148,14 @@ const SecurityInput = styled(Input)`
   box-shadow: 0px 4px 6px 4px #00000040;
   width: 70%;
 `;
-type CookieProps = {
-  cookies: any;
-};
-const Profile = (CookieProps: CookieProps) => {
-  const { cookies } = CookieProps;
+
+const Profile = () => {
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [pronouns, setPronouns] = useState('');
   const [firstLoad, setFirstLoad] = useState(true);
-  const [cookie, setCookie] = useState(cookies);
+
   useEffect(() => {
     if (firstLoad) {
       getUser();
@@ -167,22 +164,25 @@ const Profile = (CookieProps: CookieProps) => {
   });
   const getUser = async () => {
     try {
-      const user = await API.user.getName();
-      setName(user);
-      const userEmail = await API.user.getEmail();
-      setEmail(userEmail);
-      const userPronouns = await API.user.getPronouns();
-      setPronouns(userPronouns);
+      const userInfo: UserInfoType = await API.user.getUserInfo();
+      setName(userInfo.name);
+      setEmail(userInfo.email);
+      setPronouns(userInfo.pronouns);
     } catch (e) {
       // If user is not signed in (expects not-logged-in error)
       router.push('/signin');
     }
   };
+  //Sign Out button clicked
   const signOut = () => {
-    API.deleteToken.tokenDelete();
+    API.deleteUserCookie.tokenDelete();
     router.push('/signin');
   };
-  console.log(name + 'name');
+  //Delete data button clicked
+  const deleteData = () => {
+    API.user.deleteData();
+    getUser();
+  };
 
   return (
     <div>
@@ -193,9 +193,9 @@ const Profile = (CookieProps: CookieProps) => {
       <ContainerPage>
         <Card>
           <BoxTitle>Full Name</BoxTitle>
-
           <InputN
             onChange={(e) => setName(e.target.value)}
+            onBlur={(e) => API.user.updateName(e.target.value)}
             value={name}
             suffix={<StyeldEditSvg></StyeldEditSvg>}
           />
@@ -205,6 +205,7 @@ const Profile = (CookieProps: CookieProps) => {
           <BoxTitle>Pronouns</BoxTitle>
           <InputN
             onChange={(e) => setPronouns(e.target.value)}
+            onBlur={(e) => API.user.updatePronouns(e.target.value)}
             value={pronouns}
             placeholder="Add pronouns"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
@@ -217,22 +218,23 @@ const Profile = (CookieProps: CookieProps) => {
           <SecurityInput
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            onBlur={(e) => API.user.updateEmail(e.target.value)}
             suffix={<StyeldEditSvg></StyeldEditSvg>}
           ></SecurityInput>
         </Card>
         <Card>
-          <BoxTitle>Password</BoxTitle>
-          <InputN
+          <SecurityTitle>Password</SecurityTitle>
+          <SecurityInput
             defaultValue="******"
             suffix={<StyeldEditSvg></StyeldEditSvg>}
-          ></InputN>
+          ></SecurityInput>
         </Card>
         <SmallHeader>Data</SmallHeader>
         <p>
           The data will not be shared with any other group. It will only be used
           to help improve this application.
         </p>
-        <DeleteDataButton>Delete Data</DeleteDataButton>
+        <DeleteDataButton onClick={deleteData}>Delete Data</DeleteDataButton>
         <SignOutButtonContainer>
           <SignOutButton onClick={signOut}>Sign Out</SignOutButton>
         </SignOutButtonContainer>
@@ -240,11 +242,5 @@ const Profile = (CookieProps: CookieProps) => {
     </div>
   );
 };
-Profile.getInitialProps = async ({ req }: any) => {
-  console.log({
-    cookie: '',
-  });
 
-  return { cookie: req.headers.cookie };
-};
 export default Profile;

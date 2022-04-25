@@ -69,6 +69,12 @@ export type Contraceptive = {
   warning: string;
   thingsToKnow: ThingToKnow[];
 };
+
+export type UserInfoType = {
+  name: string;
+  email: string;
+  pronouns: string;
+};
 class APIClient {
   private axios: AxiosInstance;
 
@@ -114,7 +120,7 @@ class APIClient {
       return this.req('POST', `${API_URL}/sign-in`, Redirect, body);
     },
   };
-  deleteToken = {
+  deleteUserCookie = {
     tokenDelete: async (): Promise<any> => {
       return this.req('GET', `${API_URL}/delete-token`, Redirect);
     },
@@ -139,6 +145,9 @@ class APIClient {
     getPronouns: async (): Promise<string> => {
       return this.req('GET', `${API_URL}/user/pronouns`);
     },
+    getUserInfo: async (): Promise<UserInfoType> => {
+      return this.req('GET', `${API_URL}/user/user-info`);
+    },
     getBookmarks: async (cookie: any): Promise<string[]> => {
       return this.req(
         'GET',
@@ -147,6 +156,24 @@ class APIClient {
         undefined,
         cookie,
       );
+    },
+    updateName: async (name: string): Promise<string> => {
+      let body = {
+        name: name,
+      };
+      return this.req('POST', `${API_URL}/user/name`, undefined, body);
+    },
+    updateEmail: async (email: string): Promise<string> => {
+      let body = {
+        email: email,
+      };
+      return this.req('POST', `${API_URL}/user/email`, undefined, body);
+    },
+    updatePronouns: async (pronouns: string): Promise<string> => {
+      let body = {
+        pronouns: pronouns,
+      };
+      return this.req('POST', `${API_URL}/user/pronouns`, undefined, body);
     },
     postBookmark: async (bookmark: string): Promise<void> => {
       let body = {
@@ -159,6 +186,9 @@ class APIClient {
         bookmark: bookmark,
       };
       return this.req('DELETE', `${API_URL}/user/bookmark`, undefined, body);
+    },
+    deleteData: async (): Promise<void> => {
+      return this.req('DELETE', `${API_URL}/user/delete-data`);
     },
   };
 
