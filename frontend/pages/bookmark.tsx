@@ -345,9 +345,7 @@ Bookmark.getInitialProps = async ({ req }: any) => {
   const bookmarkedContraceptives = await API.user.getBookmarks({
     cookie: req.headers.cookie,
   });
-  console.log({
-    cookie: req.headers.cookie,
-  });
+
   //gets the contraceptives entities from the string of bookmarked contraceptives from the user(_bookmarkedContraceptives_)
   const contraceptives = await API.contraceptive.getMany(
     bookmarkedContraceptives,
