@@ -61,11 +61,11 @@ const PlusImage = styled(SvgPlus)`
 `;
 
 export const StyledCollapseComponent = ({
-  headers,
+  header,
   children,
   number,
 }: {
-  headers: string[];
+  header: string;
   children: React.ReactNode;
   number: number;
 }) => {
