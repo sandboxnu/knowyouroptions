@@ -4,7 +4,7 @@ import SvgBookmarkIcon from '../public/desktop-icons/desktop-bookmark.svg';
 import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
 import SvgSearchIcon from '../public/desktop-icons/search.svg';
 import SvgProfileIcon from '../public/desktop-icons/profile.svg';
-import { Menu } from 'antd';
+import { Breadcrumb, Layout, Menu, MenuProps, Space } from 'antd';
 import { colors } from '../templates/mediaSizes';
 import Link from 'next/link';
 
@@ -162,23 +162,61 @@ const Logo = styled(SvgSettingsIcon)`
   margin-left: 30px;
 `;
 
-const NavBar = (): ReactElement => {
+// const NavBar = (): ReactElement => {
+//   return (
+//     <NavMenu>
+//       <Logo />
+//       <MenuElements>
+//         <MenuHeading title={'Take Questionnaire'} />
+//         <MenuHeading title={'Q&A'} />
+//         <MenuHeading title={'Quick Access'} links={quickLinks} />
+//       </MenuElements>
+//       <MenuIcons>
+//         <SearchIcon />
+//         <BookmarkIcon />
+//         <SettingsIcon />
+//         <ProfileIcon />
+//       </MenuIcons>
+//     </NavMenu>
+//   );
+// };
+
+const linkToItem = (link: QuickLink) => {
   return (
-    <NavMenu>
-      <Logo />
-      <MenuElements>
-        <MenuHeading title={'Take Questionnaire'} />
-        <MenuHeading title={'Q&A'} />
-        <MenuHeading title={'Quick Access'} links={quickLinks} />
-      </MenuElements>
-      <MenuIcons>
-        <SearchIcon />
-        <BookmarkIcon />
-        <SettingsIcon />
-        <ProfileIcon />
-      </MenuIcons>
-    </NavMenu>
+    <MenuItem>
+      <Link href={link.url}>
+        <a>{link.title}</a>
+      </Link>
+    </MenuItem>
   );
 };
+
+const menuItems = ['Take Questionnaire', 'Q&A', 'Quick Access'].map((i) => (
+  <Menu.Item style={{ margin: 'auto' }}>{i}</Menu.Item>
+));
+
+const icons = [
+  <SearchIcon />,
+  <BookmarkIcon />,
+  <SettingsIcon />,
+  <ProfileIcon />,
+].map((i) => <Menu.Item icon={i} style={{ marginLeft: 'auto' }} />);
+
+const { Header, Content, Footer } = Layout;
+
+const NavBar = (): ReactElement => (
+  <Layout className="layout">
+    <Header style={{ background: 'white', margin: 1 }}>
+      <img src="bookmark.svg" className="logo" />
+      <Menu
+        theme="light"
+        mode="horizontal"
+        defaultSelectedKeys={['2']}
+        children={menuItems.concat(icons)}
+      />
+    </Header>
+    <Content style={{ padding: '0 50px' }}></Content>
+  </Layout>
+);
 
 export default NavBar;
