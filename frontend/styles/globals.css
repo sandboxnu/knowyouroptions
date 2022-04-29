@@ -19,10 +19,23 @@ a {
   box-sizing: border-box;
 }
 
-.logo {
+.nav-bar-title {
+  margin: auto;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.nav-bar-header {
+  background: white;
+  margin: 1px;
+  line-height: 100px;
+  height: 100px;
+}
+
+.nav-bar-logo {
   float: left;
-  height: 31px;
-  margin: 16px 24px 16px 0;
+  height: 45px;
+  margin: 27px 24px 27px 0;
   background: rgba(255, 255, 255);
 }
 
