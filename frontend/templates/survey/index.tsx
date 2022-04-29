@@ -17,14 +17,21 @@ const Fraction = styled.p`
   font-size: 1.2rem;
 `;
 
-const Header = styled(Container)`
-  min-height: 40%;
-  padding: 1.5rem;
+const HeaderDefault = styled(Container)`
+  min-height: 44%;
+  padding: 1rem 1.5rem;
 `;
 
-const HeaderSmall = styled(Container)`
-  min-height: 35%;
-  padding: 1.5rem;
+const Header1 = styled(HeaderDefault)`
+  min-height: 41%;
+`;
+
+const Header2 = styled(HeaderDefault)`
+  min-height: 39%;
+`;
+
+const Header3 = styled(HeaderDefault)`
+  min-height: 36%;
 `;
 
 const PageNumber = styled.span`
@@ -57,11 +64,17 @@ const Wrapper = styled.div`
 `;
 
 // components
-const PageNumberFraction = ({ number }: { number: number }): ReactElement => {
+const PageNumberFraction = ({
+  curPage,
+  totalPages,
+}: {
+  curPage: number;
+  totalPages: number;
+}): ReactElement => {
   return (
     <>
       <Fraction>
-        <PageNumber>{number}</PageNumber> / 7
+        <PageNumber>{curPage}</PageNumber> / {totalPages}
       </Fraction>
     </>
   );
@@ -69,24 +82,33 @@ const PageNumberFraction = ({ number }: { number: number }): ReactElement => {
 
 export interface SurveyProps {
   boldedWord: string; // the bolded word in the question
+  headerSize?: number;
   onClick: React.MouseEventHandler<HTMLDivElement>;
   Options: ReactElement;
   pageNumber: number;
   question: string;
-  smallHeader?: boolean;
   subHeader: string;
+  totalPages: number;
 }
 
 const Survey = ({
   boldedWord,
+  headerSize,
   onClick,
   Options,
   pageNumber,
   question,
-  smallHeader,
   subHeader,
+  totalPages,
 }: SurveyProps): ReactElement => {
-  const HeaderElm = smallHeader ? HeaderSmall : Header;
+  const HeaderElm =
+    headerSize === 1
+      ? Header1
+      : headerSize === 2
+      ? Header2
+      : headerSize === 3
+      ? Header3
+      : HeaderDefault;
 
   // escape special characters to use with RegExp
   function escapeRegExp(string: string) {
@@ -106,7 +128,7 @@ const Survey = ({
     <Wrapper>
       <HeaderElm>
         {pageNumber !== 1 && <SvgLeftArrow onClick={onClick} />}
-        <PageNumberFraction number={pageNumber} />
+        <PageNumberFraction curPage={pageNumber} totalPages={totalPages} />
         <Question
           dangerouslySetInnerHTML={{ __html: makeBold(question, boldedWord) }}
         ></Question>

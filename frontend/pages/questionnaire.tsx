@@ -3,10 +3,12 @@ import { useRouter } from 'next/router';
 
 import QuestionnaireDiagram from '../templates/survey/questionnaire/QuestionnaireDiagram';
 import QuestionnaireStartPage from '../templates/survey/questionnaire/QuestionnaireStartPage';
+import QuestionnaireEndPage from '../templates/survey/questionnaire/QuestionnaireEndPage';
 import SurveyCheckbox from '../templates/survey/SurveyCheckbox';
 import SurveyPill from '../templates/survey/SurveyPill';
 import SurveyMethods from '../templates/survey/SurveyMethods';
 import Layout from '../components/Layout';
+import styled from 'styled-components';
 
 import SvgCramps from '../public/cramps.svg';
 import SvgAches from '../public/aches.svg';
@@ -23,7 +25,7 @@ import SvgMood from '../public/mood-depression.svg';
 const Questionnaire = (): ReactElement => {
   const router = useRouter();
   const QuestionnaireKeys = [
-    'PregnancyAge',
+    'WhenPregnant',
     'TopPriority',
     'AdditionalBenefit',
     'SideEffects',
@@ -46,7 +48,7 @@ const Questionnaire = (): ReactElement => {
     router.push(
       {
         pathname: '/home',
-        query: { popup: true },
+        query: { popup: true, response: response },
       },
       '/home',
     );
@@ -58,6 +60,7 @@ const Questionnaire = (): ReactElement => {
     initialResponse[QuestionnaireKeys[index]] = [];
   }
   const [response, setResponse] = useState(initialResponse);
+  console.log('response');
   console.log(response);
 
   // INTRO PAGE
@@ -84,13 +87,15 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={1}
         question="When do you plan on getting pregnant?"
         response={response}
-        responseKey={QuestionnaireKeys[1]}
+        responseKey={QuestionnaireKeys[0]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -106,13 +111,15 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="top priority"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={2}
         question="What is your top priority in using contraceptive methods?"
         response={response}
-        responseKey={QuestionnaireKeys[2]}
+        responseKey={QuestionnaireKeys[1]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -127,25 +134,26 @@ const Questionnaire = (): ReactElement => {
       'Stabilizing period cycle',
       'Stabilizing mood swings',
       'Input other needs here',
-    ]; // TODO: Input box
+    ];
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord="benefit"
         headerSize={1}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={3}
         question="What additional benefit do you hope to get from contraception?"
         response={response}
-        responseKey={QuestionnaireKeys[3]}
+        responseKey={QuestionnaireKeys[2]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
   };
 
   // PAGE 4.1
-  // TODO: make font size adjustable
   const sideEffectInfos: [ReactElement, string][] = [
     [<SvgCramps />, 'Cramps'],
     [<SvgAches />, 'Muscle soreness / Back ache'],
@@ -160,18 +168,21 @@ const Questionnaire = (): ReactElement => {
     [<SvgMood />, 'Mood Depression'],
   ];
 
+  // TODO: move next button up
   const SideEffectsPage = ({}): ReactElement => {
     return (
       <SurveyMethods
-        headerSize={2}
+        boldedWord="side effects"
+        headerSize={3}
         methodInfos={sideEffectInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={4}
-        question="What side effects can't you tolerate?"
+        question="What side effects do you want to avoid?"
         response={response}
-        responseKey={QuestionnaireKeys[4]}
+        responseKey={QuestionnaireKeys[3]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -191,21 +202,22 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord="frequently"
         headerSize={3}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={5}
         question="How frequently do you care to use contraceptive methods?"
         response={response}
-        responseKey={QuestionnaireKeys[5]}
+        responseKey={QuestionnaireKeys[4]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
   };
 
   // PAGE 6
-  // TODO: body
   const PreferredMethodsPage = ({}): ReactElement => {
     const methods = [
       'Pill',
@@ -222,14 +234,16 @@ const Questionnaire = (): ReactElement => {
     ];
     return (
       <QuestionnaireDiagram
+        boldedWord=""
         headerSize={3}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={6}
         question="What methods of use do you prefer?"
         response={response}
-        responseKey={QuestionnaireKeys[6]}
+        responseKey={QuestionnaireKeys[5]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -241,13 +255,15 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord=""
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={7}
         question="Would you like to take the contraceptive method yourself or have a healthcare professional to administer for you?"
         response={response}
-        responseKey={QuestionnaireKeys[7]}
+        responseKey={QuestionnaireKeys[6]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -263,13 +279,15 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyCheckbox
         answers={answers}
+        boldedWord="access"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={8}
         question="How do you prefer to access the contraception methods?"
         response={response}
-        responseKey={QuestionnaireKeys[8]}
+        responseKey={QuestionnaireKeys[7]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -281,13 +299,15 @@ const Questionnaire = (): ReactElement => {
     return (
       <SurveyPill
         answers={answers}
+        boldedWord="insurance"
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
         pageNumber={9}
         question="Do you have health insurance?"
         response={response}
-        responseKey={QuestionnaireKeys[9]}
+        responseKey={QuestionnaireKeys[8]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );
@@ -304,15 +324,17 @@ const Questionnaire = (): ReactElement => {
       "I don't know",
     ];
     return (
-      <SurveyPill
+      <QuestionnaireEndPage
         answers={answers}
+        boldedWord=""
         onClickForwards={redirectToHome}
         onClickBackwards={onClickBackwards}
         pageNumber={10}
         question="How much are you willing to pay yourself for contraception?"
         response={response}
-        responseKey={QuestionnaireKeys[10]}
+        responseKey={QuestionnaireKeys[9]}
         setResponse={setResponse}
+        subHeader=""
         totalPages={10}
       />
     );

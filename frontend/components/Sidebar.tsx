@@ -1,5 +1,11 @@
-import { ReactElement, useState } from 'react';
-import { UserOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { ReactElement, useMemo, useState } from 'react';
+import {
+  MenuOutlined,
+  UserOutlined,
+  QuestionCircleOutlined,
+  BarChartOutlined,
+} from '@ant-design/icons';
 import styled from 'styled-components';
 import slideStyle from './slide.module.scss';
 import SvgBookmarkIcon from '../public/bookmark-nav-bar.svg';
@@ -42,7 +48,7 @@ const SidebarDiv = styled.div`
   y: 0;
   width: 70vw;
   height: 100vh;
-  z-index: 100;
+  z-index: 0;
 `;
 
 const MenuSection = styled.div`

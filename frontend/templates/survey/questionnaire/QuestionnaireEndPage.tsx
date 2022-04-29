@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import Survey from './index';
-import Pill from '../../components/Pill';
+import Survey from '../index';
+import Pill from '../../../components/Pill';
 
 // Styling
 
@@ -32,6 +32,21 @@ const PillAnswers = styled(PillContainer)`
 `;
 
 // Components
+const SubmitButtonStyled = styled.div`
+  background-color: #911d7a;
+  border-radius: 0.25rem;
+  color: white;
+  height: 7vh;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 1rem;
+  margin-top: 3rem;
+  padding: 1rem 4rem;
+  vertical-align: middle;
+  width: 20vw;
+  text-align: justify;
+  cursor: pointer;
+`;
 
 const PillColumn = ({
   className,
@@ -103,13 +118,18 @@ const SurveyPill = ({
         headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
-          <PillColumn
-            onClick={onClickForwards}
-            pillTitles={answers}
-            response={response}
-            responseKey={responseKey}
-            setResponse={setResponse}
-          />
+          <div>
+            <PillColumn
+              onClick={onClickForwards}
+              pillTitles={answers}
+              response={response}
+              responseKey={responseKey}
+              setResponse={setResponse}
+            />
+            <SubmitButtonStyled onClick={onClickForwards}>
+              Submit
+            </SubmitButtonStyled>
+          </div>
         }
         pageNumber={pageNumber}
         question={question}

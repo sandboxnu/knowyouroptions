@@ -70,6 +70,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[0]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -96,6 +97,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[1]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -115,6 +117,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[2]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -139,6 +142,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyMethods
         boldedWord="method(s)"
+        headerSize={3}
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -148,6 +152,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[3]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -157,6 +162,7 @@ const OnboardingSurvey = (): ReactElement => {
     return (
       <SurveyMethods
         boldedWord="method(s)"
+        headerSize={3}
         methodInfos={methodInfos}
         onClickForwards={onClickForwards}
         onClickBackwards={onClickBackwards}
@@ -166,6 +172,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[4]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -192,6 +199,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[5]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -216,6 +224,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[6]}
         setResponse={setResponse}
         subHeader=""
+        totalPages={7}
       />
     );
   };
@@ -257,6 +266,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[7]}
         setResponse={setResponse}
         subHeader="*The data will not be shared with any other group. It will only be used to help improve the application."
+        totalPages={7}
       />
     );
   };
@@ -280,6 +290,7 @@ const OnboardingSurvey = (): ReactElement => {
         responseKey={SurveyKeys[8]}
         setResponse={setResponse}
         subHeader="*The data will not be shared with any other group. It will only be used to help improve the application."
+        totalPages={7}
       />
     );
   };

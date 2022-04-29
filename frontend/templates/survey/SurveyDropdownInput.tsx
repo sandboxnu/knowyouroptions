@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import Survey from '.';
+import { SubmitButton } from './StyledComponents';
 import { DropdownStyled } from './StyledComponents';
 import SVGDownArrow from '../../public/down-arrow.svg';
 
@@ -102,8 +103,6 @@ const DropdownColumn = ({
       answers[index] = event.currentTarget.value;
       response[responseKey] = answers;
       setResponse(response);
-      console.log('dropdown');
-      console.log(response);
     };
     return onChange;
   };
@@ -174,8 +173,6 @@ const InputBox = ({
     answers[selectInfosSize] = event.currentTarget.value;
     response[responseKey] = answers;
     setResponse(response);
-    console.log('input');
-    console.log(response);
   };
 
   return (
@@ -193,25 +190,10 @@ const InputBox = ({
   );
 };
 
-const SubmitButton = ({
-  onClick,
-}: {
-  onClick: React.MouseEventHandler<HTMLDivElement>;
-}): ReactElement => {
-  return (
-    <SubmitButtonStyled
-      onClick={(event) => {
-        onClick(event);
-      }}
-    >
-      Submit
-    </SubmitButtonStyled>
-  );
-};
-
 export interface SurveyDropdownInputProps {
   boldedWord: string;
   dropdownInfos: [string, string[]][];
+  headerSize?: number;
   inputQuestion: string;
   intro: string;
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
@@ -222,11 +204,13 @@ export interface SurveyDropdownInputProps {
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
   subHeader: string;
+  totalPages: number;
 }
 
 const SurveyDropdownInput = ({
   boldedWord,
   dropdownInfos,
+  headerSize,
   inputQuestion,
   intro,
   onClickForwards,
@@ -237,11 +221,29 @@ const SurveyDropdownInput = ({
   responseKey,
   setResponse,
   subHeader,
+  totalPages,
 }: SurveyDropdownInputProps): ReactElement => {
+  const submitOnClick = (event) => {
+    onClickForwards(event);
+
+    // add value of text input to response
+    // ASSUME: select values have been added to response
+    const textInput = document.getElementById(inputQuestion);
+    if (textInput === null) {
+      console.log('element with id: ' + inputQuestion + ' does not exist');
+    } else {
+      let answers = response[responseKey];
+      answers.push(textInput.value);
+      response[responseKey] = answers;
+      setResponse(response);
+    }
+  };
+
   return (
     <>
       <Survey
         boldedWord={boldedWord}
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <DropdownColumnContainer>
@@ -265,6 +267,7 @@ const SurveyDropdownInput = ({
         pageNumber={pageNumber}
         question={question}
         subHeader={subHeader}
+        totalPages={totalPages}
       />
     </>
   );

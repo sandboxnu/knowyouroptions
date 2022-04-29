@@ -74,16 +74,19 @@ const MethodCardSelected = styled(MethodCard)`
 `;
 
 const MethodsContainer = styled.div`
-  column-gap: 0.5rem;
+  column-gap: 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  row-gap: 0.5rem;
+  justify-content: left;
+  padding-right: 0;
+  row-gap: 1rem;
 `;
 
-const MethodsName = styled.span`
+const MethodsName = styled.div`
+  font-size: 80%;
   margin-top: 0.5rem;
+  text-align: center;
 `;
 
 // components
@@ -91,6 +94,7 @@ const MethodsName = styled.span`
 export interface SurveyMethodsProps {
   // methodInfos: [MethodIcon, MethodName][]
   boldedWord: string;
+  headerSize?: number;
   methodInfos: [ReactElement, string][];
   onClickForwards: React.MouseEventHandler<HTMLDivElement>;
   onClickBackwards: React.MouseEventHandler<HTMLDivElement>;
@@ -100,15 +104,18 @@ export interface SurveyMethodsProps {
   responseKey: string;
   setResponse: React.Dispatch<React.SetStateAction<{}>>;
   subHeader: string;
+  totalPages: number;
 }
 
 const SurveyMethods = ({
   boldedWord,
+  headerSize,
   methodInfos,
   onClickForwards,
   onClickBackwards,
   pageNumber,
   question,
+  totalPages,
   response,
   responseKey,
   setResponse,
@@ -124,6 +131,7 @@ const SurveyMethods = ({
     <>
       <Survey
         boldedWord={boldedWord}
+        headerSize={headerSize}
         onClick={onClickBackwards}
         Options={
           <Container>
@@ -167,8 +175,8 @@ const SurveyMethods = ({
         }
         pageNumber={pageNumber}
         question={question}
-        smallHeader={true}
         subHeader={subHeader}
+        totalPages={totalPages}
       />
     </>
   );
