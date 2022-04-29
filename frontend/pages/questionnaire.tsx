@@ -45,10 +45,12 @@ const Questionnaire = (): ReactElement => {
     setCurPage(curPage - 1);
   };
   const redirectToHome = (event: React.MouseEvent<HTMLDivElement>) => {
+    // TODO: do something with responses
+
     router.push(
       {
         pathname: '/home',
-        query: { popup: true, response: response },
+        query: { popup: true },
       },
       '/home',
     );
