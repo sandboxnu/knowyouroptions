@@ -272,37 +272,34 @@ const Method = ({
   };
   const BookmarkIcon = bookmarked ? SvgBookmarkedStyled : SvgUnbookmarkedStyled;
   return (
-    <>
-      <MethodCard>
-        <ImageContainer>{icon}</ImageContainer>
+    <MethodCard>
+      <ImageContainer>{icon}</ImageContainer>
 
-        <MethodInfoColumn>
-          <MethodName>{name}</MethodName>
+      <MethodInfoColumn>
+        <MethodName>{name}</MethodName>
 
-          <MethodInfo>{effectiveRate}% Effective</MethodInfo>
-          <MethodInfo>
-            Lasts up to {usePatternHighBound} {usePatternUnits}
-          </MethodInfo>
-          <MethodInfo>
-            Can cost ${costMin} - ${costMax}
-          </MethodInfo>
-          <MethodInfo>{whoAdministers}</MethodInfo>
-        </MethodInfoColumn>
-        <ColumnExtra>
-          <BookmarkIcon onClick={() => bookmarkClicked(name)} />
+        <MethodInfo>{effectiveRate}% Effective</MethodInfo>
+        <MethodInfo>
+          Lasts up to {usePatternHighBound} {usePatternUnits}
+        </MethodInfo>
+        <MethodInfo>
+          Can cost ${costMin} - ${costMax}
+        </MethodInfo>
+        <MethodInfo>{whoAdministers}</MethodInfo>
+      </MethodInfoColumn>
+      <ColumnExtra>
+        <BookmarkIcon onClick={() => bookmarkClicked(name)} />
 
-          <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
-        </ColumnExtra>
-      </MethodCard>
-    </>
+        <LearnMoreButton> LEARN MORE {'>'} </LearnMoreButton>
+      </ColumnExtra>
+    </MethodCard>
   );
 };
-type CompareProps = {
+type BookmarkProps = {
   contraceptives: Contraceptive[];
 };
-const Bookmark = (compareProps: CompareProps): ReactElement => {
-  //const [contraceptives, setContraceptives] = useState<Contraceptive[]>([]);
-  const { contraceptives } = compareProps;
+const Bookmark = (BookmarkProps: BookmarkProps): ReactElement => {
+  const { contraceptives } = BookmarkProps;
   return (
     <>
       <Container>
@@ -310,7 +307,6 @@ const Bookmark = (compareProps: CompareProps): ReactElement => {
         <Header>
           <Title>Bookmarks</Title>
         </Header>
-        {console.log(contraceptives[0] + 'val')}
         <Body>
           <MethodCount> {contraceptives.length} methods</MethodCount>
           <MethodsContainer>
