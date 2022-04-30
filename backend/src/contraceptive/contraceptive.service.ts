@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Contraceptive } from 'src/entities/contraceptive.entity';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 export class ContraceptiveService {
   constructor(
     @InjectRepository(Contraceptive)
@@ -16,6 +16,12 @@ export class ContraceptiveService {
   public async getContraceptive(name: string) {
     const contraceptive = this.contraceptiveRepository.findOne({
       where: [{ name: name }],
+    });
+    return contraceptive;
+  }
+  public async getManyContraceptive(name: string[]) {
+    const contraceptive = this.contraceptiveRepository.find({
+      where: [{ name: In(name) }],
     });
     return contraceptive;
   }
