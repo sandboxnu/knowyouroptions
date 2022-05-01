@@ -66,7 +66,6 @@ const SurveyPopup = ({
     <>
       <PopupContainer>
         <PopupStyled className="modal-content">
-          <span className="close">&times;</span>
           <p>Thank you for submitting the onboarding survey.</p>
           <PopupButton onClick={onClickHandler}>Explore App</PopupButton>
         </PopupStyled>
