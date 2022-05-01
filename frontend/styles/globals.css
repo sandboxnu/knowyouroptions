@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 html,
 body {
   padding: 0;
@@ -15,4 +17,54 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.nav-bar-title {
+  margin: auto;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.nav-bar-header {
+  background: white;
+  margin: 1px;
+  line-height: 100px;
+  height: 100px;
+}
+
+.nav-bar-logo {
+  float: left;
+  height: 45px;
+  margin: 27px 24px 27px 0;
+  background: rgba(255, 255, 255);
+}
+
+.layout {
+  background-color: white;
+}
+
+/* Navigation bar colors */
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected::after {
+  border-bottom: 2px solid #6abdc1;
+}
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,
+.ant-menu-item-active,
+.ant-menu-light .ant-menu-submenu-title:hover {
+  color: black;
 }

@@ -1,10 +1,6 @@
 import { ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import SvgBookmarkIcon from '../public/desktop-icons/desktop-bookmark.svg';
-import SvgSettingsIcon from '../public/desktop-icons/settings.svg';
-import SvgSearchIcon from '../public/desktop-icons/search.svg';
-import SvgProfileIcon from '../public/desktop-icons/profile.svg';
-import { Menu } from 'antd';
+import { Layout, Menu, MenuProps, Space } from 'antd';
 import { colors } from '../templates/mediaSizes';
 import Link from 'next/link';
 
@@ -33,25 +29,7 @@ const quickLinks = [
   new QuickLink('Sterilization', 'https://www.google.com'),
 ];
 
-const DropdownColumns = styled.ul`
-  position: absolute;
-  background-color: white;
-  margin-left: -75px;
-  padding: 25px;
-  margin-top: 32px;
-  columns: 2;
-  column-gap: 25px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: ${colors.homepageNavBarDropdown};
-  z-index: 5;
-`;
-
-const StyledMenu = styled(Menu)`
-  padding: 50px;
-`;
-
-const MenuItem = styled(Menu.Item)`
+const DropdownLinkItem = styled(Menu.Item)`
   list-style: none;
 
   a:hover {
@@ -60,125 +38,50 @@ const MenuItem = styled(Menu.Item)`
   }
 `;
 
-const ArrowDropdown = styled.div`
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid ${colors.homepageNavBarDropdown};
-  position: absolute;
-  margin-top: 27px;
-  margin-left: 40px;
-`;
+const headerItems = ['Take Questionnaire', 'Q&A'].map((i) => (
+  <Menu.Item className="nav-bar-title" style={{ margin: 'auto' }}>
+    {i}
+  </Menu.Item>
+));
 
-const MenuHeading = ({
-  title,
-  links = [],
-}: {
-  title: string;
-  links?: QuickLink[];
-}): ReactElement => {
-  const [dropdown, setDropdown] = useState(false);
-
-  const linkToItem = (link: QuickLink) => {
-    return (
-      <MenuItem>
-        <Link href={link.url}>
-          <a>{link.title}</a>
-        </Link>
-      </MenuItem>
-    );
-  };
-
+const linkToItem = (link: QuickLink) => {
   return (
-    <StyledMenu
-      onMouseEnter={() => setDropdown(true)}
-      onMouseLeave={() => setDropdown(false)}
-    >
-      {title}
-      {dropdown && title == 'Quick Access' ? (
-        <div>
-          <ArrowDropdown />
-          <DropdownColumns>
-            {links?.map((link: QuickLink) => linkToItem(link))}
-          </DropdownColumns>
-        </div>
-      ) : null}
-    </StyledMenu>
+    <DropdownLinkItem>
+      <Link href={link.url}>
+        <a>{link.title}</a>
+      </Link>
+    </DropdownLinkItem>
   );
 };
 
-const MenuElements = styled.div`
-  display: flex;
-  width: 80%;
-  justify-content: space-evenly;
-`;
+const quickLinksDropdown = (
+  <Menu.SubMenu
+    popupOffset={[0, 1]}
+    className="nav-bar-title"
+    title="Quick Access"
+  >
+    {quickLinks.map(linkToItem)}
+  </Menu.SubMenu>
+);
 
-const NavMenu = styled.div`
-  height: 85px;
-  display: flex;
-  flex-wrap: no-wrap;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
-  z-index: 3;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-`;
+const icons = ['search', 'desktop-bookmark', 'settings', 'profile']
+  .map((filename) => (
+    <img src={`desktop-icons/${filename}.svg`} height="35px" />
+  ))
+  .map((img) => <Menu.Item icon={img} />);
 
-const MenuIcons = styled.div`
-  width: 20%;
-  margin-right: 30px;
-  display: flex;
-  align-items: flex-end;
-  flex-wrap: no-wrap;
-  justify-content: space-between;
-`;
+const { Header, Content } = Layout;
 
-const ICON_HEIGHT = '30px';
-
-const SearchIcon = styled(SvgSearchIcon)`
-  height: ${ICON_HEIGHT};
-  width: auto;
-`;
-
-const BookmarkIcon = styled(SvgBookmarkIcon)`
-  height: ${ICON_HEIGHT};
-  width: auto;
-`;
-
-const SettingsIcon = styled(SvgSettingsIcon)`
-  height: ${ICON_HEIGHT};
-  width: auto;
-`;
-
-const ProfileIcon = styled(SvgProfileIcon)`
-  height: ${ICON_HEIGHT};
-  width: auto;
-`;
-
-const Logo = styled(SvgSettingsIcon)`
-  height: ${ICON_HEIGHT};
-  width: auto;
-  margin-left: 30px;
-`;
-
-const NavBar = (): ReactElement => {
-  return (
-    <NavMenu>
-      <Logo />
-      <MenuElements>
-        <MenuHeading title={'Take Questionnaire'} />
-        <MenuHeading title={'Q&A'} />
-        <MenuHeading title={'Quick Access'} links={quickLinks} />
-      </MenuElements>
-      <MenuIcons>
-        <SearchIcon />
-        <BookmarkIcon />
-        <SettingsIcon />
-        <ProfileIcon />
-      </MenuIcons>
-    </NavMenu>
-  );
-};
+const NavBar = (): ReactElement => (
+  <Layout className="layout">
+    <Header className="nav-bar-header">
+      <img src="bookmark.svg" className="nav-bar-logo" />
+      <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>
+        {headerItems.concat(quickLinksDropdown, icons)}
+      </Menu>
+    </Header>
+    <Content style={{ padding: '0 50px' }}></Content>
+  </Layout>
+);
 
 export default NavBar;
