@@ -223,22 +223,6 @@ const SurveyDropdownInput = ({
   subHeader,
   totalPages,
 }: SurveyDropdownInputProps): ReactElement => {
-  const submitOnClick = (event) => {
-    onClickForwards(event);
-
-    // add value of text input to response
-    // ASSUME: select values have been added to response
-    const textInput = document.getElementById(inputQuestion);
-    if (textInput === null) {
-      console.log('element with id: ' + inputQuestion + ' does not exist');
-    } else {
-      let answers = response[responseKey];
-      answers.push(textInput.value);
-      response[responseKey] = answers;
-      setResponse(response);
-    }
-  };
-
   return (
     <>
       <Survey
