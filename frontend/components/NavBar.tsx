@@ -55,7 +55,11 @@ const linkToItem = (link: QuickLink) => {
 };
 
 const quickLinksDropdown = (
-  <Menu.SubMenu className="nav-bar-title" title="Quick Access">
+  <Menu.SubMenu
+    popupOffset={[0, 1]}
+    className="nav-bar-title"
+    title="Quick Access"
+  >
     {quickLinks.map(linkToItem)}
   </Menu.SubMenu>
 );
