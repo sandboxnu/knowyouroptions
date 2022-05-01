@@ -37,15 +37,25 @@ const SubmitButtonStyled = styled.div`
   border-radius: 0.25rem;
   color: white;
   height: 7vh;
-  justify-content: center;
+  justify-content: right;
   margin-left: auto;
   margin-right: 1rem;
-  margin-top: 3rem;
-  padding: 1rem 4rem;
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
   vertical-align: middle;
   width: 20vw;
   text-align: justify;
   cursor: pointer;
+`;
+const ButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-self: flex-end;
+  padding: 0 2rem;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: 0;
 `;
 
 const PillColumn = ({
@@ -126,9 +136,11 @@ const SurveyPill = ({
               responseKey={responseKey}
               setResponse={setResponse}
             />
-            <SubmitButtonStyled onClick={onClickForwards}>
-              Submit
-            </SubmitButtonStyled>
+            <ButtonDiv>
+              <SubmitButtonStyled onClick={onClickForwards}>
+                Submit
+              </SubmitButtonStyled>
+            </ButtonDiv>
           </div>
         }
         pageNumber={pageNumber}
