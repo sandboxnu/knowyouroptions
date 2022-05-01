@@ -34,7 +34,7 @@ const PillAnswers = styled(PillContainer)`
 // Components
 const SubmitButtonStyled = styled.div`
   background-color: #911d7a;
-  border-radius: 0.25rem;
+  border-radius: 0.2rem;
   color: white;
   height: 7vh;
   justify-content: right;
@@ -43,7 +43,7 @@ const SubmitButtonStyled = styled.div`
   margin-bottom: 1rem;
   padding: 1rem 2rem;
   vertical-align: middle;
-  width: 20vw;
+  width: auto;
   text-align: justify;
   cursor: pointer;
 `;

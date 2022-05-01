@@ -36,12 +36,28 @@ const PopupStyled = styled.div`
   margin-top: 20%;
 `;
 
+const PopupButton = styled.div`
+  background-color: #911d7a;
+  border-radius: 0.25rem;
+  color: white;
+  height: 7vh;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  vertical-align: middle;
+  width: 20vw;
+  text-align: justify;
+  cursor: pointer;
+  display: flex;
+  margin: auto;
+`;
+
 /**
  * make the div conditional once the popup dissapears so users can click on other page elements
  */
 
 export interface SurveyPopupInputProps {
-  onClickHandler: React.MouseEventHandler<HTMLButtonElement>;
+  onClickHandler: React.MouseEventHandler<HTMLDivElement>;
 }
 const SurveyPopup = ({
   onClickHandler,
@@ -52,7 +68,7 @@ const SurveyPopup = ({
         <PopupStyled className="modal-content">
           <span className="close">&times;</span>
           <p>Thank you for submitting the onboarding survey.</p>
-          <button onClick={onClickHandler}>Explore App</button>
+          <PopupButton onClick={onClickHandler}>Explore App</PopupButton>
         </PopupStyled>
       </PopupContainer>
     </>
