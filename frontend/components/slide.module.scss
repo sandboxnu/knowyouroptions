@@ -13,13 +13,13 @@
 
 @keyframes slide {
   100% {
-    left: 0px;
+    left: 0;
   }
 }
 
 .close {
   position: absolute;
-  left: 0px;
+  left: 0;
   -webkit-animation: close 0.5s forwards;
   animation: close 0.5s forwards;
 }
@@ -34,4 +34,8 @@
   100% {
     left: -350px;
   }
+}
+
+.default {
+  position: absolute;
 }

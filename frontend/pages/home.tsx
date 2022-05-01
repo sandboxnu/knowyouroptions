@@ -1,10 +1,12 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Card from '../components/Card';
 import styled from 'styled-components';
 import Image from 'next/image';
 import homepagePic from '../public/home-image.png';
 import Layout from '../components/Layout';
-import { colors, size, maxDevice } from '../templates/mediaSizes';
+import { colors, maxDevice, size } from '../templates/mediaSizes';
+import SurveyPopup from '../templates/survey/SurveyPopup';
 
 const HomeContainer = styled.div`
   display: flex;
@@ -44,14 +46,32 @@ const ImageContainer = styled(Row)`
 const ImageContent = styled(Image)``;
 
 const Home = (): ReactElement => {
+  const [showPopup, togglePopup] = useState(false);
+
+  const router = useRouter();
+
+  const buttonClickHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('hi');
+    togglePopup(false);
+  };
+
+  useEffect(() => {
+    console.log(router.query.popup);
+    router.query.popup ? togglePopup(true) : togglePopup(false);
+  }, []);
+
   return (
     <Layout>
       <HomeContainer>
-        <HomeTitle className="title-above">Home</HomeTitle>
+        {showPopup ? (
+          <SurveyPopup onClickHandler={buttonClickHandler} />
+        ) : (
+          console.log('nope')
+        )}
+        <HomeTitle>Home</HomeTitle>
         <ImageContainer>
           <ImageContent src={homepagePic} placeholder="blur" />
         </ImageContainer>
-        <HomeTitle className="title-below">Home</HomeTitle>
         <Row>
           <Card
             title="Methods"
